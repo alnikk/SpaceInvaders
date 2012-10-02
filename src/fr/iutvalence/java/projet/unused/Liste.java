@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet;
+package fr.iutvalence.java.projet.unused;
 
 /**
  * @author alexandre

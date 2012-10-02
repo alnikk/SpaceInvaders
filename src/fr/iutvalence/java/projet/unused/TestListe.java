@@ -1,7 +1,10 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet;
+package fr.iutvalence.java.projet.unused;
+
+import fr.iutvalence.java.projet.Coordonnee;
+import fr.iutvalence.java.projet.Movable;
 
 /**
  * @author alexandre
