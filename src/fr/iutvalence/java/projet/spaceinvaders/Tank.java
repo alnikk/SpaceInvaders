@@ -3,7 +3,7 @@
  */
 
 // FIXME rename the package
-package fr.iutvalence.java.projet;
+package fr.iutvalence.java.projet.spaceinvaders;
 
 
 /**

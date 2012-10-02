@@ -2,7 +2,10 @@
  * 
  */
 // FIXME rename the package (may be a different name that the one chosen for core classes)
-package fr.iutvalence.java.projet;
+package fr.iutvalence.java.projet.test;
+
+import fr.iutvalence.java.projet.spaceinvaders.Coordonnee;
+import fr.iutvalence.java.projet.spaceinvaders.Movable;
 
 // FIXME improve the comment
 /**

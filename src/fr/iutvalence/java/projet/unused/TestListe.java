@@ -3,8 +3,8 @@
  */
 package fr.iutvalence.java.projet.unused;
 
-import fr.iutvalence.java.projet.Coordonnee;
-import fr.iutvalence.java.projet.Movable;
+import fr.iutvalence.java.projet.spaceinvaders.Coordonnee;
+import fr.iutvalence.java.projet.spaceinvaders.Movable;
 
 /**
  * @author alexandre

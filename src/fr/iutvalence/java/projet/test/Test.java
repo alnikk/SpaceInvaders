@@ -3,7 +3,7 @@
  */
 
 // FIXME rename the package (may be a different name that the one chosen for core classes) 
-package fr.iutvalence.java.projet;
+package fr.iutvalence.java.projet.test;
 
 // FIXME improve the comment
 /**
