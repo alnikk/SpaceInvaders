@@ -1,8 +1,10 @@
 /**
  * 
  */
+// FIXME rename the package
 package fr.iutvalence.java.projet;
 
+// FIXME finish writing the comment
 /**
  * @author alexandre
  *
@@ -10,6 +12,7 @@ package fr.iutvalence.java.projet;
 public class Monster extends Movable
 {
 
+	// FIXME write a comment
 	/**
 	 * 
 	 */
@@ -18,6 +21,7 @@ public class Monster extends Movable
 		super();
 	}
 
+	// FIXME finish writing the comment
 	/**
 	 * @param i
 	 * @param j
@@ -26,5 +30,7 @@ public class Monster extends Movable
 	{
 		super(i, j);
 	}
+	
+	// FIXME methods ?
 	
 }

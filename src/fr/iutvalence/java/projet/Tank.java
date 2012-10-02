@@ -1,8 +1,12 @@
 /**
  * 
  */
+
+// FIXME rename the package
 package fr.iutvalence.java.projet;
 
+
+// FIXME finish writing the comment
 /**
  * @author alexandre
  *
@@ -10,6 +14,7 @@ package fr.iutvalence.java.projet;
 public class Tank extends Movable
 {
 
+	// FIXME write the comment
 	/**
 	 * 
 	 */
@@ -18,6 +23,8 @@ public class Tank extends Movable
 		super();
 	}
 
+	
+	// FIXME improve the comment
 	/**
 	 * @param i
 	 * @param j
@@ -26,5 +33,7 @@ public class Tank extends Movable
 	{
 		super(i, j);
 	}
+	
+	// FIXME methods ?
 	
 }

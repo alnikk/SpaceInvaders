@@ -1,17 +1,33 @@
+// FIXME rename the package
 package fr.iutvalence.java.projet;
 
+
+// FIXME finish writing the comment
 /**
  * @author alexandre
  *
  */
 public class Movable
 {
+	// FIXME write a comment
+	// FIXME define this as "true" constant 
 	private final int X = 300;
+
+	// FIXME write a comment
+	// FIXME define this as "true" constant 
 	private final int Y = 300;
+	
+	// FIXME write a comment
 	private boolean  alive;
+
+	// FIXME write a comment
 	private Coordonnee position;
+	
+	// FIXME write a comment
 	private Coordonnee taille;
 	
+	
+	// FIXME finish writing the comment
 	/**
 	 * @param i Set the position of the element
 	 * @param j Set the size of the element
@@ -24,17 +40,21 @@ public class Movable
 		this.alive = true;
 	}
 	
+	// FIXME improve the comment
 	/**
 	 * Constructeur par defaut
 	 */
 	public Movable()
 	{
 		super();
+		
+		// FIXME define default values as constants
 		this.position = new Coordonnee(10,10);
 		this.taille = new Coordonnee(10,10);
 		this.alive = true;
 	}
-	
+
+	// FIXME improve the comment
 	/**
 	 * @return the alive
 	 */
@@ -43,6 +63,7 @@ public class Movable
 		return this.alive;
 	}
 
+	// FIXME improve the comment
 	/**
 	 * @param alive the alive to set
 	 */
@@ -51,6 +72,7 @@ public class Movable
 		this.alive = alive;
 	}
 
+	// FIXME improve the comment
 	/**
 	 * @return return the position of the element
 	 */
@@ -59,6 +81,7 @@ public class Movable
 		return this.position;
 	}
 
+	// FIXME improve the comment
 	/**
 	 * @param position set the position of the element
 	 */
@@ -67,6 +90,7 @@ public class Movable
 		this.position = position;
 	}
 
+	// FIXME improve the comment
 	/**
 	 * @return get the size of the element
 	 */
@@ -75,6 +99,7 @@ public class Movable
 		return this.taille;
 	}
 
+	// FIXME improve the comment
 	/**
 	 * @param taille set the size of the element
 	 */
@@ -83,9 +108,10 @@ public class Movable
 		this.taille = taille;
 	}
 	
+	// FIXME improve the comment
 	/**
-	 * @param x nouvelle coordonée _RELATIVE_ en x
-	 * @param y nouvelle coordonée _RELATIVE_ en y
+	 * @param x nouvelle coordon√©e _RELATIVE_ en x
+	 * @param y nouvelle coordon√©e _RELATIVE_ en y
 	 */
 	public void move(int x, int y)
 	{

@@ -1,6 +1,7 @@
 /**
  * 
  */
+// FIXME rename the package
 package fr.iutvalence.java.projet;
 
 /**
@@ -10,6 +11,7 @@ package fr.iutvalence.java.projet;
 public class Shoot extends Movable
 {
 
+	// FIXME write a comment
 	/**
 	 * 
 	 */
@@ -18,6 +20,7 @@ public class Shoot extends Movable
 		super();
 	}
 
+	// FIXME improve the comment
 	/**
 	 * @param i
 	 * @param j
@@ -26,5 +29,7 @@ public class Shoot extends Movable
 	{
 		super(i, j);
 	}
+	
+	// FIXME methods ?
 	
 }
