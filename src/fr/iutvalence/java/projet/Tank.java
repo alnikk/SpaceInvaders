@@ -6,28 +6,19 @@
 package fr.iutvalence.java.projet;
 
 
-// FIXME finish writing the comment
 /**
  * @author alexandre
  *
+ * This class is son of Movable.
+ * It represents the base of your "character"
  */
 public class Tank extends Movable
 {
-
-	// FIXME write the comment
 	/**
+	 * Create Tank with 2 coordinates (position,size)
 	 * 
-	 */
-	public Tank()
-	{
-		super();
-	}
-
-	
-	// FIXME improve the comment
-	/**
-	 * @param i
-	 * @param j
+	 * @param i Set the base position of the tank
+	 * @param i Set the base size of the tank
 	 */
 	public Tank(Coordonnee i, Coordonnee j)
 	{
@@ -35,5 +26,5 @@ public class Tank extends Movable
 	}
 	
 	// FIXME methods ?
-	
+	// not yet
 }

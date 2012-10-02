@@ -6,25 +6,19 @@ package fr.iutvalence.java.projet;
 
 // FIXME finish writing the comment
 /**
- * @author alexandre
+ * @author Gallet Jordan
  *
+ * This class is son of Movable.
+ * It represents the base of enemy(s)
  */
 public class Monster extends Movable
 {
 
-	// FIXME write a comment
 	/**
+	 * Create Monster with 2 coordinates (position,size)
 	 * 
-	 */
-	public Monster()
-	{
-		super();
-	}
-
-	// FIXME finish writing the comment
-	/**
-	 * @param i
-	 * @param j
+	 * @param i Set the base position of the monster
+	 * @param i Set the base size of the monster
 	 */
 	public Monster(Coordonnee i, Coordonnee j)
 	{
@@ -32,5 +26,6 @@ public class Monster extends Movable
 	}
 	
 	// FIXME methods ?
+	// not yet
 	
 }

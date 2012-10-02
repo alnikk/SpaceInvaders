@@ -11,15 +11,6 @@ package fr.iutvalence.java.projet;
 public class Shoot extends Movable
 {
 
-	// FIXME write a comment
-	/**
-	 * 
-	 */
-	public Shoot()
-	{
-		super();
-	}
-
 	// FIXME improve the comment
 	/**
 	 * @param i

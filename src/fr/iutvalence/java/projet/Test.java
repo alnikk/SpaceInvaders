@@ -19,6 +19,6 @@ public class Test
 	public static void main(String[] args)
 	{
 		// FIXME todo what ?
-		//TODO
+		// For testing method's classes
 	}
 }
