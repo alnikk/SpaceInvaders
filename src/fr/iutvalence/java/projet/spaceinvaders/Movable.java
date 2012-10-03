@@ -19,7 +19,6 @@ public class Movable
 	// TODO in SpaceInvaders' class
 	private static final int Y = 300;
 	
-	// TODO Add the 2nd line to move method
 	/**
 	 * While the object is on the screen this boolean is true.<br/>
 	 * When it isn't alive he can't called move method 
@@ -136,7 +135,7 @@ public class Movable
 	 */
 	public boolean move(int dx, int dy)
 	{
-		if(this.position.getX()+this.taille.getX()+dx <= this.X && this.position.getY()+this.taille.getX()+dy <= this.Y)
+		if(this.position.getX()+this.taille.getX()+dx <= this.X && this.position.getY()+this.taille.getX()+dy <= this.Y && this.alive)
 		{
 			this.position = new Coordinates(this.position.getX()+dx,this.position.getY()+dy);
 			return true;

@@ -13,6 +13,11 @@ import fr.iutvalence.java.projet.unused.Shoot;
 public class SpaceInvaders
 {
 	/**
+	 * Boolean to know if the part is finished
+	 */
+	private boolean part;
+	
+	/**
 	 * Table of all monsters' instance variable
 	 */
 	private Monster[] tabMonstre;
@@ -34,12 +39,12 @@ public class SpaceInvaders
 	/**
 	 * The constant size of the screen
 	 */
-	private static final int X = 200;
+	private static final int X = 300;
 
 	/**
 	 * Height of the screen 
 	 */
-	private final int Y = 200;
+	private final int Y = 300;
 	
 	/**
 	 * Size of a movable object 
@@ -72,6 +77,7 @@ public class SpaceInvaders
 	{
 		super();
 		
+		this.part = true;
 		this.taille= new Coordinates(this.X,this.Y);
 		init(this.nbMonstre,this.nbShoot,this.nbTank);
 	}
@@ -83,11 +89,12 @@ public class SpaceInvaders
 	 * @param Set the max of shoot
 	 * @param Set the max of tank
 	 */
-	private boolean init(int nbMonstre, int nbShoot, int nbTank)
+	private void init(int nbMonstre, int nbShoot, int nbTank)
 	{
 		//local variable
 		Coordinates tank_size = new Coordinates(this.size,this.size);
 		Coordinates tank_position = new Coordinates((this.X/2)-(tank_size.getX()/2),this.Y/2-(tank_size.getY()/2));
+		
 		int i =0;
 		Coordinates monster_size = new Coordinates(this.size,this.size);
 		Coordinates monster_position = new Coordinates(this.X-monster_size.getX(),this.Y-monster_size.getY());
@@ -97,18 +104,18 @@ public class SpaceInvaders
 		this.tabShoot = new Shoot[nbShoot];
 		this.tabTank = new Tank[nbTank];
 		
+		//
 		this.tabTank[0] = new Tank(tank_position,tank_size);
 		
 		for(i=0;i<19;i++)
 		{
 			this.tabMonstre[i] = new Monster(monster_position,monster_size);
 			monster_position = new Coordinates(monster_position.getX()-monster_size.getX(),monster_position.getY()-monster_size.getY());	
-		}
-
-		// no finish yet
-		return true;
+		}		
 	}
 	
-	// public methods ?
+	//TODO deplacement des enemis seuls
+	
+	// oldFIXME public methods ?
 	// later =)
 }
