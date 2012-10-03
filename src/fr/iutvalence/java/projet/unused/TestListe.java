@@ -3,7 +3,7 @@
  */
 package fr.iutvalence.java.projet.unused;
 
-import fr.iutvalence.java.projet.spaceinvaders.Coordonnee;
+import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
 import fr.iutvalence.java.projet.spaceinvaders.Movable;
 
 /**
@@ -19,8 +19,8 @@ public class TestListe
 	public static void main(String[] args)
 	{
 		//****Declaration****
-		Coordonnee position = new Coordonnee(0,0);
-		Coordonnee taille = new Coordonnee(10,10);
+		Coordinates position = new Coordinates(0,0);
+		Coordinates taille = new Coordinates(10,10);
 
 		Movable E1 = new Movable(position,taille);
 		Movable E2 = new Movable(position,taille);

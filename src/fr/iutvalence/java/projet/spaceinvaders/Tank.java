@@ -1,9 +1,6 @@
 /**
  * 
  */
-
-// FIXME remove FIXME once fixed ;-)
-// FIXME rename the package
 package fr.iutvalence.java.projet.spaceinvaders;
 
 
@@ -22,7 +19,7 @@ public class Tank extends Movable
 	 * @param i Set the base position of the tank
 	 * @param i Set the base size of the tank
 	 */
-	public Tank(Coordonnee i, Coordonnee j)
+	public Tank(Coordinates i, Coordinates j)
 	{
 		super(i, j);
 	}

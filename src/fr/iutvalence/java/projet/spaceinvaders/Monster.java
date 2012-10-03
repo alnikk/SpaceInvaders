@@ -1,16 +1,18 @@
 /**
  * 
  */
-// FIXME remove FIXME once fixed ;-)
-// FIXME rename the package
 package fr.iutvalence.java.projet.spaceinvaders;
 
-// FIXME finish writing the comment
+// TODO Check the behavior of contact of monster and anyone else 
 /**
- * @author Gallet Jordan
- *
  * This class is son of Movable.
- * It represents the base of enemy(s)
+ * It represents the base of enemy(s).
+ * In instantiated Monster, you create an enemy
+ * and if he get contact with tank, for example, 
+ * [tank | monster | both] die.
+ *
+ * 
+ * @author Gallet Guyon
  */
 public class Monster extends Movable
 {
@@ -21,7 +23,7 @@ public class Monster extends Movable
 	 * @param i Set the base position of the monster
 	 * @param i Set the base size of the monster
 	 */
-	public Monster(Coordonnee i, Coordonnee j)
+	public Monster(Coordinates i, Coordinates j)
 	{
 		super(i, j);
 	}

@@ -1,11 +1,9 @@
 /**
  * 
  */
-// FIXME remove FIXME once fixed ;-)
-// FIXME rename the package (may be a different name that the one chosen for core classes)
 package fr.iutvalence.java.projet.test;
 
-import fr.iutvalence.java.projet.spaceinvaders.Coordonnee;
+import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
 import fr.iutvalence.java.projet.spaceinvaders.Movable;
 
 // FIXME improve the comment
@@ -22,8 +20,8 @@ public class TestMovable
 	 */
 	public static void main(String[] args)
 	{
-		Coordonnee C1 = new Coordonnee(0,0);
-		Coordonnee C2 = new Coordonnee(10,10);
+		Coordinates C1 = new Coordinates(0,0);
+		Coordinates C2 = new Coordinates(10,10);
 		Movable E1 = new Movable(C1,C2);
 		Movable E2 = new Movable(C1,C2);
 		

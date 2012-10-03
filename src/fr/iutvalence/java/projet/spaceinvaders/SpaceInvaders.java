@@ -1,73 +1,81 @@
 /**
  * 
  */
-// FIXME remove FIXME once fixed ;-)
-// FIXME rename the package
 package fr.iutvalence.java.projet.spaceinvaders;
 
-// FIXME make the comment readable (see html files)
+import fr.iutvalence.java.projet.unused.Shoot;
 /**
- * @author Gallet Guyon
- *
- * The main parts of the game.
+ * The main parts of the game.<br/>
  * It provides the initializations and all objects are referenced in it. 
+ * 
+ * @author Gallet Guyon
  */
 public class SpaceInvaders
 {
-	// FIXME use Javadoc syntax
-	// table of monsters' instance variable
+	/**
+	 * Table of all monsters' instance variable
+	 */
 	private Monster[] tabMonstre;
 
-	// FIXME use Javadoc syntax
 	// ???
 	// table of shoots' instance variable
 	private Shoot[] tabShoot;
 	
-	// FIXME use Javadoc syntax
-	// table of tanks' instance variable
+	/**
+	 * Table of all tanks' instance variable
+	 */
 	private Tank[] tabTank;
 	
-	// FIXME use Javadoc syntax
-	// The size of the screen
-	private final Coordonnee taille;
-	
-	// FIXME use Javadoc syntax
-	// FIXME define "true" constant
-	// The constant size of the screen 
-	private final int X = 200;
-
-	// FIXME use Javadoc syntax
-	// FIXME define "true" constant
-	private final int Y = 200;
-
-	
-	// FIXME use Javadoc syntax
-	// FIXME define "true" constant
-	// Constant in game
-	private final int nbMonstre = 20;
-	
-	// FIXME use Javadoc syntax
-	// FIXME define "true" constant
-	private final int nbShoot = 5;
-
-	// FIXME use Javadoc syntax
-	// FIXME define "true" constant
-	private final int nbTank = 20;
-	
-	
-	// FIXME write a comment
 	/**
+	 * The size of the screen
+	 */
+	private final Coordinates taille;
+	
+	/**
+	 * The constant size of the screen
+	 */
+	private static final int X = 200;
+
+	/**
+	 * Height of the screen 
+	 */
+	private final int Y = 200;
+	
+	/**
+	 * Size of a movable object 
+	 */
+	private final int size = 10;
+
+	
+	/**
+	 * Constant in game
+	 */
+	private static final int nbMonstre = 20;
+	
+
+	/**
+	 * Constant in game
+	 */
+	private static final int nbShoot = 5;
+
+	/**
+	 * Constant in game
+	 */
+	private static final int nbTank = 20;
+	
+	
+	/**
+	 * Initialize the game and also the part.
 	 * 
 	 */
 	public SpaceInvaders()
 	{
 		super();
 		
-		this.taille= new Coordonnee(this.X,this.Y);
-		start(this.nbMonstre,this.nbShoot,this.nbTank);
+		this.taille= new Coordinates(this.X,this.Y);
+		init(this.nbMonstre,this.nbShoot,this.nbTank);
 	}
 	
-	// FIXME rename the method
 	/**
 	 * Initialize the game with args
 	 * 
@@ -75,15 +83,14 @@ public class SpaceInvaders
 	 * @param Set the max of shoot
 	 * @param Set the max of tank
 	 */
-	private boolean start(int nbMonstre, int nbShoot, int nbTank)
+	private boolean init(int nbMonstre, int nbShoot, int nbTank)
 	{
 		//local variable
-		// FIXME define default values as constants
-		Coordonnee tank_size = new Coordonnee(10,10);
-		Coordonnee tank_position = new Coordonnee((this.X/2)-(tank_size.getX()/2),this.Y/2-(tank_size.getY()/2));
+		Coordinates tank_size = new Coordinates(this.size,this.size);
+		Coordinates tank_position = new Coordinates((this.X/2)-(tank_size.getX()/2),this.Y/2-(tank_size.getY()/2));
 		int i =0;
-		Coordonnee monster_size = new Coordonnee(10,10);
-		Coordonnee monster_position = new Coordonnee(this.X-monster_size.getX(),this.Y-monster_size.getY());
+		Coordinates monster_size = new Coordinates(this.size,this.size);
+		Coordinates monster_position = new Coordinates(this.X-monster_size.getX(),this.Y-monster_size.getY());
 		
 		//
 		this.tabMonstre = new Monster[nbMonstre];
@@ -95,14 +102,13 @@ public class SpaceInvaders
 		for(i=0;i<19;i++)
 		{
 			this.tabMonstre[i] = new Monster(monster_position,monster_size);
-			monster_position = new Coordonnee(monster_position.getX()-monster_size.getX(),monster_position.getY()-monster_size.getY());	
+			monster_position = new Coordinates(monster_position.getX()-monster_size.getX(),monster_position.getY()-monster_size.getY());	
 		}
 
-		// FIXME in which case the method return false ?
 		// no finish yet
 		return true;
 	}
 	
-	// FIXME public methods ?
+	// public methods ?
 	// later =)
 }

@@ -1,48 +1,52 @@
-// FIXME remove FIXME once fixed ;-)
-// FIXME rename the package
 package fr.iutvalence.java.projet.spaceinvaders;
 
-
-// FIXME finish writing the comment
 /**
- * @author Gallet Guyon
- *
  * This class allow you to create a movable object.
  * This is the mother class of all the movable object you can instantiate.
+ *
+ * A movable object is defined by size and position on the screen and also
+ * his status [alive | dead].
+ * A movable object can move on the screen and so being killed by others.
+ * 
+ * @author Gallet Guyon
  */
 public class Movable
 {
-	// FIXME use todo tag instead of fixme to create todos ;-)
-	// FIXME ToDo in SpaceInvaders' class
-	// FIXME define this as "true" constant 
-	private final int X = 300;
+	// TODO Constant classe??
+	// TODO in SpaceInvaders' class
+	private static final int X = 300;
 
-	// FIXME use todo tag instead of fixme to create todos ;-)
-	// FIXME ToDo in SpaceInvaders' class
-	// FIXME define this as "true" constant 
-	private final int Y = 300;
+	// TODO in SpaceInvaders' class
+	private static final int Y = 300;
 	
-	// FIXME use the Javadoc syntax
-	// While the object is on the screen this boolean is true
+	// TODO Add the 2nd line to move method
+	/**
+	 * While the object is on the screen this boolean is true.<br/>
+	 * When it isn't alive he can't called move method 
+	 */
 	private boolean  alive;
 
-	// FIXME use the Javadoc syntax
-	// The position of the movable on the screen
-	private Coordonnee position;
+	/**
+	 * The position of the movable object on the screen
+	 */
+	private Coordinates position;
 	
 	// FIXME do not use the type that carry a location semantics to carry an area semantics
-	// FIXME use the Javadoc syntax
-	// The size of the movable on the screen 
-	private Coordonnee taille;
-	
-	// FIXME improve the comment, saying what is the state of the created object
+	// Don't  understand
 	/**
-	 * Initialize the movable object with position and size
-	 * 
-	 * @param i Set the position of the element
-	 * @param j Set the size of the element
+	 * The size of the movable on the screen
 	 */
-	public Movable(Coordonnee i,Coordonnee  j)
+	private Coordinates taille;
+	
+	/**
+	 * Initialize the movable object with position and size given in parameters
+	 * 
+	 * Contrary to Coordinates, you can change the values given by calling right method
+	 * 
+	 * @param i Set the position of the element you create 
+	 * @param j Set the size of the element you create 
+	 */
+	public Movable(Coordinates i,Coordinates  j)
 	{
 		super();
 		this.position = i;
@@ -68,32 +72,43 @@ public class Movable
 		this.alive = alive;
 	}
 
-	// FIXME improve the comment, by not making it dependent of a graphical representation
 	/**
-	 * This method returns the position of the element on the screen
-	 * @return return the position of the element
+	 * This method returns the position of the object.
+	 * 
+	 * 
+	 * @return return the position (Coordonnee) of the element between <br/>
+	 * 			0 <= X <= MAX_X<br/>
+	 * 			0 <= Y <= MAX_Y<br/>
+	 * 			MAX_X and MAX_Y are the size of the screen
 	 */
-	public Coordonnee getPosition()
+	public Coordinates getPosition()
 	{
 		return this.position;
 	}
 
-	// FIXME improve the comment, by not making it dependent of a graphical representation
 	/**
-	 * This method sets the position of the element on the screen
+	 * This method sets the position of the object.
+	 * Setting position make the object move between<br/>
+	 * 0 <= X <= MAX_X<br/>
+	 * 0 <= Y <= MAX_Y<br/>
+	 * MAX_X and MAX_Y are the size of the screen<br/>
+	 * 
+	 *  Move an object allow you to control its position
+	 *  in this area
+	 *
 	 * @param position the position of the element
 	 */
-	public void setPosition(final Coordonnee position)
+	public void setPosition(final Coordinates position)
 	{
 		this.position = position;
 	}
 
-	// FIXME improve the comment, by not making it dependent of a graphical representation
 	/**
-	 * This method returns the size of the element on the screen
-	 * @return get the size of the element
+	 * This method returns the size of the object.<br/>
+	 * 
+	 * @return get the size (Coordonnee) of the object.
 	 */
-	public Coordonnee getTaille()
+	public Coordinates getTaille()
 	{
 		return this.taille;
 	}
@@ -102,34 +117,31 @@ public class Movable
 	 * This method sets the size of the element on the screen
 	 * @param taille the size of the element
 	 */
-	public void setTaille(final Coordonnee taille)
+	public void setTaille(final Coordinates taille)
 	{
 		this.taille = taille;
 	}
 	
-	// FIXME improve the comment, by not making it dependent of a graphical representation
-	// FIXME rename parameters dx and dy.
 	/**
 	 * The move method changes the position of the object (the size is unchanged).
 	 * It translates the coordinates by deltas given as x and y.
-	 * The coordinated can NOT be over the size+position of the movable on the screen 
+	 * The coordinated can NOT be over the size+position of the movable :<br/>
+	 * between  0 <= X <= MAX_X<br/>
+	 * 			0 <= Y <= MAX_Y<br/>
+	 * 			MAX_X and MAX_Y are the size of the screen<br/>
 	 * 
 	 * @param x new coordinate relative on x axis
 	 * @param y new coordinate relative on y axis
 	 * @return true when coordinates can be translated, false if they can not.
 	 */
-	public boolean move(int x, int y)
+	public boolean move(int dx, int dy)
 	{
-		if(this.position.getX()+this.taille.getX()+x <= this.X && this.position.getY()+this.taille.getX()+y <= this.Y)
+		if(this.position.getX()+this.taille.getX()+dx <= this.X && this.position.getY()+this.taille.getX()+dy <= this.Y)
 		{
-			this.position = new Coordonnee(this.position.getX()+x,this.position.getY()+y);
+			this.position = new Coordinates(this.position.getX()+dx,this.position.getY()+dy);
 			return true;
 		}
-		// FIXME remove else (implicit), keep only return statement
-		else
-		{
-			return false;
-		}
+		return false;
 	}
 
 	@Override
@@ -138,15 +150,11 @@ public class Movable
 		return "Movable [alive=" + this.alive + ", position=" + this.position + ", taille=" + this.taille + "]";   //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
+	//TODO Comment this 2 methods
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + this.X;
-		result = prime * result + this.Y;
 		result = prime * result + (this.alive ? 1231 : 1237);
 		result = prime * result
 				+ ((this.position == null) ? 0 : this.position.hashCode());
@@ -155,10 +163,6 @@ public class Movable
 		return result;
 	}
 
-	// FIXME same fixme as in Coordonnee
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -167,16 +171,10 @@ public class Movable
 		if (obj == null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if (!(obj instanceof Movable)) {
 			return false;
 		}
 		Movable other = (Movable) obj;
-		if (this.X != other.X) {
-			return false;
-		}
-		if (this.Y != other.Y) {
-			return false;
-		}
 		if (this.alive != other.alive) {
 			return false;
 		}
@@ -195,5 +193,5 @@ public class Movable
 			return false;
 		}
 		return true;
-	}	
+	}
 }
