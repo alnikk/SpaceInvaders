@@ -1,9 +1,11 @@
 /**
  * 
  */
+// FIXME remove FIXME once fixed ;-)
 // FIXME rename the package
 package fr.iutvalence.java.projet.spaceinvaders;
 
+// FIXME make the comment readable (see html files)
 /**
  * @author Gallet Guyon
  *
@@ -12,28 +14,48 @@ package fr.iutvalence.java.projet.spaceinvaders;
  */
 public class SpaceInvaders
 {
+	// FIXME use Javadoc syntax
 	// table of monsters' instance variable
 	private Monster[] tabMonstre;
 
+	// FIXME use Javadoc syntax
 	// ???
 	// table of shoots' instance variable
 	private Shoot[] tabShoot;
 	
+	// FIXME use Javadoc syntax
 	// table of tanks' instance variable
 	private Tank[] tabTank;
 	
+	// FIXME use Javadoc syntax
 	// The size of the screen
 	private final Coordonnee taille;
 	
+	// FIXME use Javadoc syntax
+	// FIXME define "true" constant
 	// The constant size of the screen 
 	private final int X = 200;
+
+	// FIXME use Javadoc syntax
+	// FIXME define "true" constant
 	private final int Y = 200;
+
 	
+	// FIXME use Javadoc syntax
+	// FIXME define "true" constant
 	// Constant in game
 	private final int nbMonstre = 20;
+	
+	// FIXME use Javadoc syntax
+	// FIXME define "true" constant
 	private final int nbShoot = 5;
+
+	// FIXME use Javadoc syntax
+	// FIXME define "true" constant
 	private final int nbTank = 20;
 	
+	
+	// FIXME write a comment
 	/**
 	 * 
 	 */
@@ -42,7 +64,6 @@ public class SpaceInvaders
 		super();
 		
 		this.taille= new Coordonnee(this.X,this.Y);
-		 
 		start(this.nbMonstre,this.nbShoot,this.nbTank);
 	}
 	
@@ -57,6 +78,7 @@ public class SpaceInvaders
 	private boolean start(int nbMonstre, int nbShoot, int nbTank)
 	{
 		//local variable
+		// FIXME define default values as constants
 		Coordonnee tank_size = new Coordonnee(10,10);
 		Coordonnee tank_position = new Coordonnee((this.X/2)-(tank_size.getX()/2),this.Y/2-(tank_size.getY()/2));
 		int i =0;

@@ -1,28 +1,30 @@
+// FIXME remove FIXME once fixed ;-)
 // FIXME rename the package
 package fr.iutvalence.java.projet.spaceinvaders;
 
 
-// FIXME rename the class
-/**
+// FIXME rename the class (Coordinates, Location, ...)
+// FIXME make the comment readable (see html files) 
+/*
  * @author Gallet Guyon
  * 
  * This class allow you to use couple of to integer
- * as coordinated.
+ * as coordinates.
  */
 public class Coordonnee
 {	
-	// The X coordinated
+	// The X coordinate
 	private final int x;
 	
-	// The Y coordinated
+	// The Y coordinate
 	private final int y;
 	
-	
+	// FIXME improve the comment, saying what is the state of coordinates once created
 	/**
 	 * instantiate new object who brings you coordinated
 	 * 
-	 * @param x The X coordinated of the object 
-	 * @param y The Y coordinated of the object
+	 * @param x the X coordinate  
+	 * @param y the Y coordinate
 	 */
 	public Coordonnee(final int x, final int y)
 	{
@@ -31,6 +33,7 @@ public class Coordonnee
 		this.y = y;
 	}
 	
+	// FIXME make the comment readable (see html files)
 	/**
 	 * @return Return the X coordinated of the object
 	 */
@@ -39,6 +42,7 @@ public class Coordonnee
 		return this.x;
 	}
 
+	// FIXME make the comment readable (see html files)
 	/**
 	 * @return Return the y coordinated of the object
 	 */
@@ -56,6 +60,7 @@ public class Coordonnee
 		return "Coordonnee [x=" + this.x + ", y=" + this.y + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
+	// FIXME write your own version of hashCode
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -68,6 +73,8 @@ public class Coordonnee
 		return result;
 	}
 
+	// FIXME write your own version of equals or comment inside code to prove that you understand it and do not use getClass() but instanceof
+	// FIXME write a comment to explain what means equality here
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */

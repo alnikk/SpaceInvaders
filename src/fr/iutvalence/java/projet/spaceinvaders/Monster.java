@@ -1,6 +1,7 @@
 /**
  * 
  */
+// FIXME remove FIXME once fixed ;-)
 // FIXME rename the package
 package fr.iutvalence.java.projet.spaceinvaders;
 

@@ -1,6 +1,8 @@
 /**
  * 
  */
+
+// FIXME remove FIXME once fixed ;-)
 // FIXME rename the package (may be a different name that the one chosen for core classes)
 package fr.iutvalence.java.projet.test;
 
