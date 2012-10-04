@@ -1,6 +1,5 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
-// FIXME (FIXED) fix comment
 /**
  * This class defines a movable object, that can move on a 2D grid and so being killed by others.
  * 
@@ -20,12 +19,32 @@ public class Movable
 	 */
 	private Coordinates position;
 
-	// FIXME rename field
 	/**
 	 * The size of the movable on the grid.<br/>
 	 * The size is defined by two values as a Coordinate object whose x means width and y means height.
 	 */
-	private Coordinates taille;
+	private Coordinates size;
+	
+	/**
+	 * The size by default of the movable on the grid.<br/>
+	 * The size is defined by two values (width,height)
+	 */
+	private final int height = 10;
+	private final int width = 10;
+	
+	/**
+	 * This constructor creates a new living <tt>Movable</tt> object taking its coordinates.<br/>
+	 * Size is set by the default couple of (10,10)
+	 * 
+	 * @param i the initial position, as a Coordinate object  
+	 */
+	public Movable(Coordinates i)
+	{
+		super();
+		this.position = i;
+		this.size = new Coordinates(this.width,this.height);
+		this.alive = true;
+	}
 	
 	/**
 	 * This constructor creates a new living <tt>Movable</tt> object taking its coordinates and size as parameters.
@@ -37,7 +56,7 @@ public class Movable
 	{
 		super();
 		this.position = i;
-		this.taille = j;
+		this.size = j;
 		this.alive = true;
 	}
 
@@ -83,7 +102,6 @@ public class Movable
 		this.position = position;
 	}
 
-	// FIXME rename method
 	/**
 	 * This method returns the size of the object.<br/>
 	 * 
@@ -91,17 +109,16 @@ public class Movable
 	 */
 	public Coordinates getSize()
 	{
-		return this.taille;
+		return this.size;
 	}
 
-	// FIXME rename method
 	/**
 	 * This method sets the size of the element on the screen
 	 * @param taille the size of the element
 	 */
-	public void setTaille(final Coordinates taille)
+	public void setSize(final Coordinates taille)
 	{
-		this.taille = taille;
+		this.size = taille;
 	}
 
 	/**
@@ -123,6 +140,6 @@ public class Movable
 	@Override
 	public String toString()
 	{
-		return "Movable [alive=" + this.alive + ", position=" + this.position + ", taille=" + this.taille + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$
+		return "Movable [alive=" + this.alive + ", position=" + this.position + ", taille=" + this.size + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$
 	}
 }

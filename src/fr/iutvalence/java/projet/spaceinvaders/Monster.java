@@ -27,6 +27,17 @@ public class Monster extends Movable
 	{
 		super(i, j);
 	}
+	
+	/**
+	 * Create Monster with coordinates.<br/>
+	 * By default the coordinate size is (10,10)
+	 * 
+	 * @param i Set the base position of the monster
+	 */
+	public Monster(Coordinates i)
+	{
+		super(i);
+	}
 
 	// oldFIXME methods ?
 	// not yet

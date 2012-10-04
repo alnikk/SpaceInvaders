@@ -33,13 +33,6 @@ public class SpaceInvaders
 	 */
 	private Tank[] tabTank;
 
-	// TODO move to Movable
-	// FIXME field initialization must be done inside a constructor
-	/**
-	 * Size of a movable object 
-	 */
-	private final int size = 10;
-
 	//************* Constante *************//
 	/**
 	 * It defines the number of monster you have in tabMonster by default,
@@ -75,8 +68,6 @@ public class SpaceInvaders
 	 */
 	public SpaceInvaders()
 	{
-		super();
-
 		this.work = true;
 		this.maxSize = new Coordinates(this.XGrid, this.YGrid);
 		initTab(this.nbMonsterDefault, this.nbTankDefault);
@@ -92,8 +83,6 @@ public class SpaceInvaders
 	 */
 	public SpaceInvaders(int nbMonster, int nbTank)
 	{
-		super();
-
 		this.work = true;
 		this.maxSize = new Coordinates(this.XGrid, this.YGrid);
 		initTab(nbMonster, nbTank);
@@ -110,8 +99,6 @@ public class SpaceInvaders
 	 */
 	public SpaceInvaders(int nbMonster, int nbTank, Coordinates Max)
 	{
-		super();
-
 		this.work = true;
 		this.maxSize = Max;
 		initTab(nbMonster, nbTank);

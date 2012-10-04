@@ -3,12 +3,11 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
-// FIXME make the comment readable (see html files)
 /**
- * @author alexandre
- *
- * This class is son of Movable.
+ * This class is son of Movable.<br/>
  * It represents the base of your "character"
+ * 
+ * @author Gallet Guyon
  */
 public class Tank extends Movable
 {
@@ -22,7 +21,18 @@ public class Tank extends Movable
 	{
 		super(i, j);
 	}
+	
+	/**
+	 * Create Tank with coordinates.<br/>
+	 * By default the coordinate size is (10,10)
+	 * 
+	 * @param i Set the base position of the monster
+	 */
+	public Tank(Coordinates i)
+	{
+		super(i);
+	}
 
-	// FIXME methods ?
+	// oldFIXME methods ?
 	// not yet
 }
