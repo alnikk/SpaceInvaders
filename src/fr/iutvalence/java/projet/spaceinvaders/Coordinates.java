@@ -61,8 +61,7 @@ public class Coordinates
 	@Override
 	public String toString()
 	{
-		// FIXME fix string
-		return "Coordonnee [x=" + this.x + ", y=" + this.y + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return "x=" + this.x + ", y=" + this.y + " "; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	@Override

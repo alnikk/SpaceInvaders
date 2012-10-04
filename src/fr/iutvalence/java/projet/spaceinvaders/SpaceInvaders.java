@@ -3,7 +3,6 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
-import fr.iutvalence.java.projet.unused.Shoot;
 
 /**
  * The main parts of the game.<br/>
@@ -13,6 +12,11 @@ import fr.iutvalence.java.projet.unused.Shoot;
  */
 public class SpaceInvaders
 {
+	/**
+	 * The constant size of the grid
+	 */
+	private Coordinates max;
+	
 	// FIXME rename field
 	/**
 	 * Boolean to know if the part is finished
@@ -26,51 +30,23 @@ public class SpaceInvaders
 	private Monster[] tabMonstre;
 
 	// FIXME rename field
-	// ???
-	// table of shoots' instance variable
-	private Shoot[] tabShoot;
-
-	// FIXME rename field
 	/**
 	 * Table of all tanks' instance variable
 	 */
 	private Tank[] tabTank;
 
-	// FIXME rename field
-	/**
-	 * The size of the screen
-	 */
-	private final Coordinates taille;
-
-	/**
-	 * The constant size of the screen
-	 */
-	private static final int X = 300;
-
-	
 	// FIXME field initialization must be done inside a constructor
 	/**
-	 * Height of the screen 
-	 */
-	private final int Y = 300;
-
-	// FIXME field initialization must be done inside a constructor
-	/**
-	 * Size of a movable object 
+	 * Size of a movable object
 	 */
 	private final int size = 10;
 
-	// FIXME rename constant
+
 	/**
 	 * Constant in game
 	 */
 	private static final int nbMonstre = 20;
 
-	// FIXME rename constant
-	/**
-	 * Constant in game
-	 */
-	private static final int nbShoot = 5;
 
 	// FIXME rename constant
 	/**
@@ -89,7 +65,7 @@ public class SpaceInvaders
 
 		this.part = true;
 		this.taille = new Coordinates(this.X, this.Y);
-		init(this.nbMonstre, this.nbShoot, this.nbTank);
+		init(this.nbMonstre, this.nbTank);
 	}
 
 	// FIXME fix comment
@@ -100,7 +76,7 @@ public class SpaceInvaders
 	 * @param Set the max of shoot
 	 * @param Set the max of tank
 	 */
-	private void init(int nbMonstre, int nbShoot, int nbTank)
+	private void init(int nbMonstre, int nbTank)
 	{
 		// local variable
 		Coordinates tank_size = new Coordinates(this.size, this.size);
@@ -114,7 +90,6 @@ public class SpaceInvaders
 
 		//
 		this.tabMonstre = new Monster[nbMonstre];
-		this.tabShoot = new Shoot[nbShoot];
 		this.tabTank = new Tank[nbTank];
 
 		//
@@ -129,7 +104,7 @@ public class SpaceInvaders
 		}
 	}
 
-	// TODO deplacement des enemis seuls
+	// TODO deplacement des enemy seuls
 
 	// oldFIXME public methods ?
 	// later =)
