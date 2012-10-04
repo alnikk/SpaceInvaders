@@ -1,6 +1,5 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
-// FIXME (FIXED) detail comment
 /**
  * This class allow to use couple of integers as coordinates.
  * Once the created, a Coordinate object is immutable (i.e. its state can not be changed)
@@ -9,17 +8,18 @@ package fr.iutvalence.java.projet.spaceinvaders;
  */
 public class Coordinates
 {
-	// FIXME respect JavaDoc syntax
-	// The X coordinate
+	/*
+	 * The X coordinate
+	 */
 	private final int x;
 
-	// FIXME respect JavaDoc syntax
-	// The Y coordinate
+	/**
+	 * The Y coordinate
+	 */
 	private final int y;
 
-	// FIXME (FIXED) fix the comment
 	/**
-	 * This constructor creates a new Coordinate <tt>(x,Y)</tt> taking x and y as parameters. 
+	 * This constructor creates a new Coordinate <tt>(x,y)</tt> taking x and y as parameters. 
 	 * 
 	 * @param x the X coordinate of the object you create  
 	 * @param y the Y coordinate of the object you create
@@ -31,7 +31,6 @@ public class Coordinates
 		this.y = y;
 	}
 
-	// FIXME (FIXED) fix the comment
 	/**
 	 * This method returns the value of X from of object's coordinates  
 	 * 
@@ -42,7 +41,6 @@ public class Coordinates
 		return this.x;
 	}
 
-	// FIXME (FIXED) fix the comment
 	/**
 	 * This method returns the value of Y from of object's coordinates  
 	 * 
@@ -74,7 +72,6 @@ public class Coordinates
 		return result;
 	}
 
-	// FIXME (FIXED) fix the comment
 	/**
 	 * Indicates whether some other object is "equal to" this one.<br/>
 	 * That is to say, the coordinates have to be the same :<br/>
