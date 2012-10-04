@@ -1,7 +1,7 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
- * This class allow to use couple of integers as coordinates.
+ * This class allow to use couple of integers as coordinates. (Can be too a couple of (Width,Height)<br/>
  * Once the created, a Coordinate object is immutable (i.e. its state can not be changed)
  * 
  * @author Gallet Guyon
