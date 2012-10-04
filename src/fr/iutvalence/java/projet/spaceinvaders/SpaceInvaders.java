@@ -3,6 +3,8 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
+import java.util.Arrays;
+
 /**
  * The main parts of the game.<br/>
  * It provides the initializations and all objects are referenced in it. 
@@ -33,33 +35,38 @@ public class SpaceInvaders
 	 */
 	private Tank[] tabTank;
 
-	//************* Constante *************//
+	//************* Constant *************//
 	/**
 	 * It defines the number of monster you have in tabMonster by default,
 	 * if it's not set in constructor. 
 	 */
-	private static final int nbMonsterDefault = 20;
+	private final int nbMonsterDefault = 20;
 
 	/**
 	 * It defines the number of tank you have in tabTank by default,
 	 * if it's not set in constructor.
 	 */
-	private static final int nbTankDefault = 1;
+	private final int nbTankDefault = 1;
 	
 	/**
 	 * It defines the maximum of X axis,
 	 * if it's not set in constructor.
 	 */
-	private static final int XGrid = 300;
+	private final int XGrid = 300;
 	
 	/**
 	 * It defines the maximum of Y axis,
 	 * if it's not set in constructor.
 	 */
-	private static final int YGrid = 300;
+	private final int YGrid = 300;
+	
+	/**
+	 * Default size of element (e.g. Doc Movable)
+	 */
+	private final int defaultSize = 10;
 
 	
-	//************************** Constructeurs **************************//
+	//************************** Constructors **************************//
 	/**
 	 * Initialize the game.<br/>
 	 * This is the default constructor. It sets the number of tank to 1, the number of monster to 20,
@@ -104,7 +111,7 @@ public class SpaceInvaders
 		initTab(nbMonster, nbTank);
 	}
 
-	//************************** Methodes **************************//
+	//************************** Methods **************************//
 	
 	/**
 	 * Initialize the table of movable elements.
@@ -116,34 +123,50 @@ public class SpaceInvaders
 	private void initTab(int nbMonstre, int nbTank)
 	{
 		// local variable
-		Coordinates tank_size = new Coordinates(this.size, this.size);
 		Coordinates tank_position = new Coordinates((this.maxSize.getX() / 2) 
-														- (tank_size.getX() / 2), 
-													this.maxSize.getY() / 2 - (tank_size.getY() / 2));
-
-		int i = 0;
-		Coordinates monster_size = new Coordinates(this.size, this.size);
-		Coordinates monster_position = new Coordinates(this.maxSize.getX() - monster_size.getX(), 
-														this.maxSize.getY() - monster_size.getY());
+														- (this.defaultSize / 2), 
+													this.maxSize.getY() / 2 - (this.defaultSize / 2));
+		Coordinates monster_position = new Coordinates(this.maxSize.getX() - this.defaultSize, 
+														this.maxSize.getY() - this.defaultSize);
+		int i = 0; //line
+		int j = 0; //column
 
 		// Allocations
 		this.tabMonster = new Monster[nbMonstre];
 		this.tabTank = new Tank[nbTank];
 
 		// Set Tabs
-		this.tabTank[0] = new Tank(tank_position, tank_size);
+		this.tabTank[0] = new Tank(tank_position);
 
-		for (i = 0; i < 19; i++)
+		if(this.XGrid % (nbMonstre * this.defaultSize) >= 1)
+			j=1;
+		else
+			j = (nbMonstre * this.defaultSize) % this.XGrid;
+		
+		for(j=j;j>=0;j--)
 		{
-			this.tabMonster[i] = new Monster(monster_position, monster_size);
-			monster_position = new Coordinates(monster_position.getX()
-					- monster_size.getX(), monster_position.getY()
-					- monster_size.getY());
+			for(i = 0; i < 19; i++)
+			{
+				this.tabMonster[i] = new Monster(monster_position);
+				monster_position = new Coordinates(monster_position.getX()
+						- this.defaultSize, monster_position.getY()
+						- this.defaultSize);
+			}
 		}
-		//TODO finish
+		//TODO =~finish
+		System.out.print(this.tabMonster);
 	}
 
-	// TODO deplacement des enemis seuls
+	@Override
+	public String toString()
+	{
+		return "SpaceInvaders [tabMonster=" + Arrays.toString(this.tabMonster)
+				+ ", tabTank=" + Arrays.toString(this.tabTank) + "]";
+	}
+	
+	
+
+	// TODO move enemy alone
 	
 	// oldFIXME public methods ?
 	// later =)
