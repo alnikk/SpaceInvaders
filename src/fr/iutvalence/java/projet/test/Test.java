@@ -1,9 +1,11 @@
+		// FIXME -> if this class is unused for the moment, just remove it
+
 /**
  * 
- */ 
+ */
 package fr.iutvalence.java.projet.test;
 
-// oldFIXME improve the comment
+// FIXME improve the comment
 //Just test for myself so no need to comment.
 /**
  * @author alexandre
@@ -11,13 +13,13 @@ package fr.iutvalence.java.projet.test;
  */
 public class Test
 {
-	// oldFIXME improve the comment
+	// FIXME improve the comment
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args)
 	{
-		// oldFIXME todo what ?
+		// FIXME todo what ?
 		// For testing method's classes generally
 	}
 }

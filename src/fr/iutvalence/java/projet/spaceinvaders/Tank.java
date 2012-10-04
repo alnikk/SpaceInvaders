@@ -3,7 +3,6 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
-
 // FIXME make the comment readable (see html files)
 /**
  * @author alexandre
@@ -23,7 +22,7 @@ public class Tank extends Movable
 	{
 		super(i, j);
 	}
-	
+
 	// FIXME methods ?
 	// not yet
 }

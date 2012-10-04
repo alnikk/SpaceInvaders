@@ -24,7 +24,7 @@ public class Shoot extends Movable
 	{
 		super(i, j);
 	}
-	
+
 	// FIXME methods ?
-	
+
 }

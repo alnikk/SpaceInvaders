@@ -27,8 +27,8 @@ public class Monster extends Movable
 	{
 		super(i, j);
 	}
-	
+
 	// FIXME methods ?
 	// not yet
-	
+
 }

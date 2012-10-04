@@ -12,7 +12,7 @@ public class Liste
 	private String nom;
 	private Object objet;
 	private Liste suivant;
-	
+
 	/**
 	 * 
 	 */
@@ -48,7 +48,7 @@ public class Liste
 		this.suivant = suivant;
 		return suivant;
 	}
-	
+
 	/**
 	 * @return le doublet suivant (existant => peut etre agal à nil)
 	 */
@@ -56,7 +56,6 @@ public class Liste
 	{
 		return this.suivant;
 	}
-	
 
 	/**
 	 * @return the nom
@@ -74,7 +73,9 @@ public class Liste
 		this.nom = nom;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -82,5 +83,5 @@ public class Liste
 	{
 		return "Liste [nom=" + this.nom + ", objet=" + this.objet + ", suivant=" + this.suivant + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 	}
-	
+
 }
