@@ -49,21 +49,26 @@ public class SpaceInvaders
 	private final int nbTankDefault = 1;
 	
 	/**
-	 * It defines the maximum of X axis,
+	 * It defines the maximum (default) of X axis,
 	 * if it's not set in constructor.
 	 */
 	private final int XGrid = 300;
 	
 	/**
-	 * It defines the maximum of Y axis,
+	 * It defines the maximum (default) of Y axis,
 	 * if it's not set in constructor.
 	 */
 	private final int YGrid = 300;
 	
 	/**
+	 * Default delta between 2 monsters
+	 */
+	private final int defaultDelta = 10;
+	
+	/**
 	 * Default size of element (e.g. Doc Movable)
 	 */
-	private final int defaultSize = 10;
+	private final int defaultSize = 2;
 
 	
 	//************************** Constructors **************************//
@@ -125,9 +130,10 @@ public class SpaceInvaders
 		// local variable
 		Coordinates tank_position = new Coordinates((this.maxSize.getX() / 2) 
 														- (this.defaultSize / 2), 
-													this.maxSize.getY() / 2 - (this.defaultSize / 2));
-		Coordinates monster_position = new Coordinates(this.maxSize.getX() - this.defaultSize, 
-														this.maxSize.getY() - this.defaultSize);
+													(this.maxSize.getY() / 2)
+														- (this.defaultSize / 2));
+		Coordinates monster_position = new Coordinates(this.maxSize.getX() - (this.defaultSize + this.defaultDelta), 
+														this.maxSize.getY() - (this.defaultSize + this.defaultDelta));
 		int i = 0; //line
 		int j = 0; //column
 
@@ -135,26 +141,11 @@ public class SpaceInvaders
 		this.tabMonster = new Monster[nbMonstre];
 		this.tabTank = new Tank[nbTank];
 
-		// Set Tabs
+		// Set-up Tabs
 		this.tabTank[0] = new Tank(tank_position);
 
-		if(this.XGrid % (nbMonstre * this.defaultSize) >= 1)
-			j=1;
-		else
-			j = (nbMonstre * this.defaultSize) % this.XGrid;
 		
-		for(j=j;j>=0;j--)
-		{
-			for(i = 0; i < 19; i++)
-			{
-				this.tabMonster[i] = new Monster(monster_position);
-				monster_position = new Coordinates(monster_position.getX()
-						- this.defaultSize, monster_position.getY()
-						- this.defaultSize);
-			}
-		}
 		//TODO =~finish
-		System.out.print(this.tabMonster);
 	}
 
 	@Override
