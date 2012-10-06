@@ -39,6 +39,13 @@ public class Monster extends Movable
 		super(i);
 	}
 
+	@Override
+	public String toString()
+	{
+		return "Monster [isAlive()=" + this.isAlive() + ", getPosition()="
+				+ this.getPosition() + ", getSize()=" + this.getSize() + "]";
+	}
+
 	// oldFIXME methods ?
 	// not yet
 

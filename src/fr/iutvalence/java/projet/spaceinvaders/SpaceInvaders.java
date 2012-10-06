@@ -63,12 +63,12 @@ public class SpaceInvaders
 	/**
 	 * Default delta between 2 monsters
 	 */
-	private final int defaultDelta = 10;
+	private final int defaultDelta = 2;
 	
 	/**
 	 * Default size of element (e.g. Doc Movable)
 	 */
-	private final int defaultSize = 2;
+	private final int defaultSize = 10;
 
 	
 	//************************** Constructors **************************//
@@ -83,6 +83,7 @@ public class SpaceInvaders
 		this.work = true;
 		this.maxSize = new Coordinates(this.XGrid, this.YGrid);
 		initTab(this.nbMonsterDefault, this.nbTankDefault);
+		iteration();
 	}
 	
 	/**
@@ -98,6 +99,7 @@ public class SpaceInvaders
 		this.work = true;
 		this.maxSize = new Coordinates(this.XGrid, this.YGrid);
 		initTab(nbMonster, nbTank);
+		iteration();
 	}
 	
 	/**
@@ -114,16 +116,17 @@ public class SpaceInvaders
 		this.work = true;
 		this.maxSize = Max;
 		initTab(nbMonster, nbTank);
+		iteration();
 	}
 
 	//************************** Methods **************************//
 	
 	/**
-	 * Initialize the table of movable elements.
+	 * Initialize the table of movable elements.<br/>
+	 * Algorithm for set-up the monsters' position on the grid, and also Tank.
 	 * 
-	 * 
-	 * @param Set the max of monster 
-	 * @param Set the max of tank
+	 * @param nbMonstre Set the number of monster (The maximum is set (to my mind) to 250, after I'm offload one's responsibilities) 
+	 * @param nbTank Set the number of tank (not implemented yet, so the maximum is 1)
 	 */
 	private void initTab(int nbMonstre, int nbTank)
 	{
@@ -132,11 +135,9 @@ public class SpaceInvaders
 														- (this.defaultSize / 2), 
 													(this.maxSize.getY() / 2)
 														- (this.defaultSize / 2));
-		Coordinates monster_position = new Coordinates(this.maxSize.getX() - (this.defaultSize + this.defaultDelta), 
+		Coordinates monster_position = new Coordinates(this.defaultDelta, 
 														this.maxSize.getY() - (this.defaultSize + this.defaultDelta));
-		int i = 0; //line
-		int j = 0; //column
-
+		int i = 0;
 		// Allocations
 		this.tabMonster = new Monster[nbMonstre];
 		this.tabTank = new Tank[nbTank];
@@ -144,9 +145,90 @@ public class SpaceInvaders
 		// Set-up Tabs
 		this.tabTank[0] = new Tank(tank_position);
 
+		while(i < nbMonstre)
+		{
+			while(i < nbMonstre && 
+					monster_position.getX() + (this.defaultDelta + this.defaultSize) <= this.maxSize.getX())
+			{
+				this.tabMonster[i] = new Monster(monster_position);
+				monster_position = new Coordinates(monster_position.getX() + (this.defaultDelta + this.defaultSize),
+													monster_position.getY());
+				i = i + 1;
+			}				
+			monster_position = new Coordinates(this.defaultDelta,
+												monster_position.getY() - (this.defaultDelta + this.defaultSize));
+		}
 		
-		//TODO =~finish
 	}
+	
+	/**
+	 * Main iteration.<br/>
+	 * This function call :
+	 * <ul>
+	 * 		<li>moveTab</li>
+	 * 		<li>testCollision</li>
+	 * </ul>
+	 */
+	private void iteration() 
+	{
+		//if the player lose, work = false.
+		while(work)
+		{
+			// need same resources, so sync?
+			// TODO move enemy (thread ?)
+			moveTab(this.tabMonster);
+			// TODO test collision (thread ?)
+			testCollision();
+		}
+	}
+	
+	/**
+	 * Make move down a table of enemy.<br/>
+	 * The scheme of the descent is :<br/>
+	 * <ul>
+	 * 		<li>Right</li>
+	 * 		<li>Down</li>
+	 * 		<li>Left</li>
+	 * 		<li>Down</li>
+	 * 		<li>Right</li>
+	 * 		<li>Down</li>
+	 * 		<li>Etc...</li>
+	 * </ul>
+	 * 
+	 * @param tab The table of enemy to move down
+	 */
+	private void moveTab(Object tab[])
+	{
+		// Variable
+		int nb = tab.length;
+		int i = 0;
+		
+		while(i < nb)
+		{
+			//Right
+			//Down
+			//Left
+			//Down
+			//Right
+			//Down
+			//Etc..
+		}
+	}
+	
+	/**
+	 * This procedure test if there 's any collisions in all table declared.<br/>
+	 * Collision are tested between each table and not between elements of the same table.<br/>
+	 * If a Tank is touched by an enemy, work is set to false and the game is stopped by the main iteration.
+	 */
+	private void testCollision()
+	{
+		//Test collision of all table declared
+	}
+	
+	
+	// oldFIXME public methods ?
+	// later =), or maybe not -_-...
+	
 
 	@Override
 	public String toString()
@@ -154,11 +236,4 @@ public class SpaceInvaders
 		return "SpaceInvaders [tabMonster=" + Arrays.toString(this.tabMonster)
 				+ ", tabTank=" + Arrays.toString(this.tabTank) + "]";
 	}
-	
-	
-
-	// TODO move enemy alone
-	
-	// oldFIXME public methods ?
-	// later =)
 }

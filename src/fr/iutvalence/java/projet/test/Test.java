@@ -17,7 +17,7 @@ public class Test
 	 */
 	public static void main(String[] args)
 	{
-		SpaceInvaders SI = new SpaceInvaders(100,1);
+		SpaceInvaders SI = new SpaceInvaders(250,1);
 		System.out.print(SI);
 	}
 
