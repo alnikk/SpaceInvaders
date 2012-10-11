@@ -83,7 +83,15 @@ public class SpaceInvaders
 		this.work = true;
 		this.maxSize = new Coordinates(this.XGrid, this.YGrid);
 		initTab(this.nbMonsterDefault, this.nbTankDefault);
-		iteration();
+		try
+		{
+			iteration();
+		}
+		catch (InterruptedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -99,7 +107,15 @@ public class SpaceInvaders
 		this.work = true;
 		this.maxSize = new Coordinates(this.XGrid, this.YGrid);
 		initTab(nbMonster, nbTank);
-		iteration();
+		try
+		{
+			iteration();
+		}
+		catch (InterruptedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -116,7 +132,15 @@ public class SpaceInvaders
 		this.work = true;
 		this.maxSize = Max;
 		initTab(nbMonster, nbTank);
-		iteration();
+		try
+		{
+			iteration();
+		}
+		catch (InterruptedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	//************************** Methods **************************//
@@ -171,17 +195,20 @@ public class SpaceInvaders
 	 * 		<li>testCollision</li>
 	 * </ul>
 	 */
-	private void iteration() 
+	private void iteration() throws InterruptedException 
 	{
 		//if the player lose, work = false.
 		while(work)
 		{
 			// need same resources, so sync?
 			// TODO move enemy (thread ? no-yes, clock mechanism)
+			Thread.sleep(1000);
 			moveTab(this.tabMonster);
 			// TODO test collision (thread ? every time check)
 			testCollision();
 		}
+		// Debug
+		System.out.println("Don't work anymore ;)");
 	}
 	
 	/**
@@ -292,14 +319,25 @@ public class SpaceInvaders
 			
 			// Check if any points of the tank touch enemy
 			if(tx1 > x1 && ty1 > y1 && tx1 < x2 && ty1 < y2)
+			{
 				this.tabTank[0].setAlive(false);
+				this.work = false;
+			}
 			else if(tx2 > x1 && ty2 > y1 && tx2 < x2 && ty2 < y2)
+			{
 				this.tabTank[0].setAlive(false);
+				this.work = false;
+			}
 			else if(tx1 > x1 && ty2 > y1 && tx1 < x2 && ty2 < y2)
+			{
 				this.tabTank[0].setAlive(false);
+				this.work = false;
+			}
 			else if(tx2 > x1 && ty1 > y1 && tx2 < x2 && ty1 < y2)
+			{
 				this.tabTank[0].setAlive(false);
-				
+				this.work = false;
+			}				
 		}
 	}
 	
