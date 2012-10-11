@@ -1,5 +1,6 @@
 package fr.iutvalence.java.projet.test;
 
+import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvaders;
 
 public class TestCollision
@@ -10,8 +11,7 @@ public class TestCollision
 	 */
 	public static void main(String[] args)
 	{
-		SpaceInvaders S = new SpaceInvaders();
-		
+		Coordinates cMax = new Coordinates(300,300);
+		SpaceInvaders S = new SpaceInvaders(1,1,cMax);	
 	}
-
 }

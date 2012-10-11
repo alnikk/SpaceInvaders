@@ -1,7 +1,10 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet.spaceinvaders;
+package fr.iutvalence.java.projet.unused;
+
+import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
+import fr.iutvalence.java.projet.spaceinvaders.Movable;
 
 // TODO Check the behavior of contact of monster and anyone else 
 /**

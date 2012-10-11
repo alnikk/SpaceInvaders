@@ -5,6 +5,9 @@ package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.util.Arrays;
 
+import fr.iutvalence.java.projet.unused.Monster;
+import fr.iutvalence.java.projet.unused.Tank;
+
 /**
  * The main parts of the game.<br/>
  * It provides the initializations and all objects are referenced in it. 
@@ -28,12 +31,12 @@ public class SpaceInvaders
 	/**
 	 * Table of all monsters' instance variable
 	 */
-	private Monster[] tabMonster;
+	private Movable[] tabMonster;
 
 	/**
 	 * Table of all tanks' instance variable
 	 */
-	private Tank[] tabTank;
+	private Movable[] tabTank;
 
 	//************* Constant *************//
 	/**
@@ -83,15 +86,7 @@ public class SpaceInvaders
 		this.work = true;
 		this.maxSize = new Coordinates(this.XGrid, this.YGrid);
 		initTab(this.nbMonsterDefault, this.nbTankDefault);
-		try
-		{
-			iteration();
-		}
-		catch (InterruptedException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		start();
 	}
 	
 	/**
@@ -107,15 +102,7 @@ public class SpaceInvaders
 		this.work = true;
 		this.maxSize = new Coordinates(this.XGrid, this.YGrid);
 		initTab(nbMonster, nbTank);
-		try
-		{
-			iteration();
-		}
-		catch (InterruptedException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		start();
 	}
 	
 	/**
@@ -132,18 +119,22 @@ public class SpaceInvaders
 		this.work = true;
 		this.maxSize = Max;
 		initTab(nbMonster, nbTank);
+		start();
+	}
+
+	//************************** Methods **************************//
+	
+	private void start()
+	{
 		try
 		{
 			iteration();
 		}
 		catch (InterruptedException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
-	//************************** Methods **************************//
 	
 	/**
 	 * Initialize the table of movable elements.<br/>
@@ -197,15 +188,21 @@ public class SpaceInvaders
 	 */
 	private void iteration() throws InterruptedException 
 	{
+		// Debug
+		System.out.println("Begin");
 		//if the player lose, work = false.
 		while(work)
 		{
+			// Debug
+			System.out.println("Boucle");
+			
+			Thread.sleep(1000); // Clock
+			
 			// need same resources, so sync?
-			// TODO move enemy (thread ? no-yes, clock mechanism)
-			Thread.sleep(1000);
-			moveTab(this.tabMonster);
 			// TODO test collision (thread ? every time check)
 			testCollision();
+			// TODO move enemy (thread ? no-yes, clock mechanism)
+			moveTab(this.tabMonster);
 		}
 		// Debug
 		System.out.println("Don't work anymore ;)");
@@ -307,8 +304,6 @@ public class SpaceInvaders
 		//	|
 		//	0-------------------------------------------------> X
 		
-		
-		// Boucle de Test
 		for(i=0; i < this.tabMonster.length;i++)
 		{
 			// Initialize coordinates
