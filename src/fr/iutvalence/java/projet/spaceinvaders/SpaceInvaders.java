@@ -124,6 +124,8 @@ public class SpaceInvaders
 	/**
 	 * Initialize the table of movable elements.<br/>
 	 * Algorithm for set-up the monsters' position on the grid, and also Tank.
+	 * It positions the tank of the middle of the grid and the monster
+	 * from the top left to the bottom right (like writing in English or French) 
 	 * 
 	 * @param nbMonstre Set the number of monster (The maximum is set (to my mind) to 250, after I'm offload one's responsibilities) 
 	 * @param nbTank Set the number of tank (not implemented yet, so the maximum is 1)
@@ -175,9 +177,9 @@ public class SpaceInvaders
 		while(work)
 		{
 			// need same resources, so sync?
-			// TODO move enemy (thread ?)
+			// TODO move enemy (thread ? no-yes, clock mechanism)
 			moveTab(this.tabMonster);
-			// TODO test collision (thread ?)
+			// TODO test collision (thread ? every time check)
 			testCollision();
 		}
 	}
@@ -197,32 +199,108 @@ public class SpaceInvaders
 	 * 
 	 * @param tab The table of enemy to move down
 	 */
-	private void moveTab(Object tab[])
+	private void moveTab(Movable tab[])
 	{
 		// Variable
 		int nb = tab.length;
 		int i = 0;
 		
-		while(i < nb)
+		//Down
+		//Left
+		//Down
+		//Right
+		//Down
+		
+		//Right
+		for(i=0; i < nb; i++)
 		{
-			//Right
-			//Down
-			//Left
-			//Down
-			//Right
-			//Down
-			//Etc..
+			tab[i].move(-10, 0);
 		}
+		//Wait
+		//Down
+		for(i=0; i < nb; i++)
+		{
+			tab[i].move(0, -10);
+		}
+		//Wait
+		//Left
+		for(i=0; i < nb; i++)
+		{
+			tab[i].move(10, 0);
+		}
+		//Wait
+		//Down
+		for(i=0; i < nb; i++)
+		{
+			tab[i].move(10, 0);
+		}
+		//Wait
 	}
 	
 	/**
-	 * This procedure test if there 's any collisions in all table declared.<br/>
+	 * This procedure test if there is any collisions in all table declared.<br/>
 	 * Collision are tested between each table and not between elements of the same table.<br/>
 	 * If a Tank is touched by an enemy, work is set to false and the game is stopped by the main iteration.
 	 */
 	private void testCollision()
 	{
 		//Test collision of all table declared
+		// Variable
+		int i=0;
+		// Coordinates for monsters
+		int x1,y1,x2,y2;
+		// Coordinates for tank
+		int tx1,tx2,ty1,ty2;
+		
+		// Initialize tank's coordinates
+		tx1 = this.tabTank[0].getPosition().getX();
+		ty1 = this.tabTank[0].getPosition().getY();
+		tx2 = this.tabTank[0].getSize().getX() + tx1;
+		ty2 = this.tabTank[0].getSize().getY() + ty1;
+		
+		
+		//	Area :
+		//
+		//
+		//	Y
+		//	^
+		//	|
+		//	|
+		//	|
+		//	|	 (x1,y2)__________(x2,y2)
+		//	|		|				 |
+		//	|		|				 |
+		//	|		|				 |
+		//	|		|				 |
+		//	|		|				 |
+		//	|		|				 |
+		//	|		|				 |
+		//	|	 (x1,y1)__________(x2,y1)
+		//	|
+		//	|
+		//	0-------------------------------------------------> X
+		
+		
+		// Boucle de Test
+		for(i=0; i < this.tabMonster.length;i++)
+		{
+			// Initialize coordinates
+			x1 = this.tabMonster[i].getPosition().getX();
+			y1 = this.tabMonster[i].getPosition().getY();
+			x2 = this.tabMonster[i].getSize().getX() + x1;
+			y2 = this.tabMonster[i].getSize().getY() + y1;
+			
+			// Check if any points of the tank touch enemy
+			if(tx1 > x1 && ty1 > y1 && tx1 < x2 && ty1 < y2)
+				this.tabTank[0].setAlive(false);
+			else if(tx2 > x1 && ty2 > y1 && tx2 < x2 && ty2 < y2)
+				this.tabTank[0].setAlive(false);
+			else if(tx1 > x1 && ty2 > y1 && tx1 < x2 && ty2 < y2)
+				this.tabTank[0].setAlive(false);
+			else if(tx2 > x1 && ty1 > y1 && tx2 < x2 && ty1 < y2)
+				this.tabTank[0].setAlive(false);
+				
+		}
 	}
 	
 	
