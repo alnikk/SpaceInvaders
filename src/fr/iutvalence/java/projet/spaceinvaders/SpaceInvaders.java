@@ -119,12 +119,11 @@ public class SpaceInvaders
 		this.work = true;
 		this.maxSize = Max;
 		initTab(nbMonster, nbTank);
-		start();
 	}
 
 	//************************** Methods **************************//
 	
-	private void start()
+	public void start()
 	{
 		try
 		{

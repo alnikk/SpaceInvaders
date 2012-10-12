@@ -12,6 +12,7 @@ public class TestCollision
 	public static void main(String[] args)
 	{
 		Coordinates cMax = new Coordinates(300,300);
-		SpaceInvaders S = new SpaceInvaders(1,1,cMax);	
+		SpaceInvaders S = new SpaceInvaders(1,1,cMax);
+		S.start();
 	}
 }
