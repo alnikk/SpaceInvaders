@@ -4,27 +4,13 @@ package fr.iutvalence.java.projet.spaceinvaders;
 /**
  * This class allows you to manage bunker on the grid.<br/>
  * The bunker protects the tank when attacked by enemy.
- * It is partially or totally destroyable.
+ * It may be partially or totally destroyable.
  * 
  * @author Gallet Guyon
  */
-public class Bunker
+public class Bunker extends Element
 {	
 	//************* Variable *************//
-	
-	// FIXME this is not a constant. If so, define it as a real one
-	/**
-	 * This constant sets the position of the bunker on the grid.<br/>
-	 * It can't be changed once it was created.
-	 */
-	private final Coordinates position;
-
-	// FIXME this is not a constant. If so, define it as a real one
-	/**
-	 * This constant sets the size of the bunker on the grid.<br/>
-	 * It can't be changed once it was created.
-	 */
-	private final Coordinates size;
 	
 	// FIXME this is not a constant. If so, define it as a real one
 	/**

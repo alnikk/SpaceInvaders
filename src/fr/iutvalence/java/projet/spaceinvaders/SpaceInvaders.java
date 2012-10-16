@@ -124,6 +124,7 @@ public class SpaceInvaders
 	 * @param nbTank Set the number of Tank you want instantiate (with default constructors, it sets to 20)
  	 * @param nbTank Set the X axis (with default constructors, it sets to 300)
  	 * @param nbTank Set the Y axis (with default constructors, it sets to 300)
+	 * @param Max 
 	 */
 	public SpaceInvaders(int nbMonster, int nbTank, Coordinates Max)
 	{
@@ -136,6 +137,9 @@ public class SpaceInvaders
 	
 	
 	// FIXME write a comment
+	/**
+	 * 
+	 */
 	public void start()
 	{
 		try
@@ -205,7 +209,7 @@ public class SpaceInvaders
 		// TODO remove Debug message
 		System.out.println("Begin");
 		//if the player lose, work = false.
-		while(work)
+		while(this.work)
 		{
 			// TODO remove Debug message
 			System.out.println("Boucle");

@@ -8,24 +8,12 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * 
  * @author Gallet Guyon
  */
-public class Movable
+public class Movable extends Element
 { 
 	/**
 	 * Status indicating if the movable object is still alive (a dead movable can no longer move).
 	 */
-	private boolean alive;
-
-	/**
-	 * The position of the movable object on the 2D grid
-	 */
-	private Coordinates position;
-
-	/**
-	 * The size of the movable on the grid.<br/>
-	 * The size is defined by two values as a Coordinate object whose x means width and y means height.
-	 */
-	private Coordinates size;
-	
+	private boolean alive;	
 	
 	// FIXME comments have to be related to only one declaration
 	/**
@@ -33,10 +21,10 @@ public class Movable
 	 * The size is defined by two values (width,height)
 	 */
 	// FIXME if it is a constant, it must be defined as a real one. Else, initialize it in a constructor
-	private final int height = 10;
+	private final static int height = 10;
 	
 	// FIXME if it is a constant, it must be defined as a real one. Else, initialize it in a constructor
-	private final int width = 10;
+	private final static int width = 10;
 	
 	/**
 	 * This constructor creates a new living <tt>Movable</tt> object taking its coordinates.<br/>
@@ -46,9 +34,7 @@ public class Movable
 	 */
 	public Movable(Coordinates i)
 	{
-		super();
-		this.position = i;
-		this.size = new Coordinates(this.width,this.height);
+		super(new BoundingBox(i,new Coordinates(width,height)));
 		this.alive = true;
 	}
 	
@@ -60,9 +46,7 @@ public class Movable
 	 */
 	public Movable(Coordinates i, Coordinates j)
 	{
-		super();
-		this.position = i;
-		this.size = j;
+		super(new BoundingBox(i,j));
 		this.alive = true;
 	}
 
