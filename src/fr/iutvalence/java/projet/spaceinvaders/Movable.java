@@ -1,5 +1,6 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
+// FIXME what about grid bounds (and the respect of them during a move) 
 /**
  * This class defines a movable object, that can move on a 2D grid and so being killed by others.
  * 
@@ -25,11 +26,16 @@ public class Movable
 	 */
 	private Coordinates size;
 	
+	
+	// FIXME comments have to be related to only one declaration
 	/**
 	 * The size by default of the movable on the grid.<br/>
 	 * The size is defined by two values (width,height)
 	 */
+	// FIXME if it is a constant, it must be defined as a real one. Else, initialize it in a constructor
 	private final int height = 10;
+	
+	// FIXME if it is a constant, it must be defined as a real one. Else, initialize it in a constructor
 	private final int width = 10;
 	
 	/**

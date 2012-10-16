@@ -9,8 +9,7 @@ import fr.iutvalence.java.projet.unused.Monster;
 import fr.iutvalence.java.projet.unused.Tank;
 
 /**
- * The main parts of the game.<br/>
- * It provides the initializations and all objects are referenced in it. 
+ * A space invader game.<br/>
  * 
  * @author Gallet Guyon
  */
@@ -31,61 +30,71 @@ public class SpaceInvaders
 	/**
 	 * Table of all monsters' instance variable
 	 */
+	// FIXME why not rename it just "monsters" ?
 	private Movable[] tabMonster;
 
 	/**
 	 * Table of all tanks' instance variable
 	 */
+	// FIXME why not rename it just "tanks" ?
 	private Movable[] tabTank;
 
 	//************* Constant *************//
 	/**
-	 * It defines the number of monster you have in tabMonster by default,
+	 * It defines the number of monsters you have in tabMonster by default,
 	 * if it's not set in constructor. 
 	 */
+	// FIXME this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
 	private final int nbMonsterDefault = 20;
 
 	/**
 	 * It defines the number of tank you have in tabTank by default,
 	 * if it's not set in constructor.
 	 */
+	// FIXME this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
 	private final int nbTankDefault = 1;
 	
 	/**
 	 * It defines the maximum (default) of X axis,
 	 * if it's not set in constructor.
 	 */
+	// FIXME this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
 	private final int XGrid = 300;
 	
 	/**
 	 * It defines the maximum (default) of Y axis,
 	 * if it's not set in constructor.
 	 */
+	// FIXME this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
 	private final int YGrid = 300;
 	
 	/**
 	 * Default delta between 2 monsters
 	 */
+	// FIXME this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
 	private final int defaultDelta = 2;
 	
 	/**
 	 * Default size of element (e.g. Doc Movable)
 	 */
+	// FIXME this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
 	private final int defaultSize = 10;
 
 	
 	//************************** Constructors **************************//
 	/**
 	 * Initialize the game.<br/>
-	 * This is the default constructor. It sets the number of tank to 1, the number of monster to 20,
+	 * This is the default constructor. It sets the number of tanks to 1, the number of monsters to 20,
 	 * the X axis to 300, and the Y axis to 300 too.<br/>
-	 * If you don't want to use this default characteristic use another constructors 
+	 * If you don't want to use this default characteristic use another constructor 
 	 */
 	public SpaceInvaders()
 	{
 		this.work = true;
 		this.maxSize = new Coordinates(this.XGrid, this.YGrid);
 		initTab(this.nbMonsterDefault, this.nbTankDefault);
+		
+		// FIXME make the call to start outside of the constructor. A constructor must return as soon as possible
 		start();
 	}
 	
@@ -102,6 +111,8 @@ public class SpaceInvaders
 		this.work = true;
 		this.maxSize = new Coordinates(this.XGrid, this.YGrid);
 		initTab(nbMonster, nbTank);
+
+		// FIXME make the call to start outside of the constructor. A constructor must return as soon as possible
 		start();
 	}
 	
@@ -123,6 +134,8 @@ public class SpaceInvaders
 
 	//************************** Methods **************************//
 	
+	
+	// FIXME write a comment
 	public void start()
 	{
 		try
@@ -144,6 +157,7 @@ public class SpaceInvaders
 	 * @param nbMonstre Set the number of monster (The maximum is set (to my mind) to 250, after I'm offload one's responsibilities) 
 	 * @param nbTank Set the number of tank (not implemented yet, so the maximum is 1)
 	 */
+	// FIXME rename parameters
 	private void initTab(int nbMonstre, int nbTank)
 	{
 		// local variable
@@ -185,14 +199,15 @@ public class SpaceInvaders
 	 * 		<li>testCollision</li>
 	 * </ul>
 	 */
+	// FIXME why returning InterruptedException ?
 	private void iteration() throws InterruptedException 
 	{
-		// Debug
+		// TODO remove Debug message
 		System.out.println("Begin");
 		//if the player lose, work = false.
 		while(work)
 		{
-			// Debug
+			// TODO remove Debug message
 			System.out.println("Boucle");
 			
 			Thread.sleep(1000); // Clock
@@ -203,7 +218,7 @@ public class SpaceInvaders
 			// TODO move enemy (thread ? no-yes, clock mechanism)
 			moveTab(this.tabMonster);
 		}
-		// Debug
+		// TODO remove Debug message
 		System.out.println("Don't work anymore ;)");
 	}
 	
@@ -267,7 +282,7 @@ public class SpaceInvaders
 	 */
 	private void testCollision()
 	{
-		//Test collision of all table declared
+		// Test collision of all tables declared
 		// Variable
 		int i=0;
 		// Coordinates for monsters

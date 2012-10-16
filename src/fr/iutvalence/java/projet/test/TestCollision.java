@@ -3,9 +3,10 @@ package fr.iutvalence.java.projet.test;
 import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvaders;
 
+//FIXME write comment
 public class TestCollision
 {
-
+	// FIXME finish writing comment
 	/**
 	 * @param args
 	 */

@@ -1,8 +1,8 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
- * This class allow to use couple of integers as coordinates. (Can be too a couple of (Width,Height)<br/>
- * Once the created, a Coordinate object is immutable (i.e. its state can not be changed)
+ * This class allows to use couple of integers as coordinates. (Can be too a couple of (Width,Height)<br/>
+ * Once created, a Coordinate object is immutable (i.e. its state can not be changed)
  * 
  * @author Gallet Guyon
  */
@@ -32,7 +32,7 @@ public class Coordinates
 	}
 
 	/**
-	 * This method returns the value of X from of object's coordinates  
+	 * This method returns the value of X from object's coordinates  
 	 * 
 	 * @return the value of X
 	 */
@@ -42,7 +42,7 @@ public class Coordinates
 	}
 
 	/**
-	 * This method returns the value of Y from of object's coordinates  
+	 * This method returns the value of Y from object's coordinates  
 	 * 
 	 * @return the value of Y
 	 */
@@ -82,7 +82,6 @@ public class Coordinates
 	 * @return <tt>true</tt> if this object is the same as the <tt>obj</tt> argument; <tt>false</tt> otherwise.
 	 */
 	@Override
-	// FIXME explain me this
 	public boolean equals(Object obj)
 	{
 		if (this == obj)

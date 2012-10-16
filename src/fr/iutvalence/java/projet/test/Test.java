@@ -5,6 +5,7 @@ package fr.iutvalence.java.projet.test;
 
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvaders;
 
+// FIXME finish writing comment
 /**
  * @author alexandre
  *
@@ -12,6 +13,7 @@ import fr.iutvalence.java.projet.spaceinvaders.SpaceInvaders;
 public class Test
 {
 
+	// FIXME finish writing comment
 	/**
 	 * @param args
 	 */
