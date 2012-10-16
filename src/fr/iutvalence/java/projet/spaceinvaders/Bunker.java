@@ -66,15 +66,14 @@ public class Bunker extends Element
 	 */
 	public Bunker(int res, Coordinates position, Coordinates size)
 	{
+		super(new BoundingBox(position, size));
 		// Declaration of local variables
 		int i = 0,j = 0;
 		
 		// Set local constant
 		this.resolution = res;
-		this.position = position;
-		this.size = size;
-		this.nbCase = new Coordinates(this.size.getX() % this.resolution,
-										this.size.getY() % this.resolution);
+		this.nbCase = new Coordinates(this.getArea().getSize().getX() % this.resolution,
+										this.getArea().getSize().getY() % this.resolution);
 		
 		// Sets informations in table
 		for(j=0; j < ((this.nbCase.getY() * 3) % 5); j++)
@@ -98,15 +97,14 @@ public class Bunker extends Element
 	// FIXME write a comment
 	public Bunker(Coordinates position, Coordinates size)
 	{
+		super(new BoundingBox(position, size));
 		// Declaration of local variables
 		int i = 0,j = 0;
 		
 		// Set local constant
 		this.resolution = this.defaultResolution;
-		this.position = position;
-		this.size = size;
-		this.nbCase = new Coordinates(this.size.getX() % this.resolution,
-										this.size.getY() % this.resolution);
+		this.nbCase = new Coordinates(this.getArea().getSize().getX() % this.resolution,
+				this.getArea().getSize().getY() % this.resolution);
 		
 		// Sets informations in table
 		for(j=0; j < ((this.nbCase.getY() * 3) % 5); j++)
@@ -166,18 +164,6 @@ public class Bunker extends Element
 	public void setStruct(boolean[][] struct)
 	{
 		this.struct = struct;
-	}
-
-	// FIXME write comment
-	public Coordinates getPosition()
-	{
-		return this.position;
-	}
-
-	// FIXME write comment
-	public Coordinates getSize()
-	{
-		return this.size;
 	}
 
 	// FIXME write comment

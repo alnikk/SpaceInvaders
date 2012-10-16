@@ -295,10 +295,10 @@ public class SpaceInvaders
 		int tx1,tx2,ty1,ty2;
 		
 		// Initialize tank's coordinates
-		tx1 = this.tabTank[0].getPosition().getX();
-		ty1 = this.tabTank[0].getPosition().getY();
-		tx2 = this.tabTank[0].getSize().getX() + tx1;
-		ty2 = this.tabTank[0].getSize().getY() + ty1;
+		tx1 = this.tabTank[0].getArea().getPosition().getX();
+		ty1 = this.tabTank[0].getArea().getPosition().getY();
+		tx2 = this.tabTank[0].getArea().getSize().getX() + tx1;
+		ty2 = this.tabTank[0].getArea().getSize().getY() + ty1;
 		
 		
 		//	Area :
@@ -325,10 +325,10 @@ public class SpaceInvaders
 		for(i=0; i < this.tabMonster.length;i++)
 		{
 			// Initialize coordinates
-			x1 = this.tabMonster[i].getPosition().getX();
-			y1 = this.tabMonster[i].getPosition().getY();
-			x2 = this.tabMonster[i].getSize().getX() + x1;
-			y2 = this.tabMonster[i].getSize().getY() + y1;
+			x1 = this.tabMonster[i].getArea().getPosition().getX();
+			y1 = this.tabMonster[i].getArea().getPosition().getY();
+			x2 = this.tabMonster[i].getArea().getSize().getX() + x1;
+			y2 = this.tabMonster[i].getArea().getSize().getY() + y1;
 			
 			// Check if any points of the tank touch enemy
 			if(tx1 > x1 && ty1 > y1 && tx1 < x2 && ty1 < y2)
