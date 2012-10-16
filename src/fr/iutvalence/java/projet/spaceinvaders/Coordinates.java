@@ -8,7 +8,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
  */
 public class Coordinates
 {
-	/*
+	/**
 	 * The X coordinate
 	 */
 	private final int x;

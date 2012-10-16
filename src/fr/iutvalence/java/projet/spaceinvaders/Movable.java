@@ -69,49 +69,6 @@ public class Movable extends Element
 	}
 
 	/**
-	 * This method returns the location of the movable object.
-	 * 
-	 * @return return the location (Coordinates) of the movable object <br/>
-	 */
-	public Coordinates getPosition()
-	{
-		return this.position;
-	}
-
-	/**
-	 * This method allows to modify the location of the movable object.
-	 * Setting position make the object move between<br/>
-	 * 
-	 *  Move an object allow you to control its position
-	 *  in this area
-	 *
-	 * @param position the position of the element
-	 */
-	public void setPosition(final Coordinates position)
-	{
-		this.position = position;
-	}
-
-	/**
-	 * This method returns the size of the object.<br/>
-	 * 
-	 * @return get the size (Coordonnee) of the object.
-	 */
-	public Coordinates getSize()
-	{
-		return this.size;
-	}
-
-	/**
-	 * This method sets the size of the element on the screen
-	 * @param taille the size of the element
-	 */
-	public void setSize(final Coordinates taille)
-	{
-		this.size = taille;
-	}
-
-	/**
 	 * The move method changes the position of the object (the size is unchanged).<br/>
 	 * It translates the coordinates by deltas given as x and y.<br/>
 	 * 
@@ -122,14 +79,18 @@ public class Movable extends Element
 	{
 		if(this.alive)
 		{
-			this.position = new Coordinates(this.position.getX() + dx,
-											this.position.getY() + dy);
+			this.setArea(
+					new BoundingBox(
+							new Coordinates(
+									this.getArea().getPosition().getX() + dx,
+									this.getArea().getPosition().getY() + dy)
+							,this.getArea().getSize()));
 		}
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Movable [alive=" + this.alive + ", position=" + this.position + ", taille=" + this.size + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$
+		return "Movable [alive=" + this.alive + ", position=" + this.getArea().getPosition() + ", taille=" + this.getArea().getSize() + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$
 	}
 }
