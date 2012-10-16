@@ -5,7 +5,6 @@ package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.util.Arrays;
 
-import fr.iutvalence.java.projet.unused.Monster;
 import fr.iutvalence.java.projet.unused.Tank;
 
 /**
@@ -173,7 +172,7 @@ public class SpaceInvaders
 														this.maxSize.getY() - (this.defaultSize + this.defaultDelta));
 		int i = 0;
 		// Allocations
-		this.tabMonster = new Monster[nbMonstre];
+		this.tabMonster = new Movable[nbMonstre];
 		this.tabTank = new Tank[nbTank];
 
 		// Set-up Tabs
@@ -184,7 +183,7 @@ public class SpaceInvaders
 			while(i < nbMonstre && 
 					monster_position.getX() + (this.defaultDelta + this.defaultSize) <= this.maxSize.getX())
 			{
-				this.tabMonster[i] = new Monster(monster_position);
+				this.tabMonster[i] = new Movable(monster_position);
 				monster_position = new Coordinates(monster_position.getX() + (this.defaultDelta + this.defaultSize),
 													monster_position.getY());
 				i = i + 1;
