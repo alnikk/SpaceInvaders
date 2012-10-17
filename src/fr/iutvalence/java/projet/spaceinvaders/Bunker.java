@@ -12,19 +12,20 @@ public class Bunker extends Element
 {	
 	//************* Variable *************//
 	
-	// FIXME this is not a constant. If so, define it as a real one
+	// FIXME (SEEN) this is not a constant. If so, define it as a real one
 	/**
-	 * This constant sets the position of the bunker on the grid.<br/>
+	 * This variable sets the position of the bunker on the grid.<br/>
 	 * It can't be changed once it was created.
 	 */
 	private final int resolution;
 	
-	// FIXME this is not a constant. If so, define it as a real one
+	// FIXME (SEEN) this is not a constant. If so, define it as a real one
 	/**
-	 * Constant for the height and the width of the 2D table <tt>struct</tt>.
+	 * Variable for the height and the width of the 2D table <tt>struct</tt>.
+	 * It can't be changed once it was created.
 	 */
-	// FIXME rename attribute (nbCells ?)
-	private final Coordinates nbCase;
+	// FIXME (SEEN) rename attribute (nbCells ?)
+	private final Coordinates nbCells;
 	
 	// FIXME (FIXED) spellcheck comment
 	/**
@@ -54,15 +55,26 @@ public class Bunker extends Element
 	 * This constant sets the resolution that is to say, 
 	 * the number of base unit (maybe pixel) to make table's case. 
 	 */
-	// FIXME this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
-	private final int defaultResolution = 10;
+	// FIXME (SEEN) this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
+	private static final int defaultResolution = 10;
 	
 	
 	//************************** Constructors **************************//
 	// FIXME fix the comment (indicating what the created bunker looks like)
 	/**
 	 * Constructor.<br/>
-	 * It initializes the table of bunker's structures.
+	 * It initializes the table of bunker's structures like this :
+	 * 
+	 *  	^
+	 *  2/5 |
+	 * 		|	t t t t t t t t t t 
+	 *  	-	t t t t t t t t t t 
+	 *  	|	t t t f f f f t t t
+	 *  3/5 |	t t t f f f f t t t
+	 *  	|	t t t f f f f t t t
+	 *  	|
+	 *  	+---------|-------|------------>
+	 *  		3/10	4/10	3/10
 	 */
 	public Bunker(int res, Coordinates position, Coordinates size)
 	{
@@ -72,29 +84,49 @@ public class Bunker extends Element
 		
 		// Set local constant
 		this.resolution = res;
-		this.nbCase = new Coordinates(this.getArea().getSize().getX() % this.resolution,
+		this.nbCells = new Coordinates(this.getArea().getSize().getX() % this.resolution,
 										this.getArea().getSize().getY() % this.resolution);
 		
 		// Sets informations in table
-		for(j=0; j < ((this.nbCase.getY() * 3) % 5); j++)
+		for(j=0; j < ((this.nbCells.getY() * 3) % 5); j++)
 		{
-			// FIXME what means 10 here ?
-			for(i=0; i < ((this.nbCase.getX() * 3) % 10); i++)
+			// FIXME (SEEN) what means 10 here ?
+			// It's the ratio, (i.e. constructors)			
+			for(i=0; i < ((this.nbCells.getX() * 3) % 10); i++)
 				this.struct[i][j] = true;
-			for(i=i; i < ((this.nbCase.getX() * 5) % 10); i++)
+			for(i=i; i < ((this.nbCells.getX() * 5) % 10); i++)
 				this.struct[i][j] = false;
-			for(i=i; i < ((this.nbCase.getX() * 7) % 10); i++)
+			for(i=i; i < ((this.nbCells.getX() * 7) % 10); i++)
 				this.struct[i][j] = true;
 		}
-		// FIXME what means j=j here ?
-		for(j=j; j < this.nbCase.getY(); j++)
+		// FIXME (SEEN) what means j=j here ?
+		while(j < this.nbCells.getY())
 		{
 			for(i=0; i < 3; i++)
 				this.struct[i][j] = true;
+			j++;
 		}
 	}
 	
 	// FIXME write a comment
+	/**
+	 * Constructor.<br/>
+	 * It initializes the table of bunker's structures like this :
+	 * 
+	 *  	^
+	 *  2/5 |
+	 * 		|	t t t t t t t t t t 
+	 *  	-	t t t t t t t t t t 
+	 *  	|	t t t f f f f t t t
+	 *  3/5 |	t t t f f f f t t t
+	 *  	|	t t t f f f f t t t
+	 *  	|
+	 *  	+---------|-------|------------>
+	 *  		3/10	4/10	3/10
+	 *  
+	 * @param position the position of the bunker on the 2D grid.
+	 * @param size the size of the bunker in the 2D grid.
+	 */
 	public Bunker(Coordinates position, Coordinates size)
 	{
 		super(new BoundingBox(position, size));
@@ -102,21 +134,21 @@ public class Bunker extends Element
 		int i = 0,j = 0;
 		
 		// Set local constant
-		this.resolution = this.defaultResolution;
-		this.nbCase = new Coordinates(this.getArea().getSize().getX() % this.resolution,
+		this.resolution = defaultResolution;
+		this.nbCells = new Coordinates(this.getArea().getSize().getX() % this.resolution,
 				this.getArea().getSize().getY() % this.resolution);
 		
 		// Sets informations in table
-		for(j=0; j < ((this.nbCase.getY() * 3) % 5); j++)
+		for(j=0; j < ((this.nbCells.getY() * 3) % 5); j++)
 		{
-			for(i=0; i < ((this.nbCase.getX() * 3) % 10); i++)
+			for(i=0; i < ((this.nbCells.getX() * 3) % 10); i++)
 				this.struct[i][j] = true;
-			for(i=i; i < ((this.nbCase.getX() * 5) % 10); i++)
+			for(i=i; i < ((this.nbCells.getX() * 5) % 10); i++)
 				this.struct[i][j] = false;
-			for(i=i; i < ((this.nbCase.getX() * 7) % 10); i++)
+			for(i=i; i < ((this.nbCells.getX() * 7) % 10); i++)
 				this.struct[i][j] = true;
 		}
-		for(j=j; j < this.nbCase.getY(); j++)
+		for(j=j; j < this.nbCells.getY(); j++)
 		{
 			for(i=0; i < 3; i++)
 				this.struct[i][j] = true;
@@ -145,37 +177,42 @@ public class Bunker extends Element
 	 */
 	// FIXME rename method
 	// FIXME what if i and j are out of bounds ?
-	public void destoy(int i, int j)
+	private void destoy(int i, int j)
 	{
 		this.struct[i][j] = false;
 	}
 
 	//********************** Getters and Setters ***********************//
-
-	// FIXME write comment
-	// FIXME is this really useful  if you have yet check and destroy methods ?
+	
+	
+	// **********
+	// I think there's no need of getters and setters here
+	
+	
+	// FIXME (SEEN) write comment
+	// FIXME (SEEN) is this really useful  if you have yet check and destroy methods ?
 	public boolean[][] getStruct()
 	{
 		return this.struct;
 	}
 
-	// FIXME write comment
-	// FIXME is this really useful  if you have yet check and destroy methods ?  
+	// FIXME (SEEN) write comment
+	// FIXME (SEEN) is this really useful  if you have yet check and destroy methods ?  
 	public void setStruct(boolean[][] struct)
 	{
 		this.struct = struct;
 	}
 
-	// FIXME write comment
+	// FIXME (SEEN) write comment
 	public int getResolution()
 	{
 		return this.resolution;
 	}
 
-	// FIXME write comment
-	// FIXME rename method
+	// FIXME (SEEN) write comment
+	// FIXME (SEEN) rename method
 	public Coordinates getNbCase()
 	{
-		return this.nbCase;
+		return this.nbCells;
 	}
 }

@@ -1,11 +1,13 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
-// FIXME what about grid bounds (and the respect of them during a move) 
+// FIXME (SEEN) what about grid bounds (and the respect of them during a move)
+// TODO Move XGridMax and YGridMax
+// TODO Exception move when it go over.
 /**
- * This class defines a movable object, that can move on a 2D grid and so being killed by others.
- * 
+ * This class defines a movable object, that can move on a 2D grid and so being killed by others.<br/>
  * A movable object is characterized by its size and position on the grid and also its status [alive | dead].
- * 
+ * Once a movable object is touched by another one, it's killed.
+ * The bounds of the 2D grid is defined in ....(SpaceInvaders for the moment), and movable objects can't move over without exception (not now). 
  * @author Gallet Guyon
  */
 public class Movable extends Element
@@ -15,16 +17,18 @@ public class Movable extends Element
 	 */
 	private boolean alive;	
 	
-	// FIXME comments have to be related to only one declaration
+	// FIXME (SEEN) comments have to be related to only one declaration
 	/**
-	 * The size by default of the movable on the grid.<br/>
-	 * The size is defined by two values (width,height)
+	 * The size (height) by default of the movable on the grid.<br/>
 	 */
-	// FIXME if it is a constant, it must be defined as a real one. Else, initialize it in a constructor
-	private final static int height = 10;
+	// FIXME (SEEN) if it is a constant, it must be defined as a real one. Else, initialize it in a constructor
+	private static final int HEIGHT = 10;
 	
-	// FIXME if it is a constant, it must be defined as a real one. Else, initialize it in a constructor
-	private final static int width = 10;
+	/**
+	 * The size (width) by default of the movable on the grid.<br/>
+	 */
+	// FIXME (SEEN) if it is a constant, it must be defined as a real one. Else, initialize it in a constructor
+	private static final int WIDTH = 10;
 	
 	/**
 	 * This constructor creates a new living <tt>Movable</tt> object taking its coordinates.<br/>
@@ -34,7 +38,7 @@ public class Movable extends Element
 	 */
 	public Movable(Coordinates i)
 	{
-		super(new BoundingBox(i,new Coordinates(width,height)));
+		super(new BoundingBox(i,new Coordinates(WIDTH,HEIGHT)));
 		this.alive = true;
 	}
 	
