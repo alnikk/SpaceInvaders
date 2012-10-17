@@ -17,17 +17,14 @@ public class Movable extends Element
 	 */
 	private boolean alive;	
 	
-	// FIXME (SEEN) comments have to be related to only one declaration
 	/**
-	 * The size (height) by default of the movable on the grid.<br/>
+	 * The default height of the movable on the grid.<br/>
 	 */
-	// FIXME (SEEN) if it is a constant, it must be defined as a real one. Else, initialize it in a constructor
 	private static final int HEIGHT = 10;
 	
 	/**
-	 * The size (width) by default of the movable on the grid.<br/>
+	 * The default width of the movable on the grid.<br/>
 	 */
-	// FIXME (SEEN) if it is a constant, it must be defined as a real one. Else, initialize it in a constructor
 	private static final int WIDTH = 10;
 	
 	/**
@@ -72,7 +69,7 @@ public class Movable extends Element
 		this.alive = alive;
 	}
 
-	// FIXME (SEEN) take into account the fact that the destination can be out-of-bounds (exception)
+	// FIXME take into account the fact that the destination can be out-of-bounds (exception)
 	/**
 	 * The move method changes the position of the object (the size is unchanged).<br/>
 	 * It translates the coordinates by deltas given as x and y.<br/>

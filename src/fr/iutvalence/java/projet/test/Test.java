@@ -5,7 +5,6 @@ package fr.iutvalence.java.projet.test;
 
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvaders;
 
-// FIXME (SEEN) finish writing comment
 /**
  * This class tests the main class of SpaceInvaders
  * 
@@ -14,7 +13,6 @@ import fr.iutvalence.java.projet.spaceinvaders.SpaceInvaders;
 public class Test
 {
 
-	// FIXME (SEEN) finish writing comment
 	/**
 	 * Create a new SpaceInvader's object to test it.
 	 * @param args No arguments..

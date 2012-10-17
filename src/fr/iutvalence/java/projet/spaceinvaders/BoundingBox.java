@@ -5,7 +5,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
 
 // FIXME what about defining BB as immutable ?
 
-// FIXME (SEEN) finish writing comment
+// FIXME fix comment : comment the class for itself, not for the class that use it
 /**
  * The BoundingBox class define area.<br/>
  * This area is for check collision and define enemy on the 2D grid. 
@@ -13,7 +13,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
  */
 public class BoundingBox
 {
-	// FIXME (SEEN) fix comment (BB is not related only to movable objects)
+	// FIXME fix comment (BB is not related to element objects)
 	/**
 	 * The position of the Element object on the 2D grid.
 	 */
@@ -38,7 +38,7 @@ public class BoundingBox
 		this.size = size;
 	}
 	
-	// FIXME (SEEN) fix and finish writing comment (to discuss)
+	// FIXME fix and finish writing comment (to discuss)
 	/**
 	 * Sets the boundingBox of the elements.
 	 * @param positionX Set the X position of the element on 2D grid.
@@ -53,9 +53,8 @@ public class BoundingBox
 		this.size = new Coordinates(sizeX,sizeY);
 	}
 
-	// FIXME (SEEN) finish writing comment
 	/**
-	 * Getters to return position of the element on 2D grid.
+	 * Getter to return position of the element on 2D grid.
 	 * @return the position of the element.
 	 */
 	public Coordinates getPosition()
@@ -63,9 +62,8 @@ public class BoundingBox
 		return this.position;
 	}
 
-	// FIXME (SEEN) finish writing comment
 	/**
-	 * Setters to change position of element on the 2D grid.
+	 * Setter to change position of element on the 2D grid.
 	 * @param position the new position to set
 	 */
 	public void setPosition(Coordinates position)
@@ -73,7 +71,6 @@ public class BoundingBox
 		this.position = position;
 	}
 
-	// FIXME (SEEN) finish writing comment
 	/**
 	 * Return the size of the element by the couple (width,height).
 	 * @return the size of the element by the couple (width,height).

@@ -13,48 +13,46 @@ import fr.iutvalence.java.projet.unused.Tank;
  * @author Gallet Guyon
  */
 public class SpaceInvaders
-{
-	// FIXME (SEEN) group constants definitions before attributes ones
-	
+{	
 	//************* Constant *************//
 	/**
 	 * It defines the number of monsters you have in tabMonster by default,
 	 * if it's not set in constructor. 
 	 */
-	// FIXME (SEEN) this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
+	// FIXME respect coding conventions
 	private static final int nbMonsterDefault = 20;
 
 	/**
 	 * It defines the number of tank you have in tabTank by default,
 	 * if it's not set in constructor.
 	 */
-	// FIXME (SEEN) this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
+	// FIXME respect coding conventions
 	private static final int nbTankDefault = 1;
 	
 	/**
 	 * It defines the maximum (default) of X axis,
 	 * if it's not set in constructor.
 	 */
-	// FIXME (SEEN) this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
+	// FIXME respect coding conventions
 	private static final int XGrid = 300;
 	
 	/**
 	 * It defines the maximum (default) of Y axis,
 	 * if it's not set in constructor.
 	 */
-	// FIXME (SEEN) this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
+	// FIXME respect coding conventions
 	private static final int YGrid = 300;
 	
 	/**
 	 * Default delta between 2 monsters
 	 */
-	// FIXME (SEEN) this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
+	// FIXME respect coding conventions
 	private static final int defaultDelta = 2;
 	
 	/**
 	 * Default size of element (e.g. Doc Movable)
 	 */
-	// FIXME (SEEN) this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
+	// FIXME respect coding conventions
 	private static final int defaultSize = 10;
 	
 	//************* Variable *************//
@@ -72,13 +70,13 @@ public class SpaceInvaders
 	/**
 	 * Array containing all monsters
 	 */
-	// FIXME (SEEN) why not rename it just "monsters" ?
+	// FIXME why not rename it just "monsters" ?
 	private Movable[] monster;
 
 	/**
 	 * Array containing all tanks.
 	 */
-	// FIXME (SEEN) why not rename it just "tanks" ?
+	// FIXME why not rename it just "tanks" ?
 	private Movable[] tank;
 
 	
@@ -94,8 +92,6 @@ public class SpaceInvaders
 		this.work = true;
 		this.maxSize = new Coordinates(XGrid, YGrid);
 		initTab(nbMonsterDefault, nbTankDefault);
-		
-		// FIXME (SEEN) make the call to start outside of the constructor. A constructor must return as soon as possible
 	}
 	
 	/**
@@ -111,8 +107,6 @@ public class SpaceInvaders
 		this.work = true;
 		this.maxSize = new Coordinates(XGrid, YGrid);
 		initTab(nbMonster, nbTank);
-
-		// FIXME (SEEN) make the call to start outside of the constructor. A constructor must return as soon as possible
 	}
 	
 	/**
@@ -135,9 +129,8 @@ public class SpaceInvaders
 	//************************** Methods **************************//
 	
 	
-	// FIXME (SEEN) write a comment
 	/**
-	 * This method begin the game. It's the only entry point. 
+	 * This method begins the game. It's the only entry point. 
 	 */
 	public void start()
 	{
@@ -160,7 +153,7 @@ public class SpaceInvaders
 	 * @param nbMonster Set the number of monster (The maximum is set (to my mind) to 250, after I'm offload one's responsibilities) 
 	 * @param nbTank Set the number of tank (not implemented yet, so the maximum is 1)
 	 */
-	// FIXME (SEEN) rename parameters
+	// FIXME rename parameters
 	private void initTab(int nbMonster, int nbTank)
 	{
 		// local variable
@@ -203,7 +196,9 @@ public class SpaceInvaders
 	 * </ul>
 	 */
 	// FIXME (SEEN) why returning InterruptedException ?
-	// Eclipse ask me to write it. 
+	// Eclipse ask me to write it.
+	// FIXME Eclipse suggests you to propagate OR catch it ;-)
+	
 	private void iteration() throws InterruptedException 
 	{
 		// TODO remove Debug message
@@ -280,7 +275,7 @@ public class SpaceInvaders
 	}
 	
 	/**
-	 * This procedure test if there is any collisions in all table declared.<br/>
+	 * This methode tests if there is any collisions in all table declared.<br/>
 	 * Collision are tested between each table and not between elements of the same table.<br/>
 	 * If a Tank is touched by an enemy, work is set to false and the game is stopped by the main iteration.
 	 */
@@ -353,11 +348,6 @@ public class SpaceInvaders
 			}				
 		}
 	}
-	
-	
-	// oldFIXME public methods ?
-	// later =), or maybe not -_-...
-	
 
 	@Override
 	public String toString()

@@ -11,19 +11,20 @@ public class Bunker extends Element
 {	
 	//************* Variable *************//
 	
-	// FIXME (SEEN) this is not a constant. If so, define it as a real one
+	// FIXME how an int can be a position ?
 	/**
-	 * This variable sets the position of the bunker on the grid.<br/>
+	 * Position of the bunker on the grid.<br/>
 	 * It can't be changed once it was created.
 	 */
 	private final int resolution;
 	
 	// FIXME (SEEN) this is not a constant. If so, define it as a real one
+	
 	/**
-	 * Variable for the height and the width of the 2D table <tt>struct</tt>.
+	 * Size of  2D array <tt>struct</tt>.
 	 * It can't be changed once it was created.
 	 */
-	// FIXME (SEEN) rename attribute (nbCells ?)
+	// FIXME rename attribute (structSize ?)
 	private final Coordinates nbCells;
 	
 	/**
@@ -51,14 +52,12 @@ public class Bunker extends Element
 	
 	/**
 	 * This constant sets the resolution that is to say, 
-	 * the number of base unit (maybe pixel) to make table's case. 
+	 * the number of base units (maybe pixels) to make array's cell. 
 	 */
-	// FIXME (SEEN) this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
 	private static final int defaultResolution = 10;
 	
 	
 	//************************** Constructors **************************//
-	// FIXME (SEEN) fix the comment (indicating what the created bunker looks like)
 	/**
 	 * Constructor.<br/>
 	 * It initializes the table of bunker's structures like this :
@@ -88,7 +87,8 @@ public class Bunker extends Element
 		// Sets informations in table
 		for(j=0; j < ((this.nbCells.getY() * 3) % 5); j++)
 		{
-			// FIXME (SEEN) what means 10 here ?
+			// FIXME use the constant instead of its value
+			
 			// It's the ratio, (i.e. constructors)			
 			for(i=0; i < ((this.nbCells.getX() * 3) % 10); i++)
 				this.struct[i][j] = true;
@@ -97,7 +97,6 @@ public class Bunker extends Element
 			for(i=i; i < ((this.nbCells.getX() * 7) % 10); i++)
 				this.struct[i][j] = true;
 		}
-		// FIXME (SEEN) what means j=j here ?
 		while(j < this.nbCells.getY())
 		{
 			for(i=0; i < 3; i++)
@@ -106,7 +105,6 @@ public class Bunker extends Element
 		}
 	}
 	
-	// FIXME write a comment
 	/**
 	 * Constructor.<br/>
 	 * It initializes the table of bunker's structures like this :
@@ -186,28 +184,28 @@ public class Bunker extends Element
 	// I think there's no need of getters and setters here
 	
 	
-	// FIXME (SEEN) write comment
-	// FIXME (SEEN) is this really useful  if you have yet check and destroy methods ?
+	// FIXME write comment
+	// FIXME is this really useful  if you have yet check and destroy methods ?
 	public boolean[][] getStruct()
 	{
 		return this.struct;
 	}
 
-	// FIXME (SEEN) write comment
-	// FIXME (SEEN) is this really useful  if you have yet check and destroy methods ?  
+	// FIXME write comment
+	// FIXME is this really useful  if you have yet check and destroy methods ?  
 	public void setStruct(boolean[][] struct)
 	{
 		this.struct = struct;
 	}
 
-	// FIXME (SEEN) write comment
+	// FIXME write comment
 	public int getResolution()
 	{
 		return this.resolution;
 	}
 
-	// FIXME (SEEN) write comment
-	// FIXME (SEEN) rename method
+	// FIXME write comment
+	// FIXME rename method
 	public Coordinates getNbCase()
 	{
 		return this.nbCells;
