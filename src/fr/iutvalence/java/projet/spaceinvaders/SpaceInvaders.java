@@ -24,20 +24,22 @@ public class SpaceInvaders
 	 * The maximum size of the area
 	 */
 	private final Coordinates maxSize;
+	
 
-	//************* Tableau *************//
 	/**
-	 * Table of all monsters' instance variable
+	 * Array containing all monsters
 	 */
 	// FIXME (SEEN) why not rename it just "monsters" ?
 	private Movable[] monster;
 
 	/**
-	 * Table of all tanks' instance variable
+	 * Array containing all tanks.
 	 */
 	// FIXME (SEEN) why not rename it just "tanks" ?
 	private Movable[] tank;
 
+	// FIXME group constants definitions before attributes ones
+	
 	//************* Constant *************//
 	/**
 	 * It defines the number of monsters you have in tabMonster by default,

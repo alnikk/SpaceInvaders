@@ -72,6 +72,7 @@ public class Movable extends Element
 		this.alive = alive;
 	}
 
+	// FIXME take into account the fact that the destination can be out-of-bounds (exception)
 	/**
 	 * The move method changes the position of the object (the size is unchanged).<br/>
 	 * It translates the coordinates by deltas given as x and y.<br/>

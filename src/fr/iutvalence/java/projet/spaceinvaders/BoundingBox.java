@@ -3,12 +3,16 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
+// FIXME what about defining BB as immutable ?
+
+// FIXME finish writing comment
 /**
  * @author Gallet Guyon
  *
  */
 public class BoundingBox
 {
+	// FIXME fix comment (BB is not related only to movable objects)
 	/**
 	 * The position of the movable object on the 2D grid
 	 */
@@ -20,6 +24,7 @@ public class BoundingBox
 	 */
 	private final Coordinates size;
 
+	// FIXME fix and finish writing comment (to discuss)
 	/**
 	 * Sets the boundingBox of the elements.
 	 * @param position
@@ -32,6 +37,7 @@ public class BoundingBox
 		this.size = size;
 	}
 	
+	// FIXME fix and finish writing comment (to discuss)
 	/**
 	 * Sets the boundingBox of the elements.
 	 * @param positionX
@@ -46,6 +52,7 @@ public class BoundingBox
 		this.size = new Coordinates(sizeX,sizeY);
 	}
 
+	// FIXME finish writing comment
 	/**
 	 * @return the position
 	 */
@@ -54,6 +61,7 @@ public class BoundingBox
 		return this.position;
 	}
 
+	// FIXME finish writing comment
 	/**
 	 * @param position the position to set
 	 */
@@ -62,6 +70,7 @@ public class BoundingBox
 		this.position = position;
 	}
 
+	// FIXME finish writing comment
 	/**
 	 * @return the size
 	 */
@@ -69,4 +78,8 @@ public class BoundingBox
 	{
 		return this.size;
 	}
+	
+	// FIXME add a method to compute the intersection with another BB (the result is a BB)
+	
+	// FIXME override toString
 }

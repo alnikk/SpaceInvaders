@@ -1,8 +1,7 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
-// FIXME (FIXED) spellcheck comment
 /**
- * This class allows you to manage bunker on the grid.<br/>
+ * This class allows to manage bunker on the grid.<br/>
  * The bunker protects the tank when attacked by enemy.
  * It may be partially or totally destroyable.
  * 
@@ -27,10 +26,9 @@ public class Bunker extends Element
 	// FIXME (SEEN) rename attribute (nbCells ?)
 	private final Coordinates nbCells;
 	
-	// FIXME (FIXED) spellcheck comment
 	/**
 	 * This is the main structure of the bunker.<br/>
-	 * When found in the 2D tab, <tt>true</tt> means "not (yet) destroyed".
+	 * When found in the 2D array, <tt>true</tt> means "not (yet) destroyed".
 	 * So the tank can be protected if it is under it.
 	 * 
 	 * notation struct[x][y].<br/>
@@ -47,7 +45,7 @@ public class Bunker extends Element
 	 *  |
 	 *  +--------------------------> X
 	 */
-	private boolean [][]struct;
+	private boolean[][] struct;
 	
 	//************* Constant *************//
 	
@@ -156,7 +154,6 @@ public class Bunker extends Element
 	}
 	
 	
-	// FIXME (FIXED) spellcheck comment
 	//************************** Methods **************************//
 	/**
 	 * Check if the cell exists (true) or not.<br/>
