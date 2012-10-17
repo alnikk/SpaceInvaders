@@ -4,17 +4,27 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 
-// FIXME finish writing comment
+// FIXME (SEEN) finish writing comment
 /**
+ * The element Class is the basic class of all elements on the grid.<br/>
+ * It defines all stuff needed for position and collision.
  * @author Guyon Gallet
- *
  */
 public abstract class Element
 {
-	// FIXME write a comment
+	// FIXME (SEEN) write a comment
+	/**
+	 * It sets the area on the grid which use to check collision.<br/>
+	 * Any element on the grid have one (and they are all different).  
+	 */
 	private BoundingBox area;
 
-	// FIXME write a comment
+	// FIXME (SEEN)  write a comment
+	/**
+	 * This constructors sets the base of all elements on the grid.<br/>
+	 * It defines the BoundingBox of the element.
+	 * @param area The BoundingBox of the element you want create.
+	 */
 	public Element(BoundingBox area)
 	{
 		super();

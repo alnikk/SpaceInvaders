@@ -5,16 +5,17 @@ package fr.iutvalence.java.projet.spaceinvaders;
 
 // FIXME what about defining BB as immutable ?
 
-// FIXME finish writing comment
+// FIXME (SEEN) finish writing comment
 /**
+ * The BoundingBox class define area.<br/>
+ * This area is for check collision and define enemy on the 2D grid. 
  * @author Gallet Guyon
- *
  */
 public class BoundingBox
 {
-	// FIXME fix comment (BB is not related only to movable objects)
+	// FIXME (SEEN) fix comment (BB is not related only to movable objects)
 	/**
-	 * The position of the movable object on the 2D grid
+	 * The position of the Element object on the 2D grid.
 	 */
 	private Coordinates position;
 	
@@ -27,7 +28,7 @@ public class BoundingBox
 	// FIXME fix and finish writing comment (to discuss)
 	/**
 	 * Sets the boundingBox of the elements.
-	 * @param position
+	 * @param position Set the position of the element in 2D grid
 	 * @param size Can't be change once it's allocated
 	 */
 	public BoundingBox(Coordinates position, Coordinates size)
@@ -37,13 +38,13 @@ public class BoundingBox
 		this.size = size;
 	}
 	
-	// FIXME fix and finish writing comment (to discuss)
+	// FIXME (SEEN) fix and finish writing comment (to discuss)
 	/**
 	 * Sets the boundingBox of the elements.
-	 * @param positionX
-	 * @param positionY
-	 * @param sizeX Can't be change once it's allocated
-	 * @param sizeY
+	 * @param positionX Set the X position of the element on 2D grid.
+	 * @param positionY Set the Y position of the element on 2D grid.
+	 * @param sizeX Can't be change once it's allocated. Set the width of the element on 2D grid.
+	 * @param sizeY Can't be change once it's allocated. Set the height of the element on 2D grid.
 	 */
 	public BoundingBox(int positionX, int positionY, int sizeX, int sizeY)
 	{
@@ -52,27 +53,30 @@ public class BoundingBox
 		this.size = new Coordinates(sizeX,sizeY);
 	}
 
-	// FIXME finish writing comment
+	// FIXME (SEEN) finish writing comment
 	/**
-	 * @return the position
+	 * Getters to return position of the element on 2D grid.
+	 * @return the position of the element.
 	 */
 	public Coordinates getPosition()
 	{
 		return this.position;
 	}
 
-	// FIXME finish writing comment
+	// FIXME (SEEN) finish writing comment
 	/**
-	 * @param position the position to set
+	 * Setters to change position of element on the 2D grid.
+	 * @param position the new position to set
 	 */
 	public void setPosition(Coordinates position)
 	{
 		this.position = position;
 	}
 
-	// FIXME finish writing comment
+	// FIXME (SEEN) finish writing comment
 	/**
-	 * @return the size
+	 * Return the size of the element by the couple (width,height).
+	 * @return the size of the element by the couple (width,height).
 	 */
 	public Coordinates getSize()
 	{
@@ -81,5 +85,9 @@ public class BoundingBox
 	
 	// FIXME add a method to compute the intersection with another BB (the result is a BB)
 	
-	// FIXME override toString
+	@Override
+	public String toString()
+	{
+		return "BoundingBox [position=" + position + ", size=" + size + "]";
+	}
 }

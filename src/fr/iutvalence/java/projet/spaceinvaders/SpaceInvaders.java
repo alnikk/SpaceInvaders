@@ -14,31 +14,7 @@ import fr.iutvalence.java.projet.unused.Tank;
  */
 public class SpaceInvaders
 {
-	//************* Variable *************//
-	/**
-	 * Boolean to know if the game is finished
-	 */
-	private boolean work;
-	
-	/**
-	 * The maximum size of the area
-	 */
-	private final Coordinates maxSize;
-	
-
-	/**
-	 * Array containing all monsters
-	 */
-	// FIXME (SEEN) why not rename it just "monsters" ?
-	private Movable[] monster;
-
-	/**
-	 * Array containing all tanks.
-	 */
-	// FIXME (SEEN) why not rename it just "tanks" ?
-	private Movable[] tank;
-
-	// FIXME group constants definitions before attributes ones
+	// FIXME (SEEN) group constants definitions before attributes ones
 	
 	//************* Constant *************//
 	/**
@@ -80,6 +56,30 @@ public class SpaceInvaders
 	 */
 	// FIXME (SEEN) this is not a constant. If so, define it as a real one. If not, initialize its value in a constructor
 	private static final int defaultSize = 10;
+	
+	//************* Variable *************//
+	/**
+	 * Boolean to know if the game is finished
+	 */
+	private boolean work;
+	
+	/**
+	 * The maximum size of the area
+	 */
+	private final Coordinates maxSize;
+	
+
+	/**
+	 * Array containing all monsters
+	 */
+	// FIXME (SEEN) why not rename it just "monsters" ?
+	private Movable[] monster;
+
+	/**
+	 * Array containing all tanks.
+	 */
+	// FIXME (SEEN) why not rename it just "tanks" ?
+	private Movable[] tank;
 
 	
 	//************************** Constructors **************************//

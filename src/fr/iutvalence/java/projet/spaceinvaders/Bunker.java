@@ -58,7 +58,7 @@ public class Bunker extends Element
 	
 	
 	//************************** Constructors **************************//
-	// FIXME fix the comment (indicating what the created bunker looks like)
+	// FIXME (SEEN) fix the comment (indicating what the created bunker looks like)
 	/**
 	 * Constructor.<br/>
 	 * It initializes the table of bunker's structures like this :
