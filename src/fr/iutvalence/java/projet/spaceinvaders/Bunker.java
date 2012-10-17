@@ -11,10 +11,10 @@ public class Bunker extends Element
 {	
 	//************* Variable *************//
 	
-	// FIXME how an int can be a position ?
+	// FIXME (SEEN) how an int can be a position ?
+	// TODO write the comment
 	/**
-	 * Position of the bunker on the grid.<br/>
-	 * It can't be changed once it was created.
+	 * 
 	 */
 	private final int resolution;
 	
