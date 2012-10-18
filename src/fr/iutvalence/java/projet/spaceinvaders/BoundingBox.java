@@ -7,7 +7,26 @@ package fr.iutvalence.java.projet.spaceinvaders;
 /**
  * The BoundingBox class define area.<br/>
  * An area is defined by position (Coordinates) and size (Coordinates) on the grid.
- * The 0 point is bottom left. 
+ * The 0 point is bottom left, the grid is represented like this : <br/>
+ * <br/>
+ *	Y<br/>
+ *	^<br/>
+ *	|<br/>
+ *	|<br/>
+ *	|<br/>
+ *	|	 (x1,y2)__________(x2,y2)<br/>
+ *	|		|				 |<br/>
+ *	|		|				 |<br/>
+ *	|		|				 |<br/>
+ *	|		|				 |<br/>
+ *	|		|				 |<br/>
+ *	|		|				 |<br/>
+ *	|		|				 |<br/>
+ *	|	 (x1,y1)__________(x2,y1)<br/>
+ *	|<br/>
+ *	|<br/>		
+ *	0---------------------------------> X<br/>
+ *			
  * @author Gallet Guyon
  */
 public class BoundingBox
@@ -63,12 +82,7 @@ public class BoundingBox
 	// TODO Translate Size
 	
 	// FIXME add a method to compute the intersection with another BB (the result is a BB)	
-	/**
-	 * 
-	 * @param C
-	 * @param B
-	 * @return
-	 */
+	
 	private boolean pointIn(Coordinates C, BoundingBox B)
 	{
 		int x,y,bx1,bx2,by1,by2;
@@ -83,40 +97,11 @@ public class BoundingBox
 		return ((x >= bx1) && (x <= bx2) && (y >= by1) && (y <= by2));
 	}
 	
-	/**
-	 * 
-	 * @param B
-	 * @return (BoundingBox)
-	 */
 	public BoundingBox interBound(BoundingBox B)
 	{
-		//  Hypothese : Prendre l'objet courant comme reference (hx1,hx2,hy1,hy2)
-		//				B (x1,x2,y1,y2)
-		//	Area :
-		//
-		//
-		//	Y
-		//	^
-		//	|
-		//	|
-		//	|
-		//	|	 (x1,y2)__________(x2,y2)
-		//	|		|				 |
-		//	|		|				 |
-		//	|		|				 |
-		//	|		|				 |
-		//	|		|				 |
-		//	|		|				 |
-		//	|		|				 |
-		//	|	 (x1,y1)__________(x2,y1)
-		//	|
-		//	|
-		//	0-------------------------------------------------> X
-		
-		// Declaration des variables
 		int x1,x2,y1,y2,hx1,hx2,hy1,hy2;
+		int posResX, posResY, sizeResX, sizeResY;
 		
-		//Initialisation
 		hx1 = this.position.getX();
 		hx2 = this.position.getX() + this.size.getX();
 		hy1 = this.position.getY();
@@ -127,15 +112,34 @@ public class BoundingBox
 		y1 = B.position.getY();
 		y2 = B.position.getY() + B.size.getY();
 		
-		
-		// Pour chaque points test
-		if(this.pointIn(new Coordinates(hx1,hy1),B))
+		if(pointIn(new Coordinates(hx1,hy1),B) 
+				|| pointIn(new Coordinates(hx2,hy1),B)
+				|| pointIn(new Coordinates(hx2,hy2),B)
+				|| pointIn(new Coordinates(hx1,hy2),B))
 		{
-			return new BoundingBox();
+			if(x1 <= hx1)
+				posResX = hx1;
+			else
+				posResX = x1;
+			if(x2 >= hx2)
+				sizeResX = hx2;
+			else
+				sizeResX = x2;
+			if(y1 <= hy1)
+				posResY = hy1;
+			else
+				posResY = y2;
+			if(y2 >= hy2)
+				sizeResY = hy2;
+			else
+				sizeResY = y2;
+			
+			return new BoundingBox(new Coordinates(posResX, posResY), new Coordinates(sizeResX, sizeResY)) ;
 		}
-		
-		
-		return B; 
+		else
+		{
+			return null;
+		}
 	}
 
 	//***************** Getters and Setters ************************
