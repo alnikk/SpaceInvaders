@@ -3,7 +3,7 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
-// FIXME what about defining BB as immutable ?
+// FIXME (SEEN) what about defining BB as immutable ?
 /**
  * The BoundingBox class define area.<br/>
  * An area is defined by position (Coordinates) and size (Coordinates) on the grid.
@@ -79,10 +79,23 @@ public class BoundingBox
 		return this.moveTo(this.position.translate(delta));
 	}
 	
-	// TODO Translate Size
-	
-	// FIXME add a method to compute the intersection with another BB (the result is a BB)	
-	
+	/**
+	 * Method to change position of element on the 2D grid.
+	 * @param newPosition (Coordinates) the new position to set 
+	 * @return New BoundingBox with new coordinates.
+	 */
+	public BoundingBox reSize(Coordinates newSize)
+	{
+		return new BoundingBox(this.position, newSize);
+	}
+
+	// FIXME (SEEN) add a method to compute the intersection with another BB (the result is a BB)	
+	/**
+	 * Check if a point is in BoundingBox area.
+	 * @param C Coordinates of the point to check. 
+	 * @param B BoundingBox area to check in
+	 * @return Return true if the point is in the area, false otherwise.
+	 */
 	private boolean pointIn(Coordinates C, BoundingBox B)
 	{
 		int x,y,bx1,bx2,by1,by2;
@@ -97,6 +110,11 @@ public class BoundingBox
 		return ((x >= bx1) && (x <= bx2) && (y >= by1) && (y <= by2));
 	}
 	
+	/**
+	 * Intersection of two BoundingBox area. One of them is passed as argument and the other is the current object.
+	 * @param B BoundingBox to calculate Intersection.
+	 * @return Return null if there no intersection and the area (BoundingBox) of the intersection otherwise.
+	 */
 	public BoundingBox interBound(BoundingBox B)
 	{
 		int x1,x2,y1,y2,hx1,hx2,hy1,hy2;
@@ -106,6 +124,57 @@ public class BoundingBox
 		hx2 = this.position.getX() + this.size.getX();
 		hy1 = this.position.getY();
 		hy2 = this.position.getY() + this.size.getY();
+		
+		x1 = B.position.getX();
+		x2 = B.position.getX() + B.size.getX();
+		y1 = B.position.getY();
+		y2 = B.position.getY() + B.size.getY();
+		
+		if(pointIn(new Coordinates(hx1,hy1),B) 
+				|| pointIn(new Coordinates(hx2,hy1),B)
+				|| pointIn(new Coordinates(hx2,hy2),B)
+				|| pointIn(new Coordinates(hx1,hy2),B))
+		{
+			if(x1 <= hx1)
+				posResX = hx1;
+			else
+				posResX = x1;
+			if(x2 >= hx2)
+				sizeResX = hx2;
+			else
+				sizeResX = x2;
+			if(y1 <= hy1)
+				posResY = hy1;
+			else
+				posResY = y2;
+			if(y2 >= hy2)
+				sizeResY = hy2;
+			else
+				sizeResY = y2;
+			
+			return new BoundingBox(new Coordinates(posResX, posResY), new Coordinates(sizeResX, sizeResY)) ;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	/**
+	 * Intersection of two BoundingBox area passed in arguments.
+	 * @param A The first BoundingBox
+	 * @param B The Second BoundingBox
+	 * @return Return null if there no intersection and the area (BoundingBox) of the intersection otherwise.
+	 */
+	public BoundingBox interBound(BoundingBox A, BoundingBox B)
+	{
+		int x1,x2,y1,y2,hx1,hx2,hy1,hy2;
+		int posResX, posResY, sizeResX, sizeResY;
+		
+		hx1 = A.position.getX();
+		hx2 = A.position.getX() + A.size.getX();
+		hy1 = A.position.getY();
+		hy2 = A.position.getY() + A.size.getY();
 		
 		x1 = B.position.getX();
 		x2 = B.position.getX() + B.size.getX();
