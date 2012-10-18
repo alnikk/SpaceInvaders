@@ -7,6 +7,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
 /**
  * The BoundingBox class define area.<br/>
  * An area is defined by position (Coordinates) and size (Coordinates) on the grid.
+ * The coordinates have to be positive or equals to 0 otherwise it returns NegativeCoordinates exception  
  * The 0 point is bottom left, the grid is represented like this : <br/>
  * <br/>
  *	Y<br/>
@@ -31,9 +32,9 @@ package fr.iutvalence.java.projet.spaceinvaders;
  */
 public class BoundingBox
 {
-	// FIXME fix comment (BB is not related to element objects)
+	// FIXME (SEEN) fix comment (BB is not related to element objects)
 	/**
-	 * The position of the Element object on the 2D grid.
+	 * The position of the object on the 2D grid.
 	 */
 	private final Coordinates position;
 	
