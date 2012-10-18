@@ -197,7 +197,7 @@ public class SpaceInvaders
 	 */
 	// FIXME (SEEN) why returning InterruptedException ?
 	// Eclipse ask me to write it.
-	// FIXME Eclipse suggests you to propagate OR catch it ;-)
+	// FIXME Eclipse suggests you to propagate OR catch it ;-) (to discuss)
 	
 	private void iteration() throws InterruptedException 
 	{

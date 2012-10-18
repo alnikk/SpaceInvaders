@@ -4,8 +4,6 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 // FIXME what about defining BB as immutable ?
-
-// FIXME (SEEN) fix comment : comment the class for itself, not for the class that use it
 /**
  * The BoundingBox class define area.<br/>
  * An area is defined by position (Coordinates) and size (Coordinates) on the grid.

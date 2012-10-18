@@ -11,14 +11,12 @@ public class Bunker extends Element
 {	
 	//************* Variable *************//
 	
-	// FIXME (SEEN) how an int can be a position ?
-	// TODO write the comment
+	// FIXME write the comment
 	/**
 	 * 
 	 */
 	private final int resolution;
 	
-	// FIXME (SEEN) this is not a constant. If so, define it as a real one
 	
 	/**
 	 * Size of  2D array <tt>struct</tt>.

@@ -1,6 +1,5 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
-// FIXME (SEEN) what about grid bounds (and the respect of them during a move)
 // TODO Move XGridMax and YGridMax
 // TODO Exception move when it go over.
 /**
