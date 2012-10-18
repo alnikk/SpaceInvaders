@@ -49,10 +49,17 @@ public class BoundingBox
 	 * Creates a new bounding box, whose position and size are given as parameters 
 	 * @param position Set the position of the element in 2D grid
 	 * @param size Can't be change once it's allocated
+	 * @throws NegativeCoordinates If one of Coordinates is Negative.
 	 */
-	public BoundingBox(Coordinates position, Coordinates size)
+	// TODO Size can't be negative because of interBound method.
+	public BoundingBox(Coordinates position, Coordinates size) throws NegativeCoordinates
 	{
 		super();
+		if(position.getX() < 0
+				|| position.getY() < 0
+				|| size.getX() < 0
+				|| size.getY() < 0)
+			throw new NegativeCoordinates();
 		this.position = position;
 		this.size = size;
 	}
@@ -63,8 +70,9 @@ public class BoundingBox
 	 * Method to change position of element on the 2D grid.
 	 * @param newPosition (Coordinates) the new position to set 
 	 * @return New BoundingBox with new coordinates.
+	 * @throws NegativeCoordinates If position is negative.
 	 */
-	public BoundingBox moveTo(Coordinates newPosition)
+	public BoundingBox moveTo(Coordinates newPosition) throws NegativeCoordinates
 	{
 		return new BoundingBox(newPosition, this.size);
 	}
@@ -73,8 +81,9 @@ public class BoundingBox
 	 * Method to translate position of element on the 2D grid.
 	 * @param delta (Coordinates) take the old coordinates and add delta to it.
 	 * @return New BoundingBox with new coordinates.
+	 * @throws NegativeCoordinates If position is negative.
 	 */
-	public BoundingBox translate(Coordinates delta)
+	public BoundingBox translate(Coordinates delta) throws NegativeCoordinates
 	{
 		return this.moveTo(this.position.translate(delta));
 	}
@@ -83,8 +92,9 @@ public class BoundingBox
 	 * Method to change position of element on the 2D grid.
 	 * @param newPosition (Coordinates) the new position to set 
 	 * @return New BoundingBox with new coordinates.
+	 * @throws NegativeCoordinates If the size is negative.
 	 */
-	public BoundingBox reSize(Coordinates newSize)
+	public BoundingBox reSize(Coordinates newSize) throws NegativeCoordinates
 	{
 		return new BoundingBox(this.position, newSize);
 	}
@@ -152,7 +162,15 @@ public class BoundingBox
 			else
 				sizeResY = y2;
 			
-			return new BoundingBox(new Coordinates(posResX, posResY), new Coordinates(sizeResX, sizeResY)) ;
+			try
+			{
+				return new BoundingBox(new Coordinates(posResX, posResY), new Coordinates(sizeResX, sizeResY)) ;
+			}
+			catch (NegativeCoordinates e)
+			{
+				e.printStackTrace();
+				return null;
+			}
 		}
 		else
 		{
@@ -203,7 +221,15 @@ public class BoundingBox
 			else
 				sizeResY = y2;
 			
-			return new BoundingBox(new Coordinates(posResX, posResY), new Coordinates(sizeResX, sizeResY)) ;
+			try
+			{
+				return new BoundingBox(new Coordinates(posResX, posResY), new Coordinates(sizeResX, sizeResY)) ;
+			}
+			catch (NegativeCoordinates e)
+			{
+				e.printStackTrace();
+				return null;
+			}
 		}
 		else
 		{

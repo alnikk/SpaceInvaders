@@ -30,6 +30,16 @@ public class Coordinates
 		this.x = x;
 		this.y = y;
 	}
+	
+	/**
+	 * Translate Coordinates with other one.
+	 * @param c delta coordinates to add to existing one
+	 * @return Return Coordinates object translated of the argument.
+	 */
+	public Coordinates translate(Coordinates c)
+	{
+		return new Coordinates(this.x + c.x, this.y + c.y);
+	}
 
 	/**
 	 * This method returns the value of X from object's coordinates  
@@ -70,11 +80,6 @@ public class Coordinates
 		result = prime * result + this.x;
 		result = prime * result + this.y;
 		return result;
-	}
-
-	public Coordinates translate(Coordinates c)
-	{
-		return new Coordinates(this.x + c.x, this.y + c.y);
 	}
 	
 	/**
