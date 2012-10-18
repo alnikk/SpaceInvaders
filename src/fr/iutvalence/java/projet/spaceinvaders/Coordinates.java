@@ -72,6 +72,11 @@ public class Coordinates
 		return result;
 	}
 
+	public Coordinates translate(Coordinates c)
+	{
+		return new Coordinates(this.x + c.x, this.y + c.y);
+	}
+	
 	/**
 	 * Indicates whether some other object is "equal to" this one.<br/>
 	 * That is to say, the coordinates have to be the same :<br/>
