@@ -7,17 +7,17 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * Thrown by a BoundingBox to indicate that there is a negative coordinates.
  * @author Gallet Guyon
  */
-public class NegativeCoordinates extends Exception
+public class NegativeCoordinatesException extends Exception
 {
 	private int number;
 
-	public NegativeCoordinates(int number)
+	public NegativeCoordinatesException(int number)
 	{
 		super();
 		this.number = number;
 	}
 	
-	public NegativeCoordinates()
+	public NegativeCoordinatesException()
 	{
 		super();
 	}
