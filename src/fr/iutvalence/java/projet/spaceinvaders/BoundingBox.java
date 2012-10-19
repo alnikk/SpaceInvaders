@@ -50,15 +50,12 @@ public class BoundingBox
 	 * @param size Can't be change once it's allocated
 	 * @throws NegativeCoordinatesException If size has at least one negative coordinate.
 	 */
-	// TODO Size can't be negative because of interBound method.
 	public BoundingBox(Coordinates position, Coordinates size) throws NegativeCoordinatesException
 	{
-		// FIXME size cannot be negative but position can be
+		// FIXME (SEEN) size cannot be negative but position can be
 		super();
-		if(position.getX() < 0
-				|| position.getY() < 0
-				|| size.getX() < 0
-				|| size.getY() < 0)
+		if(size.getX() < 0
+			|| size.getY() < 0)
 			throw new NegativeCoordinatesException();
 		this.position = position;
 		this.size = size;
@@ -140,11 +137,15 @@ public class BoundingBox
 		y1 = bb.position.getY();
 		y2 = bb.position.getY() + bb.size.getY();
 		
-		// FIXME it does not work when the current bb is completely contained by bb
+		// FIXME (SEEN) it does not work when the current bb is completely contained by bb
 		if(			(bb.pointIn(new Coordinates(hx1,hy1)))
 				|| 	(bb.pointIn(new Coordinates(hx2,hy1)))
 				|| 	(bb.pointIn(new Coordinates(hx2,hy2)))
-				|| 	(bb.pointIn(new Coordinates(hx1,hy2))) )
+				|| 	(bb.pointIn(new Coordinates(hx1,hy2)))
+				||  (this.pointIn(new Coordinates(x1,y1)))
+				|| 	(this.pointIn(new Coordinates(x2,y1)))
+				|| 	(this.pointIn(new Coordinates(x2,y2)))
+				|| 	(this.pointIn(new Coordinates(x1,y2))))
 		{
 			if(x1 <= hx1)
 				posResX = hx1;
