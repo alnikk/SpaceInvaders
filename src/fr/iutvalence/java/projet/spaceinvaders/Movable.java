@@ -1,7 +1,4 @@
 package fr.iutvalence.java.projet.spaceinvaders;
-
-// TODO Move XGridMax and YGridMax
-// TODO Exception move when it go over.
 /**
  * This class defines a movable object, that can move on a 2D grid and so being killed by others.<br/>
  * A movable object is characterized by its size and position on the grid and also its status [alive | dead].
@@ -26,13 +23,20 @@ public class Movable extends Element
 	 */
 	private static final int WIDTH = 10;
 	
+	
+	//*************** Constructor *****************
+	// TODO Exception move when it go over.
+	// to do that : 
+	// TODO Move XGridMax and YGridMax
+	
 	/**
 	 * This constructor creates a new living <tt>Movable</tt> object taking its coordinates.<br/>
 	 * Size is set by the default couple of (10,10)
 	 * 
 	 * @param i the initial position, as a Coordinate object  
+	 * @throws NegativeCoordinatesException Throws Exception when the size coordinates are negative
 	 */
-	public Movable(Coordinates i)
+	public Movable(Coordinates i) throws NegativeCoordinatesException
 	{
 		super(new BoundingBox(i,new Coordinates(WIDTH,HEIGHT)));
 		this.alive = true;
@@ -43,13 +47,49 @@ public class Movable extends Element
 	 * 
 	 * @param i the initial position, as a Coordinate object 
 	 * @param j the size, as a Coordinate object whose x means width and y means height. 
+	 * @throws NegativeCoordinatesException Throws Exception when the size coordinates are negative
 	 */
-	public Movable(Coordinates i, Coordinates j)
+	public Movable(Coordinates i, Coordinates j) throws NegativeCoordinatesException
 	{
 		super(new BoundingBox(i,j));
 		this.alive = true;
 	}
 
+	//*************** Method *****************
+	
+	
+	/**
+	 * The move method changes the position of the object (the size is unchanged).<br/>
+	 * It translates the coordinates by deltas given as x and y.<br/>
+	 * 
+	 * @param dx new coordinate relative on x axis
+	 * @param dy new coordinate relative on y axis
+	 * @throws NegativeCoordinatesException If position is negative.
+	 */
+	public void move(int dx, int dy) throws NegativeCoordinatesException
+	{
+		if(this.alive)
+		{
+			getArea().translate(new Coordinates(dx,dy));
+		}
+	}
+	
+	/**
+	 * Method to move element to specific coordinates on the 2D grid.
+	 * @param x the X coordinates to move the element.
+	 * @param y the Y coordinates to move the element.
+	 * @throws NegativeCoordinatesException If position is negative.
+	 */
+	public void moveTo(int x, int y) throws NegativeCoordinatesException
+	{
+		if(this.alive)
+		{
+			getArea().moveTo(new Coordinates(x,y));
+		}
+	}
+	
+	//*************** Getters and Setters *****************
+	
 	/**
 	 * This method returns if the movable object is still alive
 	 * @return the life status
@@ -66,27 +106,6 @@ public class Movable extends Element
 	public void setAlive(boolean alive)
 	{
 		this.alive = alive;
-	}
-
-	// FIXME take into account the fact that the destination can be out-of-bounds (exception)
-	/**
-	 * The move method changes the position of the object (the size is unchanged).<br/>
-	 * It translates the coordinates by deltas given as x and y.<br/>
-	 * 
-	 * @param dx new coordinate relative on x axis
-	 * @param dy new coordinate relative on y axis
-	 */
-	public void move(int dx, int dy)
-	{
-		if(this.alive)
-		{
-			this.setArea(
-					new BoundingBox(
-							new Coordinates(
-									this.getArea().getPosition().getX() + dx,
-									this.getArea().getPosition().getY() + dy)
-							,this.getArea().getSize()));
-		}
 	}
 
 	@Override

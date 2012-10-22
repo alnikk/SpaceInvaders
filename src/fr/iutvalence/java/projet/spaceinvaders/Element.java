@@ -15,6 +15,8 @@ public abstract class Element
 	 */
 	private BoundingBox area;
 
+	
+	//************* Constructor ***************
 	/**
 	 * This constructor sets the area of the grid filled by the element .<br/>
 	 * It defines the BoundingBox of the element.
@@ -25,8 +27,26 @@ public abstract class Element
 		super();
 		this.area = area;
 	}
+	
+	//************* Methods ***************
+	// FIXME (SEEN) add a method calculating the overlapping (which is a BB) with another object
+	/**
+	 * Calculate the overlapping of two Elements' Object. 
+	 * The compute is made through bounding box.
+	 * The first element to compare is the current element and the
+	 * second one is given as argument.
+	 * @param e The second element to compute the overlapping.
+	 * @return (BoundingBox) the intersection of both elements.
+	 */
+	public BoundingBox overlap(Element e)
+	{
+		return this.area.intersection(e.area);
+	}
 
-	// FIXME fix comment (this is not compliant with method signature)
+	//************* Getters and Setters ***************
+	
+	// FIXME (SEEN) fix comment (this is not compliant with method signature)
+	// I don't understand..
 	/**
 	 * This method returns the location and size of the movable object.
 	 * 
@@ -37,7 +57,8 @@ public abstract class Element
 		return area;
 	}
 
-	// FIXME fix comment (this is not compliant with method signature)
+	// FIXME (SEEN) fix comment (this is not compliant with method signature)
+	// I don't understand.
 	/**
 	 * This method allows to modify the location and size of the movable object.
 	 * Setting position make the object moves<br/>
@@ -53,7 +74,5 @@ public abstract class Element
 	public String toString()
 	{
 		return "Element [ position=" + this.getArea().getPosition() + ", taille=" + this.getArea().getSize() + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$
-	}
-	
-	// FIXME add a method calculating the overlapping (which is a BB) with another object
+	}	
 }

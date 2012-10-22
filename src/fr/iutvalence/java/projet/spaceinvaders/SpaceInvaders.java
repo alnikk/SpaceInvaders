@@ -19,41 +19,41 @@ public class SpaceInvaders
 	 * It defines the number of monsters you have in tabMonster by default,
 	 * if it's not set in constructor. 
 	 */
-	// FIXME respect coding conventions
-	private static final int nbMonsterDefault = 20;
+	// FIXME (SEEN) respect coding conventions
+	private static final int NBMONSTERDEFAULT = 20;
 
 	/**
 	 * It defines the number of tank you have in tabTank by default,
 	 * if it's not set in constructor.
 	 */
-	// FIXME respect coding conventions
-	private static final int nbTankDefault = 1;
+	// FIXME (SEEN) respect coding conventions
+	private static final int NBTANKDEFAULT = 1;
 	
 	/**
 	 * It defines the maximum (default) of X axis,
 	 * if it's not set in constructor.
 	 */
-	// FIXME respect coding conventions
-	private static final int XGrid = 300;
+	// FIXME (SEEN) respect coding conventions
+	private static final int XGRID = 300;
 	
 	/**
 	 * It defines the maximum (default) of Y axis,
 	 * if it's not set in constructor.
 	 */
-	// FIXME respect coding conventions
-	private static final int YGrid = 300;
+	// FIXME (SEEN) respect coding conventions
+	private static final int YGRID = 300;
 	
 	/**
 	 * Default delta between 2 monsters
 	 */
-	// FIXME respect coding conventions
-	private static final int defaultDelta = 2;
+	// FIXME (SEEN) respect coding conventions
+	private static final int DEFAULTDELTA = 2;
 	
 	/**
 	 * Default size of element (e.g. Doc Movable)
 	 */
-	// FIXME respect coding conventions
-	private static final int defaultSize = 10;
+	// FIXME (SEEN) respect coding conventions
+	private static final int DEFAULTSIZE = 10;
 	
 	//************* Variable *************//
 	/**
@@ -70,14 +70,14 @@ public class SpaceInvaders
 	/**
 	 * Array containing all monsters
 	 */
-	// FIXME why not rename it just "monsters" ?
-	private Movable[] monster;
+	// FIXME (SEEN) why not rename it just "monsters" ?
+	private Movable[] monsters;
 
 	/**
 	 * Array containing all tanks.
 	 */
-	// FIXME why not rename it just "tanks" ?
-	private Movable[] tank;
+	// FIXME (SEEN) why not rename it just "tanks" ?
+	private Movable[] tanks;
 
 	
 	//************************** Constructors **************************//
@@ -90,8 +90,8 @@ public class SpaceInvaders
 	public SpaceInvaders()
 	{
 		this.work = true;
-		this.maxSize = new Coordinates(XGrid, YGrid);
-		initTab(nbMonsterDefault, nbTankDefault);
+		this.maxSize = new Coordinates(XGRID, YGRID);
+		initTab(NBMONSTERDEFAULT, NBTANKDEFAULT);
 	}
 	
 	/**
@@ -105,7 +105,7 @@ public class SpaceInvaders
 	public SpaceInvaders(int nbMonster, int nbTank)
 	{
 		this.work = true;
-		this.maxSize = new Coordinates(XGrid, YGrid);
+		this.maxSize = new Coordinates(XGRID, YGRID);
 		initTab(nbMonster, nbTank);
 	}
 	
@@ -132,16 +132,9 @@ public class SpaceInvaders
 	/**
 	 * This method begins the game. It's the only entry point. 
 	 */
-	public void start()
+	public void start() throws InterruptedException
 	{
-		try
-		{
-			iteration();
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
+		iteration();
 	}
 	
 	/**
@@ -153,36 +146,44 @@ public class SpaceInvaders
 	 * @param nbMonster Set the number of monster (The maximum is set (to my mind) to 250, after I'm offload one's responsibilities) 
 	 * @param nbTank Set the number of tank (not implemented yet, so the maximum is 1)
 	 */
-	// FIXME rename parameters
+	// FIXME (SEEN) rename parameters
+	// Why I have to rename this parameters?
 	private void initTab(int nbMonster, int nbTank)
 	{
 		// local variable
 		Coordinates tank_position = new Coordinates((this.maxSize.getX() / 2) 
-														- (defaultSize / 2), 
+														- (DEFAULTSIZE / 2), 
 													(this.maxSize.getY() / 2)
-														- (defaultSize / 2));
-		Coordinates monster_position = new Coordinates(defaultDelta, 
-														this.maxSize.getY() - (defaultSize + defaultDelta));
+														- (DEFAULTSIZE / 2));
+		Coordinates monster_position = new Coordinates(DEFAULTDELTA, 
+														this.maxSize.getY() - (DEFAULTSIZE + DEFAULTDELTA));
 		int i = 0;
 		// Allocations
-		this.monster = new Movable[nbMonster];
-		this.tank = new Tank[nbTank];
+		this.monsters = new Movable[nbMonster];
+		this.tanks = new Tank[nbTank];
 
 		// Set-up Tabs
-		this.tank[0] = new Tank(tank_position);
+		this.tanks[0] = new Tank(tank_position);
 
 		while(i < nbMonster)
 		{
 			while(i < nbMonster && 
-					monster_position.getX() + (defaultDelta + defaultSize) <= this.maxSize.getX())
+					monster_position.getX() + (DEFAULTDELTA + DEFAULTSIZE) <= this.maxSize.getX())
 			{
-				this.monster[i] = new Movable(monster_position);
-				monster_position = new Coordinates(monster_position.getX() + (defaultDelta + defaultSize),
+				try
+				{
+					this.monsters[i] = new Movable(monster_position);
+				}
+				catch (NegativeCoordinatesException e)
+				{
+					// TODO write the bad coordinates
+				}
+				monster_position = new Coordinates(monster_position.getX() + (DEFAULTDELTA + DEFAULTSIZE),
 													monster_position.getY());
 				i = i + 1;
 			}				
-			monster_position = new Coordinates(defaultDelta,
-												monster_position.getY() - (defaultDelta + defaultSize));
+			monster_position = new Coordinates(DEFAULTDELTA,
+												monster_position.getY() - (DEFAULTDELTA + DEFAULTSIZE));
 		}
 		
 	}
@@ -197,9 +198,9 @@ public class SpaceInvaders
 	 */
 	// FIXME (SEEN) why returning InterruptedException ?
 	// Eclipse ask me to write it.
-	// FIXME Eclipse suggests you to propagate OR catch it ;-) (to discuss)
+	// FIXME (SEEN) Eclipse suggests you to propagate OR catch it ;-) (to discuss)
 	
-	private void iteration() throws InterruptedException 
+	private void iteration() 
 	{
 		// TODO remove Debug message
 		System.out.println("Begin");
@@ -209,13 +210,20 @@ public class SpaceInvaders
 			// TODO remove Debug message
 			System.out.println("Boucle");
 			
-			Thread.sleep(1000); // Clock
+			try
+			{
+				Thread.sleep(1000); // Clock
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
 			
 			// need same resources, so sync?
 			// TODO test collision (thread ? every time check)
 			testCollision();
 			// TODO move enemy (thread ? no-yes, clock mechanism)
-			moveTab(this.monster);
+			moveTab(this.monsters);
 		}
 		// TODO remove Debug message
 		System.out.println("Don't work anymore ;)");
@@ -251,31 +259,59 @@ public class SpaceInvaders
 		//Right
 		for(i=0; i < nb; i++)
 		{
-			tab[i].move(-10, 0);
+			try
+			{
+				tab[i].move(-10, 0);
+			}
+			catch (NegativeCoordinatesException e)
+			{
+				// TODO write the bad coordinates
+			}
 		}
 		//Wait
 		//Down
 		for(i=0; i < nb; i++)
 		{
-			tab[i].move(0, -10);
+			try
+			{
+				tab[i].move(0, -10);
+			}
+			catch (NegativeCoordinatesException e)
+			{
+				// TODO write the bad coordinates
+			}
 		}
 		//Wait
 		//Left
 		for(i=0; i < nb; i++)
 		{
-			tab[i].move(10, 0);
+			try
+			{
+				tab[i].move(10, 0);
+			}
+			catch (NegativeCoordinatesException e)
+			{
+				// TODO write the bad coordinates
+			}
 		}
 		//Wait
 		//Down
 		for(i=0; i < nb; i++)
 		{
-			tab[i].move(10, 0);
+			try
+			{
+				tab[i].move(10, 0);
+			}
+			catch (NegativeCoordinatesException e)
+			{
+				// TODO write the bad coordinates
+			}
 		}
 		//Wait
 	}
 	
 	/**
-	 * This methode tests if there is any collisions in all table declared.<br/>
+	 * This method tests if there is any collisions in all table declared.<br/>
 	 * Collision are tested between each table and not between elements of the same table.<br/>
 	 * If a Tank is touched by an enemy, work is set to false and the game is stopped by the main iteration.
 	 */
@@ -290,10 +326,10 @@ public class SpaceInvaders
 		int tx1,tx2,ty1,ty2;
 		
 		// Initialize tank's coordinates
-		tx1 = this.tank[0].getArea().getPosition().getX();
-		ty1 = this.tank[0].getArea().getPosition().getY();
-		tx2 = this.tank[0].getArea().getSize().getX() + tx1;
-		ty2 = this.tank[0].getArea().getSize().getY() + ty1;
+		tx1 = this.tanks[0].getArea().getPosition().getX();
+		ty1 = this.tanks[0].getArea().getPosition().getY();
+		tx2 = this.tanks[0].getArea().getSize().getX() + tx1;
+		ty2 = this.tanks[0].getArea().getSize().getY() + ty1;
 		
 		
 		//	Area :
@@ -317,33 +353,33 @@ public class SpaceInvaders
 		//	|
 		//	0-------------------------------------------------> X
 		
-		for(i=0; i < this.monster.length;i++)
+		for(i=0; i < this.monsters.length;i++)
 		{
 			// Initialize coordinates
-			x1 = this.monster[i].getArea().getPosition().getX();
-			y1 = this.monster[i].getArea().getPosition().getY();
-			x2 = this.monster[i].getArea().getSize().getX() + x1;
-			y2 = this.monster[i].getArea().getSize().getY() + y1;
+			x1 = this.monsters[i].getArea().getPosition().getX();
+			y1 = this.monsters[i].getArea().getPosition().getY();
+			x2 = this.monsters[i].getArea().getSize().getX() + x1;
+			y2 = this.monsters[i].getArea().getSize().getY() + y1;
 			
 			// Check if any points of the tank touch enemy
 			if(tx1 > x1 && ty1 > y1 && tx1 < x2 && ty1 < y2)
 			{
-				this.tank[0].setAlive(false);
+				this.tanks[0].setAlive(false);
 				this.work = false;
 			}
 			else if(tx2 > x1 && ty2 > y1 && tx2 < x2 && ty2 < y2)
 			{
-				this.tank[0].setAlive(false);
+				this.tanks[0].setAlive(false);
 				this.work = false;
 			}
 			else if(tx1 > x1 && ty2 > y1 && tx1 < x2 && ty2 < y2)
 			{
-				this.tank[0].setAlive(false);
+				this.tanks[0].setAlive(false);
 				this.work = false;
 			}
 			else if(tx2 > x1 && ty1 > y1 && tx2 < x2 && ty1 < y2)
 			{
-				this.tank[0].setAlive(false);
+				this.tanks[0].setAlive(false);
 				this.work = false;
 			}				
 		}
@@ -352,7 +388,7 @@ public class SpaceInvaders
 	@Override
 	public String toString()
 	{
-		return "SpaceInvaders [tabMonster=" + Arrays.toString(this.monster)
-				+ ", tabTank=" + Arrays.toString(this.tank) + "]";
+		return "SpaceInvaders [tabMonster=" + Arrays.toString(this.monsters)
+				+ ", tabTank=" + Arrays.toString(this.tanks) + "]";
 	}
 }

@@ -103,7 +103,7 @@ public class BoundingBox
 	 * @param B BoundingBox area to check in
 	 * @return Return true if the point is in the area, false otherwise.
 	 */
-	// FIXME (FIXED) make this method public and using this as target BB
+	// FIXME (SEEN) (FIXED) make this method public and using this as target BB
 	public boolean pointIn(Coordinates point)
 	{
 		int x = point.getX();
@@ -121,7 +121,7 @@ public class BoundingBox
 	 * @param bb Bounding box to calculate intersection with.
 	 * @return Return the bounding box resulting of this one and bb intersection if it exists, null otherwise.
 	 */
-	// FIXME (FIXED) rename method
+	// FIXME (SEEN) (FIXED) rename method
 	public BoundingBox intersection(BoundingBox bb)
 	{
 		int x1,x2,y1,y2,hx1,hx2,hy1,hy2;
@@ -170,6 +170,7 @@ public class BoundingBox
 			}
 			catch (NegativeCoordinatesException e)
 			{
+				// TODO Display error/debug msg
 				return null;
 			}
 		}
