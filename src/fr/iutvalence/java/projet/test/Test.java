@@ -20,7 +20,15 @@ public class Test
 	public static void main(String[] args)
 	{
 		SpaceInvaders SI = new SpaceInvaders(250,1);
-		SI.start();
+		try
+		{
+			SI.start();
+		}
+		catch (InterruptedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.print(SI);
 	}
 

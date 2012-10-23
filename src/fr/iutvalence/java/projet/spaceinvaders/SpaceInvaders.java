@@ -5,8 +5,6 @@ package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.util.Arrays;
 
-import fr.iutvalence.java.projet.unused.Tank;
-
 /**
  * A space invader game.<br/>
  * 
@@ -160,10 +158,17 @@ public class SpaceInvaders
 		int i = 0;
 		// Allocations
 		this.monsters = new Movable[nbMonster];
-		this.tanks = new Tank[nbTank];
+		this.tanks = new Movable[nbTank];
 
 		// Set-up Tabs
-		this.tanks[0] = new Tank(tank_position);
+		try
+		{
+			this.tanks[0] = new Movable(tank_position);
+		}
+		catch (NegativeCoordinatesException e1)
+		{
+			System.out.println(e1);
+		}
 
 		while(i < nbMonster)
 		{
