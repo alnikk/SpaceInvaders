@@ -56,7 +56,7 @@ public class BoundingBox
 		super();
 		if(size.getX() < 0
 			|| size.getY() < 0)
-			throw new NegativeCoordinatesException();
+			throw new NegativeCoordinatesException(size);
 		this.position = position;
 		this.size = size;
 	}
@@ -170,7 +170,7 @@ public class BoundingBox
 			}
 			catch (NegativeCoordinatesException e)
 			{
-				// TODO Display error/debug msg
+				System.out.println(e);
 				return null;
 			}
 		}

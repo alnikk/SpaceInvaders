@@ -176,7 +176,7 @@ public class SpaceInvaders
 				}
 				catch (NegativeCoordinatesException e)
 				{
-					// TODO write the bad coordinates
+					System.out.println(e);
 				}
 				monster_position = new Coordinates(monster_position.getX() + (DEFAULTDELTA + DEFAULTSIZE),
 													monster_position.getY());
@@ -216,7 +216,7 @@ public class SpaceInvaders
 			}
 			catch (InterruptedException e)
 			{
-				e.printStackTrace();
+				System.out.println(e);
 			}
 			
 			// need same resources, so sync?
@@ -265,7 +265,7 @@ public class SpaceInvaders
 			}
 			catch (NegativeCoordinatesException e)
 			{
-				// TODO write the bad coordinates
+				//System.out.println(e);
 			}
 		}
 		//Wait
@@ -278,7 +278,7 @@ public class SpaceInvaders
 			}
 			catch (NegativeCoordinatesException e)
 			{
-				// TODO write the bad coordinates
+				System.out.println(e);
 			}
 		}
 		//Wait
@@ -291,7 +291,7 @@ public class SpaceInvaders
 			}
 			catch (NegativeCoordinatesException e)
 			{
-				// TODO write the bad coordinates
+				System.out.println(e);
 			}
 		}
 		//Wait
@@ -304,7 +304,7 @@ public class SpaceInvaders
 			}
 			catch (NegativeCoordinatesException e)
 			{
-				// TODO write the bad coordinates
+				System.out.println(e);
 			}
 		}
 		//Wait

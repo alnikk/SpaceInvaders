@@ -9,12 +9,12 @@ package fr.iutvalence.java.projet.spaceinvaders;
  */
 public class NegativeCoordinatesException extends Exception
 {
-	private int number;
+	private Coordinates bad;
 
-	public NegativeCoordinatesException(int number)
+	public NegativeCoordinatesException(Coordinates bad)
 	{
 		super();
-		this.number = number;
+		this.bad = bad;
 	}
 	
 	public NegativeCoordinatesException()
@@ -25,6 +25,6 @@ public class NegativeCoordinatesException extends Exception
 	@Override
 	public String toString()
 	{
-		return "You did key in : "+ this.number;
+		return "You did key in : "+ this.bad;
 	}
 }

@@ -28,6 +28,8 @@ public class Movable extends Element
 	// TODO Exception move when it go over.
 	// to do that : 
 	// TODO Move XGridMax and YGridMax
+	// but this is already in SpaceInvaders class
+	// Create Grid Class?
 	
 	/**
 	 * This constructor creates a new living <tt>Movable</tt> object taking its coordinates.<br/>
@@ -66,7 +68,7 @@ public class Movable extends Element
 	 * @param dy new coordinate relative on y axis
 	 * @throws NegativeCoordinatesException If position is negative.
 	 */
-	public void move(int dx, int dy) throws NegativeCoordinatesException
+	public synchronized void move(int dx, int dy) throws NegativeCoordinatesException
 	{
 		if(this.alive)
 		{
@@ -80,7 +82,7 @@ public class Movable extends Element
 	 * @param y the Y coordinates to move the element.
 	 * @throws NegativeCoordinatesException If position is negative.
 	 */
-	public void moveTo(int x, int y) throws NegativeCoordinatesException
+	public synchronized void moveTo(int x, int y) throws NegativeCoordinatesException
 	{
 		if(this.alive)
 		{
