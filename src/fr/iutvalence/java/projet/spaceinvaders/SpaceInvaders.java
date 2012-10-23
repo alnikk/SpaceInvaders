@@ -209,7 +209,6 @@ public class SpaceInvaders
 	{
 		// TODO remove Debug message
 		System.out.println("Begin");
-		//if the player lose, work = false.
 		while(this.work)
 		{
 			// TODO remove Debug message
@@ -224,10 +223,7 @@ public class SpaceInvaders
 				System.out.println(e);
 			}
 			
-			// need same resources, so sync?
-			// TODO test collision (thread ? every time check)
 			testCollision();
-			// TODO move enemy (thread ? no-yes, clock mechanism)
 			moveTab(this.monsters);
 		}
 		// TODO remove Debug message

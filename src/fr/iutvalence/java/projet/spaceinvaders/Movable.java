@@ -105,7 +105,7 @@ public class Movable extends Element
 	 * This method allows to modify the alive status of the movable object
 	 * @param alive the new alive status
 	 */
-	public void setAlive(boolean alive)
+	public synchronized void setAlive(boolean alive)
 	{
 		this.alive = alive;
 	}
