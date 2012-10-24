@@ -1,3 +1,5 @@
+// FIXME write an application testing some features of this class, particularly intersection
+
 /**
  * 
  */
@@ -31,15 +33,15 @@ package fr.iutvalence.java.projet.spaceinvaders;
  */
 public class BoundingBox
 {
-	// FIXME (SEEN) fix comment (BB is not related to element objects)
+	// FIXME (FIXED) rewritten
 	/**
-	 * The position of the object on the 2D grid.
+	 * Coordinates of the bottom-left corner of the bounding box
 	 */
 	private final Coordinates position;
 
+	// FIXME (FIXED) rewritten
 	/**
-	 * The size of the movable on the grid.<br/>
-	 * The size is defined by two values as a Coordinate object whose x means width and y means height.
+	 * The size (width, height) of the bounding box, defined by a <tt>Coordinate</tt> object whose x means width and y means height.
 	 */
 	private final Coordinates size;
 
@@ -56,7 +58,6 @@ public class BoundingBox
 	 */
 	public BoundingBox(Coordinates position, Coordinates size) throws NegativeCoordinatesException
 	{
-		// FIXME (SEEN) size cannot be negative but position can be
 		super();
 		if (size.getX() < 0 || size.getY() < 0)
 			throw new NegativeCoordinatesException(size);
@@ -66,8 +67,11 @@ public class BoundingBox
 
 	// **************** Method ************************
 
+	// FIXME (FIXED) rewritten
+	// FIXME here, the exception can not be raised since (as the bounding box exists) the size can not be negative
+	// FIXME -> so, remove throws clause, and catch exception inside the method
 	/**
-	 * Method to change position of element on the 2D grid.
+	 * Method to change position of the bottom-left corner of the bounding box
 	 * 
 	 * @param newPosition
 	 *            (Coordinates) the new position to set
@@ -80,8 +84,9 @@ public class BoundingBox
 		return new BoundingBox(newPosition, this.size);
 	}
 
+	// FIXME (FIXED) rewritten
 	/**
-	 * Method to translate position of element on the 2D grid.
+	 * Method to translate position of the bottom-left corner of the bounding box
 	 * 
 	 * @param delta
 	 *            (Coordinates) take the old coordinates and add delta to it.
@@ -94,12 +99,13 @@ public class BoundingBox
 		return this.moveTo(this.position.translate(delta));
 	}
 
+	// FIXME (FIXED) rewritten
 	/**
-	 * Method to change position of element on the 2D grid.
+	 * Method to change the size of the bounding box
 	 * 
-	 * @param newPosition
-	 *            (Coordinates) the new position to set
-	 * @return New BoundingBox with new coordinates.
+	 * @param newSize
+	 *            (Coordinates) the new size to set
+	 * @return New BoundingBox with new size.
 	 * @throws NegativeCoordinatesException
 	 *             If the size is negative.
 	 */
@@ -115,9 +121,8 @@ public class BoundingBox
 	 *            Coordinates of the point to check.
 	 * @param B
 	 *            BoundingBox area to check in
-	 * @return Return true if the point is in the area, false otherwise.
+	 * @return  <tt>true</tt> if the point is in the area, <tt>false</tt> otherwise.
 	 */
-	// FIXME (SEEN) (FIXED) make this method public and using this as target BB
 	public boolean pointIn(Coordinates point)
 	{
 		int x = point.getX();
@@ -137,7 +142,6 @@ public class BoundingBox
 	 *            Bounding box to calculate intersection with.
 	 * @return Return the bounding box resulting of this one and bb intersection if it exists, null otherwise.
 	 */
-	// FIXME (SEEN) (FIXED) rename method
 	public BoundingBox intersection(BoundingBox bb)
 	{
 		int x1, x2, y1, y2, hx1, hx2, hy1, hy2;
@@ -153,7 +157,6 @@ public class BoundingBox
 		y1 = bb.position.getY();
 		y2 = bb.position.getY() + bb.size.getY();
 
-		// FIXME (SEEN) it does not work when the current bb is completely contained by bb
 		if ((bb.pointIn(new Coordinates(hx1, hy1))) || (bb.pointIn(new Coordinates(hx2, hy1)))
 				|| (bb.pointIn(new Coordinates(hx2, hy2))) || (bb.pointIn(new Coordinates(hx1, hy2)))
 				|| (this.pointIn(new Coordinates(x1, y1))) || (this.pointIn(new Coordinates(x2, y1)))
@@ -182,7 +185,6 @@ public class BoundingBox
 			}
 			catch (NegativeCoordinatesException e)
 			{
-				System.out.println(e);
 				return null;
 			}
 		}
@@ -194,20 +196,22 @@ public class BoundingBox
 
 	// ***************** Getters and Setters ************************
 
+	// FIXME (FIXED) rewritten
 	/**
-	 * Return the size of the element by the couple (width,height).
+	 * Return the size of the bottom-left corner of the bounding box as a couple (width,height).
 	 * 
-	 * @return the size of the element by the couple (width,height).
+	 * @return the size of the bottom-left corner of the bounding box as a couple (width,height).
 	 */
 	public Coordinates getSize()
 	{
 		return this.size;
 	}
 
+	// FIXME (FIXED) rewritten
 	/**
-	 * Getter to return position of the element on 2D grid.
+	 * Getter to return position of the bottom-left corner of the bounding box.
 	 * 
-	 * @return the position of the element.
+	 * @return the position of the bottom-left corner of the bounding box.
 	 */
 	public Coordinates getPosition()
 	{

@@ -14,6 +14,7 @@ public abstract class Element
 	/**
 	 * area of the grid filled by the element
 	 */
+	// FIXME why not rename it "boundingBox" ?
 	private BoundingBox area;
 
 	// ************* Constructor ***************
@@ -30,25 +31,26 @@ public abstract class Element
 		this.area = area;
 	}
 
-	// ************* Methods ***************
-	// FIXME (SEEN) add a method calculating the overlapping (which is a BB) with another object
+	// ************* Methods **************
 	/**
 	 * Calculate the overlapping of two Elements' Object. The compute is made through bounding box. The first element to
 	 * compare is the current element and the second one is given as argument.
 	 * 
 	 * @param e
-	 *            The second element to compute the overlapping.
-	 * @return (BoundingBox) the intersection of both elements.
+	 *            The element to compute the overlapping with.
+	 * @return (BoundingBox) the intersection of both elements if it exists, <tt>null</tt> otherwise
 	 */
-	public BoundingBox overlap(Element e)
+	public BoundingBox overlapping(Element e)
 	{
 		return this.area.intersection(e.area);
 	}
 
 	// ************* Getters and Setters ***************
 
-	// FIXME (SEEN) fix comment (this is not compliant with method signature)
+	// FIXME fix comment (this is not compliant with method signature)
 	// I don't understand..
+	// -> N.B. here, the element is not necessarily movable, and you can say that the method returns the boundix box of this element
+	
 	/**
 	 * This method returns the location and size of the movable object.
 	 * 
@@ -59,8 +61,9 @@ public abstract class Element
 		return area;
 	}
 
-	// FIXME (SEEN) fix comment (this is not compliant with method signature)
+	// FIXME fix comment (this is not compliant with method signature)
 	// I don't understand.
+	// -> N.B. here, the element is not necessarily movable,
 	/**
 	 * This method allows to modify the location and size of the movable object. Setting position make the object moves<br/>
 	 * 

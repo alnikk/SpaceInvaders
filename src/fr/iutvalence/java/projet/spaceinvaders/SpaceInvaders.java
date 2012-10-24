@@ -16,37 +16,37 @@ public class SpaceInvaders
 	/**
 	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
 	 */
-	// FIXME (SEEN) respect coding conventions
+	// FIXME (NOT FIXED) respect coding conventions (to discuss)
 	private static final int NBMONSTERDEFAULT = 20;
 
 	/**
 	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
 	 */
-	// FIXME (SEEN) respect coding conventions
+	// FIXME (NOT FIXED) respect coding conventions
 	private static final int NBTANKDEFAULT = 1;
 
 	/**
 	 * It defines the maximum (default) of X axis, if it's not set in constructor.
 	 */
-	// FIXME (SEEN) respect coding conventions
+	// FIXME (NOT FIXED) respect coding conventions
 	private static final int XGRID = 300;
 
 	/**
 	 * It defines the maximum (default) of Y axis, if it's not set in constructor.
 	 */
-	// FIXME (SEEN) respect coding conventions
+	// FIXME (NOT FIXED) respect coding conventions
 	private static final int YGRID = 300;
 
 	/**
 	 * Default delta between 2 monsters
 	 */
-	// FIXME (SEEN) respect coding conventions
+	// FIXME (NOT FIXED) respect coding conventions
 	private static final int DEFAULTDELTA = 2;
 
 	/**
 	 * Default size of element (e.g. Doc Movable)
 	 */
-	// FIXME (SEEN) respect coding conventions
+	// FIXME (NOT FIXED) respect coding conventions
 	private static final int DEFAULTSIZE = 10;
 
 	// ************* Variable *************//
@@ -63,13 +63,11 @@ public class SpaceInvaders
 	/**
 	 * Array containing all monsters
 	 */
-	// FIXME (SEEN) why not rename it just "monsters" ?
 	private Movable[] monsters;
 
 	/**
 	 * Array containing all tanks.
 	 */
-	// FIXME (SEEN) why not rename it just "tanks" ?
 	private Movable[] tanks;
 
 	// ************************** Constructors **************************//
@@ -145,8 +143,9 @@ public class SpaceInvaders
 	 * @param nbTank
 	 *            Set the number of tank (not implemented yet, so the maximum is 1)
 	 */
-	// FIXME (SEEN) rename parameters
+	// FIXME rename parameters
 	// Why I have to rename this parameters?
+	// -> because there can be more than one monster and one tank 
 	private void initTab(int nbMonster, int nbTank)
 	{
 		// local variable
@@ -197,10 +196,6 @@ public class SpaceInvaders
 	 * <li>testCollision</li>
 	 * </ul>
 	 */
-	// FIXME (SEEN) why returning InterruptedException ?
-	// Eclipse ask me to write it.
-	// FIXME (SEEN) Eclipse suggests you to propagate OR catch it ;-) (to discuss)
-
 	private void iteration()
 	{
 		// TODO remove Debug message
@@ -216,7 +211,8 @@ public class SpaceInvaders
 			}
 			catch (InterruptedException e)
 			{
-				System.out.println(e);
+				// Just ignoring signal (unlikely to occur)
+				// That can just result to a pause of less than 1 second, does not matter
 			}
 
 			testCollision();
