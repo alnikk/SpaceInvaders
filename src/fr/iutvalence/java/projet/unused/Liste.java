@@ -5,7 +5,7 @@ package fr.iutvalence.java.projet.unused;
 
 /**
  * @author alexandre
- *
+ * 
  */
 public class Liste
 {
@@ -32,7 +32,8 @@ public class Liste
 	}
 
 	/**
-	 * @param objet the objet to set
+	 * @param objet
+	 *            the objet to set
 	 */
 	public void setObjet(Object objet)
 	{
@@ -66,7 +67,8 @@ public class Liste
 	}
 
 	/**
-	 * @param nom the nom to set
+	 * @param nom
+	 *            the nom to set
 	 */
 	public void setNom(String nom)
 	{

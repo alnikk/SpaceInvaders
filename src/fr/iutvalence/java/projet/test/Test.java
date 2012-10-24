@@ -15,11 +15,13 @@ public class Test
 
 	/**
 	 * Create a new SpaceInvader's object to test it.
-	 * @param args No arguments..
+	 * 
+	 * @param args
+	 *            No arguments..
 	 */
 	public static void main(String[] args)
 	{
-		SpaceInvaders SI = new SpaceInvaders(300,1);
+		SpaceInvaders SI = new SpaceInvaders(300, 1);
 		try
 		{
 			SI.start();

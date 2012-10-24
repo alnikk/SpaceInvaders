@@ -8,7 +8,7 @@ import fr.iutvalence.java.projet.spaceinvaders.Movable;
 
 /**
  * @author alexandre
- *
+ * 
  */
 public class TestListe
 {
@@ -53,19 +53,16 @@ public class TestListe
 
 		/**** 2nd methode ****/
 		/*
-		 * T.setObjet(new Movable(position,taille)); A = T.setSuivant();
-		 * A.setObjet(new Movable(position,taille)); A = A.setSuivant();
-		 * A.setObjet(new Movable(position,taille));
+		 * T.setObjet(new Movable(position,taille)); A = T.setSuivant(); A.setObjet(new Movable(position,taille)); A =
+		 * A.setSuivant(); A.setObjet(new Movable(position,taille));
 		 * 
 		 * 
-		 * A = T; ((Movable) A.getObjet()).move(10,10); A = A.suivant();
-		 * ((Movable) A.getObjet()).move(20,20); A = A.suivant(); ((Movable)
-		 * A.getObjet()).move(30,30);
+		 * A = T; ((Movable) A.getObjet()).move(10,10); A = A.suivant(); ((Movable) A.getObjet()).move(20,20); A =
+		 * A.suivant(); ((Movable) A.getObjet()).move(30,30);
 		 * 
 		 * 
-		 * A = T; E1 = ((Movable) A.getObjet()); A = A.suivant(); E2 =
-		 * ((Movable) A.getObjet()); A = A.suivant(); E3 = ((Movable)
-		 * A.getObjet());
+		 * A = T; E1 = ((Movable) A.getObjet()); A = A.suivant(); E2 = ((Movable) A.getObjet()); A = A.suivant(); E3 =
+		 * ((Movable) A.getObjet());
 		 */
 
 		// Debug

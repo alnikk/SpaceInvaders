@@ -5,6 +5,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
  * Thrown by a BoundingBox to indicate that there is a negative coordinates.
+ * 
  * @author Gallet Guyon
  */
 public class NegativeCoordinatesException extends Exception
@@ -16,7 +17,7 @@ public class NegativeCoordinatesException extends Exception
 		super();
 		this.bad = bad;
 	}
-	
+
 	public NegativeCoordinatesException()
 	{
 		super();
@@ -25,6 +26,6 @@ public class NegativeCoordinatesException extends Exception
 	@Override
 	public String toString()
 	{
-		return "You did key in : "+ this.bad;
+		return "You did key in : " + this.bad;
 	}
 }

@@ -19,10 +19,12 @@ public class Coordinates
 	private final int y;
 
 	/**
-	 * This constructor creates a new Coordinate <tt>(x,y)</tt> taking x and y as parameters. 
+	 * This constructor creates a new Coordinate <tt>(x,y)</tt> taking x and y as parameters.
 	 * 
-	 * @param x the X coordinate of the object you create  
-	 * @param y the Y coordinate of the object you create
+	 * @param x
+	 *            the X coordinate of the object you create
+	 * @param y
+	 *            the Y coordinate of the object you create
 	 */
 	public Coordinates(final int x, final int y)
 	{
@@ -30,10 +32,12 @@ public class Coordinates
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	/**
 	 * Translate Coordinates with other one.
-	 * @param c delta coordinates to add to existing one
+	 * 
+	 * @param c
+	 *            delta coordinates to add to existing one
 	 * @return Return Coordinates object translated of the argument.
 	 */
 	public Coordinates translate(Coordinates c)
@@ -42,7 +46,7 @@ public class Coordinates
 	}
 
 	/**
-	 * This method returns the value of X from object's coordinates  
+	 * This method returns the value of X from object's coordinates
 	 * 
 	 * @return the value of X
 	 */
@@ -52,7 +56,7 @@ public class Coordinates
 	}
 
 	/**
-	 * This method returns the value of Y from object's coordinates  
+	 * This method returns the value of Y from object's coordinates
 	 * 
 	 * @return the value of Y
 	 */
@@ -81,14 +85,14 @@ public class Coordinates
 		result = prime * result + this.y;
 		return result;
 	}
-	
+
 	/**
 	 * Indicates whether some other object is "equal to" this one.<br/>
 	 * That is to say, the coordinates have to be the same :<br/>
-	 * x1 = x2
-	 * y1 = y2
+	 * x1 = x2 y1 = y2
 	 * 
-	 * @param obj the reference object with which to compare (supposed to be instance of Coordinate).
+	 * @param obj
+	 *            the reference object with which to compare (supposed to be instance of Coordinate).
 	 * @return <tt>true</tt> if this object is the same as the <tt>obj</tt> argument; <tt>false</tt> otherwise.
 	 */
 	@Override

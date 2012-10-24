@@ -12,12 +12,14 @@ public class TestCollision
 {
 	/**
 	 * Create a new SpaceInvader's object to test Collision.
-	 * @param args No arguments..
+	 * 
+	 * @param args
+	 *            No arguments..
 	 */
 	public static void main(String[] args)
 	{
-		Coordinates cMax = new Coordinates(300,300);
-		SpaceInvaders S = new SpaceInvaders(1,1,cMax);
+		Coordinates cMax = new Coordinates(300, 300);
+		SpaceInvaders S = new SpaceInvaders(1, 1, cMax);
 		S.start();
 	}
 }
