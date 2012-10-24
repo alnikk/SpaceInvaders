@@ -27,10 +27,10 @@ public class TestBoundingBox
 												new Coordinates(5,5));
 			System.out.println("Avant : " + b1 + "\n\t" + b2);
 			
-			b1.moveTo(new Coordinates(10,10));
-			b2.translate(new Coordinates(10,10));
+			b1 = b1.moveTo(new Coordinates(10,10));
+			b2 = b2.translate(new Coordinates(10,10));
 			
-			//b2.reSize(new Coordinates(10,10));
+			b2 = b2.reSize(new Coordinates(10,10));
 			
 			System.out.println("Apres : " + b1 + "\n\t" + b2);
 			
