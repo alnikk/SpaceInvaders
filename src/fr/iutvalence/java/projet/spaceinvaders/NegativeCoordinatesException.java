@@ -10,7 +10,10 @@ package fr.iutvalence.java.projet.spaceinvaders;
  */
 public class NegativeCoordinatesException extends Exception
 {
-	// FIXME write a comment
+	// FIXME (SEEN) write a comment
+	/**
+	 * This variable is the bad coordinates. Exception due to this coordinates. 
+	 */
 	private Coordinates bad;
 
 	// FIXME write a comment
@@ -26,10 +29,12 @@ public class NegativeCoordinatesException extends Exception
 		super();
 	}
 
-	// FIXME replace the redefinition of toString by a getter
-	@Override
-	public String toString()
+	// FIXME (SEEN) replace the redefinition of toString by a getter
+	/**
+	 * @return the bad coordinates
+	 */
+	public Coordinates getNegativeCoordinatesException()
 	{
-		return "You did key in : " + this.bad;
+		return this.bad;
 	}
 }
