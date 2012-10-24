@@ -25,14 +25,14 @@ public class TestBoundingBox
 												new Coordinates(10,10));
 			BoundingBox b2 = new BoundingBox(new Coordinates(5,5),
 												new Coordinates(5,5));
-			System.out.println(b1 + "\n" + b2);
+			System.out.println("Avant : " + b1 + "\n\t" + b2);
 			
 			b1.moveTo(new Coordinates(10,10));
 			b2.translate(new Coordinates(10,10));
 			
-			b2.reSize(new Coordinates(10,10));
+			//b2.reSize(new Coordinates(10,10));
 			
-			System.out.println(b1 + "\n" + b2);
+			System.out.println("Apres : " + b1 + "\n\t" + b2);
 			
 			System.out.println("Intersection : " + b1.intersection(b2));
 		}
