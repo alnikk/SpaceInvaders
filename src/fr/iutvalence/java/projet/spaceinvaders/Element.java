@@ -14,8 +14,9 @@ public abstract class Element
 	/**
 	 * area of the grid filled by the element
 	 */
-	// FIXME why not rename it "boundingBox" ?
-	private BoundingBox area;
+	// FIXME (SEEN) why not rename it "boundingBox"
+	// Because it makes lot of rehearse
+	private BoundingBox boundingBox;
 
 	// ************* Constructor ***************
 	/**
@@ -28,7 +29,7 @@ public abstract class Element
 	public Element(BoundingBox area)
 	{
 		super();
-		this.area = area;
+		this.boundingBox = area;
 	}
 
 	// ************* Methods **************
@@ -42,37 +43,37 @@ public abstract class Element
 	 */
 	public BoundingBox overlapping(Element e)
 	{
-		return this.area.intersection(e.area);
+		return this.boundingBox.intersection(e.boundingBox);
 	}
 
 	// ************* Getters and Setters ***************
 
-	// FIXME fix comment (this is not compliant with method signature)
+	// FIXME (SEEN) fix comment (this is not compliant with method signature)
 	// I don't understand..
-	// -> N.B. here, the element is not necessarily movable, and you can say that the method returns the boundix box of this element
+	// -> N.B. here, the element is not necessarily movable, and you can say that the method returns the bounding box of this element
 	
 	/**
 	 * This method returns the location and size of the movable object.
 	 * 
-	 * @return return the location and size (both Coordinates) of the movable object <br/>
+	 * @return return the location and size (BoundingBox) of the object <br/>
 	 */
 	public BoundingBox getArea()
 	{
-		return area;
+		return boundingBox;
 	}
 
-	// FIXME fix comment (this is not compliant with method signature)
+	// FIXME (SEEN) fix comment (this is not compliant with method signature)
 	// I don't understand.
 	// -> N.B. here, the element is not necessarily movable,
 	/**
-	 * This method allows to modify the location and size of the movable object. Setting position make the object moves<br/>
+	 * This method allows to modify the location and size (BoundingBox) of the element. Setting position make the object moves<br/>
 	 * 
 	 * @param Bounding
 	 *            box of the element
 	 */
 	protected void setArea(BoundingBox area)
 	{
-		this.area = area;
+		this.boundingBox = area;
 	}
 
 	@Override

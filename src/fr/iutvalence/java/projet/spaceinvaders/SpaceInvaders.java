@@ -16,38 +16,38 @@ public class SpaceInvaders
 	/**
 	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
 	 */
-	// FIXME (NOT FIXED) respect coding conventions (to discuss)
-	private static final int NBMONSTERDEFAULT = 20;
+	// FIXME (SEEN) (NOT FIXED) respect coding conventions (to discuss)
+	private static final int NB_MONSTER_DEFAULT = 20;
 
 	/**
 	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
 	 */
-	// FIXME (NOT FIXED) respect coding conventions
-	private static final int NBTANKDEFAULT = 1;
+	// FIXME (SEEN) (NOT FIXED) respect coding conventions
+	private static final int NB_TANK_DEFAULT = 1;
 
 	/**
 	 * It defines the maximum (default) of X axis, if it's not set in constructor.
 	 */
-	// FIXME (NOT FIXED) respect coding conventions
-	private static final int XGRID = 300;
+	// FIXME (SEEN) (NOT FIXED) respect coding conventions
+	private static final int X_GRID = 300;
 
 	/**
 	 * It defines the maximum (default) of Y axis, if it's not set in constructor.
 	 */
-	// FIXME (NOT FIXED) respect coding conventions
-	private static final int YGRID = 300;
+	// FIXME (SEEN) (NOT FIXED) respect coding conventions
+	private static final int Y_GRID = 300;
 
 	/**
 	 * Default delta between 2 monsters
 	 */
-	// FIXME (NOT FIXED) respect coding conventions
-	private static final int DEFAULTDELTA = 2;
+	// FIXME (SEEN) (NOT FIXED) respect coding conventions
+	private static final int DEFAULT_DELTA = 2;
 
 	/**
 	 * Default size of element (e.g. Doc Movable)
 	 */
-	// FIXME (NOT FIXED) respect coding conventions
-	private static final int DEFAULTSIZE = 10;
+	// FIXME (SEEN) (NOT FIXED) respect coding conventions
+	private static final int DEFAULT_SIZE = 10;
 
 	// ************* Variable *************//
 	/**
@@ -80,8 +80,8 @@ public class SpaceInvaders
 	public SpaceInvaders()
 	{
 		this.work = true;
-		this.maxSize = new Coordinates(XGRID, YGRID);
-		initTab(NBMONSTERDEFAULT, NBTANKDEFAULT);
+		this.maxSize = new Coordinates(X_GRID, Y_GRID);
+		initTab(NB_MONSTER_DEFAULT, NB_TANK_DEFAULT);
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class SpaceInvaders
 	public SpaceInvaders(int nbMonster, int nbTank)
 	{
 		this.work = true;
-		this.maxSize = new Coordinates(XGRID, YGRID);
+		this.maxSize = new Coordinates(X_GRID, Y_GRID);
 		initTab(nbMonster, nbTank);
 	}
 
@@ -137,25 +137,25 @@ public class SpaceInvaders
 	 * Algorithm for set-up the monsters' position on the grid, and also Tank. It positions the tank of the middle of
 	 * the grid and the monster from the top left to the bottom right (like writing in English or French)
 	 * 
-	 * @param nbMonster
+	 * @param nbMonsters
 	 *            Set the number of monster (The maximum is set (to my mind) to 250, after I'm offload one's
 	 *            responsibilities)
-	 * @param nbTank
+	 * @param nbTanks
 	 *            Set the number of tank (not implemented yet, so the maximum is 1)
 	 */
-	// FIXME rename parameters
+	// FIXME (SEEN) rename parameters
 	// Why I have to rename this parameters?
 	// -> because there can be more than one monster and one tank 
-	private void initTab(int nbMonster, int nbTank)
+	private void initTab(int nbMonsters, int nbTanks)
 	{
 		// local variable
-		Coordinates tank_position = new Coordinates((this.maxSize.getX() / 2) - (DEFAULTSIZE / 2),
-				(this.maxSize.getY() / 2) - (DEFAULTSIZE / 2));
-		Coordinates monster_position = new Coordinates(DEFAULTDELTA, this.maxSize.getY() - (DEFAULTSIZE + DEFAULTDELTA));
+		Coordinates tank_position = new Coordinates((this.maxSize.getX() / 2) - (DEFAULT_SIZE / 2),
+				(this.maxSize.getY() / 2) - (DEFAULT_SIZE / 2));
+		Coordinates monster_position = new Coordinates(DEFAULT_DELTA, this.maxSize.getY() - (DEFAULT_SIZE + DEFAULT_DELTA));
 		int i = 0;
 		// Allocations
-		this.monsters = new Movable[nbMonster];
-		this.tanks = new Movable[nbTank];
+		this.monsters = new Movable[nbMonsters];
+		this.tanks = new Movable[nbTanks];
 
 		// Set-up Tabs
 		try
@@ -167,9 +167,9 @@ public class SpaceInvaders
 			System.out.println(e1);
 		}
 
-		while (i < nbMonster)
+		while (i < nbMonsters)
 		{
-			while (i < nbMonster && monster_position.getX() + (DEFAULTDELTA + DEFAULTSIZE) <= this.maxSize.getX())
+			while (i < nbMonsters && monster_position.getX() + (DEFAULT_DELTA + DEFAULT_SIZE) <= this.maxSize.getX())
 			{
 				try
 				{
@@ -179,11 +179,11 @@ public class SpaceInvaders
 				{
 					System.out.println(e);
 				}
-				monster_position = new Coordinates(monster_position.getX() + (DEFAULTDELTA + DEFAULTSIZE),
+				monster_position = new Coordinates(monster_position.getX() + (DEFAULT_DELTA + DEFAULT_SIZE),
 						monster_position.getY());
 				i = i + 1;
 			}
-			monster_position = new Coordinates(DEFAULTDELTA, monster_position.getY() - (DEFAULTDELTA + DEFAULTSIZE));
+			monster_position = new Coordinates(DEFAULT_DELTA, monster_position.getY() - (DEFAULT_DELTA + DEFAULT_SIZE));
 		}
 
 	}

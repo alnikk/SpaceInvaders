@@ -19,8 +19,15 @@ public class TestCollision
 	public static void main(String[] args)
 	{
 		Coordinates cMax = new Coordinates(300, 300);
-		// FIXME respect coding conentions
-		SpaceInvaders S = new SpaceInvaders(1, 1, cMax);
-		S.start();
+		// FIXME (SEEN) respect coding conentions
+		SpaceInvaders s = new SpaceInvaders(1, 1, cMax);
+		try
+		{
+			s.start();
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
