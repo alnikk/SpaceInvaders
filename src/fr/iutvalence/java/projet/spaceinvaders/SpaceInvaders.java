@@ -16,37 +16,31 @@ public class SpaceInvaders
 	/**
 	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
 	 */
-	// FIXME (SEEN) (NOT FIXED) respect coding conventions (to discuss)
-	private static final int NB_MONSTER_DEFAULT = 20;
+	private static final int DEFAULT_MONSTERS_AMOUNT = 20;
 
 	/**
 	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
 	 */
-	// FIXME (SEEN) (NOT FIXED) respect coding conventions
-	private static final int NB_TANK_DEFAULT = 1;
+	private static final int DEFAULT_TANKS_AMOUNT = 1;
 
 	/**
 	 * It defines the maximum (default) of X axis, if it's not set in constructor.
 	 */
-	// FIXME (SEEN) (NOT FIXED) respect coding conventions
 	private static final int X_GRID = 300;
 
 	/**
 	 * It defines the maximum (default) of Y axis, if it's not set in constructor.
 	 */
-	// FIXME (SEEN) (NOT FIXED) respect coding conventions
 	private static final int Y_GRID = 300;
 
 	/**
 	 * Default delta between 2 monsters
 	 */
-	// FIXME (SEEN) (NOT FIXED) respect coding conventions
 	private static final int DEFAULT_DELTA = 2;
 
 	/**
 	 * Default size of element (e.g. Doc Movable)
 	 */
-	// FIXME (SEEN) (NOT FIXED) respect coding conventions
 	private static final int DEFAULT_SIZE = 10;
 
 	// ************* Variable *************//
@@ -81,7 +75,7 @@ public class SpaceInvaders
 	{
 		this.work = true;
 		this.maxSize = new Coordinates(X_GRID, Y_GRID);
-		initTab(NB_MONSTER_DEFAULT, NB_TANK_DEFAULT);
+		initTab(DEFAULT_MONSTERS_AMOUNT, DEFAULT_TANKS_AMOUNT);
 	}
 
 	/**
@@ -143,9 +137,6 @@ public class SpaceInvaders
 	 * @param nbTanks
 	 *            Set the number of tank (not implemented yet, so the maximum is 1)
 	 */
-	// FIXME (SEEN) rename parameters
-	// Why I have to rename this parameters?
-	// -> because there can be more than one monster and one tank 
 	private void initTab(int nbMonsters, int nbTanks)
 	{
 		// local variable
