@@ -14,8 +14,6 @@ public abstract class Element
 	/**
 	 * area of the grid filled by the element
 	 */
-	// FIXME (SEEN) why not rename it "boundingBox"
-	// Because it makes lot of rehearse
 	private BoundingBox boundingBox;
 
 	// ************* Constructor ***************

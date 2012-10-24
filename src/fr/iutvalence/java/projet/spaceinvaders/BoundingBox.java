@@ -33,13 +33,11 @@ package fr.iutvalence.java.projet.spaceinvaders;
  */
 public class BoundingBox
 {
-	// FIXME (SEEN) (FIXED) rewritten
 	/**
 	 * Coordinates of the bottom-left corner of the bounding box
 	 */
 	private final Coordinates position;
 
-	// FIXME (SEEN) (FIXED) rewritten
 	/**
 	 * The size (width, height) of the bounding box, defined by a <tt>Coordinate</tt> object whose x means width and y means height.
 	 */
@@ -67,9 +65,8 @@ public class BoundingBox
 
 	// **************** Method ************************
 
-	// FIXME (SEEN) (FIXED) rewritten
-	// FIXME (SEEN) here, the exception can not be raised since (as the bounding box exists) the size can not be negative
-	// FIXME (SEEN)  -> so, remove throws clause, and catch exception inside the method
+	// FIXME here, the exception can not be raised since (as the bounding box exists) the size can not be negative
+	// FIXME  -> so, remove throws clause, and catch exception inside the method
 	/**
 	 * Method to change position of the bottom-left corner of the bounding box
 	 * 
@@ -82,7 +79,6 @@ public class BoundingBox
 		return new BoundingBox(newPosition, this.size);
 	}
 
-	// FIXME (SEEN) (FIXED) rewritten
 	/**
 	 * Method to translate position of the bottom-left corner of the bounding box
 	 * 
@@ -97,7 +93,6 @@ public class BoundingBox
 		return this.moveTo(this.position.translate(delta));
 	}
 
-	// FIXME (SEEN) (FIXED) rewritten
 	/**
 	 * Method to change the size of the bounding box
 	 * 
@@ -194,7 +189,6 @@ public class BoundingBox
 
 	// ***************** Getters and Setters ************************
 
-	// FIXME (SEEN) (FIXED) rewritten
 	/**
 	 * Return the size of the bottom-left corner of the bounding box as a couple (width,height).
 	 * 
@@ -205,7 +199,6 @@ public class BoundingBox
 		return this.size;
 	}
 
-	// FIXME (SEEN) (FIXED) rewritten
 	/**
 	 * Getter to return position of the bottom-left corner of the bounding box.
 	 * 
@@ -216,6 +209,9 @@ public class BoundingBox
 		return this.position;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
