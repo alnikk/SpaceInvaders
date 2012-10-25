@@ -161,29 +161,29 @@ public class BoundingBox
 				|| (this.pointIn(new Coordinates(x1, y1))) || (this.pointIn(new Coordinates(x2, y1)))
 				|| (this.pointIn(new Coordinates(x2, y2))) || (this.pointIn(new Coordinates(x1, y2))))
 		{
-			if (x1 <= hx1)
-				posResX = hx1;
+			
+			posResX = Math.max(x1, hx1);
+			sizeResX = Math.min(x2, hx2);
+			posResY = Math.max(y1, hy1);
+			sizeResY = Math.min(y2, hy2);
+			
+			if((sizeResX - posResX) < 0)
+				sizeResX = posResX - sizeResX;
 			else
-				posResX = x1;
-			if (x2 >= hx2)
-				sizeResX = hx2;
+				sizeResX = sizeResX - posResX;
+			if((sizeResY - posResY) < 0)
+				sizeResY = posResY - sizeResY;
 			else
-				sizeResX = x2;
-			if (y1 <= hy1)
-				posResY = hy1;
-			else
-				posResY = y2;
-			if (y2 >= hy2)
-				sizeResY = hy2;
-			else
-				sizeResY = y2;
-
+				sizeResY = sizeResY - posResY;
+				
+			
 			try
 			{
 				return new BoundingBox(new Coordinates(posResX, posResY), new Coordinates(sizeResX, sizeResY));
 			}
 			catch (NegativeCoordinatesException e)
 			{
+				System.out.println(e.getNegativeCoordinatesException());
 				return null;
 			}
 		}
@@ -222,5 +222,28 @@ public class BoundingBox
 	public String toString()
 	{
 		return "BoundingBox [position=" + this.position + ", size=" + this.size + "]";
+	}
+	
+	// TODO Comment
+	/**
+	 * 
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+		{ // if they two have the same references
+			return true;
+		}
+		if (obj == null)
+		{ // if one is null
+			return false;
+		}
+		if (!(obj instanceof BoundingBox))
+		{ // if they two haven't the same instance
+			return false;
+		}
+		BoundingBox other = (BoundingBox) obj; // Cast obj
+		return ((this.position.equals(other.position)) && (this.size.equals(other.size)));
 	}
 }
