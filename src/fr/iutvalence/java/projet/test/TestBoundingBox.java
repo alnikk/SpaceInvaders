@@ -40,7 +40,7 @@ public class TestBoundingBox
 
 			System.out.println("Bottom-left :   b1 " + b1 + "\n\t\tb2 " + b2);
 			System.out.println("Intersection :  b3 " + b2.intersection(b1));
-			System.out.println("\t\t" + b3.equals(b2.intersection(b1))+"-"+ b3.equals(b1.intersection(b2)) + "\ton test si b3 (attendu) est égal à intersection de b1, b2 \n");
+			System.out.println("\t\tTest waited b3 and b1 U b2 : " + b3.equals(b2.intersection(b1))+"\n\t\tTest waited b3 and b2 U b1 : "+ b3.equals(b1.intersection(b2)) + "\n");
 		
 		
 		
@@ -49,26 +49,9 @@ public class TestBoundingBox
 			b3 = b3.translate(new Coordinates(0, 5));
 			b3 = b3.reSize(new Coordinates(5,5));
 
-			System.out.println("Top-left :   b1 " + b1 + "\n\t\tb2 " + b2);
+			System.out.println("Top-left :      b1 " + b1 + "\n\t\tb2 " + b2);
 			System.out.println("Intersection :  b3 " + b2.intersection(b1));
-			System.out.println("\t\t" + b3.equals(b2.intersection(b1))+"-"+ b3.equals(b1.intersection(b2)) + "\ton test si b3 (attendu) est égal à intersection de b1, b2 \n");
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+			System.out.println("\t\tTest waited b3 and b1 U b2: " + b3.equals(b2.intersection(b1))+"\n\t\tTest waited b3 and b2 U b1 : "+ b3.equals(b1.intersection(b2)) + "\n");
 		
 		
 		}
