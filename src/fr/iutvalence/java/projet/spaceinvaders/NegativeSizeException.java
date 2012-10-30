@@ -8,7 +8,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * 
  * @author Gallet Guyon
  */
-public class NegativeCoordinatesException extends Exception
+public class NegativeSizeException extends Exception
 {
 	// FIXME (SEEN) write a comment
 	/**
@@ -21,7 +21,7 @@ public class NegativeCoordinatesException extends Exception
 	 * Constructors who defined the bad Coordinates to handle 
 	 * @param bad It is the bad coordinates to handle. It create an NegativeCoorinatesException
 	 */
-	public NegativeCoordinatesException(Coordinates bad)
+	public NegativeSizeException(Coordinates bad)
 	{
 		super();
 		this.bad = bad;
@@ -31,7 +31,7 @@ public class NegativeCoordinatesException extends Exception
 	/**
 	 * Default Constructors, it create an NegativeCoorinatesException 
 	 */
-	public NegativeCoordinatesException()
+	public NegativeSizeException()
 	{
 		super();
 	}

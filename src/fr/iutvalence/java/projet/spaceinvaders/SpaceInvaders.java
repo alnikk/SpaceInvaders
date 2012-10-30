@@ -47,7 +47,7 @@ public class SpaceInvaders
 	/**
 	 * Boolean to know if the game is finished
 	 */
-	private boolean work;
+	private Boolean work;
 
 	/**
 	 * The maximum size of the area
@@ -73,7 +73,7 @@ public class SpaceInvaders
 	 */
 	public SpaceInvaders()
 	{
-		this.work = true;
+		this.work = new Boolean(true);
 		this.maxSize = new Coordinates(X_GRID, Y_GRID);
 		initTab(DEFAULT_MONSTERS_AMOUNT, DEFAULT_TANKS_AMOUNT);
 	}
@@ -90,7 +90,7 @@ public class SpaceInvaders
 	 */
 	public SpaceInvaders(int nbMonster, int nbTank)
 	{
-		this.work = true;
+		this.work = new Boolean(true);
 		this.maxSize = new Coordinates(X_GRID, Y_GRID);
 		initTab(nbMonster, nbTank);
 	}
@@ -108,7 +108,7 @@ public class SpaceInvaders
 	 */
 	public SpaceInvaders(int nbMonster, int nbTank, Coordinates Max)
 	{
-		this.work = true;
+		this.work = new Boolean(true);
 		this.maxSize = Max;
 		initTab(nbMonster, nbTank);
 	}
@@ -120,8 +120,10 @@ public class SpaceInvaders
 	 */
 	public void start() throws InterruptedException
 	{
-		// TODO threads?
-		iteration();
+		MoveMonstersThread move = new MoveMonstersThread("Monsters", 1000, monsters, tanks, work, maxSize);
+		move.start();
+		move.join();
+		//iteration();
 	}
 
 	/**
@@ -151,7 +153,7 @@ public class SpaceInvaders
 		{
 			this.tanks[0] = new Movable(tank_position);
 		}
-		catch (NegativeCoordinatesException e1)
+		catch (NegativeSizeException e1)
 		{
 			System.out.println(e1);
 		}
@@ -164,7 +166,7 @@ public class SpaceInvaders
 				{
 					this.monsters[i] = new Movable(monster_position);
 				}
-				catch (NegativeCoordinatesException e)
+				catch (NegativeSizeException e)
 				{
 					System.out.println(e);
 				}
@@ -190,7 +192,7 @@ public class SpaceInvaders
 	{
 		// TODO remove Debug message
 		System.out.println("Begin");
-		while (this.work)
+		while (this.work.booleanValue())
 		{
 			// TODO remove Debug message
 			System.out.println("Boucle");
@@ -246,7 +248,7 @@ public class SpaceInvaders
 			{
 				tab[i].move(-10, 0);
 			}
-			catch (NegativeCoordinatesException e)
+			catch (NegativeSizeException e)
 			{
 				// System.out.println(e);
 			}
@@ -259,7 +261,7 @@ public class SpaceInvaders
 			{
 				tab[i].move(0, -10);
 			}
-			catch (NegativeCoordinatesException e)
+			catch (NegativeSizeException e)
 			{
 				System.out.println(e);
 			}
@@ -272,7 +274,7 @@ public class SpaceInvaders
 			{
 				tab[i].move(10, 0);
 			}
-			catch (NegativeCoordinatesException e)
+			catch (NegativeSizeException e)
 			{
 				System.out.println(e);
 			}
@@ -285,7 +287,7 @@ public class SpaceInvaders
 			{
 				tab[i].move(10, 0);
 			}
-			catch (NegativeCoordinatesException e)
+			catch (NegativeSizeException e)
 			{
 				System.out.println(e);
 			}
@@ -322,7 +324,7 @@ public class SpaceInvaders
 	@Override
 	public String toString()
 	{
-		return "SpaceInvaders [tabMonster=" + Arrays.toString(this.monsters) + ", tabTank="
+		return "SpaceInvaders [tabMonster=" + Arrays.toString(this.monsters) + "tabTank="
 				+ Arrays.toString(this.tanks) + "]";
 	}
 }

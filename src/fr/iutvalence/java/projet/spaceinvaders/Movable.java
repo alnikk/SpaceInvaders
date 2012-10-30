@@ -1,5 +1,7 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
+import java.util.Arrays;
+
 /**
  * This class defines a movable object, that can move on a 2D grid and so being killed by others.<br/>
  * A movable object is characterized by its size and position on the grid and also its status [alive | dead]. Once a
@@ -33,10 +35,10 @@ public class Movable extends Element
 	 * 
 	 * @param i
 	 *            the initial position, as a Coordinate object
-	 * @throws NegativeCoordinatesException
+	 * @throws NegativeSizeException
 	 *             Throws Exception when the size coordinates are negative
 	 */
-	public Movable(Coordinates i) throws NegativeCoordinatesException
+	public Movable(Coordinates i) throws NegativeSizeException
 	{
 		super(new BoundingBox(i, new Coordinates(WIDTH, HEIGHT)));
 		this.alive = true;
@@ -49,10 +51,10 @@ public class Movable extends Element
 	 *            the initial position, as a Coordinate object
 	 * @param j
 	 *            the size, as a Coordinate object whose x means width and y means height.
-	 * @throws NegativeCoordinatesException
+	 * @throws NegativeSizeException
 	 *             Throws Exception when the size coordinates are negative
 	 */
-	public Movable(Coordinates i, Coordinates j) throws NegativeCoordinatesException
+	public Movable(Coordinates i, Coordinates j) throws NegativeSizeException
 	{
 		super(new BoundingBox(i, j));
 		this.alive = true;
@@ -68,17 +70,34 @@ public class Movable extends Element
 	 *            new coordinate relative on x axis
 	 * @param dy
 	 *            new coordinate relative on y axis
-	 * @throws NegativeCoordinatesException
+	 * @throws NegativeSizeException
 	 *             If position is negative.
 	 */
-	public synchronized void move(int dx, int dy) throws NegativeCoordinatesException
+	public synchronized void move(int dx, int dy) throws NegativeSizeException
 	{
 		if (this.alive)
 		{
-			getArea().translate(new Coordinates(dx, dy));
+			this.setArea(getArea().translate(new Coordinates(dx, dy)));
 		}
 	}
 
+	/**
+	 * The move method changes the position of the object (the size is unchanged).<br/>
+	 * It translates the coordinates by deltas given as x and y.<br/>
+	 * 
+	 * @param delta
+	 *             new Coordinates
+	 * @throws NegativeSizeException
+	 *             If position is negative.
+	 */
+	public synchronized void move(Coordinates delta) throws NegativeSizeException
+	{
+		if (this.alive)
+		{
+			getArea().translate(delta);
+		}
+	}
+	
 	/**
 	 * Method to move element to specific coordinates on the 2D grid.
 	 * 
@@ -86,14 +105,29 @@ public class Movable extends Element
 	 *            the X coordinates to move the element.
 	 * @param y
 	 *            the Y coordinates to move the element.
-	 * @throws NegativeCoordinatesException
+	 * @throws NegativeSizeException
 	 *             If position is negative.
 	 */
-	public synchronized void moveTo(int x, int y) throws NegativeCoordinatesException
+	public synchronized void moveTo(int x, int y) throws NegativeSizeException
 	{
 		if (this.alive)
 		{
 			getArea().moveTo(new Coordinates(x, y));
+		}
+	}
+	
+	/**
+	 * Method to move element to specific coordinates on the 2D grid.
+	 * 
+	 * @param couple The new coordinates to move
+	 * @throws NegativeSizeException
+	 *             If position is negative.
+	 */
+	public synchronized void moveTo(Coordinates couple) throws NegativeSizeException
+	{
+		if (this.alive)
+		{
+			getArea().moveTo(couple);
 		}
 	}
 

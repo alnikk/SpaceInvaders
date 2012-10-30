@@ -51,14 +51,14 @@ public class BoundingBox
 	 *            Set the position of the element in 2D grid
 	 * @param size
 	 *            Can't be change once it's allocated
-	 * @throws NegativeCoordinatesException
+	 * @throws NegativeSizeException
 	 *             If size has at least one negative coordinate.
 	 */
-	public BoundingBox(Coordinates position, Coordinates size) throws NegativeCoordinatesException
+	public BoundingBox(Coordinates position, Coordinates size) throws NegativeSizeException
 	{
 		super();
 		if (size.getX() < 0 || size.getY() < 0)
-			throw new NegativeCoordinatesException(size);
+			throw new NegativeSizeException(size);
 		this.position = position;
 		this.size = size;
 	}
@@ -80,7 +80,7 @@ public class BoundingBox
 		{
 			return new BoundingBox(newPosition, this.size);
 		}
-		catch (NegativeCoordinatesException e)
+		catch (NegativeSizeException e)
 		{
 			System.out.println(e.getNegativeCoordinatesException());
 			return null;
@@ -93,10 +93,10 @@ public class BoundingBox
 	 * @param delta
 	 *            (Coordinates) take the old coordinates and add delta to it.
 	 * @return New BoundingBox with new coordinates.
-	 * @throws NegativeCoordinatesException
+	 * @throws NegativeSizeException
 	 *             If position is negative.
 	 */
-	public BoundingBox translate(Coordinates delta) throws NegativeCoordinatesException
+	public BoundingBox translate(Coordinates delta) throws NegativeSizeException
 	{
 		return this.moveTo(this.position.translate(delta));
 	}
@@ -107,10 +107,10 @@ public class BoundingBox
 	 * @param newSize
 	 *            (Coordinates) the new size to set
 	 * @return New BoundingBox with new size.
-	 * @throws NegativeCoordinatesException
+	 * @throws NegativeSizeException
 	 *             If the size is negative.
 	 */
-	public BoundingBox reSize(Coordinates newSize) throws NegativeCoordinatesException
+	public BoundingBox reSize(Coordinates newSize) throws NegativeSizeException
 	{
 		return new BoundingBox(this.position, newSize);
 	}
@@ -181,7 +181,7 @@ public class BoundingBox
 			{
 				return new BoundingBox(new Coordinates(posResX, posResY), new Coordinates(sizeResX, sizeResY));
 			}
-			catch (NegativeCoordinatesException e)
+			catch (NegativeSizeException e)
 			{
 				System.out.println(e.getNegativeCoordinatesException());
 				return null;

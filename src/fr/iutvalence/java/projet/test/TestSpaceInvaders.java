@@ -10,7 +10,7 @@ import fr.iutvalence.java.projet.spaceinvaders.SpaceInvaders;
  * 
  * @author Gallet Guyon
  */
-public class Test
+public class TestSpaceInvaders
 {
 
 	/**
@@ -21,16 +21,21 @@ public class Test
 	 */
 	public static void main(String[] args)
 	{
-		SpaceInvaders SI = new SpaceInvaders(300, 1);
+		SpaceInvaders SI = new SpaceInvaders(1, 1);
+		
+		System.out.println("Etat Initial :" + SI);
+		
 		try
 		{
 			SI.start();
 		}
 		catch (InterruptedException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.print(SI);
+
+		System.out.println("Etat Final :" + SI);
 	}
 
 }
