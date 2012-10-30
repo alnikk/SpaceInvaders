@@ -80,7 +80,7 @@ public class SpaceInvaders
 
 	/**
 	 * Initialize the game.<br/>
-	 * This is the default constructor. It sets the X axis to 300, and the Y axis to 300 too.<br/>
+	 * This constructor sets the X axis to 300, and the Y axis to 300 too.<br/>
 	 * If you don't want to use this default characteristic use another constructors
 	 * 
 	 * @param nbMonster
@@ -97,17 +97,14 @@ public class SpaceInvaders
 
 	/**
 	 * Initialize the game.<br/>
-	 * This is the default constructor. It uses no default value.
+	 * This constructor no default value.
 	 * 
 	 * @param nbMonster
 	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
 	 * @param nbTank
 	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
-	 * @param nbTank
-	 *            Set the X axis (with default constructors, it sets to 300)
-	 * @param nbTank
-	 *            Set the Y axis (with default constructors, it sets to 300)
 	 * @param Max
+	 *            Set the Max point of the grid (Coordinates) 
 	 */
 	public SpaceInvaders(int nbMonster, int nbTank, Coordinates Max)
 	{
@@ -123,6 +120,7 @@ public class SpaceInvaders
 	 */
 	public void start() throws InterruptedException
 	{
+		// TODO threads?
 		iteration();
 	}
 
@@ -176,7 +174,8 @@ public class SpaceInvaders
 			}
 			monster_position = new Coordinates(DEFAULT_DELTA, monster_position.getY() - (DEFAULT_DELTA + DEFAULT_SIZE));
 		}
-
+		// ? Check
+		testCollision();
 	}
 
 	/**
@@ -206,7 +205,6 @@ public class SpaceInvaders
 				// That can just result to a pause of less than 1 second, does not matter
 			}
 
-			testCollision();
 			moveTab(this.monsters);
 		}
 		// TODO remove Debug message
@@ -302,71 +300,23 @@ public class SpaceInvaders
 	 */
 	private void testCollision()
 	{
-		// Test collision of all tables declared
-		// Variable
-		int i = 0;
-		// Coordinates for monsters
-		int x1, y1, x2, y2;
-		// Coordinates for tank
-		int tx1, tx2, ty1, ty2;
-
-		// Initialize tank's coordinates
-		tx1 = this.tanks[0].getArea().getPosition().getX();
-		ty1 = this.tanks[0].getArea().getPosition().getY();
-		tx2 = this.tanks[0].getArea().getSize().getX() + tx1;
-		ty2 = this.tanks[0].getArea().getSize().getY() + ty1;
-
-		// Area :
-		//
-		//
-		// Y
-		// ^
-		// |
-		// |
-		// |
-		// | (x1,y2)__________(x2,y2)
-		// | | |
-		// | | |
-		// | | |
-		// | | |
-		// | | |
-		// | | |
-		// | | |
-		// | (x1,y1)__________(x2,y1)
-		// |
-		// |
-		// 0-------------------------------------------------> X
-
-		for (i = 0; i < this.monsters.length; i++)
+		int nbMonsters, nbTanks, i, j;
+		
+		nbTanks = this.tanks.length;
+		nbMonsters = this.monsters.length;
+		
+		for(i=0;i < nbTanks; i++)
 		{
-			// Initialize coordinates
-			x1 = this.monsters[i].getArea().getPosition().getX();
-			y1 = this.monsters[i].getArea().getPosition().getY();
-			x2 = this.monsters[i].getArea().getSize().getX() + x1;
-			y2 = this.monsters[i].getArea().getSize().getY() + y1;
-
-			// Check if any points of the tank touch enemy
-			if (tx1 > x1 && ty1 > y1 && tx1 < x2 && ty1 < y2)
+			for(j=0; j < nbMonsters; j++)
 			{
-				this.tanks[0].setAlive(false);
-				this.work = false;
-			}
-			else if (tx2 > x1 && ty2 > y1 && tx2 < x2 && ty2 < y2)
-			{
-				this.tanks[0].setAlive(false);
-				this.work = false;
-			}
-			else if (tx1 > x1 && ty2 > y1 && tx1 < x2 && ty2 < y2)
-			{
-				this.tanks[0].setAlive(false);
-				this.work = false;
-			}
-			else if (tx2 > x1 && ty1 > y1 && tx2 < x2 && ty1 < y2)
-			{
-				this.tanks[0].setAlive(false);
-				this.work = false;
+				if(this.tanks[i].overlapping(this.monsters[j]) != null)
+				{
+					this.tanks[i].setAlive(false);
+					this.monsters[j].setAlive(false);
+				}
 			}
 		}
+		
 	}
 
 	@Override
