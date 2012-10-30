@@ -1,4 +1,4 @@
-// FIXME write an application testing some features of this class, particularly intersection
+// FIXME (SEEN) (In progress ;-)) write an application testing some features of this class, particularly intersection
 
 /**
  * 
@@ -65,8 +65,8 @@ public class BoundingBox
 
 	// **************** Method ************************
 
-	// FIXME here, the exception can not be raised since (as the bounding box exists) the size can not be negative
-	// FIXME  -> so, remove throws clause, and catch exception inside the method
+	// FIXME (SEEN) here, the exception can not be raised since (as the bounding box exists) the size can not be negative
+	// FIXME (SEEN)  -> so, remove throws clause, and catch exception inside the method
 	/**
 	 * Method to change position of the bottom-left corner of the bounding box
 	 * 
@@ -82,7 +82,7 @@ public class BoundingBox
 		}
 		catch (NegativeCoordinatesException e)
 		{
-			// TODO Affiche
+			System.out.println(e.getNegativeCoordinatesException());
 			return null;
 		}
 	}
@@ -224,9 +224,10 @@ public class BoundingBox
 		return "BoundingBox [position=" + this.position + ", size=" + this.size + "]";
 	}
 	
-	// TODO Comment
+
 	/**
-	 * 
+	 * Indicates whether some other object is "equal to" this one.<br/>
+	 * That is to say, the BoundingBox have to be the same (equals size and positions)<br/> 
 	 */
 	@Override
 	public boolean equals(Object obj)

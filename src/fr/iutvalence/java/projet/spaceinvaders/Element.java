@@ -12,7 +12,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
 public abstract class Element
 {
 	/**
-	 * area of the grid filled by the element
+	 * Area of the grid filled by the element
 	 */
 	private BoundingBox boundingBox;
 
@@ -57,7 +57,7 @@ public abstract class Element
 	 */
 	public BoundingBox getArea()
 	{
-		return boundingBox;
+		return this.boundingBox;
 	}
 
 	// FIXME (SEEN) fix comment (this is not compliant with method signature)
@@ -66,7 +66,7 @@ public abstract class Element
 	/**
 	 * This method allows to modify the location and size (BoundingBox) of the element. Setting position make the object moves<br/>
 	 * 
-	 * @param Bounding
+	 * @param area BoundingBox
 	 *            box of the element
 	 */
 	protected void setArea(BoundingBox area)

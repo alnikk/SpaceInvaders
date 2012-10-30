@@ -31,6 +31,7 @@ public class Movable extends Element
 	// TODO Move XGridMax and YGridMax
 	// but this is already in SpaceInvaders class
 	// Create Grid Class?
+	// TODO throw Exception in Space invaders class, with XGridMax and YGridMax  
 
 	/**
 	 * This constructor creates a new living <tt>Movable</tt> object taking its coordinates.<br/>

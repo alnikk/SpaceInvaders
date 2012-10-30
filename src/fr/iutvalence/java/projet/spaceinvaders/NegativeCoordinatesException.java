@@ -16,14 +16,21 @@ public class NegativeCoordinatesException extends Exception
 	 */
 	private Coordinates bad;
 
-	// FIXME write a comment
+	// FIXME (SEEN) write a comment
+	/**
+	 * Constructors who defined the bad Coordinates to handle 
+	 * @param bad It is the bad coordinates to handle. It create an NegativeCoorinatesException
+	 */
 	public NegativeCoordinatesException(Coordinates bad)
 	{
 		super();
 		this.bad = bad;
 	}
 
-	// FIXME write a comment
+	// FIXME (SEEN) write a comment
+	/**
+	 * Default Constructors, it create an NegativeCoorinatesException 
+	 */
 	public NegativeCoordinatesException()
 	{
 		super();
