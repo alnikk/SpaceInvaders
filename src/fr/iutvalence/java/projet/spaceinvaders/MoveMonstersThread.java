@@ -188,14 +188,7 @@ public class MoveMonstersThread extends Thread
 			
 			testCollision();
 
-			try
-			{
-				Thread.sleep(this.sleepTime);
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
+			waitMonsters();
 		}
 		// TODO remove Debug msg
 		System.out.println("End MoveMonstersThread\n");
@@ -351,6 +344,31 @@ public class MoveMonstersThread extends Thread
 				moveTab(0, -DEFAULT_Y_MOVE);
 				this.etat = Etat.LEFT1;
 				break;
+		}
+	}
+	
+	/**
+	 * This method wait a time in function of sleepTime value and of monster alive's number
+	 */
+	private void waitMonsters()
+	{
+		int nbInvaders, nbAlive, i;
+		nbInvaders = this.monsters.length;
+		nbAlive = 0;
+		
+		for(i = 0; i < nbInvaders; i++)
+		{
+			if(this.monsters[i].isAlive())
+				nbAlive++;
+		}
+		
+		try
+		{
+			Thread.sleep((int) (Math.sqrt((nbAlive/nbInvaders)) * this.sleepTime));
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
 		}
 	}
 }
