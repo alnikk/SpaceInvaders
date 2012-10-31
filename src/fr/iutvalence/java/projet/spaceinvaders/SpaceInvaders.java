@@ -120,7 +120,7 @@ public class SpaceInvaders
 	 */
 	public void start()
 	{
-		MoveMonstersThread move = new MoveMonstersThread("Monsters", 1000, this.monsters, this.tanks, this.work, this.maxSize);
+		MonstersBehaviorThread move = new MonstersBehaviorThread("Monsters", 1000, this.monsters, this.tanks, this.work, this.maxSize);
 		move.start();
 		try
 		{
