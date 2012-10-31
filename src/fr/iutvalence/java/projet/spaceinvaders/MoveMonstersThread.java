@@ -187,14 +187,30 @@ public class MoveMonstersThread extends Thread
 			}
 			
 			testCollision();
-
+			
 			waitMonsters();
+			//TODO Remove debug
+			//kill();
 		}
 		// TODO remove Debug msg
 		System.out.println("End MoveMonstersThread\n");
 	}
 	
 	//******************** Method ***********************
+	
+	// methote de test
+	// TODO think to remove
+	/**
+	 * Test for acceleration
+	 */
+	private void kill()
+	{
+		int i = 0, nbMonsters= this.monsters.length;
+		
+		while(i < nbMonsters && (!this.monsters[i].isAlive()))
+			i++;
+		this.monsters[i].setAlive(false);
+	}
 	
 	/**
 	 * This method tests if there is any collisions in all table declared.<br/>
@@ -249,6 +265,7 @@ public class MoveMonstersThread extends Thread
 					|| this.monsters[i].getArea().getPosition().getX() + delta.getX()< 0
 					|| this.monsters[i].getArea().getPosition().getY() + delta.getY() < 0)
 				{
+					// Kill when Y coordinates is less than 0?
 					throw new OutOfGridException(delta);
 				}
 				this.monsters[i].move(delta);
@@ -352,9 +369,7 @@ public class MoveMonstersThread extends Thread
 	 */
 	private void waitMonsters()
 	{
-		int nbInvaders, nbAlive, i;
-		nbInvaders = this.monsters.length;
-		nbAlive = 0;
+		int nbInvaders = this.monsters.length, nbAlive = 0, i;
 		
 		for(i = 0; i < nbInvaders; i++)
 		{
@@ -364,7 +379,14 @@ public class MoveMonstersThread extends Thread
 		
 		try
 		{
-			Thread.sleep((int) (Math.sqrt((nbAlive/nbInvaders)) * this.sleepTime));
+			/*System.out.println( "nbInvaders : " + nbInvaders +
+								"\nnbAlive : " + (double) nbAlive +
+								"\n(nbAlive/nbInvaders) : " + ((double) nbAlive/nbInvaders) + 
+								"\nRacine : " + Math.sqrt(((double) nbAlive/nbInvaders)) +
+								"\nTotal (n) : " + (Math.sqrt(((double) nbAlive/nbInvaders)) * this.sleepTime +
+								"\nTotal (casted) : " + ((long) (Math.sqrt(((double) nbAlive/nbInvaders)) * this.sleepTime))));*/
+			// expression is a.x type. Add a.x + c with c playable. It have to don't affect sleepTime
+			Thread.sleep((long) (Math.sqrt(((double) nbAlive/nbInvaders)) * this.sleepTime));
 		}
 		catch (InterruptedException e)
 		{
