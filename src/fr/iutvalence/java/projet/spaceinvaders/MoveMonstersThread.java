@@ -182,6 +182,7 @@ public class MoveMonstersThread extends Thread
 			}
 			catch (OutOfGridException e1)
 			{
+				// TODO Stop Game ?
 				System.out.println("OutOfGrid : " + e1.getOutOfGridException());
 			}
 			
@@ -218,13 +219,16 @@ public class MoveMonstersThread extends Thread
 		{
 			for(j=0; j < nbMonsters; j++)
 			{
-				if(this.tanks[i].overlapping(this.monsters[j]) != null)
+				if(this.monsters[j].isAlive())
 				{
-					this.tanks[i].setAlive(false);
-					this.monsters[j].setAlive(false);
-					this.work = false;
-					// TODO remove Debug msg
-					System.out.println("Collision !");
+					if(this.tanks[i].overlapping(this.monsters[j]) != null)
+					{
+						this.tanks[i].setAlive(false);
+						this.monsters[j].setAlive(false);
+						this.work = false;
+						// TODO remove Debug msg
+						System.out.println("Collision !");
+					}
 				}
 			}
 		}
@@ -246,16 +250,14 @@ public class MoveMonstersThread extends Thread
 			try
 			{
 				if(this.monsters[i].getArea().getPosition().getX() + 
-						this.monsters[i].getArea().getSize().getX() > this.max.getX()
+						this.monsters[i].getArea().getSize().getX() + delta.getX() > this.max.getX()
 					|| this.monsters[i].getArea().getPosition().getY() + 
-						this.monsters[i].getArea().getSize().getY() > this.max.getY()
-					|| this.monsters[i].getArea().getPosition().getX() < 0
-					|| this.monsters[i].getArea().getPosition().getY() < 0)
+						this.monsters[i].getArea().getSize().getY() + delta.getY() > this.max.getY()
+					|| this.monsters[i].getArea().getPosition().getX() + delta.getX()< 0
+					|| this.monsters[i].getArea().getPosition().getY() + delta.getY() < 0)
 				{
-					System.out.println("Negative");
 					throw new OutOfGridException(delta);
-				}				
-				System.out.println("a");
+				}
 				this.monsters[i].move(delta);
 			
 			}
@@ -283,12 +285,15 @@ public class MoveMonstersThread extends Thread
 			try
 			{
 				if(this.monsters[i].getArea().getPosition().getX() + 
-						this.monsters[i].getArea().getSize().getX() > this.max.getX()
+						this.monsters[i].getArea().getSize().getX() + dx > this.max.getX()
 					|| this.monsters[i].getArea().getPosition().getY() + 
-						this.monsters[i].getArea().getSize().getY() > this.max.getY()
-					|| this.monsters[i].getArea().getPosition().getX() < 0
-					|| this.monsters[i].getArea().getPosition().getY() < 0)
+						this.monsters[i].getArea().getSize().getY() + dy > this.max.getY()
+					|| this.monsters[i].getArea().getPosition().getX() + dx < 0
+					|| this.monsters[i].getArea().getPosition().getY() + dy < 0)
+				{
+					//TODO Kill when Y coordinates is less than 0?
 					throw new OutOfGridException(new Coordinates(dx,dx));
+				}
 				this.monsters[i].move(dx, dy);
 			}
 			catch (NegativeSizeException e)
@@ -317,16 +322,30 @@ public class MoveMonstersThread extends Thread
 		switch(this.etat)
 		{
 			case LEFT1:
-				moveTab(DEFAULT_X_MOVE, 0);
-				this.etat = Etat.RIGHT2;
+				try
+				{
+					moveTab(DEFAULT_X_MOVE, 0);
+				}
+				catch (OutOfGridException e)
+				{
+					this.etat = Etat.RIGHT2;
+					move();
+				}
 				break;
 			case RIGHT2:
 				moveTab(0, -DEFAULT_Y_MOVE);
 				this.etat = Etat.RIGHT3;
 				break;
 			case RIGHT3:
-				moveTab(-DEFAULT_X_MOVE, 0);
-				this.etat = Etat.LEFT4;
+				try
+				{
+					moveTab(-DEFAULT_X_MOVE, 0);
+				}
+				catch (OutOfGridException e)
+				{
+					this.etat = Etat.LEFT4;
+					move();
+				}
 				break;
 			case LEFT4:
 				moveTab(0, -DEFAULT_Y_MOVE);

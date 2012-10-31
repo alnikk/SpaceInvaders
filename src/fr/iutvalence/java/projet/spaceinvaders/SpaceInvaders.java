@@ -146,9 +146,10 @@ public class SpaceInvaders
 	 */
 	private void initTab(int nbMonsters, int nbTanks)
 	{
+		// TODO improve
+		
 		// local variable
-		Coordinates tank_position = new Coordinates((this.maxSize.getX() / 2) - (DEFAULT_SIZE / 2),
-				(this.maxSize.getY() / 2) - (DEFAULT_SIZE / 2));
+		Coordinates tank_position = new Coordinates((this.maxSize.getX() / 2) - (DEFAULT_SIZE / 2),0);
 		Coordinates monster_position = new Coordinates(DEFAULT_DELTA, this.maxSize.getY() - (DEFAULT_SIZE + DEFAULT_DELTA));
 		int i = 0;
 		// Allocations
