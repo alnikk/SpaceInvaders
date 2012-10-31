@@ -183,7 +183,6 @@ public class MoveMonstersThread extends Thread
 			catch (OutOfGridException e1)
 			{
 				System.out.println("OutOfGrid : " + e1.getOutOfGridException());
-				e1.printStackTrace();
 			}
 			
 			testCollision();
@@ -232,6 +231,7 @@ public class MoveMonstersThread extends Thread
 		
 	}
 	
+	// TODO Useless?
 	/**
 	 * This method allows to move Invaders table of delta coordinates.
 	 * @param delta The delta coordinates to move Invaders
@@ -247,14 +247,15 @@ public class MoveMonstersThread extends Thread
 			{
 				if(this.monsters[i].getArea().getPosition().getX() + 
 						this.monsters[i].getArea().getSize().getX() > this.max.getX()
-					&& this.monsters[i].getArea().getPosition().getY() + 
+					|| this.monsters[i].getArea().getPosition().getY() + 
 						this.monsters[i].getArea().getSize().getY() > this.max.getY()
-					&& this.monsters[i].getArea().getPosition().getX() < 0
-					&& this.monsters[i].getArea().getPosition().getY() < 0)
+					|| this.monsters[i].getArea().getPosition().getX() < 0
+					|| this.monsters[i].getArea().getPosition().getY() < 0)
 				{
 					System.out.println("Negative");
 					throw new OutOfGridException(delta);
-				}					
+				}				
+				System.out.println("a");
 				this.monsters[i].move(delta);
 			
 			}
@@ -283,10 +284,10 @@ public class MoveMonstersThread extends Thread
 			{
 				if(this.monsters[i].getArea().getPosition().getX() + 
 						this.monsters[i].getArea().getSize().getX() > this.max.getX()
-					&& this.monsters[i].getArea().getPosition().getY() + 
+					|| this.monsters[i].getArea().getPosition().getY() + 
 						this.monsters[i].getArea().getSize().getY() > this.max.getY()
-					&& this.monsters[i].getArea().getPosition().getX() < 0
-					&& this.monsters[i].getArea().getPosition().getY() < 0)
+					|| this.monsters[i].getArea().getPosition().getX() < 0
+					|| this.monsters[i].getArea().getPosition().getY() < 0)
 					throw new OutOfGridException(new Coordinates(dx,dx));
 				this.monsters[i].move(dx, dy);
 			}
