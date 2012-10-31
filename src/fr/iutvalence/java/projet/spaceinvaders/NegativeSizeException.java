@@ -8,6 +8,8 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * 
  * @author Gallet Guyon
  */
+// FIXME What is this?
+@SuppressWarnings("serial")
 public class NegativeSizeException extends Exception
 {
 	// FIXME (SEEN) write a comment

@@ -5,40 +5,99 @@ package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.util.Arrays;
 
-// TODO Comment Class
+
 
 /**
+ * This thread loop until the game finish.
+ * It make invaders move and test collision beetween us and the tank. 
  * 
  * @author Gallet Guyon
  */
 public class MoveMonstersThread extends Thread
 {
-	//***************** Variable *************************
-	private enum Etat {GAUCHE1, DROITE1, DROITE2, GAUCHE2};
-	
-	private Etat etat;
-	
-	private int sleepTime;
-	
-	private int acceleration;
-	
-	private Movable monsters[];
-	
-	private Movable tanks[];
-	
-	private Boolean work;
-	
-	private final Coordinates max;
-
 	//***************** Constant *************************
 	
-	private final static int DEFAULT_SLEEP_TIME = 100;
+	/**
+	 * This constant defines the default sleep time between each move of Invaders 
+	 */
+	private static final int DEFAULT_SLEEP_TIME = 100;
 	
-	private final static int DEFAULT_ACCELERATION = 2;
+	/**
+	 * This constant is the default acceleration
+	 * (Not used for now)
+	 */
+	private static final int DEFAULT_ACCELERATION = 2;
 	
-	private final static int DEFAULT_X_MOVE = 10;
+	/**
+	 * This constant defines the step X on the grid of a move
+	 */
+	private static final int DEFAULT_X_MOVE = 10;
 	
-	private final static int DEFAULT_Y_MOVE = 10;
+	/**
+	 * This constant defines the step Y on the grid of a move
+	 */
+	private static final int DEFAULT_Y_MOVE = 10;
+		
+		
+	//***************** Variable *************************
+	
+	// FIXME is that right?
+	/**
+	 * This enumerate the state of invaders
+	 */
+	private enum Etat {/**
+	 * This is the first state, and invaders are left side on the grid
+	 */
+	LEFT1, /**
+	 * This is the second state, and invaders are right side on the grid
+	 */
+	RIGHT2, /**
+	 * This is the third state, and invaders are right side on the grid
+	 */
+	RIGHT3, /**
+	 * This is the fourth state, and invaders are left side on the grid
+	 */
+	LEFT4};
+	
+	/**
+	 * This variable is the state of invaders 
+	 */
+	private Etat etat;
+	
+	/**
+	 * This variable is used to wait sleepTime millisecond between each loop 
+	 */
+	private int sleepTime;
+	
+	/**
+	 * Not implemented yet
+	 * It uses to accelerate sleepTime when invaders are less numerous
+	 */
+	private int acceleration;
+	
+	/**
+	 * A copy of monsters' tab in space invaders.
+	 * Array containing all monsters
+	 */
+	private Movable monsters[];
+	
+	/**
+	 * A copy of tanks' tab in space invaders.
+	 * Array containing all tanks
+	 */
+	private Movable tanks[];
+	
+	/**
+	 * Reference to work boolean in SpaceInvaders class
+	 * Boolean to know if the game is finished
+	 */
+	private Boolean work;
+	
+	/**
+	 * The maximum size of the area
+	 */
+	private final Coordinates max;
+	
 	
 	//***************** Constructors *************************
 
@@ -60,7 +119,7 @@ public class MoveMonstersThread extends Thread
 		this.tanks = tanks;
 		this.work = work;
 		this.max = max;
-		this.etat = etat.GAUCHE1;
+		this.etat = Etat.LEFT1;
 	}
 
 	/**
@@ -79,8 +138,8 @@ public class MoveMonstersThread extends Thread
 		this.tanks = tanks;
 		this.work = work;
 		this.max = max;
-		this.acceleration = this.DEFAULT_ACCELERATION;
-		this.etat = etat.GAUCHE1;
+		this.acceleration = DEFAULT_ACCELERATION;
+		this.etat = Etat.LEFT1;
 	}
 
 	/**
@@ -97,20 +156,20 @@ public class MoveMonstersThread extends Thread
 		this.tanks = tanks;
 		this.work = work;
 		this.max = max;
-		this.acceleration = this.DEFAULT_ACCELERATION;
-		this.sleepTime = this.DEFAULT_SLEEP_TIME;
-		this.etat = etat.GAUCHE1;
+		this.acceleration = DEFAULT_ACCELERATION;
+		this.sleepTime = DEFAULT_SLEEP_TIME;
+		this.etat = Etat.LEFT1;
 	}
 	
 	//******************** Main ***********************
 	
 	public void run()
 	{
-		// TODO remove Debud msg
+		// TODO remove Debug msg
 		System.out.println("\nBegin MoveMonstersThread");
 		while(this.work.booleanValue())
 		{
-			// TODO remove Debud msg
+			// TODO remove Debug msg
 			System.out.println(Arrays.toString(this.monsters));
 			try
 			{
@@ -133,7 +192,7 @@ public class MoveMonstersThread extends Thread
 				e.printStackTrace();
 			}
 		}
-		// TODO remove Debud msg
+		// TODO remove Debug msg
 		System.out.println("End MoveMonstersThread\n");
 	}
 	
@@ -160,7 +219,7 @@ public class MoveMonstersThread extends Thread
 					this.tanks[i].setAlive(false);
 					this.monsters[j].setAlive(false);
 					this.work = false;
-					// TODO Remove debug msg
+					// TODO remove Debug msg
 					System.out.println("Collision !");
 				}
 			}
@@ -168,6 +227,10 @@ public class MoveMonstersThread extends Thread
 		
 	}
 	
+	/**
+	 * @param delta
+	 * @throws OutOfGridException
+	 */
 	private void moveTab(Coordinates delta) throws OutOfGridException
 	{
 		int i, nbMonsters;
@@ -198,6 +261,11 @@ public class MoveMonstersThread extends Thread
 		}
 	}
 	
+	/**
+	 * @param dx
+	 * @param dy
+	 * @throws OutOfGridException
+	 */
 	private void moveTab(int dx, int dy) throws OutOfGridException
 	{
 		int i, nbMonsters;
@@ -224,25 +292,28 @@ public class MoveMonstersThread extends Thread
 		}
 	}
 	
+	/**
+	 * @throws OutOfGridException
+	 */
 	private void move() throws OutOfGridException
 	{
 		switch(this.etat)
 		{
-			case GAUCHE1:
+			case LEFT1:
 				moveTab(DEFAULT_X_MOVE, 0);
-				this.etat = etat.DROITE1;
+				this.etat = Etat.RIGHT2;
 				break;
-			case DROITE1:
+			case RIGHT2:
 				moveTab(0, -DEFAULT_Y_MOVE);
-				this.etat = etat.DROITE2;
+				this.etat = Etat.RIGHT3;
 				break;
-			case DROITE2:
+			case RIGHT3:
 				moveTab(-DEFAULT_X_MOVE, 0);
-				this.etat = etat.GAUCHE2;
+				this.etat = Etat.LEFT4;
 				break;
-			case GAUCHE2:
+			case LEFT4:
 				moveTab(0, -DEFAULT_Y_MOVE);
-				this.etat = etat.GAUCHE1;
+				this.etat = Etat.LEFT1;
 				break;
 		}
 	}

@@ -1,7 +1,5 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
-import java.util.Arrays;
-
 /**
  * This class defines a movable object, that can move on a 2D grid and so being killed by others.<br/>
  * A movable object is characterized by its size and position on the grid and also its status [alive | dead]. Once a

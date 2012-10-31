@@ -21,19 +21,12 @@ public class TestSpaceInvaders
 	 */
 	public static void main(String[] args)
 	{
+		// TODO More Test
 		SpaceInvaders SI = new SpaceInvaders(1, 1);
 		
 		System.out.println("Etat Initial :" + SI);
 		
-		try
-		{
-			SI.start();
-		}
-		catch (InterruptedException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		SI.start();
 
 		System.out.println("Etat Final :" + SI);
 	}

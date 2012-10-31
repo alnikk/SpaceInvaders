@@ -118,12 +118,19 @@ public class SpaceInvaders
 	/**
 	 * This method begins the game. It's the only entry point.
 	 */
-	public void start() throws InterruptedException
+	public void start()
 	{
-		MoveMonstersThread move = new MoveMonstersThread("Monsters", 1000, monsters, tanks, work, maxSize);
+		MoveMonstersThread move = new MoveMonstersThread("Monsters", 1000, this.monsters, this.tanks, this.work, this.maxSize);
 		move.start();
-		move.join();
-		//iteration();
+		try
+		{
+			move.join();
+		}
+		catch (InterruptedException e)
+		{
+			// FIXME What I have to write here?
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -176,151 +183,10 @@ public class SpaceInvaders
 			}
 			monster_position = new Coordinates(DEFAULT_DELTA, monster_position.getY() - (DEFAULT_DELTA + DEFAULT_SIZE));
 		}
-		// ? Check
-		testCollision();
+		// TODO ? Check
+		//testCollision();
 	}
-
-	/**
-	 * Main iteration.<br/>
-	 * This function call :
-	 * <ul>
-	 * <li>moveTab</li>
-	 * <li>testCollision</li>
-	 * </ul>
-	 */
-	private void iteration()
-	{
-		// TODO remove Debug message
-		System.out.println("Begin");
-		while (this.work.booleanValue())
-		{
-			// TODO remove Debug message
-			System.out.println("Boucle");
-
-			try
-			{
-				Thread.sleep(1000); // Clock
-			}
-			catch (InterruptedException e)
-			{
-				// Just ignoring signal (unlikely to occur)
-				// That can just result to a pause of less than 1 second, does not matter
-			}
-
-			moveTab(this.monsters);
-		}
-		// TODO remove Debug message
-		System.out.println("Don't work anymore ;)");
-	}
-
-	/**
-	 * Make move down a table of enemy.<br/>
-	 * The scheme of the descent is :<br/>
-	 * <ul>
-	 * <li>Right</li>
-	 * <li>Down</li>
-	 * <li>Left</li>
-	 * <li>Down</li>
-	 * <li>Right</li>
-	 * <li>Down</li>
-	 * <li>Etc...</li>
-	 * </ul>
-	 * 
-	 * @param tab
-	 *            The table of enemy to move down
-	 */
-	private void moveTab(Movable tab[])
-	{
-		// Variable
-		int nb = tab.length;
-		int i = 0;
-
-		// Down
-		// Left
-		// Down
-		// Right
-		// Down
-
-		// Right
-		for (i = 0; i < nb; i++)
-		{
-			try
-			{
-				tab[i].move(-10, 0);
-			}
-			catch (NegativeSizeException e)
-			{
-				// System.out.println(e);
-			}
-		}
-		// Wait
-		// Down
-		for (i = 0; i < nb; i++)
-		{
-			try
-			{
-				tab[i].move(0, -10);
-			}
-			catch (NegativeSizeException e)
-			{
-				System.out.println(e);
-			}
-		}
-		// Wait
-		// Left
-		for (i = 0; i < nb; i++)
-		{
-			try
-			{
-				tab[i].move(10, 0);
-			}
-			catch (NegativeSizeException e)
-			{
-				System.out.println(e);
-			}
-		}
-		// Wait
-		// Down
-		for (i = 0; i < nb; i++)
-		{
-			try
-			{
-				tab[i].move(10, 0);
-			}
-			catch (NegativeSizeException e)
-			{
-				System.out.println(e);
-			}
-		}
-		// Wait
-	}
-
-	/**
-	 * This method tests if there is any collisions in all table declared.<br/>
-	 * Collision are tested between each table and not between elements of the same table.<br/>
-	 * If a Tank is touched by an enemy, work is set to false and the game is stopped by the main iteration.
-	 */
-	private void testCollision()
-	{
-		int nbMonsters, nbTanks, i, j;
-		
-		nbTanks = this.tanks.length;
-		nbMonsters = this.monsters.length;
-		
-		for(i=0;i < nbTanks; i++)
-		{
-			for(j=0; j < nbMonsters; j++)
-			{
-				if(this.tanks[i].overlapping(this.monsters[j]) != null)
-				{
-					this.tanks[i].setAlive(false);
-					this.monsters[j].setAlive(false);
-				}
-			}
-		}
-		
-	}
-
+	
 	@Override
 	public String toString()
 	{
