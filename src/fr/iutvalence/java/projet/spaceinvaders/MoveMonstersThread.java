@@ -5,8 +5,6 @@ package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.util.Arrays;
 
-
-
 /**
  * This thread loop until the game finish.
  * It make invaders move and test collision beetween us and the tank. 
@@ -102,13 +100,14 @@ public class MoveMonstersThread extends Thread
 	//***************** Constructors *************************
 
 	/**
-	 * @param nom 
-	 * @param sleepTime
-	 * @param acceleration
-	 * @param monsters
-	 * @param tanks 
-	 * @param work
-	 * @param max
+	 * This constructors set the variable needed by the thread.
+	 * @param nom Name of the Thread
+	 * @param sleepTime Number of millisecond between each move
+	 * @param acceleration Acceleration of sleepTime when less Invaders
+	 * @param monsters The table of monsters to move
+	 * @param tanks The table of tank to check collision
+	 * @param work The stop loop value 
+	 * @param max The max coordinates of the screen
 	 */
 	public MoveMonstersThread(String nom, int sleepTime, int acceleration, Movable monsters[], Movable tanks[], Boolean work, Coordinates max)
 	{
@@ -123,12 +122,13 @@ public class MoveMonstersThread extends Thread
 	}
 
 	/**
-	 * @param nom 
-	 * @param sleepTime
-	 * @param monsters
-	 * @param tanks 
-	 * @param work
-	 * @param max
+	 * This constructors set the variable needed by the thread.
+	 * @param nom Name of the Thread
+	 * @param sleepTime Number of millisecond between each move
+	 * @param monsters The table of monsters to move
+	 * @param tanks The table of tank to check collision
+	 * @param work The stop loop value
+	 * @param max The max coordinates of the screen
 	 */
 	public MoveMonstersThread(String nom, int sleepTime, Movable monsters[], Movable tanks[], Boolean work, Coordinates max)
 	{
@@ -143,11 +143,12 @@ public class MoveMonstersThread extends Thread
 	}
 
 	/**
-	 * @param nom 
-	 * @param monsters
-	 * @param tanks 
-	 * @param work
-	 * @param max
+	 * This constructors set the variable needed by the thread.
+	 * @param nom Name of the Thread
+	 * @param monsters The table of monsters to move
+	 * @param tanks The table of tank to check collision
+	 * @param work The stop loop value
+	 * @param max The max coordinates of the screen
 	 */
 	public MoveMonstersThread(String nom, Movable monsters[], Movable tanks[], Boolean work, Coordinates max)
 	{
@@ -163,6 +164,10 @@ public class MoveMonstersThread extends Thread
 	
 	//******************** Main ***********************
 	
+	/**
+	 * Main of the thread.
+	 * It calls move() then testCollision() every sleepTime millisecond.
+	 */
 	public void run()
 	{
 		// TODO remove Debug msg
@@ -228,8 +233,9 @@ public class MoveMonstersThread extends Thread
 	}
 	
 	/**
-	 * @param delta
-	 * @throws OutOfGridException
+	 * This method allows to move Invaders table of delta coordinates.
+	 * @param delta The delta coordinates to move Invaders
+	 * @throws OutOfGridException This method can return OutOfgridException if monsters does'nt be anymore in the grid.  
 	 */
 	private void moveTab(Coordinates delta) throws OutOfGridException
 	{
@@ -262,9 +268,10 @@ public class MoveMonstersThread extends Thread
 	}
 	
 	/**
-	 * @param dx
-	 * @param dy
-	 * @throws OutOfGridException
+	 * This method allows to move Invaders table of delta dx, dy.
+	 * @param dx The delta dx coordinates to move Invaders
+	 * @param dy The delta dy coordinates to move Invaders
+	 * @throws OutOfGridException This method can return OutOfgridException if monsters does'nt be anymore in the grid.
 	 */
 	private void moveTab(int dx, int dy) throws OutOfGridException
 	{
@@ -293,7 +300,16 @@ public class MoveMonstersThread extends Thread
 	}
 	
 	/**
-	 * @throws OutOfGridException
+	 * This method allows to move Invaders once that is to say to right, down, or left.
+	 * It follow scheme by itself :
+	 * <ul>
+	 * <li>right</li>
+	 * <li>down</li>
+	 * <li>left</li>
+	 * <li>down</li>
+	 * <li>right</li>
+	 * </ul> 
+	 * @throws OutOfGridException If Invaders are OutOfGrid then ther's exception.
 	 */
 	private void move() throws OutOfGridException
 	{
