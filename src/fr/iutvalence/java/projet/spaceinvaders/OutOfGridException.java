@@ -1,7 +1,6 @@
 /**
  * 
  */
-// TODO Comment Class
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**

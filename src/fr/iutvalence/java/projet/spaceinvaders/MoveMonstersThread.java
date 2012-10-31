@@ -39,7 +39,7 @@ public class MoveMonstersThread extends Thread
 		
 	//***************** Variable *************************
 	
-	// FIXME is that right?
+	// FIXME (QUEST) is that right?
 	/**
 	 * This enumerate the state of invaders
 	 */
@@ -182,7 +182,7 @@ public class MoveMonstersThread extends Thread
 			}
 			catch (OutOfGridException e1)
 			{
-				// TODO Stop Game ?
+				// Stop Game ?
 				System.out.println("OutOfGrid : " + e1.getOutOfGridException());
 			}
 			
@@ -235,7 +235,7 @@ public class MoveMonstersThread extends Thread
 		
 	}
 	
-	// TODO Useless?
+	// FIXME (QUEST) Useless?
 	/**
 	 * This method allows to move Invaders table of delta coordinates.
 	 * @param delta The delta coordinates to move Invaders
@@ -291,7 +291,7 @@ public class MoveMonstersThread extends Thread
 					|| this.monsters[i].getArea().getPosition().getX() + dx < 0
 					|| this.monsters[i].getArea().getPosition().getY() + dy < 0)
 				{
-					//TODO Kill when Y coordinates is less than 0?
+					// Kill when Y coordinates is less than 0?
 					throw new OutOfGridException(new Coordinates(dx,dx));
 				}
 				this.monsters[i].move(dx, dy);

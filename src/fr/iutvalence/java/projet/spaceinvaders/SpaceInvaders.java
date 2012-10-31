@@ -128,7 +128,7 @@ public class SpaceInvaders
 		}
 		catch (InterruptedException e)
 		{
-			// FIXME What I have to write here?
+			// FIXME (QUEST) What I have to write here?
 			e.printStackTrace();
 		}
 	}
@@ -184,7 +184,7 @@ public class SpaceInvaders
 			}
 			monster_position = new Coordinates(DEFAULT_DELTA, monster_position.getY() - (DEFAULT_DELTA + DEFAULT_SIZE));
 		}
-		// TODO ? Check
+		// Check?
 		//testCollision();
 	}
 	
