@@ -365,9 +365,10 @@ public class MoveMonstersThread extends Thread
 	}
 	
 	/**
-	 * This method wait a time in function of sleepTime value and of monster alive's number
+	 * This method count the number of alive Invaders.
+	 * @return The number of alive Invaders.
 	 */
-	private void waitMonsters()
+	private int countMonsters()
 	{
 		int nbInvaders = this.monsters.length, nbAlive = 0, i;
 		
@@ -376,17 +377,18 @@ public class MoveMonstersThread extends Thread
 			if(this.monsters[i].isAlive())
 				nbAlive++;
 		}
-		
+		return nbAlive;
+	}
+	
+	/**
+	 * This method wait a time in function of sleepTime value and of monster alive's number
+	 */
+	private void waitMonsters()
+	{
 		try
-		{
-			/*System.out.println( "nbInvaders : " + nbInvaders +
-								"\nnbAlive : " + (double) nbAlive +
-								"\n(nbAlive/nbInvaders) : " + ((double) nbAlive/nbInvaders) + 
-								"\nRacine : " + Math.sqrt(((double) nbAlive/nbInvaders)) +
-								"\nTotal (n) : " + (Math.sqrt(((double) nbAlive/nbInvaders)) * this.sleepTime +
-								"\nTotal (casted) : " + ((long) (Math.sqrt(((double) nbAlive/nbInvaders)) * this.sleepTime))));*/
+		{			
 			// expression is a.x type. Add a.x + c with c playable. It have to don't affect sleepTime
-			Thread.sleep((long) (Math.sqrt(((double) nbAlive/nbInvaders)) * this.sleepTime));
+			Thread.sleep((long) (Math.sqrt(((double) countMonsters()/this.monsters.length)) * this.sleepTime));
 		}
 		catch (InterruptedException e)
 		{
