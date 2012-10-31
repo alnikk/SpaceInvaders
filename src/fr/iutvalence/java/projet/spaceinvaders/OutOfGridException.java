@@ -14,13 +14,13 @@ public class OutOfGridException extends Exception
 	/**
 	 * This variable is the bad coordinates. Exception due to this coordinates. 
 	 */
-	private Coordinates bad;
+	private Movable bad;
 
 	/**
 	 * Constructors who defined the bad Coordinates to handle 
 	 * @param bad It is the bad coordinates to handle. It create an OutOfGridException
 	 */
-	public OutOfGridException(Coordinates bad)
+	public OutOfGridException(Movable bad)
 	{
 		super();
 		this.bad = bad;
@@ -33,11 +33,19 @@ public class OutOfGridException extends Exception
 	{
 		super();
 	}
+	
+	/**
+	 * Allows to kill object OutOfGrid
+	 */
+	public void kill()
+	{
+		this.bad.setAlive(false);
+	}
 
 	/**
 	 * @return the bad coordinates
 	 */
-	public Coordinates getOutOfGridException()
+	public Movable getOutOfGridException()
 	{
 		return this.bad;
 	}

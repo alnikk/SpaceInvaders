@@ -172,6 +172,7 @@ public class MoveMonstersThread extends Thread
 	{
 		// TODO remove Debug msg
 		System.out.println("\nBegin MoveMonstersThread");
+		testCollision();
 		while(this.work.booleanValue())
 		{
 			// TODO remove Debug msg
@@ -183,6 +184,8 @@ public class MoveMonstersThread extends Thread
 			catch (OutOfGridException e1)
 			{
 				// Stop Game ?
+				// No ^^, Kill him hahaha >< x)
+				e1.kill();
 				System.out.println("OutOfGrid : " + e1.getOutOfGridException());
 			}
 			
@@ -266,7 +269,7 @@ public class MoveMonstersThread extends Thread
 					|| this.monsters[i].getArea().getPosition().getY() + delta.getY() < 0)
 				{
 					// Kill when Y coordinates is less than 0?
-					throw new OutOfGridException(delta);
+					throw new OutOfGridException(this.monsters[i]);
 				}
 				this.monsters[i].move(delta);
 			
@@ -302,7 +305,7 @@ public class MoveMonstersThread extends Thread
 					|| this.monsters[i].getArea().getPosition().getY() + dy < 0)
 				{
 					// Kill when Y coordinates is less than 0?
-					throw new OutOfGridException(new Coordinates(dx,dx));
+					throw new OutOfGridException(this.monsters[i]);
 				}
 				this.monsters[i].move(dx, dy);
 			}
@@ -377,6 +380,9 @@ public class MoveMonstersThread extends Thread
 			if(this.monsters[i].isAlive())
 				nbAlive++;
 		}
+		// TODO is this go here?
+		if(nbAlive == 0) // we stop game if there's no Invaders
+			this.work = false;
 		return nbAlive;
 	}
 	

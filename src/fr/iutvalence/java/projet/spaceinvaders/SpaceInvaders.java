@@ -142,11 +142,11 @@ public class SpaceInvaders
 	 *            Set the number of monster (The maximum is set (to my mind) to 250, after I'm offload one's
 	 *            responsibilities)
 	 * @param nbTanks
-	 *            Set the number of tank (not implemented yet, so the maximum is 1)
+	 *            Set the number of tank (not implemented yet, so the maximum is 1 and minimum too ;-))
 	 */
 	private void initTab(int nbMonsters, int nbTanks)
 	{
-		// TODO improve
+		// TODO improve with tank
 		
 		// local variable
 		Coordinates tank_position = new Coordinates((this.maxSize.getX() / 2) - (DEFAULT_SIZE / 2),0);
