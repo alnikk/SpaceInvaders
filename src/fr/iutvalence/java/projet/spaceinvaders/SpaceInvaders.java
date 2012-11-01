@@ -63,6 +63,11 @@ public class SpaceInvaders
 	 * Array containing all tanks.
 	 */
 	private Movable[] tanks;
+	
+	/**
+	 * Array containing all shoots.
+	 */
+	private Movable[] shoots;
 
 	// ************************** Constructors **************************//
 	/**
@@ -120,7 +125,7 @@ public class SpaceInvaders
 	 */
 	public void start()
 	{
-		MonstersBehaviorThread monsters = new MonstersBehaviorThread("Monsters", 1000, this.monsters, this.tanks, this.work, this.maxSize);
+		MonstersBehaviorThread monsters = new MonstersBehaviorThread("Monsters", 1000, this.monsters, this.tanks, this.shoots, this.work, this.maxSize);
 		monsters.start();
 		try
 		{
@@ -155,6 +160,7 @@ public class SpaceInvaders
 		// Allocations
 		this.monsters = new Movable[nbMonsters];
 		this.tanks = new Movable[nbTanks];
+		this.shoots = new Movable[nbTanks + nbMonsters];
 
 		// Set-up Tabs
 		try

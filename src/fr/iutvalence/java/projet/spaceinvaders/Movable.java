@@ -161,6 +161,8 @@ public class Movable extends Element
 											,(this.getArea().getPosition().getY() - this.getArea().getSize().getY()));
 			shoot = new Movable(coorShoot, size);
 		}
+		// TODO Remove debug
+		System.out.println("Shoot : " + shoot);
 		return shoot;
 	}
 

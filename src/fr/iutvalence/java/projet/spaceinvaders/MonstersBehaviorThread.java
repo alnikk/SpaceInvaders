@@ -35,7 +35,11 @@ public class MonstersBehaviorThread extends Thread
 	 * This constant defines the step Y on the grid of a move
 	 */
 	private static final int DEFAULT_Y_MOVE = 10;
-		
+	
+	/**
+	 * This constant defines the size of shoot
+	 */
+	private static final Coordinates DEFAULT_SIZE_SHOOT = new Coordinates(5,10);
 		
 	//***************** Variable *************************
 	
@@ -74,16 +78,22 @@ public class MonstersBehaviorThread extends Thread
 	private int acceleration;
 	
 	/**
-	 * A copy of monsters' tab in space invaders.
+	 * A reference to monsters' tab in space invaders.
 	 * Array containing all monsters
 	 */
 	private Movable monsters[];
 	
 	/**
-	 * A copy of tanks' tab in space invaders.
+	 * A reference to tanks' tab in space invaders.
 	 * Array containing all tanks
 	 */
 	private Movable tanks[];
+	
+	/**
+	 * A reference to shoots' tab in space invaders.
+	 * Array containing all shoots.
+	 */
+	private Movable[] shoots;
 	
 	/**
 	 * Reference to work boolean in SpaceInvaders class
@@ -106,16 +116,18 @@ public class MonstersBehaviorThread extends Thread
 	 * @param acceleration Acceleration of sleepTime when less Invaders
 	 * @param monsters The table of monsters to move
 	 * @param tanks The table of tank to check collision
+	 * @param shoots The table of shoots to create new one
 	 * @param work The stop loop value 
 	 * @param max The max coordinates of the screen
 	 */
-	public MonstersBehaviorThread(String nom, int sleepTime, int acceleration, Movable monsters[], Movable tanks[], Boolean work, Coordinates max)
+	public MonstersBehaviorThread(String nom, int sleepTime, int acceleration, Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work, Coordinates max)
 	{
 		super(nom);
 		this.sleepTime = sleepTime;
 		this.acceleration = acceleration;
 		this.monsters = monsters;
 		this.tanks = tanks;
+		this.shoots = shoots;
 		this.work = work;
 		this.max = max;
 		this.etat = Etat.LEFT1;
@@ -127,15 +139,17 @@ public class MonstersBehaviorThread extends Thread
 	 * @param sleepTime Number of millisecond between each move
 	 * @param monsters The table of monsters to move
 	 * @param tanks The table of tank to check collision
+	 * @param shoots The table of shoots to create new one
 	 * @param work The stop loop value
 	 * @param max The max coordinates of the screen
 	 */
-	public MonstersBehaviorThread(String nom, int sleepTime, Movable monsters[], Movable tanks[], Boolean work, Coordinates max)
+	public MonstersBehaviorThread(String nom, int sleepTime, Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work, Coordinates max)
 	{
 		super(nom);
 		this.sleepTime = sleepTime;
 		this.monsters = monsters;
 		this.tanks = tanks;
+		this.shoots = shoots;
 		this.work = work;
 		this.max = max;
 		this.acceleration = DEFAULT_ACCELERATION;
@@ -147,14 +161,16 @@ public class MonstersBehaviorThread extends Thread
 	 * @param nom Name of the Thread
 	 * @param monsters The table of monsters to move
 	 * @param tanks The table of tank to check collision
+	 * @param shoots The table of shoots to create new one
 	 * @param work The stop loop value
 	 * @param max The max coordinates of the screen
 	 */
-	public MonstersBehaviorThread(String nom, Movable monsters[], Movable tanks[], Boolean work, Coordinates max)
+	public MonstersBehaviorThread(String nom, Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work, Coordinates max)
 	{
 		super(nom);
 		this.monsters = monsters;
 		this.tanks = tanks;
+		this.shoots = shoots;
 		this.work = work;
 		this.max = max;
 		this.acceleration = DEFAULT_ACCELERATION;
@@ -190,6 +206,8 @@ public class MonstersBehaviorThread extends Thread
 			}
 			
 			testCollision();
+			
+			shoot();
 			
 			waitMonsters();
 			//TODO Remove debug
@@ -239,7 +257,7 @@ public class MonstersBehaviorThread extends Thread
 						this.monsters[j].setAlive(false);
 						this.work = false;
 						// TODO remove Debug msg
-						System.out.println("Collision !");
+						System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
 					}
 				}
 			}
@@ -399,6 +417,71 @@ public class MonstersBehaviorThread extends Thread
 		catch (InterruptedException e)
 		{
 			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Method for shoot on tanks.
+	 * It search the invaders above tanks and shoot.
+	 */
+	private void shoot()
+	{
+		int nbMonsters = this.monsters.length;
+		int nbTanks = this.tanks.length;
+		int nbShoots = this.shoots.length;
+		int i,j,k = 0, l = -1;
+		Movable invaderAbove = null;
+		
+		for(i = 0; i < nbTanks; i++)
+		{
+			for(j = nbMonsters - 1; j > 0 ; j--)
+			{
+				if(this.monsters[j].isAlive())
+				{
+					if((((this.monsters[j].getArea().getPosition().getX() + this.monsters[j].getArea().getSize().getX()) / 2) - (DEFAULT_SIZE_SHOOT.getX() / 2) < (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX())
+							&& ((this.monsters[j].getArea().getPosition().getX() + this.monsters[j].getArea().getSize().getX()) / 2) - (DEFAULT_SIZE_SHOOT.getX() / 2) > (this.tanks[i].getArea().getPosition().getX()))
+							|| (((this.monsters[j].getArea().getPosition().getX() + this.monsters[j].getArea().getSize().getX()) / 2) + (DEFAULT_SIZE_SHOOT.getX() / 2) < (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX())
+							&& ((this.monsters[j].getArea().getPosition().getX() + this.monsters[j].getArea().getSize().getX()) / 2) + (DEFAULT_SIZE_SHOOT.getX() / 2)  > (this.tanks[i].getArea().getPosition().getX())))
+					{
+						if(invaderAbove != null)
+						{
+							if(invaderAbove.getArea().getPosition().getY() > this.monsters[j].getArea().getPosition().getY())
+							{
+								invaderAbove = this.monsters[j];
+							}
+						}
+						else
+							invaderAbove = this.monsters[j];
+					}
+				}
+			}
+			// TODO Remove debug
+			invaderAbove = this.monsters[0];
+			System.out.println("Shoot is from : " +invaderAbove);
+			try
+			{
+				// Search dead shoot
+				while(k < nbShoots)
+				{
+					if(this.shoots[k] != null)
+					{
+						if(!this.shoots[k].isAlive())
+							l = k;
+					}
+					else
+					{
+						l = k;
+					}
+					k++;
+				}
+				if(l != -1) // TODO Add acceleration to shoot
+					this.shoots[l] = invaderAbove.fire(-1, DEFAULT_SIZE_SHOOT);
+			}
+			catch (NegativeSizeException e)
+			{
+				e.printStackTrace();
+				System.out.println(e.getNegativeCoordinatesException());
+			}
 		}
 	}
 }
