@@ -3,8 +3,8 @@ package fr.iutvalence.java.projet.spaceinvaders;
 /**
  * This class defines a movable object, that can move on a 2D grid and so being killed by others.<br/>
  * A movable object is characterized by its size and position on the grid and also its status [alive | dead]. Once a
- * movable object is touched by another one, it's killed. The bounds of the 2D grid is defined in ....(SpaceInvaders for
- * the moment), and movable objects can't move over without exception (not now).
+ * movable object is touched by another one, it's killed. The bounds of the 2D grid is defined in SpaceInvaders for, 
+ * and movable objects can't move over without exception.
  * 
  * @author Gallet Guyon
  */

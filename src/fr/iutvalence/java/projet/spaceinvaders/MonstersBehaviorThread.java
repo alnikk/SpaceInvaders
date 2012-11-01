@@ -434,53 +434,59 @@ public class MonstersBehaviorThread extends Thread
 		
 		for(i = 0; i < nbTanks; i++)
 		{
-			for(j = nbMonsters - 1; j > 0 ; j--)
+			if(this.tanks[i].isAlive())
 			{
-				if(this.monsters[j].isAlive())
+				for(j = nbMonsters - 1; j > 0 ; j--)
 				{
-					if((((this.monsters[j].getArea().getPosition().getX() + this.monsters[j].getArea().getSize().getX()) / 2) - (DEFAULT_SIZE_SHOOT.getX() / 2) < (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX())
-							&& ((this.monsters[j].getArea().getPosition().getX() + this.monsters[j].getArea().getSize().getX()) / 2) - (DEFAULT_SIZE_SHOOT.getX() / 2) > (this.tanks[i].getArea().getPosition().getX()))
-							|| (((this.monsters[j].getArea().getPosition().getX() + this.monsters[j].getArea().getSize().getX()) / 2) + (DEFAULT_SIZE_SHOOT.getX() / 2) < (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX())
-							&& ((this.monsters[j].getArea().getPosition().getX() + this.monsters[j].getArea().getSize().getX()) / 2) + (DEFAULT_SIZE_SHOOT.getX() / 2)  > (this.tanks[i].getArea().getPosition().getX())))
+					if(this.monsters[j].isAlive())
 					{
-						if(invaderAbove != null)
+						if((((this.monsters[j].getArea().getPosition().getX() + this.monsters[j].getArea().getSize().getX()) / 2) - (DEFAULT_SIZE_SHOOT.getX() / 2) < (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX())
+								&& ((this.monsters[j].getArea().getPosition().getX() + this.monsters[j].getArea().getSize().getX()) / 2) - (DEFAULT_SIZE_SHOOT.getX() / 2) > (this.tanks[i].getArea().getPosition().getX()))
+								|| (((this.monsters[j].getArea().getPosition().getX() + this.monsters[j].getArea().getSize().getX()) / 2) + (DEFAULT_SIZE_SHOOT.getX() / 2) < (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX())
+								&& ((this.monsters[j].getArea().getPosition().getX() + this.monsters[j].getArea().getSize().getX()) / 2) + (DEFAULT_SIZE_SHOOT.getX() / 2)  > (this.tanks[i].getArea().getPosition().getX())))
 						{
-							if(invaderAbove.getArea().getPosition().getY() > this.monsters[j].getArea().getPosition().getY())
+							if(invaderAbove != null)
 							{
-								invaderAbove = this.monsters[j];
+								if(invaderAbove.getArea().getPosition().getY() > this.monsters[j].getArea().getPosition().getY())
+								{
+									invaderAbove = this.monsters[j];
+								}
 							}
+							else
+								invaderAbove = this.monsters[j];
+						}
+					}
+				}
+			}
+			if(invaderAbove != null)
+			{
+				// TODO Remove debug
+				//invaderAbove = this.monsters[0];
+				System.out.println("Shoot is from : " +invaderAbove);
+				try
+				{
+					// Search dead shoot
+					while(k < nbShoots)
+					{
+						if(this.shoots[k] != null)
+						{
+							if(!this.shoots[k].isAlive())
+								l = k;
 						}
 						else
-							invaderAbove = this.monsters[j];
-					}
-				}
-			}
-			// TODO Remove debug
-			invaderAbove = this.monsters[0];
-			System.out.println("Shoot is from : " +invaderAbove);
-			try
-			{
-				// Search dead shoot
-				while(k < nbShoots)
-				{
-					if(this.shoots[k] != null)
-					{
-						if(!this.shoots[k].isAlive())
+						{
 							l = k;
+						}
+						k++;
 					}
-					else
-					{
-						l = k;
-					}
-					k++;
+					if(l != -1) // TODO Add acceleration to shoot
+						this.shoots[l] = invaderAbove.fire(-1, DEFAULT_SIZE_SHOOT);
 				}
-				if(l != -1) // TODO Add acceleration to shoot
-					this.shoots[l] = invaderAbove.fire(-1, DEFAULT_SIZE_SHOOT);
-			}
-			catch (NegativeSizeException e)
-			{
-				e.printStackTrace();
-				System.out.println(e.getNegativeCoordinatesException());
+				catch (NegativeSizeException e)
+				{
+					e.printStackTrace();
+					System.out.println(e.getNegativeCoordinatesException());
+				}
 			}
 		}
 	}

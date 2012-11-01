@@ -23,7 +23,7 @@ public class TestSpaceInvaders
 	public static void main(String[] args)
 	{
 		// TODO More Test
-		SpaceInvaders SI = new SpaceInvaders(1,1,new Coordinates(50,50));
+		SpaceInvaders SI = new SpaceInvaders(4,1,new Coordinates(50,50));
 		
 		System.out.println("Etat Initial :" + SI);
 		
