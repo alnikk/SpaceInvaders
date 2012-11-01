@@ -11,11 +11,6 @@ package fr.iutvalence.java.projet.spaceinvaders;
 public class Movable extends Element
 {
 	/**
-	 * Status indicating if the movable object is still alive (a dead movable can no longer move).
-	 */
-	private boolean alive;
-
-	/**
 	 * The default height of the movable on the grid.<br/>
 	 */
 	private static final int HEIGHT = 10;
@@ -24,6 +19,17 @@ public class Movable extends Element
 	 * The default width of the movable on the grid.<br/>
 	 */
 	private static final int WIDTH = 10;
+
+	/**
+	 * Status indicating if the movable object is still alive (a dead movable can no longer move).
+	 */
+	private boolean alive;
+
+	/**
+	 * Set the direction of shoot. Negative -> down, Positive -> up, Equals to 0 means it's not a shoot.
+	 * More it's big number, more it's quick.
+	 */
+	private int direction;
 
 	// *************** Constructor *****************
 
@@ -128,6 +134,35 @@ public class Movable extends Element
 			getArea().moveTo(couple);
 		}
 	}
+	
+	/**
+	 * Method to create new movable object who moves by itself in given direction [UP|DOWN]
+	 * @param direction The direction of the shoot (if it negative the direction is down, up otherwise).
+	 * 					 If it's equal to 0 The function return null.
+	 * 			// TODO More it's big more shoot's quick
+	 * @param size This defined the size of the movable object to create
+	 * @return Return new shoot (Movable) or null if it failled.
+	 * @throws NegativeSizeException If the size given is negative
+	 */
+	public synchronized Movable fire(int direction, Coordinates size) throws NegativeSizeException
+	{
+		Movable shoot = null;
+		Coordinates coorShoot = null;
+		
+		if(direction < 0)
+		{
+			coorShoot = new Coordinates(((this.getArea().getPosition().getX() + this.getArea().getSize().getX()) / 2) - (size.getX() / 2)
+											,(this.getArea().getPosition().getY() - size.getY()));
+			shoot = new Movable(coorShoot,size);
+		}
+		else if(direction > 0)
+		{
+			coorShoot = new Coordinates(((this.getArea().getPosition().getX() + this.getArea().getSize().getX()) / 2) - (size.getX() / 2)
+											,(this.getArea().getPosition().getY() - this.getArea().getSize().getY()));
+			shoot = new Movable(coorShoot, size);
+		}
+		return shoot;
+	}
 
 	// *************** Getters and Setters *****************
 
@@ -136,7 +171,7 @@ public class Movable extends Element
 	 * 
 	 * @return the life status
 	 */
-	public boolean isAlive()
+	public synchronized boolean isAlive()
 	{
 		return this.alive;
 	}
@@ -150,6 +185,26 @@ public class Movable extends Element
 	public synchronized void setAlive(boolean alive)
 	{
 		this.alive = alive;
+	}
+	
+	
+
+	/**
+	 * Return the direction of the shoot.
+	 * @return the direction of the shoot.
+	 */
+	public int getDirection()
+	{
+		return this.direction;
+	}
+
+	/**
+	 * Set the direction of the shoot.
+	 * @param direction The direction to set
+	 */
+	public void setDirection(int direction)
+	{
+		this.direction = direction;
 	}
 
 	@Override

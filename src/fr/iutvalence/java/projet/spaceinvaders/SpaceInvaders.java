@@ -120,11 +120,11 @@ public class SpaceInvaders
 	 */
 	public void start()
 	{
-		MonstersBehaviorThread move = new MonstersBehaviorThread("Monsters", 1000, this.monsters, this.tanks, this.work, this.maxSize);
-		move.start();
+		MonstersBehaviorThread monsters = new MonstersBehaviorThread("Monsters", 1000, this.monsters, this.tanks, this.work, this.maxSize);
+		monsters.start();
 		try
 		{
-			move.join();
+			monsters.join();
 		}
 		catch (InterruptedException e)
 		{
