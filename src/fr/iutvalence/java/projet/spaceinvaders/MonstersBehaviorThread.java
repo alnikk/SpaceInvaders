@@ -462,7 +462,7 @@ public class MonstersBehaviorThread extends Thread
 			{
 				// TODO Remove debug
 				//invaderAbove = this.monsters[0];
-				System.out.println("Shoot is from : " +invaderAbove);
+				System.out.println("Shoot is from : " + invaderAbove);
 				try
 				{
 					// Search dead shoot
