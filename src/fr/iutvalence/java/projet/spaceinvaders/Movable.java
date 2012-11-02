@@ -46,6 +46,7 @@ public class Movable extends Element
 	{
 		super(new BoundingBox(i, new Coordinates(WIDTH, HEIGHT)));
 		this.alive = true;
+		this.direction = 0;
 	}
 
 	/**
@@ -62,6 +63,26 @@ public class Movable extends Element
 	{
 		super(new BoundingBox(i, j));
 		this.alive = true;
+		this.direction = 0;
+	}
+	
+	/**
+	 * This constructor creates a new living <tt>Movable</tt> object taking its coordinates and size as parameters.
+	 * 
+	 * @param i
+	 *            the initial position, as a Coordinate object
+	 * @param j
+	 *            the size, as a Coordinate object whose x means width and y means height.
+	 * @param direction 
+	 * 			  the direction of the movable object (shoot). For non shoot it sets to 0. for others negative is for down shoot and positive othewise.
+	 * @throws NegativeSizeException
+	 *             Throws Exception when the size coordinates are negative
+	 */
+	public Movable(Coordinates i, Coordinates j, int direction) throws NegativeSizeException
+	{
+		super(new BoundingBox(i, j));
+		this.alive = true;
+		this.direction = 0;
 	}
 
 	// *************** Method *****************
@@ -141,29 +162,30 @@ public class Movable extends Element
 	 * 					 If it's equal to 0 The function return null.
 	 * 			// TODO More it's big more shoot's quick
 	 * @param size This defined the size of the movable object to create
-	 * @return Return new shoot (Movable) or null if it failled.
+	 * @return Return new shoot (Movable) or null if it failed.
 	 * @throws NegativeSizeException If the size given is negative
 	 */
 	public synchronized Movable fire(int direction, Coordinates size) throws NegativeSizeException
 	{
-		Movable shoot = null;
-		Coordinates coorShoot = null;
-		
-		if(direction < 0)
+		if(direction != 0)
 		{
-			coorShoot = new Coordinates((this.getArea().getPosition().getX() + (this.getArea().getSize().getX() / 2)) - (size.getX() / 2)
-											,(this.getArea().getPosition().getY() - size.getY()));
-			shoot = new Movable(coorShoot,size);
+			Coordinates coorShoot = null;
+			
+			if(direction < 0)
+			{
+				coorShoot = new Coordinates((this.getArea().getPosition().getX() + (this.getArea().getSize().getX() / 2)) - (size.getX() / 2)
+												,(this.getArea().getPosition().getY() - size.getY()));
+			}
+			else if(direction > 0)
+			{
+				coorShoot = new Coordinates((this.getArea().getPosition().getX() + (this.getArea().getSize().getX()) / 2) - (size.getX() / 2)
+												,(this.getArea().getPosition().getY() - this.getArea().getSize().getY()));
+			}
+			// TODO Remove debug
+			System.out.println("Shoot : " + new Movable(coorShoot, size));
+			return new Movable(coorShoot, size, direction);
 		}
-		else if(direction > 0)
-		{
-			coorShoot = new Coordinates((this.getArea().getPosition().getX() + (this.getArea().getSize().getX()) / 2) - (size.getX() / 2)
-											,(this.getArea().getPosition().getY() - this.getArea().getSize().getY()));
-			shoot = new Movable(coorShoot, size);
-		}
-		// TODO Remove debug
-		System.out.println("Shoot : " + shoot);
-		return shoot;
+		return null;
 	}
 
 	// *************** Getters and Setters *****************

@@ -422,7 +422,7 @@ public class MonstersBehaviorThread extends Thread
 	
 	/**
 	 * Method for shoot on tanks.
-	 * It search the invaders above tanks and shoot.
+	 * It search the invaders just above tanks and shoot.
 	 */
 	private void shoot()
 	{
@@ -461,7 +461,6 @@ public class MonstersBehaviorThread extends Thread
 			if(invaderAbove != null)
 			{
 				// TODO Remove debug
-				//invaderAbove = this.monsters[0];
 				System.out.println("Shoot is from : " + invaderAbove);
 				try
 				{
@@ -481,6 +480,8 @@ public class MonstersBehaviorThread extends Thread
 					}
 					if(l != -1) // TODO Add acceleration to shoot
 						this.shoots[l] = invaderAbove.fire(-1, DEFAULT_SIZE_SHOOT);
+					else 	// TODO Remove debug
+						System.out.println("Issue l = -1");
 				}
 				catch (NegativeSizeException e)
 				{
