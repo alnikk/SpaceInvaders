@@ -246,7 +246,7 @@ public class MonstersBehaviorThread extends Thread
 		nbMonsters = this.monsters.length;
 		
 		for(i=0;i < nbTanks; i++)
-		{
+		{ // TODO Tank alive?
 			for(j=0; j < nbMonsters; j++)
 			{
 				if(this.monsters[j].isAlive())

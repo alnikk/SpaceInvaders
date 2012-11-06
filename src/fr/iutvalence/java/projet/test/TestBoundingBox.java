@@ -29,7 +29,7 @@ public class TestBoundingBox
 												new Coordinates(0,0));
 			
 			b1 = b1.moveTo(new Coordinates(10,10));/* Bb1 is fix*/
-			b2 = b2.reSize(new Coordinates(10,10));
+			
 			
 			
 			
@@ -53,7 +53,53 @@ public class TestBoundingBox
 			System.out.println("Intersection :  b3 " + b2.intersection(b1));
 			System.out.println("\t\tTest waited b3 and b1 U b2: " + b3.equals(b2.intersection(b1))+"\n\t\tTest waited b3 and b2 U b1 : "+ b3.equals(b1.intersection(b2)) + "\n");
 			
+			
+			
+			/* test with bb2 is left*/
+			b2 = b2.translate(new Coordinates(0,-5));
+			b3 = b3.translate(new Coordinates(0, -5));
+			b3 = b3.reSize(new Coordinates(5,10));
+
+			System.out.println("left :      b1 " + b1 + "\n\t\tb2 " + b2);
+			System.out.println("Intersection :  b3 " + b2.intersection(b1));
+			System.out.println("\t\tTest waited b3 and b1 U b2: " + b3.equals(b2.intersection(b1))+"\n\t\tTest waited b3 and b2 U b1 : "+ b3.equals(b1.intersection(b2)) + "\n");
+			
+			/* test with bb2 is top and smaller */
+			b2 = b2.reSize(new Coordinates(6,4));
+			b2 = b2.translate(new Coordinates(7,8));
+			b3 = b3.translate(new Coordinates(2, 8));
+			b3 = b3.reSize(new Coordinates(6,2));
+
+			System.out.println("top and smaller :      b1 " + b1 + "\n\t\tb2 " + b2);
+			System.out.println("Intersection :  b3 " + b2.intersection(b1));
+			System.out.println("\t\tTest waited b3 and b1 U b2: " + b3.equals(b2.intersection(b1))+"\n\t\tTest waited b3 and b2 U b1 : "+ b3.equals(b1.intersection(b2)) + "\n");
+			
+			
+			/* test with bb2 is left and taller */
+			b2 = b2.reSize(new Coordinates(4,14));
+			b2 = b2.translate(new Coordinates(6,-10));
+			b3 = b3.translate(new Coordinates(6, -8));
+			b3 = b3.reSize(new Coordinates(2,10));
+
+			System.out.println("top and taller :      b1 " + b1 + "\n\t\tb2 " + b2);
+			System.out.println("Intersection :  b3 " + b2.intersection(b1));
+			System.out.println("\t\tTest waited b3 and b1 U b2: " + b3.equals(b2.intersection(b1))+"\n\t\tTest waited b3 and b2 U b1 : "+ b3.equals(b1.intersection(b2)) + "\n");
+	
+			
+			/* test with bb2 is bottom and equal/ taller */
+			b2 = b2.reSize(new Coordinates(12,4));
+			b2 = b2.translate(new Coordinates(-8,0));
+			b3 = b3.translate(new Coordinates(-8,0));
+			b3 = b3.reSize(new Coordinates(10,2));
+
+			System.out.println("bottom and equal/ taller :      b1 " + b1 + "\n\t\tb2 " + b2);
+			System.out.println("Intersection :  b3 " + b2.intersection(b1));
+			System.out.println("\t\tTest waited b3 and b1 U b2: " + b3.equals(b2.intersection(b1))+"\n\t\tTest waited b3 and b2 U b1 : "+ b3.equals(b1.intersection(b2)) + "\n");
+	
+			
 			// TODO Finish
+			
+			
 		
 		}
 		catch (NegativeSizeException e)
