@@ -120,7 +120,7 @@ public class SpaceInvaders
 
 	// ************************** Methods **************************//
 
-	// FIXME write a first version of the game like an automata (no threading) (to discuss)
+	// FIXME (SEEN) write a first version of the game like an automata (no threading) (to discuss)
 	/**
 	 * This method begins the game. It's the only entry point.
 	 */
@@ -128,15 +128,16 @@ public class SpaceInvaders
 	{
 		MonstersBehaviorThread monsters = new MonstersBehaviorThread("Monsters", 1000, this.monsters, this.tanks, this.shoots, this.work, this.maxSize);
 		monsters.start();
-		try
+		while(true)
 		{
-			monsters.join();
-		}
-		catch (InterruptedException e)
-		{
-			// FIXME (QUEST) What I have to write here?
-			// FIXME (ANSWER) nothing special (to discuss)
-			e.printStackTrace();
+			try
+			{
+				monsters.join();
+				break;
+			}
+			catch (InterruptedException e)
+			{
+			}
 		}
 	}
 

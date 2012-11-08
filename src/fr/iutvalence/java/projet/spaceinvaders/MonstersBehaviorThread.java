@@ -43,23 +43,7 @@ public class MonstersBehaviorThread extends Thread
 		
 	//***************** Variable *************************
 	
-	// FIXME Define the enum in a separate file (same package)
-	/**
-	 * This enumerate the state of invaders
-	 */
-	private enum Etat {/**
-	 * This is the first state, and invaders are left side on the grid
-	 */
-	LEFT1, /**
-	 * This is the second state, and invaders are right side on the grid
-	 */
-	RIGHT2, /**
-	 * This is the third state, and invaders are right side on the grid
-	 */
-	RIGHT3, /**
-	 * This is the fourth state, and invaders are left side on the grid
-	 */
-	LEFT4};
+	// FIXME (SEEN) Define the enum in a separate file (same package)
 	
 	/**
 	 * This variable is the state of invaders 
@@ -265,7 +249,7 @@ public class MonstersBehaviorThread extends Thread
 		
 	}
 	
-	// FIXME prefer using moveTab(Coordinate) rather than moveTab(int, int)
+	// FIXME (SEEN) prefer using moveTab(Coordinate) rather than moveTab(int, int)
 	/**
 	 * This method allows to move Invaders table of delta coordinates.
 	 * @param delta The delta coordinates to move Invaders
@@ -355,7 +339,7 @@ public class MonstersBehaviorThread extends Thread
 			case LEFT1:
 				try
 				{
-					moveTab(DEFAULT_X_MOVE, 0);
+					moveTab(new Coordinates(DEFAULT_X_MOVE, 0));
 				}
 				catch (OutOfGridException e)
 				{
@@ -364,13 +348,13 @@ public class MonstersBehaviorThread extends Thread
 				}
 				break;
 			case RIGHT2:
-				moveTab(0, -DEFAULT_Y_MOVE);
+				moveTab(new Coordinates(0, -DEFAULT_Y_MOVE));
 				this.etat = Etat.RIGHT3;
 				break;
 			case RIGHT3:
 				try
 				{
-					moveTab(-DEFAULT_X_MOVE, 0);
+					moveTab(new Coordinates(-DEFAULT_X_MOVE, 0));
 				}
 				catch (OutOfGridException e)
 				{
@@ -379,7 +363,7 @@ public class MonstersBehaviorThread extends Thread
 				}
 				break;
 			case LEFT4:
-				moveTab(0, -DEFAULT_Y_MOVE);
+				moveTab(new Coordinates(0, -DEFAULT_Y_MOVE));
 				this.etat = Etat.LEFT1;
 				break;
 		}

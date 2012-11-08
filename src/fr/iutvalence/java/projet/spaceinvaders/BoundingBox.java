@@ -81,8 +81,7 @@ public class BoundingBox
 		{
 			//  here, the exception can not be raised since (as the bounding box exists) the size can not be negative
 			// so, we can safely ignore it
-			// FIXME remove the debug message
-			System.out.println(e.getNegativeCoordinatesException());
+			// FIXME (SEEN) remove the debug message
 			return null;
 		}
 	}
