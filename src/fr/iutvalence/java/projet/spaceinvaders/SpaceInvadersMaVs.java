@@ -10,7 +10,7 @@ import java.util.Arrays;
  * 
  * @author Gallet Guyon
  */
-public class SpaceInvaders
+public class SpaceInvadersMaVs
 {
 	// ************* Constant *************//
 	/**
@@ -76,7 +76,7 @@ public class SpaceInvaders
 	 * 300, and the Y axis to 300 too.<br/>
 	 * If you don't want to use this default characteristic use another constructor
 	 */
-	public SpaceInvaders()
+	public SpaceInvadersMaVs()
 	{
 		this.work = new Boolean(true);
 		this.maxSize = new Coordinates(X_GRID, Y_GRID);
@@ -93,7 +93,7 @@ public class SpaceInvaders
 	 * @param nbTank
 	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
 	 */
-	public SpaceInvaders(int nbMonster, int nbTank)
+	public SpaceInvadersMaVs(int nbMonster, int nbTank)
 	{
 		this.work = new Boolean(true);
 		this.maxSize = new Coordinates(X_GRID, Y_GRID);
@@ -111,7 +111,7 @@ public class SpaceInvaders
 	 * @param Max
 	 *            Set the Max point of the grid (Coordinates) 
 	 */
-	public SpaceInvaders(int nbMonster, int nbTank, Coordinates Max)
+	public SpaceInvadersMaVs(int nbMonster, int nbTank, Coordinates Max)
 	{
 		this.work = new Boolean(true);
 		this.maxSize = Max;

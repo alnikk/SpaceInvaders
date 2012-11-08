@@ -10,16 +10,16 @@ public enum Etat {
 /**
  * This is the first state, and invaders are left side on the grid
  */
-LEFT1, 
+LEFT_UP, 
 /**
  * This is the second state, and invaders are right side on the grid
  */
-RIGHT2, 
+RIGHT_UP,
 /**
  * This is the third state, and invaders are right side on the grid
  */
-RIGHT3,
+RIGHT_BOTTOM,
 /**
  * This is the fourth state, and invaders are left side on the grid
  */
-LEFT4};
+LEFT_BOTTOM};
