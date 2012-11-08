@@ -43,7 +43,7 @@ public class MonstersBehaviorThread extends Thread
 		
 	//***************** Variable *************************
 	
-	// FIXME (QUEST) is that right?
+	// FIXME Define the enum in a separate file (same package)
 	/**
 	 * This enumerate the state of invaders
 	 */
@@ -265,7 +265,7 @@ public class MonstersBehaviorThread extends Thread
 		
 	}
 	
-	// FIXME (QUEST) Useless?
+	// FIXME prefer using moveTab(Coordinate) rather than moveTab(int, int)
 	/**
 	 * This method allows to move Invaders table of delta coordinates.
 	 * @param delta The delta coordinates to move Invaders

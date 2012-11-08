@@ -120,6 +120,7 @@ public class SpaceInvaders
 
 	// ************************** Methods **************************//
 
+	// FIXME write a first version of the game like an automata (no threading) (to discuss)
 	/**
 	 * This method begins the game. It's the only entry point.
 	 */
@@ -134,6 +135,7 @@ public class SpaceInvaders
 		catch (InterruptedException e)
 		{
 			// FIXME (QUEST) What I have to write here?
+			// FIXME (ANSWER) nothing special (to discuss)
 			e.printStackTrace();
 		}
 	}

@@ -1,4 +1,3 @@
-// FIXME (SEEN) (In progress ;-)) write an application testing some features of this class, particularly intersection
 
 /**
  * 
@@ -65,8 +64,6 @@ public class BoundingBox
 
 	// **************** Method ************************
 
-	// FIXME (SEEN) here, the exception can not be raised since (as the bounding box exists) the size can not be negative
-	// FIXME (SEEN)  -> so, remove throws clause, and catch exception inside the method
 	/**
 	 * Method to change position of the bottom-left corner of the bounding box
 	 * 
@@ -82,6 +79,9 @@ public class BoundingBox
 		}
 		catch (NegativeSizeException e)
 		{
+			//  here, the exception can not be raised since (as the bounding box exists) the size can not be negative
+			// so, we can safely ignore it
+			// FIXME remove the debug message
 			System.out.println(e.getNegativeCoordinatesException());
 			return null;
 		}

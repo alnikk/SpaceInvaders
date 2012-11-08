@@ -9,19 +9,18 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * @author Gallet Guyon
  */
 // FIXME (QUEST) What is this?
+// FIXME (ANSWER) it is an annotation (aimed to be caught by the compiler) meaning that even if no serial version UID is given no warning has to be raised
 @SuppressWarnings("serial")
 public class NegativeSizeException extends Exception
 {
-	// FIXME (SEEN) write a comment
 	/**
 	 * This variable is the bad coordinates. Exception due to this coordinates. 
 	 */
 	private Coordinates bad;
 
-	// FIXME (SEEN) write a comment
 	/**
-	 * Constructors who defined the bad Coordinates to handle 
-	 * @param bad It is the bad coordinates to handle. It create an NegativeCoorinatesException
+	 * Create an exception related to specified negative coordinates
+	 * @param bad negative coordinates related to the exception 
 	 */
 	public NegativeSizeException(Coordinates bad)
 	{
@@ -29,18 +28,18 @@ public class NegativeSizeException extends Exception
 		this.bad = bad;
 	}
 
-	// FIXME (SEEN) write a comment
 	/**
-	 * Default Constructors, it create an NegativeCoorinatesException 
+	 * @see Exception()
 	 */
 	public NegativeSizeException()
 	{
 		super();
+		this.bad = null;
 	}
 
-	// FIXME (SEEN) replace the redefinition of toString by a getter
 	/**
-	 * @return the bad coordinates
+	 * Getter for the negative coordinates related to the exception
+	 * @return negative coordinates related to the exception
 	 */
 	public Coordinates getNegativeCoordinatesException()
 	{

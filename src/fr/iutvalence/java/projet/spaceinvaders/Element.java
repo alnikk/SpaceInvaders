@@ -46,34 +46,30 @@ public abstract class Element
 
 	// ************* Getters and Setters ***************
 
-	// FIXME (SEEN) fix comment (this is not compliant with method signature)
-	// I don't understand..
-	// -> N.B. here, the element is not necessarily movable, and you can say that the method returns the bounding box of this element
-	
+
 	/**
-	 * This method returns the location and size of the movable object.
+	 * This method returns the bounding box of the element
 	 * 
-	 * @return return the location and size (BoundingBox) of the object <br/>
+	 * @return return the bounding box of the element
 	 */
 	public BoundingBox getArea()
 	{
 		return this.boundingBox;
 	}
 
-	// FIXME (SEEN) fix comment (this is not compliant with method signature)
-	// I don't understand.
-	// -> N.B. here, the element is not necessarily movable,
 	/**
-	 * This method allows to modify the location and size (BoundingBox) of the element. Setting position make the object moves<br/>
+	 * This method allows to modify the location and size (BoundingBox) of the element. 
 	 * 
-	 * @param area BoundingBox
-	 *            box of the element
+	 * @param area bounding box of the element
 	 */
 	protected void setArea(BoundingBox area)
 	{
 		this.boundingBox = area;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
