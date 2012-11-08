@@ -17,7 +17,7 @@ public class SpaceInvadersMsVs
 	/**
 	 * This constant defines the default sleep time between each move of Invaders 
 	 */
-	private static final int DEFAULT_SLEEP_TIME = 100;
+	private static final int DEFAULT_SLEEP_TIME = 1000;
 	
 	/**
 	 * This constant is the default acceleration
@@ -124,6 +124,9 @@ public class SpaceInvadersMsVs
 	public SpaceInvadersMsVs()
 	{
 		this.work = true;
+		this.etat = Etat.LEFT_UP;
+		this.acceleration = DEFAULT_ACCELERATION;
+		this.sleepTime = DEFAULT_SLEEP_TIME;
 		this.maxSize = new Coordinates(X_GRID, Y_GRID);
 		initTab(DEFAULT_MONSTERS_AMOUNT, DEFAULT_TANKS_AMOUNT);
 	}
@@ -141,6 +144,9 @@ public class SpaceInvadersMsVs
 	public SpaceInvadersMsVs(int nbMonsters, int nbTanks)
 	{
 		this.work = true;
+		this.etat = Etat.LEFT_UP;
+		this.acceleration = DEFAULT_ACCELERATION;
+		this.sleepTime = DEFAULT_SLEEP_TIME;
 		this.maxSize = new Coordinates(X_GRID, Y_GRID);
 		initTab(nbMonsters, nbTanks);
 	}
@@ -159,6 +165,9 @@ public class SpaceInvadersMsVs
 	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Coordinates max)
 	{
 		this.work = true;
+		this.etat = Etat.LEFT_UP;
+		this.acceleration = DEFAULT_ACCELERATION;
+		this.sleepTime = DEFAULT_SLEEP_TIME;
 		this.maxSize = max;
 		initTab(nbMonsters, nbTanks);
 	}
@@ -220,66 +229,8 @@ public class SpaceInvadersMsVs
 		// Check?
 		//testCollision();
 	}
-
-	/**
-	 * This constructors set the variable needed by the thread.
-	 * @param sleepTime Number of millisecond between each move
-	 * @param acceleration Acceleration of sleepTime when less Invaders
-	 * @param monsters The table of monsters to move
-	 * @param tanks The table of tank to check collision
-	 * @param shoots The table of shoots to create new one
-	 * @param work The stop loop value 
-	 */
-	private void MonstersBehavior(int sleepTime, int acceleration, Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work)
-	{
-		this.sleepTime = sleepTime;
-		this.acceleration = acceleration;
-		this.monsters = monsters;
-		this.tanks = tanks;
-		this.shoots = shoots;
-		this.work = work;
-		this.etat = Etat.LEFT_UP;
-		run();
-	}
-
-	/**
-	 * This constructors set the variable needed by the thread.
-	 * @param sleepTime Number of millisecond between each move
-	 * @param monsters The table of monsters to move
-	 * @param tanks The table of tank to check collision
-	 * @param shoots The table of shoots to create new one
-	 * @param work The stop loop value
-	 */
-	private void MonstersBehavior(int sleepTime, Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work)
-	{
-		this.sleepTime = sleepTime;
-		this.monsters = monsters;
-		this.tanks = tanks;
-		this.shoots = shoots;
-		this.work = work;
-		this.acceleration = DEFAULT_ACCELERATION;
-		this.etat = Etat.LEFT_UP;
-		run();
-	}
-
-	/**
-	 * This constructors set the variable needed by the thread.
-	 * @param monsters The table of monsters to move
-	 * @param tanks The table of tank to check collision
-	 * @param shoots The table of shoots to create new one
-	 * @param work The stop loop value
-	 */
-	private void MonstersBehavior(Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work)
-	{
-		this.monsters = monsters;
-		this.tanks = tanks;
-		this.shoots = shoots;
-		this.work = work;
-		this.acceleration = DEFAULT_ACCELERATION;
-		this.sleepTime = DEFAULT_SLEEP_TIME;
-		this.etat = Etat.LEFT_UP;
-		run();
-	}
+	
+	//********************* Main ************************
 	
 	/**
 	 * Main of the thread.
@@ -287,8 +238,6 @@ public class SpaceInvadersMsVs
 	 */
 	public void run()
 	{
-		// TODO remove Debug msg
-		System.out.println("\nBegin MoveMonstersThread");
 		testCollision();
 		while(this.work)
 		{
@@ -314,8 +263,6 @@ public class SpaceInvadersMsVs
 			//TODO Remove debug
 			//kill();
 		}
-		// TODO remove Debug msg
-		System.out.println("End MoveMonstersThread\n");
 	}
 	
 	//******************** Method ***********************
@@ -362,8 +309,7 @@ public class SpaceInvadersMsVs
 					}
 				}
 			}
-		}
-		
+		}	
 	}
 	
 	// FIXME (SEEN) prefer using moveTab(Coordinate) rather than moveTab(int, int)

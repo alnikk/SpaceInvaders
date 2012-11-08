@@ -119,7 +119,7 @@ public class Movable extends Element
 	{
 		if (this.alive)
 		{
-			getArea().translate(delta);
+			this.setArea(getArea().translate(delta));
 		}
 	}
 	

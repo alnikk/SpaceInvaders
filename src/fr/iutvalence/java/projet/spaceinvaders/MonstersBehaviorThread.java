@@ -114,7 +114,7 @@ public class MonstersBehaviorThread extends Thread
 		this.shoots = shoots;
 		this.work = work;
 		this.max = max;
-		this.etat = Etat.LEFT1;
+		this.etat = Etat.LEFT_UP;
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class MonstersBehaviorThread extends Thread
 		this.work = work;
 		this.max = max;
 		this.acceleration = DEFAULT_ACCELERATION;
-		this.etat = Etat.LEFT1;
+		this.etat = Etat.LEFT_UP;
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class MonstersBehaviorThread extends Thread
 		this.max = max;
 		this.acceleration = DEFAULT_ACCELERATION;
 		this.sleepTime = DEFAULT_SLEEP_TIME;
-		this.etat = Etat.LEFT1;
+		this.etat = Etat.LEFT_UP;
 	}
 	
 	//******************** Main ***********************
@@ -336,18 +336,18 @@ public class MonstersBehaviorThread extends Thread
 	{
 		switch(this.etat)
 		{
-			case LEFT1:
+			case LEFT_UP:
 				try
 				{
 					moveTab(new Coordinates(DEFAULT_X_MOVE, 0));
 				}
 				catch (OutOfGridException e)
 				{
-					this.etat = Etat.RIGHT2;
+					this.etat = Etat.RIGHT_UP;
 					move();
 				}
 				break;
-			case RIGHT2:
+			case RIGHT_UP:
 				moveTab(new Coordinates(0, -DEFAULT_Y_MOVE));
 				this.etat = Etat.RIGHT_BOTTOM;
 				break;
@@ -364,7 +364,7 @@ public class MonstersBehaviorThread extends Thread
 				break;
 			case LEFT_BOTTOM:
 				moveTab(new Coordinates(0, -DEFAULT_Y_MOVE));
-				this.etat = Etat.LEFT1;
+				this.etat = Etat.LEFT_UP;
 				break;
 		}
 	}
