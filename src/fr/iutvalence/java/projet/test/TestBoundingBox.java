@@ -34,6 +34,7 @@ public class TestBoundingBox
 			
 			
 			/* test with bb2 is bottom-left*/
+			b2 = b2.reSize(new Coordinates(10,10));
 			b2 = b2.translate(new Coordinates(5,5));
 			b3 = b3.translate(new Coordinates(10, 10));
 			b3 = b3.reSize(new Coordinates(5,5));
@@ -93,6 +94,28 @@ public class TestBoundingBox
 			b3 = b3.reSize(new Coordinates(10,2));
 
 			System.out.println("bottom and equal/ taller :      b1 " + b1 + "\n\t\tb2 " + b2);
+			System.out.println("Intersection :  b3 " + b2.intersection(b1));
+			System.out.println("\t\tTest waited b3 and b1 U b2: " + b3.equals(b2.intersection(b1))+"\n\t\tTest waited b3 and b2 U b1 : "+ b3.equals(b1.intersection(b2)) + "\n");
+	
+			
+			/* test with bb2 is inside */
+			b2 = b2.reSize(new Coordinates(6,6));
+			b2 = b2.translate(new Coordinates(2,4));
+			b3 = b3.translate(new Coordinates(2,2));
+			b3 = b3.reSize(new Coordinates(6,6));
+
+			System.out.println("inside :      b1 " + b1 + "\n\t\tb2 " + b2);
+			System.out.println("Intersection :  b3 " + b2.intersection(b1));
+			System.out.println("\t\tTest waited b3 and b1 U b2: " + b3.equals(b2.intersection(b1))+"\n\t\tTest waited b3 and b2 U b1 : "+ b3.equals(b1.intersection(b2)) + "\n");
+	
+			
+			/* test with bb2 frame bb1 */
+			b2 = b2.reSize(new Coordinates(12,12));
+			b2 = b2.translate(new Coordinates(-3,-3));
+			b3 = b3.translate(new Coordinates(-2,-2));
+			b3 = b3.reSize(new Coordinates(10,10));
+
+			System.out.println("frame :      b1 " + b1 + "\n\t\tb2 " + b2);
 			System.out.println("Intersection :  b3 " + b2.intersection(b1));
 			System.out.println("\t\tTest waited b3 and b1 U b2: " + b3.equals(b2.intersection(b1))+"\n\t\tTest waited b3 and b2 U b1 : "+ b3.equals(b1.intersection(b2)) + "\n");
 	
