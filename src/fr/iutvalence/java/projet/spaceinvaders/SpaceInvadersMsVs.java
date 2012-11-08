@@ -338,6 +338,8 @@ public class SpaceInvadersMsVs
 			
 			waitMonsters();
 			
+			randomMove();
+			
 			//TODO Remove debug
 			//kill();
 		}
@@ -683,6 +685,18 @@ public class SpaceInvadersMsVs
 	{
 		char[][] grid = gridImage(); 
 		printGrid(grid);
+	}
+	
+	private void randomMove()
+	{
+		try
+		{
+			this.tanks[0].move(new Coordinates((int) (Math.random() * 10),0));
+		}
+		catch (NegativeSizeException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
