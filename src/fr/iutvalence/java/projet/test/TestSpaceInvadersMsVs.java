@@ -19,7 +19,7 @@ public class TestSpaceInvadersMsVs
 	public static void main(String[] args)
 	{
 		// TODO More Test
-		SpaceInvadersMsVs SI = new SpaceInvadersMsVs(10,1,new Coordinates(50,70));
+		SpaceInvadersMsVs SI = new SpaceInvadersMsVs();
 		
 		System.out.println("Etat Initial :" + SI);
 		
