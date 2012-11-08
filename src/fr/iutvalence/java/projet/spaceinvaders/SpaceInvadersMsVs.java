@@ -17,42 +17,42 @@ public class SpaceInvadersMsVs
 	/**
 	 * It defines the maximum (default) of X axis, if it's not set in constructor.
 	 */
-	private static final int X_GRID = 10;
+	private static final int X_GRID = 100;
 
 	/**
 	 * It defines the maximum (default) of Y axis, if it's not set in constructor.
 	 */
-	private static final int Y_GRID = 3;
+	private static final int Y_GRID = 30;
 
 	/**
 	 * Default size of element (e.g. Doc Movable)
 	 */
-	private static final int DEFAULT_SIZE = 1;
+	private static final int DEFAULT_SIZE = 5;
 	
 	/**
 	 * Default delta between 2 monsters
 	 */
-	private static final int DEFAULT_DELTA = 1;
+	private static final int DEFAULT_DELTA = 2;
 	
 	/**
 	 * This constant defines the step X on the grid of a move
 	 */
-	private static final int DEFAULT_X_MOVE = 1;
+	private static final int DEFAULT_X_MOVE = 5;
 	
 	/**
 	 * This constant defines the step Y on the grid of a move
 	 */
-	private static final int DEFAULT_Y_MOVE = 1;
+	private static final int DEFAULT_Y_MOVE = 5;
 
 	/**
 	 * This constant defines the size of shoot
 	 */
-	private static final Coordinates DEFAULT_SIZE_SHOOT = new Coordinates(1,2);
+	private static final Coordinates DEFAULT_SIZE_SHOOT = new Coordinates(2,5);
 	
 	/**
 	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
 	 */
-	private static final int DEFAULT_MONSTERS_AMOUNT = 4;
+	private static final int DEFAULT_MONSTERS_AMOUNT = 10;
 
 	/**
 	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
@@ -316,7 +316,7 @@ public class SpaceInvadersMsVs
 		while(this.work)
 		{
 			// TODO remove Debug msg
-			System.out.println(Arrays.toString(this.monsters));
+			//System.out.println(Arrays.toString(this.monsters));
 			try
 			{
 				move();
@@ -383,7 +383,7 @@ public class SpaceInvadersMsVs
 						this.monsters[j].setAlive(false);
 						this.work = false;
 						// TODO remove Debug msg
-						System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
+						//System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
 					}
 				}
 			}
@@ -523,7 +523,8 @@ public class SpaceInvadersMsVs
 			index = searchEmptyCellFromMovableTable(this.shoots);
 			if (index != -1)
 			{
-				System.out.println("Shoot is from : " + invader);
+				// TODO remove debug
+				//System.out.println("Shoot is from : " + invader);
 					// TODO Add acceleration to shoot
 				try
 				{
@@ -535,8 +536,8 @@ public class SpaceInvadersMsVs
 					e.printStackTrace();
 				}
 			}
-			else	// TODO Remove debug
-				System.out.println("Issue : don't find free place for shoot");
+			//else	// TODO Remove debug
+				///System.out.println("Issue : don't find free place for shoot");
 		}
 	}
 	
@@ -596,7 +597,7 @@ public class SpaceInvadersMsVs
 		{
 			for(x = 0; x < this.maxSize.getX(); x++)
 			{
-				grid[x][y] = ' ';
+				grid[x][y] = 'x';
 			}
 		}
 		
@@ -605,10 +606,10 @@ public class SpaceInvadersMsVs
 			if(this.tanks[i] != null && this.tanks[i].isAlive())
 			{
 				y = this.tanks[i].getArea().getPosition().getY();
-				while(y <= this.tanks[i].getArea().getSize().getY())
+				while(y < (this.tanks[i].getArea().getSize().getY() + this.tanks[i].getArea().getPosition().getY()))
 				{
 					x = this.tanks[i].getArea().getPosition().getX();
-					while(x <= this.tanks[i].getArea().getSize().getX())
+					while(x < (this.tanks[i].getArea().getSize().getX()  + this.tanks[i].getArea().getPosition().getX()))
 					{
 						grid[x][y] = 'T';
 						x++;
@@ -623,10 +624,10 @@ public class SpaceInvadersMsVs
 			if(this.monsters[i] != null && this.monsters[i].isAlive())
 			{
 				y = this.monsters[i].getArea().getPosition().getY();
-				while(y <= this.monsters[i].getArea().getSize().getY())
+				while(y < (this.monsters[i].getArea().getSize().getY() + this.monsters[i].getArea().getPosition().getY()))
 				{
 					x = this.monsters[i].getArea().getPosition().getX();
-					while(x <= this.monsters[i].getArea().getSize().getX())
+					while(x < (this.monsters[i].getArea().getSize().getX()  + this.monsters[i].getArea().getPosition().getX()))
 					{
 						grid[x][y] = 'M';
 						x++;
@@ -635,16 +636,16 @@ public class SpaceInvadersMsVs
 				}
 			}
 		}
-		
+
 		for(i = 0; i < nbShoots; i++)
 		{
 			if(this.shoots[i] != null && this.shoots[i].isAlive())
 			{
 				y = this.shoots[i].getArea().getPosition().getY();
-				while(y <= this.shoots[i].getArea().getSize().getY())
+				while(y < (this.shoots[i].getArea().getSize().getY() + this.shoots[i].getArea().getPosition().getY()))
 				{
 					x = this.shoots[i].getArea().getPosition().getX();
-					while(x <= this.shoots[i].getArea().getSize().getX())
+					while(x < (this.shoots[i].getArea().getSize().getX()  + this.shoots[i].getArea().getPosition().getX()))
 					{
 						grid[x][y] = 'S';
 						x++;
@@ -663,16 +664,17 @@ public class SpaceInvadersMsVs
 	 */
 	private void printGrid(char[][] grid)
 	{
-		int x,y;
+		int x ,y;
 		
-		for(y = 0; y < this.maxSize.getY(); y++)
+		for(y = this.maxSize.getY() - 1; y >= 0; y--)
 		{
-			for(x = 0; x < this.maxSize.getX(); x++)
+			for(x = this.maxSize.getX() - 1; x >= 0; x--)
 			{
 				System.out.print(grid[x][y]);
 			}
 			System.out.print("\n");
 		}
+		System.out.print("\n");
 	}
 	/**
 	 * Allows to print the game to the screen in ASCII Art

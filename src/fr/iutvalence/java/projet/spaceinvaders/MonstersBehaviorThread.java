@@ -171,12 +171,12 @@ public class MonstersBehaviorThread extends Thread
 	public void run()
 	{
 		// TODO remove Debug msg
-		System.out.println("\nBegin MoveMonstersThread");
+		//System.out.println("\nBegin MoveMonstersThread");
 		testCollision();
 		while(this.work.booleanValue())
 		{
 			// TODO remove Debug msg
-			System.out.println(Arrays.toString(this.monsters));
+			//System.out.println(Arrays.toString(this.monsters));
 			try
 			{
 				move();
@@ -198,7 +198,7 @@ public class MonstersBehaviorThread extends Thread
 			//kill();
 		}
 		// TODO remove Debug msg
-		System.out.println("End MoveMonstersThread\n");
+		//System.out.println("End MoveMonstersThread\n");
 	}
 	
 	//******************** Method ***********************
@@ -241,7 +241,7 @@ public class MonstersBehaviorThread extends Thread
 						this.monsters[j].setAlive(false);
 						this.work = false;
 						// TODO remove Debug msg
-						System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
+						//System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
 					}
 				}
 			}
@@ -445,7 +445,7 @@ public class MonstersBehaviorThread extends Thread
 			if(invaderAbove != null)
 			{
 				// TODO Remove debug
-				System.out.println("Shoot is from : " + invaderAbove);
+				//System.out.println("Shoot is from : " + invaderAbove);
 				try
 				{
 					// Search dead shoot
@@ -464,8 +464,8 @@ public class MonstersBehaviorThread extends Thread
 					}
 					if(l != -1) // TODO Add acceleration to shoot
 						this.shoots[l] = invaderAbove.fire(-1, DEFAULT_SIZE_SHOOT);
-					else 	// TODO Remove debug
-						System.out.println("Issue l = -1");
+					//else 	// TODO Remove debug
+						//System.out.println("Issue l = -1");
 				}
 				catch (NegativeSizeException e)
 				{
