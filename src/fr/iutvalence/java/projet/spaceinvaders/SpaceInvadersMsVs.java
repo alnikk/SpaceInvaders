@@ -15,41 +15,6 @@ public class SpaceInvadersMsVs
 	// ************* Constant *************//
 	
 	/**
-	 * This constant defines the default sleep time between each move of Invaders 
-	 */
-	private static final int DEFAULT_SLEEP_TIME = 1000;
-	
-	/**
-	 * This constant is the default acceleration
-	 * (Not used for now)
-	 */
-	private static final int DEFAULT_ACCELERATION = 2;
-	
-	/**
-	 * This constant defines the step X on the grid of a move
-	 */
-	private static final int DEFAULT_X_MOVE = 10;
-	
-	/**
-	 * This constant defines the step Y on the grid of a move
-	 */
-	private static final int DEFAULT_Y_MOVE = 10;
-	
-	/**
-	 * This constant defines the size of shoot
-	 */
-	private static final Coordinates DEFAULT_SIZE_SHOOT = new Coordinates(5,10);
-	/**
-	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
-	 */
-	private static final int DEFAULT_MONSTERS_AMOUNT = 20;
-
-	/**
-	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
-	 */
-	private static final int DEFAULT_TANKS_AMOUNT = 1;
-
-	/**
 	 * It defines the maximum (default) of X axis, if it's not set in constructor.
 	 */
 	private static final int X_GRID = 300;
@@ -60,23 +25,59 @@ public class SpaceInvadersMsVs
 	private static final int Y_GRID = 300;
 
 	/**
-	 * Default delta between 2 monsters
-	 */
-	private static final int DEFAULT_DELTA = 2;
-
-	/**
 	 * Default size of element (e.g. Doc Movable)
 	 */
 	private static final int DEFAULT_SIZE = 10;
+	
+	/**
+	 * Default delta between 2 monsters
+	 */
+	private static final int DEFAULT_DELTA = 2;
+	
+	/**
+	 * This constant defines the step X on the grid of a move
+	 */
+	private static final int DEFAULT_X_MOVE = 10;
+	
+	/**
+	 * This constant defines the step Y on the grid of a move
+	 */
+	private static final int DEFAULT_Y_MOVE = 10;
+
+	/**
+	 * This constant defines the size of shoot
+	 */
+	private static final Coordinates DEFAULT_SIZE_SHOOT = new Coordinates(5,10);
+	
+	/**
+	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
+	 */
+	private static final int DEFAULT_MONSTERS_AMOUNT = 20;
+
+	/**
+	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
+	 */
+	private static final int DEFAULT_TANKS_AMOUNT = 1;
+	
+	/**
+	 * This constant defines the default sleep time between each move of Invaders 
+	 */
+	private static final int DEFAULT_SLEEP_TIME = 1000;
+	
+	/**
+	 * This constant is the default acceleration
+	 * (Not used for now)
+	 */
+	private static final int DEFAULT_ACCELERATION = 2;
 	
 	//***************** Variable *************************
 	
 	// FIXME (SEEN) Define the enum in a separate file (same package)
 	
 	/**
-	 * This variable is the state of invaders 
+	 * The maximum size of the area
 	 */
-	private Etat etat;
+	private final Coordinates maxSize;
 	
 	/**
 	 * This variable is used to wait sleepTime millisecond between each loop 
@@ -90,14 +91,14 @@ public class SpaceInvadersMsVs
 	private int acceleration;
 	
 	/**
+	 * This variable is the state of invaders 
+	 */
+	private Etat etat;
+	
+	/**
 	 * Boolean to know if the game is finished
 	 */
 	private boolean work;
-
-	/**
-	 * The maximum size of the area
-	 */
-	private final Coordinates maxSize;
 
 	/**
 	 * Array containing all monsters
@@ -123,11 +124,11 @@ public class SpaceInvadersMsVs
 	 */
 	public SpaceInvadersMsVs()
 	{
+		this.maxSize = new Coordinates(X_GRID, Y_GRID);
 		this.work = true;
 		this.etat = Etat.LEFT_UP;
-		this.acceleration = DEFAULT_ACCELERATION;
 		this.sleepTime = DEFAULT_SLEEP_TIME;
-		this.maxSize = new Coordinates(X_GRID, Y_GRID);
+		this.acceleration = DEFAULT_ACCELERATION;
 		initTab(DEFAULT_MONSTERS_AMOUNT, DEFAULT_TANKS_AMOUNT);
 	}
 
@@ -143,17 +144,17 @@ public class SpaceInvadersMsVs
 	 */
 	public SpaceInvadersMsVs(int nbMonsters, int nbTanks)
 	{
+		this.maxSize = new Coordinates(X_GRID, Y_GRID);
 		this.work = true;
 		this.etat = Etat.LEFT_UP;
-		this.acceleration = DEFAULT_ACCELERATION;
 		this.sleepTime = DEFAULT_SLEEP_TIME;
-		this.maxSize = new Coordinates(X_GRID, Y_GRID);
+		this.acceleration = DEFAULT_ACCELERATION;
 		initTab(nbMonsters, nbTanks);
 	}
 
 	/**
 	 * Initialize the game.<br/>
-	 * This constructor no default value.
+	 * This constructor uses default value of acceleration
 	 * 
 	 * @param nbMonsters
 	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
@@ -164,15 +165,63 @@ public class SpaceInvadersMsVs
 	 */
 	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Coordinates max)
 	{
+		this.maxSize = max;
 		this.work = true;
 		this.etat = Etat.LEFT_UP;
-		this.acceleration = DEFAULT_ACCELERATION;
 		this.sleepTime = DEFAULT_SLEEP_TIME;
+		this.acceleration = DEFAULT_ACCELERATION;
+		initTab(nbMonsters, nbTanks);
+	}
+	
+	/**
+	 * Initialize the game.<br/>
+	 * This constructor no default value.
+	 * 
+	 * @param nbMonsters
+	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
+	 * @param nbTanks
+	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
+	 * @param max
+	 *            Set the Max point of the grid (Coordinates) 
+	 * @param sleepTime
+	 *            Set the time between each move of monster (in milliseconds)  
+	 */
+	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Coordinates max, int sleepTime)
+	{
 		this.maxSize = max;
+		this.work = true;
+		this.etat = Etat.LEFT_UP;
+		this.sleepTime = sleepTime;
+		this.acceleration = DEFAULT_ACCELERATION;
+		initTab(nbMonsters, nbTanks);
+	}
+	
+	/**
+	 * Initialize the game.<br/>
+	 * This constructor uses no default value.
+	 * 
+	 * @param nbMonsters
+	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
+	 * @param nbTanks
+	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
+	 * @param max
+	 *            Set the Max point of the grid (Coordinates) 
+	 * @param sleepTime
+	 *            Set the time between each move of monster (in milliseconds)  
+	 * @param acceleration
+	 *            Set the acceleration of Invaders. (not uses for now) 
+	 */
+	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, int acceleration)
+	{
+		this.maxSize = max;
+		this.work = true;
+		this.etat = Etat.LEFT_UP;
+		this.sleepTime = sleepTime;
+		this.acceleration = acceleration;
 		initTab(nbMonsters, nbTanks);
 	}
 
-	// ************************** Methods **************************//
+	// ************************** Generals Methods **************************//
 
 	/**
 	 * Initialize the table of movable elements.<br/>
@@ -347,42 +396,7 @@ public class SpaceInvadersMsVs
 			}
 		}
 	}
-	
-	/**
-	 * This method allows to move Invaders table of delta dx, dy.
-	 * @param dx The delta dx coordinates to move Invaders
-	 * @param dy The delta dy coordinates to move Invaders
-	 * @throws OutOfGridException This method can return OutOfgridException if monsters does'nt be anymore in the grid.
-	 */
-	private void moveTab(int dx, int dy) throws OutOfGridException
-	{
-		int i, nbMonsters;
-		nbMonsters = this.monsters.length;
-		for(i=0; i < nbMonsters; i++)
-		{
-			try
-			{
-				if(this.monsters[i].getArea().getPosition().getX() + 
-						this.monsters[i].getArea().getSize().getX() + dx > this.maxSize.getX()
-					|| this.monsters[i].getArea().getPosition().getY() + 
-						this.monsters[i].getArea().getSize().getY() + dy > this.maxSize.getY()
-					|| this.monsters[i].getArea().getPosition().getX() + dx < 0
-					|| this.monsters[i].getArea().getPosition().getY() + dy < 0)
-				{
-					// Kill when Y coordinates is less than 0?
-					throw new OutOfGridException(this.monsters[i]);
-				}
-				this.monsters[i].move(dx, dy);
-			}
-			catch (NegativeSizeException e)
-			{
-				System.out.println(e.getNegativeCoordinatesException());
-				System.out.println(this.monsters[i] + " " + new Coordinates(dx,dx));
-				e.printStackTrace();
-			}
-		}
-	}
-	
+		
 	/**
 	 * This method allows to move Invaders once that is to say to right, down, or left.
 	 * It follow scheme by itself :
