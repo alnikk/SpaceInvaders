@@ -57,7 +57,7 @@ public class SpaceInvadersMsVs
 	/**
 	 * This constant defines the default sleep time between each move of Invaders 
 	 */
-	private static final int DEFAULT_SLEEP_TIME = 1000;
+	private static final int DEFAULT_SLEEP_TIME = 800;
 	
 	/**
 	 * This constant is the default acceleration
@@ -274,6 +274,47 @@ public class SpaceInvadersMsVs
 		//testCollision();
 	}
 	
+	// FIXME (SEEN) prefer using moveTab(Coordinate) rather than moveTab(int, int)
+	// TODO Fix Bug(s)
+	/**
+	 * This method allows to move all instances in table of delta coordinates.
+	 * @param delta The delta coordinates to move Invaders
+	 * @param tableToMove The table to move
+	 * @throws OutOfGridException This method can return OutOfgridException if monsters does'nt be anymore in the grid.  
+	 */
+	private void moveTab(Coordinates delta, Movable[] tableToMove) throws OutOfGridException
+	{
+		int i, nbMonsters;
+		nbMonsters = tableToMove.length;
+		for(i=0; i < nbMonsters; i++)
+		{
+			if(tableToMove[i] != null && tableToMove[i].isAlive())
+			{
+				try
+				{
+					if(tableToMove[i].getArea().getPosition().getX() + 
+							tableToMove[i].getArea().getSize().getX() + delta.getX() > this.maxSize.getX()
+						|| tableToMove[i].getArea().getPosition().getY() + 
+							tableToMove[i].getArea().getSize().getY() + delta.getY() > this.maxSize.getY()
+						|| tableToMove[i].getArea().getPosition().getX() + delta.getX()< 0
+						|| tableToMove[i].getArea().getPosition().getY() + delta.getY() < 0)
+					{
+						// Kill when Y coordinates is less than 0?
+						throw new OutOfGridException(tableToMove[i]);
+					}
+					tableToMove[i].move(delta);
+				
+				}
+				catch (NegativeSizeException e)
+				{
+					System.out.println(e.getNegativeCoordinatesException());
+					System.out.println(tableToMove[i] + " " + delta);
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 	/**
 	 * Search an empty cell in table given in argument.
 	 * @param table Table to search empty cell
@@ -328,23 +369,22 @@ public class SpaceInvadersMsVs
 			//System.out.println(Arrays.toString(this.monsters));
 			try
 			{
-				move();
+				moveMonsters();
 			}
 			catch (OutOfGridException e1)
 			{
-				// Stop Game ?
-				// No ^^, Kill him hahaha >< x)
 				e1.kill();
 				System.out.println("OutOfGrid : " + e1.getOutOfGridException());
 			}
 			
-			testCollision();
+			testCollision(); // Collision Shoots?
 			
-			shoot();
+			monsterShoot();
 			
 			showGrid();
-			
 			waitMonsters();
+			
+			moveShoots();
 			
 			randomMove();
 			
@@ -363,23 +403,35 @@ public class SpaceInvadersMsVs
 	 */
 	private void testCollision()
 	{
-		int nbMonsters, nbTanks, i, j;
+		int i, j;
 		
-		nbTanks = this.tanks.length;
-		nbMonsters = this.monsters.length;
-		
-		for(i=0;i < nbTanks; i++)
+		for(i=0;i < this.tanks.length; i++)
 		{ 
 			if(this.tanks[i].isAlive())
 			{
-				for(j=0; j < nbMonsters; j++)
+				for(j=0; j < this.monsters.length; j++)
 				{
-					if(this.monsters[j].isAlive())
+					if(this.shoots[i] != null && this.monsters[j].isAlive())
 					{
 						if(this.tanks[i].overlapping(this.monsters[j]) != null)
 						{
 							this.tanks[i].setAlive(false);
 							this.monsters[j].setAlive(false);
+							this.work = false;
+							// TODO remove Debug msg
+							//System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
+						}
+					}
+				}
+				
+				for(j=0; j < this.shoots.length; j++)
+				{
+					if(this.shoots[j] != null && this.shoots[j].isAlive())
+					{
+						if(this.tanks[i].overlapping(this.shoots[j]) != null)
+						{
+							this.tanks[i].setAlive(false);
+							this.shoots[j].setAlive(false);
 							this.work = false;
 							// TODO remove Debug msg
 							//System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
@@ -392,43 +444,6 @@ public class SpaceInvadersMsVs
 	
 	
 		//[[[[[[[[[[[[[ Monsters behavior ]]]]]]]]]]]]]
-	
-	// FIXME (SEEN) prefer using moveTab(Coordinate) rather than moveTab(int, int)
-	// TODO Generalize this method
-	/**
-	 * This method allows to move Invaders table of delta coordinates.
-	 * @param delta The delta coordinates to move Invaders
-	 * @throws OutOfGridException This method can return OutOfgridException if monsters does'nt be anymore in the grid.  
-	 */
-	private void moveTab(Coordinates delta) throws OutOfGridException
-	{
-		int i, nbMonsters;
-		nbMonsters = this.monsters.length;
-		for(i=0; i < nbMonsters; i++)
-		{
-			try
-			{
-				if(this.monsters[i].getArea().getPosition().getX() + 
-						this.monsters[i].getArea().getSize().getX() + delta.getX() > this.maxSize.getX()
-					|| this.monsters[i].getArea().getPosition().getY() + 
-						this.monsters[i].getArea().getSize().getY() + delta.getY() > this.maxSize.getY()
-					|| this.monsters[i].getArea().getPosition().getX() + delta.getX()< 0
-					|| this.monsters[i].getArea().getPosition().getY() + delta.getY() < 0)
-				{
-					// Kill when Y coordinates is less than 0?
-					throw new OutOfGridException(this.monsters[i]);
-				}
-				this.monsters[i].move(delta);
-			
-			}
-			catch (NegativeSizeException e)
-			{
-				System.out.println(e.getNegativeCoordinatesException());
-				System.out.println(this.monsters[i] + " " + delta);
-				e.printStackTrace();
-			}
-		}
-	}
 		
 	/**
 	 * This method allows to move Invaders once that is to say to right, down, or left.
@@ -442,38 +457,38 @@ public class SpaceInvadersMsVs
 	 * </ul> 
 	 * @throws OutOfGridException If Invaders are OutOfGrid then ther's exception.
 	 */
-	private void move() throws OutOfGridException
+	private void moveMonsters() throws OutOfGridException
 	{
 		switch(this.etat)
 		{
 			case LEFT_UP:
 				try
 				{
-					moveTab(new Coordinates(DEFAULT_MOVE.getX(), 0));
+					moveTab(new Coordinates(DEFAULT_MOVE.getX(), 0), this.monsters);
 				}
 				catch (OutOfGridException e)
 				{
 					this.etat = Etat.RIGHT_UP;
-					move();
+					moveMonsters();
 				}
 				break;
 			case RIGHT_UP:
-				moveTab(new Coordinates(0, -DEFAULT_MOVE.getY()));
+				moveTab(new Coordinates(0, -DEFAULT_MOVE.getY()), this.monsters);
 				this.etat = Etat.RIGHT_BOTTOM;
 				break;
 			case RIGHT_BOTTOM:
 				try
 				{
-					moveTab(new Coordinates(-DEFAULT_MOVE.getX(), 0));
+					moveTab(new Coordinates(-DEFAULT_MOVE.getX(), 0), this.monsters);
 				}
 				catch (OutOfGridException e)
 				{
 					this.etat = Etat.LEFT_BOTTOM;
-					move();
+					moveMonsters();
 				}
 				break;
 			case LEFT_BOTTOM:
-				moveTab(new Coordinates(0, -DEFAULT_MOVE.getY()));
+				moveTab(new Coordinates(0, -DEFAULT_MOVE.getY()), this.monsters);
 				this.etat = Etat.LEFT_UP;
 				break;
 		}
@@ -550,7 +565,7 @@ public class SpaceInvadersMsVs
 	 * Method for shoot on tanks.
 	 * It search the invaders just above tanks and shoot.
 	 */
-	private void shoot()
+	private void monsterShoot()
 	{
 		int nbMonsters = this.monsters.length;
 		int nbTanks = this.tanks.length;
@@ -589,6 +604,28 @@ public class SpaceInvadersMsVs
 	
 		//[[[[[[[[[[[[[ Shoots behavior ]]]]]]]]]]]]]
 		
+	/**
+	 * Allow to move shoot
+	 */
+	private void moveShoots()
+	{
+		int i;
+		
+		for(i = 0; i < this.shoots.length; i++)
+		{
+			if(this.shoots[i] != null && this.shoots[i].isAlive())
+			{
+				try
+				{
+					this.moveTab(new Coordinates(0, -DEFAULT_MOVE.getY()), this.shoots);
+				}
+				catch (OutOfGridException e)
+				{
+					e.kill();
+				}
+			}
+		}
+	}
 	
 		//[[[[[[[[[[[[[ Display ]]]]]]]]]]]]]
 	
@@ -607,7 +644,7 @@ public class SpaceInvadersMsVs
 		{
 			for(x = 0; x < this.maxSize.getX(); x++)
 			{
-				grid[x][y] = 'x';
+				grid[x][y] = ' ';
 			}
 		}
 		
@@ -728,6 +765,8 @@ public class SpaceInvadersMsVs
 			e.printStackTrace();
 		}
 	}
+	
+	// TODO Add tankShoot method
 	
 		//[[[[[[[[[[[[[  Others ]]]]]]]]]]]]]
 	
