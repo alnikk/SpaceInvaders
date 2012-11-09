@@ -160,7 +160,6 @@ public class Movable extends Element
 	 * Method to create new movable object who moves by itself in given direction [UP|DOWN]
 	 * @param direction The direction of the shoot (if it negative the direction is down, up otherwise).
 	 * 					 If it's equal to 0 The function return null.
-	 * 			// TODO More it's big more shoot's quick
 	 * @param size This defined the size of the movable object to create
 	 * @return Return new shoot (Movable) or null if it failed.
 	 * @throws NegativeSizeException If the size given is negative

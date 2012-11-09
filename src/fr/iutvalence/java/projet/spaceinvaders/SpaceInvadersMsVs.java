@@ -14,6 +14,7 @@ public class SpaceInvadersMsVs
 {	
 	// ************* Constant *************//
 	
+		//[[[[[[[ Grid ]]]]]]]
 	/**
 	 * It defines the maximum (default) of X axis, if it's not set in constructor.
 	 */
@@ -23,7 +24,8 @@ public class SpaceInvadersMsVs
 	 * It defines the maximum (default) of Y axis, if it's not set in constructor.
 	 */
 	private static final int Y_GRID = 30;
-
+	
+		//[[[[[[[ Movable ]]]]]]]
 	/**
 	 * Default size of element (e.g. Doc Movable)
 	 */
@@ -39,11 +41,18 @@ public class SpaceInvadersMsVs
 	 */
 	private static final Coordinates DEFAULT_MOVE = new Coordinates(5,5);
 	
+		//[[[[[[[ Shoots ]]]]]]]
+	/**
+	 * This constant defines the step on the grid of a move
+	 */
+	private static final Coordinates DEFAULT_MOVE_SHOOTS = new Coordinates(0,2);
+	
 	/**
 	 * This constant defines the size of shoot
 	 */
 	private static final Coordinates DEFAULT_SIZE_SHOOT = new Coordinates(2,5);
 	
+		//[[[[[[[ Numerous ]]]]]]]
 	/**
 	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
 	 */
@@ -52,8 +61,9 @@ public class SpaceInvadersMsVs
 	/**
 	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
 	 */
-	private static final int DEFAULT_TANKS_AMOUNT = 1;
+	private static final int DEFAULT_TANKS_AMOUNT = 4;
 	
+		//[[[[[[[ Time ]]]]]]]
 	/**
 	 * This constant defines the default sleep time between each move of Invaders 
 	 */
@@ -69,32 +79,63 @@ public class SpaceInvadersMsVs
 	
 	// FIXME (SEEN) Define the enum in a separate file (same package)
 	
+		//[[[[[[[ Grid ]]]]]]]
 	/**
 	 * The maximum size of the area
 	 */
 	private final Coordinates maxSize;
 	
+	//[[[[[[[ Movable ]]]]]]]
+	/**
+	 * Size of Movable (e.g. Doc Movable)
+	 */
+	private Coordinates sizeMovable;
+
+	/**
+	 * Delta between 2 Invaders
+	 */
+	private int delta;
+
+	/**
+	 * This constant defines the step on the grid of a move
+	 */
+	private Coordinates coorMove;
+	
+	//[[[[[[[ Shoots ]]]]]]]
+	/**
+	 * Defines the step on the grid of a move
+	 */
+	private Coordinates moveShoots;
+
+	/**
+	 * Defines the size of shoot
+	 */
+	private Coordinates sizeShoots;
+	
+	//[[[[[[[ Numerous ]]]]]]]
+	/**
+	 * It defines the number of monsters you have in tabMonster.
+	 */
+	private int monstersAmount;
+
+	/**
+	 * It defines the number of tank you have in tabTank.
+	 */
+	private int tanksAmount;
+	
+	//[[[[[[[ Time ]]]]]]]
 	/**
 	 * This variable is used to wait sleepTime millisecond between each loop 
 	 */
 	private int sleepTime;
-	
+
 	/**
 	 * Not implemented yet
 	 * It uses to accelerate sleepTime when invaders are less numerous
 	 */
 	private int acceleration;
-	
-	/**
-	 * This variable is the state of invaders 
-	 */
-	private Etat etat;
-	
-	/**
-	 * Boolean to know if the game is finished
-	 */
-	private boolean work;
 
+		//[[[[[[[ Table ]]]]]]]
 	/**
 	 * Array containing all monsters
 	 */
@@ -109,22 +150,38 @@ public class SpaceInvadersMsVs
 	 * Array containing all shoots.
 	 */
 	private Movable[] shoots;
+		
+		//[[[[[[[ Others ]]]]]]]
+	/**
+	 * This variable is the state of invaders 
+	 */
+	private Etat etat;
+	
+	/**
+	 * Boolean to know if the game is finished
+	 */
+	private boolean work;
 
 	// ************************** Constructors **************************//
 	/**
 	 * Initialize the game.<br/>
-	 * This is the default constructor. It sets the number of tanks to 1, the number of monsters to 20, the X axis to
-	 * 300, and the Y axis to 300 too.<br/>
+	 * This is the default constructor. 
+	 * It set all to default value.
 	 * If you don't want to use this default characteristic use another constructor
 	 */
 	public SpaceInvadersMsVs()
 	{
 		this.maxSize = new Coordinates(X_GRID, Y_GRID);
-		this.work = true;
-		this.etat = Etat.LEFT_UP;
+		this.sizeMovable = DEFAULT_SIZE;
+		this.delta = DEFAULT_DELTA;
+		this.coorMove = DEFAULT_MOVE;
+		this.moveShoots = DEFAULT_MOVE_SHOOTS;
+		this.sizeShoots = DEFAULT_SIZE_SHOOT;
+		this.monstersAmount = DEFAULT_MONSTERS_AMOUNT;
+		this.tanksAmount = DEFAULT_TANKS_AMOUNT;
 		this.sleepTime = DEFAULT_SLEEP_TIME;
 		this.acceleration = DEFAULT_ACCELERATION;
-		initTab(DEFAULT_MONSTERS_AMOUNT, DEFAULT_TANKS_AMOUNT);
+		initTab(this.monstersAmount, this.tanksAmount);
 	}
 
 	/**
@@ -140,11 +197,16 @@ public class SpaceInvadersMsVs
 	public SpaceInvadersMsVs(int nbMonsters, int nbTanks)
 	{
 		this.maxSize = new Coordinates(X_GRID, Y_GRID);
-		this.work = true;
-		this.etat = Etat.LEFT_UP;
+		this.sizeMovable = DEFAULT_SIZE;
+		this.delta = DEFAULT_DELTA;
+		this.coorMove = DEFAULT_MOVE;
+		this.moveShoots = DEFAULT_MOVE_SHOOTS;
+		this.sizeShoots = DEFAULT_SIZE_SHOOT;
+		this.monstersAmount = nbMonsters;
+		this.tanksAmount = nbTanks;
 		this.sleepTime = DEFAULT_SLEEP_TIME;
 		this.acceleration = DEFAULT_ACCELERATION;
-		initTab(nbMonsters, nbTanks);
+		initTab(this.monstersAmount, this.tanksAmount);
 	}
 
 	/**
@@ -161,11 +223,16 @@ public class SpaceInvadersMsVs
 	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Coordinates max)
 	{
 		this.maxSize = max;
-		this.work = true;
-		this.etat = Etat.LEFT_UP;
+		this.sizeMovable = DEFAULT_SIZE;
+		this.delta = DEFAULT_DELTA;
+		this.coorMove = DEFAULT_MOVE;
+		this.moveShoots = DEFAULT_MOVE_SHOOTS;
+		this.sizeShoots = DEFAULT_SIZE_SHOOT;
+		this.monstersAmount = nbMonsters;
+		this.tanksAmount = nbTanks;
 		this.sleepTime = DEFAULT_SLEEP_TIME;
 		this.acceleration = DEFAULT_ACCELERATION;
-		initTab(nbMonsters, nbTanks);
+		initTab(this.monstersAmount, this.tanksAmount);
 	}
 	
 	/**
@@ -184,11 +251,16 @@ public class SpaceInvadersMsVs
 	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Coordinates max, int sleepTime)
 	{
 		this.maxSize = max;
-		this.work = true;
-		this.etat = Etat.LEFT_UP;
+		this.sizeMovable = DEFAULT_SIZE;
+		this.delta = DEFAULT_DELTA;
+		this.coorMove = DEFAULT_MOVE;
+		this.moveShoots = DEFAULT_MOVE_SHOOTS;
+		this.sizeShoots = DEFAULT_SIZE_SHOOT;
+		this.monstersAmount = nbMonsters;
+		this.tanksAmount = nbTanks;
 		this.sleepTime = sleepTime;
 		this.acceleration = DEFAULT_ACCELERATION;
-		initTab(nbMonsters, nbTanks);
+		initTab(this.monstersAmount, this.tanksAmount);
 	}
 	
 	/**
@@ -209,11 +281,16 @@ public class SpaceInvadersMsVs
 	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, int acceleration)
 	{
 		this.maxSize = max;
-		this.work = true;
-		this.etat = Etat.LEFT_UP;
+		this.sizeMovable = DEFAULT_SIZE;
+		this.delta = DEFAULT_DELTA;
+		this.coorMove = DEFAULT_MOVE;
+		this.moveShoots = DEFAULT_MOVE_SHOOTS;
+		this.sizeShoots = DEFAULT_SIZE_SHOOT;
+		this.monstersAmount = nbMonsters;
+		this.tanksAmount = nbTanks;
 		this.sleepTime = sleepTime;
 		this.acceleration = acceleration;
-		initTab(nbMonsters, nbTanks);
+		initTab(this.monstersAmount, this.tanksAmount);
 	}
 
 	// ************************** Generals Methods **************************//
@@ -227,55 +304,59 @@ public class SpaceInvadersMsVs
 	 *            Set the number of monster (The maximum is set (to my mind) to 250, after I'm offload one's
 	 *            responsibilities)
 	 * @param nbTanks
-	 *            Set the number of tank (not implemented yet, so the maximum is 1 and minimum too ;-))
+	 *            Set the number of tank [1-4]
 	 */
 	private void initTab(int nbMonsters, int nbTanks)
-	{
-		// TODO improve with tank
-		
+	{		
 		// local variable
-		Coordinates tank_position = new Coordinates((this.maxSize.getX() / 2) - (DEFAULT_SIZE.getX() / 2),0);
-		Coordinates monster_position = new Coordinates(DEFAULT_DELTA, this.maxSize.getY() - (DEFAULT_SIZE.getY() + DEFAULT_DELTA));
-		int i = 0;
+		int i;
+		
 		// Allocations
 		this.monsters = new Movable[nbMonsters];
 		this.tanks = new Movable[nbTanks];
 		this.shoots = new Movable[nbTanks + nbMonsters];
-
-		// Set-up Tabs
-		try
+		
+		// Set-up tank table
+		for(i = 0; i < nbTanks; i++)
 		{
-			this.tanks[0] = new Movable(tank_position, new Coordinates(DEFAULT_SIZE.getX(),DEFAULT_SIZE.getY()));
+			try
+			{		// TODO improve with tank
+				this.tanks[i] = new Movable(new Coordinates(((this.maxSize.getX() / 4) - (this.sizeMovable.getX() / 2))*i,0), 
+											new Coordinates(this.sizeMovable.getX(),this.sizeMovable.getY()));
+			}
+			catch (NegativeSizeException e1)
+			{
+				System.out.println(e1);
+			}
 		}
-		catch (NegativeSizeException e1)
-		{
-			System.out.println(e1);
-		}
 
-		while (i < nbMonsters)
+		// Define Invaders position
+		this.etat = Etat.LEFT_UP;
+		
+		// Set-up Invaders table
+		Coordinates monster_position = new Coordinates(this.delta, this.maxSize.getY() - (this.sizeMovable.getY() + this.delta));
+		for(i = 0; i < nbMonsters; i++)
 		{
-			while (i < nbMonsters && monster_position.getX() + (DEFAULT_DELTA + DEFAULT_SIZE.getX()) <= this.maxSize.getX())
+			if(monster_position.getX() + (this.delta + this.sizeMovable.getX()) <= this.maxSize.getX())
 			{
 				try
 				{
-					this.monsters[i] = new Movable(monster_position, new Coordinates(DEFAULT_SIZE.getX(),DEFAULT_SIZE.getY()));
+					this.monsters[i] = new Movable(monster_position, new Coordinates(this.sizeMovable.getX(),this.sizeMovable.getY()));
 				}
 				catch (NegativeSizeException e)
 				{
 					System.out.println(e);
 				}
-				monster_position = new Coordinates(monster_position.getX() + (DEFAULT_DELTA + DEFAULT_SIZE.getX()),
-						monster_position.getY());
-				i = i + 1;
+				monster_position = new Coordinates(monster_position.getX() + (this.delta + this.sizeMovable.getX()),
+													monster_position.getY());
 			}
-			monster_position = new Coordinates(DEFAULT_DELTA, monster_position.getY() - (DEFAULT_DELTA + DEFAULT_SIZE.getY()));
+			else
+				monster_position = new Coordinates(this.delta, monster_position.getY() - (this.delta + this.sizeMovable.getY()));
 		}
-		// Check?
-		//testCollision();
+		testCollision();
 	}
 	
 	// FIXME (SEEN) prefer using moveTab(Coordinate) rather than moveTab(int, int)
-	// TODO Fix Bug(s)
 	/**
 	 * This method allows to move all instances in table of delta coordinates.
 	 * @param delta The delta coordinates to move Invaders
@@ -284,26 +365,34 @@ public class SpaceInvadersMsVs
 	 */
 	private void moveTab(Coordinates delta, Movable[] tableToMove) throws OutOfGridException
 	{
-		int i, nbMonsters;
-		nbMonsters = tableToMove.length;
-		for(i=0; i < nbMonsters; i++)
+		int i;
+		
+		// Test if all table is movable
+		for(i=0; i < tableToMove.length; i++)
+		{
+			if(tableToMove[i] != null && tableToMove[i].isAlive())
+			{
+				if(tableToMove[i].getArea().getPosition().getX() + 
+						tableToMove[i].getArea().getSize().getX() + delta.getX() > this.maxSize.getX()
+					|| tableToMove[i].getArea().getPosition().getY() + 
+						tableToMove[i].getArea().getSize().getY() + delta.getY() > this.maxSize.getY()
+					|| tableToMove[i].getArea().getPosition().getX() + delta.getX()< 0
+					|| tableToMove[i].getArea().getPosition().getY() + delta.getY() < 0)
+				{
+					// TODO Kill when Y coordinates is less than 0?
+					throw new OutOfGridException(tableToMove[i]);
+				}
+			}
+		}
+		
+		// Next we move table
+		for(i=0; i < tableToMove.length; i++)
 		{
 			if(tableToMove[i] != null && tableToMove[i].isAlive())
 			{
 				try
 				{
-					if(tableToMove[i].getArea().getPosition().getX() + 
-							tableToMove[i].getArea().getSize().getX() + delta.getX() > this.maxSize.getX()
-						|| tableToMove[i].getArea().getPosition().getY() + 
-							tableToMove[i].getArea().getSize().getY() + delta.getY() > this.maxSize.getY()
-						|| tableToMove[i].getArea().getPosition().getX() + delta.getX()< 0
-						|| tableToMove[i].getArea().getPosition().getY() + delta.getY() < 0)
-					{
-						// Kill when Y coordinates is less than 0?
-						throw new OutOfGridException(tableToMove[i]);
-					}
 					tableToMove[i].move(delta);
-				
 				}
 				catch (NegativeSizeException e)
 				{
@@ -323,9 +412,8 @@ public class SpaceInvadersMsVs
 	private int searchEmptyCellFromMovableTable(Movable table[])
 	{
 		int i;
-		int nbCell = table.length;
 		
-		for(i = 0; i < nbCell; i++)
+		for(i = 0; i < table.length; i++)
 		{
 			if(table[i] != null)
 			{
@@ -333,11 +421,73 @@ public class SpaceInvadersMsVs
 					return i;
 			}
 			else
-			{
 				return i;
-			}
 		}
 		return -1;
+	}
+	
+	/**
+	 * This method count the number of alive Movable.
+	 * @param table The table to count alive Movable.
+	 * @return The number of alive Invaders.
+	 */
+	private int countAlive(Movable[] table)
+	{
+		int nbAlive = 0, i;
+		
+		for(i = 0; i < table.length; i++)
+		{
+			if(table[i].isAlive())
+				nbAlive++;
+		}
+		return nbAlive;
+	}
+	
+	/**
+	 * This method wait a time in function of sleepTime value and of monster alive's number
+	 */
+	private void waitLoop()
+	{
+		try
+		{		
+			// TODO sleepTime constant...
+			// expression is a.x type. Add a.x + c with c playable. It have to don't affect sleepTime
+			Thread.sleep((long) (Math.sqrt(((double) countAlive(this.monsters)/this.monstersAmount)) * this.sleepTime));
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Make invader given in arguments shoot
+	 * @param movable Invaders who have to shoot
+	 * @param direction The direction you want to shoot
+	 */
+	private void shootFrom(Movable movable, int direction)
+	{
+		int index;
+		
+		if(movable != null)
+		{
+			index = searchEmptyCellFromMovableTable(this.shoots);
+			if (index != -1)
+			{
+				// TODO remove debug
+				//System.out.println("Shoot is from : " + invader);
+				try
+				{
+					this.shoots[index] = movable.fire(direction, this.sizeShoots);
+				}
+				catch (NegativeSizeException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			//else	// TODO Remove debug
+				///System.out.println("Issue : don't find free place for shoot");
+		}
 	}
 	
 	// TODO think to remove
@@ -362,31 +512,34 @@ public class SpaceInvadersMsVs
 	 */
 	public void run()
 	{
-		testCollision();
+		this.work = true;
 		while(this.work)
 		{
 			// TODO remove Debug msg
 			//System.out.println(Arrays.toString(this.monsters));
-			try
-			{
-				moveMonsters();
-			}
-			catch (OutOfGridException e1)
-			{
-				e1.kill();
-				System.out.println("OutOfGrid : " + e1.getOutOfGridException());
-			}
 			
-			testCollision(); // Collision Shoots?
+			moveMonsters();
+			
+			testCollision();
+			
+			if(this.countAlive(this.tanks) == 0 || this.countAlive(this.monsters) == 0)
+				this.work = false;
 			
 			monsterShoot();
 			
 			showGrid();
-			waitMonsters();
+			waitLoop();
 			
 			moveShoots();
 			
-			randomMove();
+			try
+			{
+				randomMove();
+			}
+			catch (OutOfGridException e)
+			{
+				// Nothing to do, maybe a little noise for tell user he can't
+			}
 			
 			//TODO Remove debug
 			//kill(this.monsters);
@@ -396,6 +549,7 @@ public class SpaceInvadersMsVs
 	//******************** Method ***********************
 
 		//[[[[[[[[[[[[[ Collision ]]]]]]]]]]]]]
+	// TODO Go to general section ?
 	/**
 	 * This method tests if there is any collisions in all table declared.<br/>
 	 * Collision are tested between each table and not between elements of the same table.<br/>
@@ -405,11 +559,11 @@ public class SpaceInvadersMsVs
 	{
 		int i, j;
 		
-		for(i=0;i < this.tanks.length; i++)
+		for(i=0;i < this.tanksAmount; i++)
 		{ 
-			if(this.tanks[i].isAlive())
+			if(this.tanks[i] != null && this.tanks[i].isAlive())
 			{
-				for(j=0; j < this.monsters.length; j++)
+				for(j=0; j < this.monstersAmount; j++)
 				{
 					if(this.shoots[i] != null && this.monsters[j].isAlive())
 					{
@@ -417,14 +571,13 @@ public class SpaceInvadersMsVs
 						{
 							this.tanks[i].setAlive(false);
 							this.monsters[j].setAlive(false);
-							this.work = false;
 							// TODO remove Debug msg
 							//System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
 						}
 					}
 				}
 				
-				for(j=0; j < this.shoots.length; j++)
+				for(j=0; j < (this.monstersAmount + this.tanksAmount); j++)
 				{
 					if(this.shoots[j] != null && this.shoots[j].isAlive())
 					{
@@ -432,7 +585,6 @@ public class SpaceInvadersMsVs
 						{
 							this.tanks[i].setAlive(false);
 							this.shoots[j].setAlive(false);
-							this.work = false;
 							// TODO remove Debug msg
 							//System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
 						}
@@ -455,16 +607,15 @@ public class SpaceInvadersMsVs
 	 * <li>down</li>
 	 * <li>right</li>
 	 * </ul> 
-	 * @throws OutOfGridException If Invaders are OutOfGrid then ther's exception.
 	 */
-	private void moveMonsters() throws OutOfGridException
+	private void moveMonsters()
 	{
 		switch(this.etat)
 		{
 			case LEFT_UP:
 				try
 				{
-					moveTab(new Coordinates(DEFAULT_MOVE.getX(), 0), this.monsters);
+					moveTab(new Coordinates(this.coorMove.getX(), 0), this.monsters);
 				}
 				catch (OutOfGridException e)
 				{
@@ -473,13 +624,21 @@ public class SpaceInvadersMsVs
 				}
 				break;
 			case RIGHT_UP:
-				moveTab(new Coordinates(0, -DEFAULT_MOVE.getY()), this.monsters);
+				try
+				{
+					moveTab(new Coordinates(0, -this.coorMove.getY()), this.monsters);
+				}
+				catch (OutOfGridException e1)
+				{
+					e1.kill();
+					moveMonsters();
+				}
 				this.etat = Etat.RIGHT_BOTTOM;
 				break;
 			case RIGHT_BOTTOM:
 				try
 				{
-					moveTab(new Coordinates(-DEFAULT_MOVE.getX(), 0), this.monsters);
+					moveTab(new Coordinates(-this.coorMove.getX(), 0), this.monsters);
 				}
 				catch (OutOfGridException e)
 				{
@@ -488,76 +647,17 @@ public class SpaceInvadersMsVs
 				}
 				break;
 			case LEFT_BOTTOM:
-				moveTab(new Coordinates(0, -DEFAULT_MOVE.getY()), this.monsters);
-				this.etat = Etat.LEFT_UP;
-				break;
-		}
-	}
-	
-	// TODO Generalize this method
-	/**
-	 * This method count the number of alive Invaders.
-	 * @return The number of alive Invaders.
-	 */
-	private int countMonsters()
-	{
-		int nbInvaders = this.monsters.length, nbAlive = 0, i;
-		
-		for(i = 0; i < nbInvaders; i++)
-		{
-			if(this.monsters[i].isAlive())
-				nbAlive++;
-		}
-
-		if(nbAlive == 0)
-			this.work = false;
-		return nbAlive;
-	}
-	
-	// TODO Generalize this method
-	/**
-	 * This method wait a time in function of sleepTime value and of monster alive's number
-	 */
-	private void waitMonsters()
-	{
-		try
-		{			
-			// expression is a.x type. Add a.x + c with c playable. It have to don't affect sleepTime
-			Thread.sleep((long) (Math.sqrt(((double) countMonsters()/this.monsters.length)) * this.sleepTime));
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Make invader given in arguments shoot
-	 * @param invader Invaders who have to shoot
-	 */
-	private void shootFrom(Movable invader)
-	{
-		int index;
-		
-		if(invader != null)
-		{
-			index = searchEmptyCellFromMovableTable(this.shoots);
-			if (index != -1)
-			{
-				// TODO remove debug
-				//System.out.println("Shoot is from : " + invader);
-					// TODO Add acceleration to shoot
 				try
 				{
-					this.shoots[index] = invader.fire(-1, DEFAULT_SIZE_SHOOT);
+					moveTab(new Coordinates(0, -this.coorMove.getY()), this.monsters);
 				}
-				catch (NegativeSizeException e)
+				catch (OutOfGridException e1)
 				{
-					e.printStackTrace();
+					e1.kill();
+					moveMonsters();
 				}
-			}
-			//else	// TODO Remove debug
-				///System.out.println("Issue : don't find free place for shoot");
+				this.etat = Etat.LEFT_UP;
+				break;
 		}
 	}
 	
@@ -567,38 +667,34 @@ public class SpaceInvadersMsVs
 	 */
 	private void monsterShoot()
 	{
-		int nbMonsters = this.monsters.length;
-		int nbTanks = this.tanks.length;
 		int i,j;
 		Movable invaderAbove = null;
 		
-		for(i = 0; i < nbTanks; i++)
+		for(i = 0; i < this.tanksAmount; i++)
 		{
-			if(this.tanks[i].isAlive())
+			if(this.tanks[i] != null && this.tanks[i].isAlive())
 			{
-				for(j = nbMonsters - 1; j > 0 ; j--)
+				for(j = this.monstersAmount - 1; j > 0 ; j--)
 				{
-					if(this.monsters[j].isAlive())
+					if(this.monsters[i] != null && this.monsters[j].isAlive())
 					{
-						if(((this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2) - (DEFAULT_SIZE_SHOOT.getX() / 2) < (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX())
-								&& (this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2) - (DEFAULT_SIZE_SHOOT.getX() / 2) > (this.tanks[i].getArea().getPosition().getX()))
-								|| ((this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2) + (DEFAULT_SIZE_SHOOT.getX() / 2) < (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX())
-								&& (this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2) + (DEFAULT_SIZE_SHOOT.getX() / 2)  > (this.tanks[i].getArea().getPosition().getX())))
+						if(((this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2) - (this.sizeShoots.getX() / 2) < (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX())
+								&& (this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2) - (this.sizeShoots.getX() / 2) > (this.tanks[i].getArea().getPosition().getX()))
+								|| ((this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2) + (this.sizeShoots.getX() / 2) < (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX())
+								&& (this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2) + (this.sizeShoots.getX() / 2)  > (this.tanks[i].getArea().getPosition().getX())))
 						{
 							if(invaderAbove != null)
 							{
 								if(invaderAbove.getArea().getPosition().getY() > this.monsters[j].getArea().getPosition().getY())
-								{
 									invaderAbove = this.monsters[j];
-								}
 							}
 							else
 								invaderAbove = this.monsters[j];
 						}
 					}
 				}
-			}
-			shootFrom(invaderAbove);
+			} // TODO Shoot's acceleration
+			shootFrom(invaderAbove, -1);
 		}
 	}
 	
@@ -611,13 +707,13 @@ public class SpaceInvadersMsVs
 	{
 		int i;
 		
-		for(i = 0; i < this.shoots.length; i++)
+		for(i = 0; i < (this.monstersAmount + this.tanksAmount); i++)
 		{
 			if(this.shoots[i] != null && this.shoots[i].isAlive())
 			{
 				try
 				{
-					this.moveTab(new Coordinates(0, -DEFAULT_MOVE.getY()), this.shoots);
+					this.moveTab(new Coordinates(0, -this.moveShoots.getY()), this.shoots);
 				}
 				catch (OutOfGridException e)
 				{
@@ -636,8 +732,6 @@ public class SpaceInvadersMsVs
 	private char[][] gridImage()
 	{
 		int i,x,y;
-		int nbTanks = this.tanks.length, nbMonsters = this.monsters.length, 
-				nbShoots = this.shoots.length;
 		char grid[][] = new char[this.maxSize.getX()][this.maxSize.getY()];
 		
 		for(y = 0; y < this.maxSize.getY(); y++)
@@ -648,7 +742,7 @@ public class SpaceInvadersMsVs
 			}
 		}
 		
-		for(i = 0; i < nbTanks; i++)
+		for(i = 0; i < this.tanksAmount; i++)
 		{
 			if(this.tanks[i] != null && this.tanks[i].isAlive())
 			{
@@ -666,7 +760,7 @@ public class SpaceInvadersMsVs
 			}
 		}
 		
-		for(i = 0; i < nbMonsters; i++)
+		for(i = 0; i < this.monstersAmount; i++)
 		{
 			if(this.monsters[i] != null && this.monsters[i].isAlive())
 			{
@@ -684,7 +778,7 @@ public class SpaceInvadersMsVs
 			}
 		}
 
-		for(i = 0; i < nbShoots; i++)
+		for(i = 0; i < (this.monstersAmount + this.tanksAmount); i++)
 		{
 			if(this.shoots[i] != null && this.shoots[i].isAlive())
 			{
@@ -738,31 +832,42 @@ public class SpaceInvadersMsVs
 	
 	/**
 	 * Allows random tank control
+	 * @throws OutOfGridException Indicate when Tank want to go over the screen
 	 */
-	private void randomMove()
+	private void randomMove() throws OutOfGridException
 	{
-		int x = (int) (Math.random() * 10);
-		long neg = Math.round(Math.random());
+		int i;
+		int x;
+		long neg;
 		
-		if(neg == 0)
-			neg = -1;
-		
-		try
+		for(i=0; i < this.tanksAmount; i++)
 		{
-			if((this.tanks[0].getArea().getPosition().getX() + (int) (x*neg)) > 0
-				&& (this.tanks[0].getArea().getPosition().getX() +
-				    this.tanks[0].getArea().getSize().getX() + (int) (x*neg)) < this.maxSize.getX())
+			if(this.tanks[i] != null && this.tanks[i].isAlive())
 			{
-				this.tanks[0].move(new Coordinates((int) (x*neg),0));
+				x = (int) (Math.random() * 10);
+				neg = Math.round(Math.random());
+				
+				if(neg == 0)
+					neg = -1;
+				
+				try
+				{
+					if((this.tanks[i].getArea().getPosition().getX() + (int) (x*neg)) > 0
+						&& (this.tanks[i].getArea().getPosition().getX() +
+						    this.tanks[i].getArea().getSize().getX() + (int) (x*neg)) < this.maxSize.getX())
+					{
+						this.tanks[i].move(new Coordinates((int) (x*neg),0));
+					}
+					else
+					{
+						throw new OutOfGridException(this.tanks[i]);
+					}
+				}
+				catch (NegativeSizeException e)
+				{
+					e.printStackTrace();
+				}
 			}
-			else
-			{
-				// TODO Exception
-			}
-		}
-		catch (NegativeSizeException e)
-		{
-			e.printStackTrace();
 		}
 	}
 	
