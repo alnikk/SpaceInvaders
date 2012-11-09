@@ -3,8 +3,6 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
-import java.util.Arrays;
-
 /**
  * This thread loop until the game finish.
  * It make invaders move and test collision beetween us and the tank. 
@@ -230,18 +228,21 @@ public class MonstersBehaviorThread extends Thread
 		nbMonsters = this.monsters.length;
 		
 		for(i=0;i < nbTanks; i++)
-		{ // TODO Tank alive?
-			for(j=0; j < nbMonsters; j++)
+		{ 
+			if(this.tanks[i].isAlive())
 			{
-				if(this.monsters[j].isAlive())
+				for(j=0; j < nbMonsters; j++)
 				{
-					if(this.tanks[i].overlapping(this.monsters[j]) != null)
+					if(this.monsters[j].isAlive())
 					{
-						this.tanks[i].setAlive(false);
-						this.monsters[j].setAlive(false);
-						this.work = false;
-						// TODO remove Debug msg
-						//System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
+						if(this.tanks[i].overlapping(this.monsters[j]) != null)
+						{
+							this.tanks[i].setAlive(false);
+							this.monsters[j].setAlive(false);
+							this.work = false;
+							// TODO remove Debug msg
+							//System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
+						}
 					}
 				}
 			}
@@ -382,8 +383,8 @@ public class MonstersBehaviorThread extends Thread
 			if(this.monsters[i].isAlive())
 				nbAlive++;
 		}
-		// TODO is this go here?
-		if(nbAlive == 0) // we stop game if there's no Invaders
+		
+		if(nbAlive == 0)
 			this.work = false;
 		return nbAlive;
 	}

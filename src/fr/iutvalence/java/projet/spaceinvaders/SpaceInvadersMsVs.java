@@ -27,7 +27,7 @@ public class SpaceInvadersMsVs
 	/**
 	 * Default size of element (e.g. Doc Movable)
 	 */
-	private static final int DEFAULT_SIZE = 5;
+	private static final Coordinates DEFAULT_SIZE = new Coordinates(5,5);
 	
 	/**
 	 * Default delta between 2 monsters
@@ -35,15 +35,10 @@ public class SpaceInvadersMsVs
 	private static final int DEFAULT_DELTA = 2;
 	
 	/**
-	 * This constant defines the step X on the grid of a move
+	 * This constant defines the step on the grid of a move
 	 */
-	private static final int DEFAULT_X_MOVE = 5;
+	private static final Coordinates DEFAULT_MOVE = new Coordinates(5,5);
 	
-	/**
-	 * This constant defines the step Y on the grid of a move
-	 */
-	private static final int DEFAULT_Y_MOVE = 5;
-
 	/**
 	 * This constant defines the size of shoot
 	 */
@@ -239,8 +234,8 @@ public class SpaceInvadersMsVs
 		// TODO improve with tank
 		
 		// local variable
-		Coordinates tank_position = new Coordinates((this.maxSize.getX() / 2) - (DEFAULT_SIZE / 2),0);
-		Coordinates monster_position = new Coordinates(DEFAULT_DELTA, this.maxSize.getY() - (DEFAULT_SIZE + DEFAULT_DELTA));
+		Coordinates tank_position = new Coordinates((this.maxSize.getX() / 2) - (DEFAULT_SIZE.getX() / 2),0);
+		Coordinates monster_position = new Coordinates(DEFAULT_DELTA, this.maxSize.getY() - (DEFAULT_SIZE.getY() + DEFAULT_DELTA));
 		int i = 0;
 		// Allocations
 		this.monsters = new Movable[nbMonsters];
@@ -250,7 +245,7 @@ public class SpaceInvadersMsVs
 		// Set-up Tabs
 		try
 		{
-			this.tanks[0] = new Movable(tank_position, new Coordinates(DEFAULT_SIZE,DEFAULT_SIZE));
+			this.tanks[0] = new Movable(tank_position, new Coordinates(DEFAULT_SIZE.getX(),DEFAULT_SIZE.getY()));
 		}
 		catch (NegativeSizeException e1)
 		{
@@ -259,21 +254,21 @@ public class SpaceInvadersMsVs
 
 		while (i < nbMonsters)
 		{
-			while (i < nbMonsters && monster_position.getX() + (DEFAULT_DELTA + DEFAULT_SIZE) <= this.maxSize.getX())
+			while (i < nbMonsters && monster_position.getX() + (DEFAULT_DELTA + DEFAULT_SIZE.getX()) <= this.maxSize.getX())
 			{
 				try
 				{
-					this.monsters[i] = new Movable(monster_position, new Coordinates(DEFAULT_SIZE,DEFAULT_SIZE));
+					this.monsters[i] = new Movable(monster_position, new Coordinates(DEFAULT_SIZE.getX(),DEFAULT_SIZE.getY()));
 				}
 				catch (NegativeSizeException e)
 				{
 					System.out.println(e);
 				}
-				monster_position = new Coordinates(monster_position.getX() + (DEFAULT_DELTA + DEFAULT_SIZE),
+				monster_position = new Coordinates(monster_position.getX() + (DEFAULT_DELTA + DEFAULT_SIZE.getX()),
 						monster_position.getY());
 				i = i + 1;
 			}
-			monster_position = new Coordinates(DEFAULT_DELTA, monster_position.getY() - (DEFAULT_DELTA + DEFAULT_SIZE));
+			monster_position = new Coordinates(DEFAULT_DELTA, monster_position.getY() - (DEFAULT_DELTA + DEFAULT_SIZE.getY()));
 		}
 		// Check?
 		//testCollision();
@@ -302,6 +297,20 @@ public class SpaceInvadersMsVs
 			}
 		}
 		return -1;
+	}
+	
+	// TODO think to remove
+	/**
+	 * Kill one instance of movable object
+	 * @param tabToKill Table where kill instance
+	 */
+	private void kill(Movable[] tabToKill)
+	{
+		int i = 0, nbMonsters= tabToKill.length;
+		
+		while(i < nbMonsters && (!tabToKill[i].isAlive()))
+			i++;
+		tabToKill[i].setAlive(false);
 	}
 	
 	//********************* Main ************************
@@ -333,7 +342,6 @@ public class SpaceInvadersMsVs
 			
 			shoot();
 			
-			// TODO Print screen
 			showGrid();
 			
 			waitMonsters();
@@ -341,26 +349,13 @@ public class SpaceInvadersMsVs
 			randomMove();
 			
 			//TODO Remove debug
-			//kill();
+			//kill(this.monsters);
 		}
 	}
 	
 	//******************** Method ***********************
-	
-	// test method
-	// TODO think to remove
-	/**
-	 * Test for acceleration
-	 */
-	private void kill()
-	{
-		int i = 0, nbMonsters= this.monsters.length;
-		
-		while(i < nbMonsters && (!this.monsters[i].isAlive()))
-			i++;
-		this.monsters[i].setAlive(false);
-	}
-	
+
+		//[[[[[[[[[[[[[ Collision ]]]]]]]]]]]]]
 	/**
 	 * This method tests if there is any collisions in all table declared.<br/>
 	 * Collision are tested between each table and not between elements of the same table.<br/>
@@ -374,25 +369,32 @@ public class SpaceInvadersMsVs
 		nbMonsters = this.monsters.length;
 		
 		for(i=0;i < nbTanks; i++)
-		{ // TODO Tank alive?
-			for(j=0; j < nbMonsters; j++)
+		{ 
+			if(this.tanks[i].isAlive())
 			{
-				if(this.monsters[j].isAlive())
+				for(j=0; j < nbMonsters; j++)
 				{
-					if(this.tanks[i].overlapping(this.monsters[j]) != null)
+					if(this.monsters[j].isAlive())
 					{
-						this.tanks[i].setAlive(false);
-						this.monsters[j].setAlive(false);
-						this.work = false;
-						// TODO remove Debug msg
-						//System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
+						if(this.tanks[i].overlapping(this.monsters[j]) != null)
+						{
+							this.tanks[i].setAlive(false);
+							this.monsters[j].setAlive(false);
+							this.work = false;
+							// TODO remove Debug msg
+							//System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
+						}
 					}
 				}
 			}
 		}	
 	}
 	
+	
+		//[[[[[[[[[[[[[ Monsters behavior ]]]]]]]]]]]]]
+	
 	// FIXME (SEEN) prefer using moveTab(Coordinate) rather than moveTab(int, int)
+	// TODO Generalize this method
 	/**
 	 * This method allows to move Invaders table of delta coordinates.
 	 * @param delta The delta coordinates to move Invaders
@@ -447,7 +449,7 @@ public class SpaceInvadersMsVs
 			case LEFT_UP:
 				try
 				{
-					moveTab(new Coordinates(DEFAULT_X_MOVE, 0));
+					moveTab(new Coordinates(DEFAULT_MOVE.getX(), 0));
 				}
 				catch (OutOfGridException e)
 				{
@@ -456,13 +458,13 @@ public class SpaceInvadersMsVs
 				}
 				break;
 			case RIGHT_UP:
-				moveTab(new Coordinates(0, -DEFAULT_Y_MOVE));
+				moveTab(new Coordinates(0, -DEFAULT_MOVE.getY()));
 				this.etat = Etat.RIGHT_BOTTOM;
 				break;
 			case RIGHT_BOTTOM:
 				try
 				{
-					moveTab(new Coordinates(-DEFAULT_X_MOVE, 0));
+					moveTab(new Coordinates(-DEFAULT_MOVE.getX(), 0));
 				}
 				catch (OutOfGridException e)
 				{
@@ -471,12 +473,13 @@ public class SpaceInvadersMsVs
 				}
 				break;
 			case LEFT_BOTTOM:
-				moveTab(new Coordinates(0, -DEFAULT_Y_MOVE));
+				moveTab(new Coordinates(0, -DEFAULT_MOVE.getY()));
 				this.etat = Etat.LEFT_UP;
 				break;
 		}
 	}
 	
+	// TODO Generalize this method
 	/**
 	 * This method count the number of alive Invaders.
 	 * @return The number of alive Invaders.
@@ -490,12 +493,13 @@ public class SpaceInvadersMsVs
 			if(this.monsters[i].isAlive())
 				nbAlive++;
 		}
-		// TODO is this go here?
-		if(nbAlive == 0) // we stop game if there's no Invaders
+
+		if(nbAlive == 0)
 			this.work = false;
 		return nbAlive;
 	}
 	
+	// TODO Generalize this method
 	/**
 	 * This method wait a time in function of sleepTime value and of monster alive's number
 	 */
@@ -534,7 +538,6 @@ public class SpaceInvadersMsVs
 				}
 				catch (NegativeSizeException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -583,7 +586,12 @@ public class SpaceInvadersMsVs
 			shootFrom(invaderAbove);
 		}
 	}
+	
+		//[[[[[[[[[[[[[ Shoots behavior ]]]]]]]]]]]]]
 		
+	
+		//[[[[[[[[[[[[[ Display ]]]]]]]]]]]]]
+	
 	/**
 	 * Create grid image to table of character
 	 * @return 2D table of character
@@ -670,7 +678,7 @@ public class SpaceInvadersMsVs
 		
 		for(y = this.maxSize.getY() - 1; y >= 0; y--)
 		{
-			for(x = this.maxSize.getX() - 1; x >= 0; x--)
+			for(x = 0; x <this.maxSize.getX(); x++)
 			{
 				System.out.print(grid[x][y]);
 			}
@@ -678,6 +686,7 @@ public class SpaceInvadersMsVs
 		}
 		System.out.print("\n");
 	}
+	
 	/**
 	 * Allows to print the game to the screen in ASCII Art
 	 */
@@ -687,17 +696,40 @@ public class SpaceInvadersMsVs
 		printGrid(grid);
 	}
 	
+	
+		//[[[[[[[[[[[[[  Controls ]]]]]]]]]]]]]
+	
+	/**
+	 * Allows random tank control
+	 */
 	private void randomMove()
 	{
+		int x = (int) (Math.random() * 10);
+		long neg = Math.round(Math.random());
+		
+		if(neg == 0)
+			neg = -1;
+		
 		try
 		{
-			this.tanks[0].move(new Coordinates((int) (Math.random() * 10),0));
+			if((this.tanks[0].getArea().getPosition().getX() + (int) (x*neg)) > 0
+				&& (this.tanks[0].getArea().getPosition().getX() +
+				    this.tanks[0].getArea().getSize().getX() + (int) (x*neg)) < this.maxSize.getX())
+			{
+				this.tanks[0].move(new Coordinates((int) (x*neg),0));
+			}
+			else
+			{
+				// TODO Exception
+			}
 		}
 		catch (NegativeSizeException e)
 		{
 			e.printStackTrace();
 		}
 	}
+	
+		//[[[[[[[[[[[[[  Others ]]]]]]]]]]]]]
 	
 	@Override
 	public String toString()

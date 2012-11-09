@@ -15,7 +15,7 @@ public class TestBoundingBox
 {
 
 	/**
-	 * @param args
+	 * @param args No arguments
 	 */
 	public static void main(String[] args)
 	{
@@ -118,11 +118,6 @@ public class TestBoundingBox
 			System.out.println("frame :      b1 " + b1 + "\n\t\tb2 " + b2);
 			System.out.println("Intersection :  b3 " + b2.intersection(b1));
 			System.out.println("\t\tTest waited b3 and b1 U b2: " + b3.equals(b2.intersection(b1))+"\n\t\tTest waited b3 and b2 U b1 : "+ b3.equals(b1.intersection(b2)) + "\n");
-	
-			
-			// TODO Finish
-			
-			
 		
 		}
 		catch (NegativeSizeException e)

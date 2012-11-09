@@ -3,7 +3,6 @@
  */
 package fr.iutvalence.java.projet.test;
 
-import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMsVs;
 
 /**
@@ -14,7 +13,7 @@ public class TestSpaceInvadersMsVs
 {
 
 	/**
-	 * @param args
+	 * @param args No arguments
 	 */
 	public static void main(String[] args)
 	{

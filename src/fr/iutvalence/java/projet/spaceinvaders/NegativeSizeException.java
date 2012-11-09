@@ -9,7 +9,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * @author Gallet Guyon
  */
 // FIXME (QUEST) What is this?
-// FIXME (ANSWER) it is an annotation (aimed to be caught by the compiler) meaning that even if no serial version UID is given no warning has to be raised
+// FIXME (SEEN) (ANSWER) it is an annotation (aimed to be caught by the compiler) meaning that even if no serial version UID is given no warning has to be raised
 @SuppressWarnings("serial")
 public class NegativeSizeException extends Exception
 {
@@ -29,7 +29,7 @@ public class NegativeSizeException extends Exception
 	}
 
 	/**
-	 * @see Exception()
+	 * Create NegativeSizeException
 	 */
 	public NegativeSizeException()
 	{
