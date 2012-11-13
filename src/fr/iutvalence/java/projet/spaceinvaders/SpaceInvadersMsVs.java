@@ -391,7 +391,7 @@ public class SpaceInvadersMsVs
 			if(tableToMove[i] != null && tableToMove[i].isAlive())
 			{
 				try
-				{
+				{	
 					tableToMove[i].move(delta);
 				}
 				catch (NegativeSizeException e)
@@ -474,8 +474,6 @@ public class SpaceInvadersMsVs
 			index = searchEmptyCellFromMovableTable(this.shoots);
 			if (index != -1)
 			{
-				// TODO remove debug
-				//System.out.println("Shoot is from : " + invader);
 				try
 				{
 					this.shoots[index] = movable.fire(direction, this.sizeShoots);
@@ -485,8 +483,6 @@ public class SpaceInvadersMsVs
 					e.printStackTrace();
 				}
 			}
-			//else	// TODO Remove debug
-				///System.out.println("Issue : don't find free place for shoot");
 		}
 	}
 	
@@ -514,23 +510,12 @@ public class SpaceInvadersMsVs
 	{
 		this.work = true;
 		while(this.work)
-		{
-			// TODO remove Debug msg
-			//System.out.println(Arrays.toString(this.monsters));
+		{			
+			moveShoots();
 			
 			moveMonsters();
 			
-			testCollision();
-			
-			if(this.countAlive(this.tanks) == 0 || this.countAlive(this.monsters) == 0)
-				this.work = false;
-			
 			monsterShoot();
-			
-			showGrid();
-			waitLoop();
-			
-			moveShoots();
 			
 			try
 			{
@@ -538,11 +523,18 @@ public class SpaceInvadersMsVs
 			}
 			catch (OutOfGridException e)
 			{
-				// Nothing to do, maybe a little noise for tell user he can't
+				java.awt.Toolkit.getDefaultToolkit().beep();
 			}
+
+			tankShoot();
+
+			testCollision();
 			
-			//TODO Remove debug
-			//kill(this.monsters);
+			if(this.countAlive(this.tanks) == 0 || this.countAlive(this.monsters) == 0)
+				this.work = false;
+			
+			showGrid();
+			waitLoop();
 		}
 	}
 	
@@ -571,8 +563,6 @@ public class SpaceInvadersMsVs
 						{
 							this.tanks[i].setAlive(false);
 							this.monsters[j].setAlive(false);
-							// TODO remove Debug msg
-							//System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
 						}
 					}
 				}
@@ -585,13 +575,29 @@ public class SpaceInvadersMsVs
 						{
 							this.tanks[i].setAlive(false);
 							this.shoots[j].setAlive(false);
-							// TODO remove Debug msg
-							//System.out.println("Collision : " + this.tanks[i].overlapping(this.monsters[j]));
 						}
 					}
 				}
 			}
-		}	
+		}
+		
+		for(i=0; i < this.monstersAmount; i++)
+		{
+			if(this.monsters[i] != null && this.monsters[i].isAlive())
+			{
+				for(j=0; j < (this.monstersAmount + this.tanksAmount); j++)
+				{
+					if(this.shoots[j] != null && this.shoots[j].isAlive())
+					{
+						if(this.monsters[i].overlapping(this.shoots[j]) != null)
+						{
+							this.monsters[i].setAlive(false);
+							this.shoots[j].setAlive(false);
+						}						
+					}
+				}
+			}
+		}
 	}
 	
 	
@@ -713,7 +719,10 @@ public class SpaceInvadersMsVs
 			{
 				try
 				{
-					this.moveTab(new Coordinates(0, -this.moveShoots.getY()), this.shoots);
+					if(this.shoots[i].getDirection() < 0)
+						this.moveTab(new Coordinates(0, -this.moveShoots.getY()), this.shoots);
+					if(this.shoots[i].getDirection() > 0)
+						this.moveTab(new Coordinates(0, this.moveShoots.getY()), this.shoots);
 				}
 				catch (OutOfGridException e)
 				{
@@ -871,7 +880,19 @@ public class SpaceInvadersMsVs
 		}
 	}
 	
-	// TODO Add tankShoot method
+	/**
+	 * Allow tank to shoot Invaders
+	 */
+	private void tankShoot()
+	{
+		int i;
+		
+		for(i=0; i < this.tanksAmount; i++)
+		{
+			if(this.tanks[i] != null && this.tanks[i].isAlive())
+				this.shootFrom(this.tanks[i], 1);
+		}
+	}
 	
 		//[[[[[[[[[[[[[  Others ]]]]]]]]]]]]]
 	

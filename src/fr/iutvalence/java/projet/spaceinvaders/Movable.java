@@ -82,7 +82,7 @@ public class Movable extends Element
 	{
 		super(new BoundingBox(i, j));
 		this.alive = true;
-		this.direction = 0;
+		this.direction = direction;
 	}
 
 	// *************** Method *****************
@@ -173,15 +173,13 @@ public class Movable extends Element
 			if(direction < 0)
 			{
 				coorShoot = new Coordinates((this.getArea().getPosition().getX() + (this.getArea().getSize().getX() / 2)) - (size.getX() / 2)
-												,(this.getArea().getPosition().getY() - size.getY()));
+												,(this.getArea().getPosition().getY() - size.getY() - 1));
 			}
 			else if(direction > 0)
 			{
 				coorShoot = new Coordinates((this.getArea().getPosition().getX() + (this.getArea().getSize().getX()) / 2) - (size.getX() / 2)
-												,(this.getArea().getPosition().getY() - this.getArea().getSize().getY()));
+												,(this.getArea().getPosition().getY() + this.getArea().getSize().getX() + 1));
 			}
-			// TODO Remove debug
-			//System.out.println("Shoot : " + new Movable(coorShoot, size));
 			return new Movable(coorShoot, size, direction);
 		}
 		return null;
@@ -233,6 +231,6 @@ public class Movable extends Element
 	@Override
 	public String toString()
 	{
-		return "Movable [alive=" + this.alive + ", position=" + this.getArea().getPosition() + ", taille=" + this.getArea().getSize() + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$
+		return "Movable [alive=" + this.alive + ", position=" + this.getArea().getPosition() + ", taille=" + this.getArea().getSize() + " direction=" + this.direction + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$"
 	}
 }
