@@ -10,65 +10,8 @@ import java.util.Arrays;
  * 
  * @author Gallet Guyon
  */
-public class SpaceInvadersMaVs
+public class SpaceInvadersMaVs extends SpaceInvaders
 {
-	// ************* Constant *************//
-	/**
-	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
-	 */
-	private static final int DEFAULT_MONSTERS_AMOUNT = 20;
-
-	/**
-	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
-	 */
-	private static final int DEFAULT_TANKS_AMOUNT = 1;
-
-	/**
-	 * It defines the maximum (default) of X axis, if it's not set in constructor.
-	 */
-	private static final int X_GRID = 300;
-
-	/**
-	 * It defines the maximum (default) of Y axis, if it's not set in constructor.
-	 */
-	private static final int Y_GRID = 300;
-
-	/**
-	 * Default delta between 2 monsters
-	 */
-	private static final int DEFAULT_DELTA = 2;
-
-	/**
-	 * Default size of element (e.g. Doc Movable)
-	 */
-	private static final int DEFAULT_SIZE = 10;
-
-	// ************* Variable *************//
-	/**
-	 * Boolean to know if the game is finished
-	 */
-	private Boolean work;
-
-	/**
-	 * The maximum size of the area
-	 */
-	private final Coordinates maxSize;
-
-	/**
-	 * Array containing all monsters
-	 */
-	private Movable[] monsters;
-
-	/**
-	 * Array containing all tanks.
-	 */
-	private Movable[] tanks;
-	
-	/**
-	 * Array containing all shoots.
-	 */
-	private Movable[] shoots;
-
 	// ************************** Constructors **************************//
 	/**
 	 * Initialize the game.<br/>
@@ -78,9 +21,7 @@ public class SpaceInvadersMaVs
 	 */
 	public SpaceInvadersMaVs()
 	{
-		this.work = new Boolean(true);
-		this.maxSize = new Coordinates(X_GRID, Y_GRID);
-		initTab(DEFAULT_MONSTERS_AMOUNT, DEFAULT_TANKS_AMOUNT);
+		super();
 	}
 
 	/**
@@ -95,9 +36,7 @@ public class SpaceInvadersMaVs
 	 */
 	public SpaceInvadersMaVs(int nbMonster, int nbTank)
 	{
-		this.work = new Boolean(true);
-		this.maxSize = new Coordinates(X_GRID, Y_GRID);
-		initTab(nbMonster, nbTank);
+		super(nbMonster,nbTank);
 	}
 
 	/**
@@ -113,9 +52,7 @@ public class SpaceInvadersMaVs
 	 */
 	public SpaceInvadersMaVs(int nbMonster, int nbTank, Coordinates Max)
 	{
-		this.work = new Boolean(true);
-		this.maxSize = Max;
-		initTab(nbMonster, nbTank);
+		super(nbMonster,nbTank,Max);
 	}
 
 	// ************************** Methods **************************//
@@ -124,9 +61,9 @@ public class SpaceInvadersMaVs
 	/**
 	 * This method begins the game. It's the only entry point.
 	 */
-	public void start()
+	public void run()
 	{
-		MonstersBehavior monsters = new MonstersBehavior("Monsters", 1000, this.monsters, this.tanks, this.shoots, this.work, this.maxSize);
+		MonstersBehaviorThread monsters = new MonstersBehaviorThread("Monsters", 1000, this.monsters, this.tanks, this.shoots, this.work, this.maxSize);
 		monsters.start();
 		while(true)
 		{
@@ -141,66 +78,201 @@ public class SpaceInvadersMaVs
 		}
 	}
 
-	/**
-	 * Initialize the table of movable elements.<br/>
-	 * Algorithm for set-up the monsters' position on the grid, and also Tank. It positions the tank of the middle of
-	 * the grid and the monster from the top left to the bottom right (like writing in English or French)
-	 * 
-	 * @param nbMonsters
-	 *            Set the number of monster (The maximum is set (to my mind) to 250, after I'm offload one's
-	 *            responsibilities)
-	 * @param nbTanks
-	 *            Set the number of tank (not implemented yet, so the maximum is 1 and minimum too ;-))
-	 */
-	private void initTab(int nbMonsters, int nbTanks)
-	{
-		// TODO improve with tank
-		
-		// local variable
-		Coordinates tank_position = new Coordinates((this.maxSize.getX() / 2) - (DEFAULT_SIZE / 2),0);
-		Coordinates monster_position = new Coordinates(DEFAULT_DELTA, this.maxSize.getY() - (DEFAULT_SIZE + DEFAULT_DELTA));
-		int i = 0;
-		// Allocations
-		this.monsters = new Movable[nbMonsters];
-		this.tanks = new Movable[nbTanks];
-		this.shoots = new Movable[nbTanks + nbMonsters];
-
-		// Set-up Tabs
-		try
-		{
-			this.tanks[0] = new Movable(tank_position);
-		}
-		catch (NegativeSizeException e1)
-		{
-			System.out.println(e1);
-		}
-
-		while (i < nbMonsters)
-		{
-			while (i < nbMonsters && monster_position.getX() + (DEFAULT_DELTA + DEFAULT_SIZE) <= this.maxSize.getX())
-			{
-				try
-				{
-					this.monsters[i] = new Movable(monster_position);
-				}
-				catch (NegativeSizeException e)
-				{
-					System.out.println(e);
-				}
-				monster_position = new Coordinates(monster_position.getX() + (DEFAULT_DELTA + DEFAULT_SIZE),
-						monster_position.getY());
-				i = i + 1;
-			}
-			monster_position = new Coordinates(DEFAULT_DELTA, monster_position.getY() - (DEFAULT_DELTA + DEFAULT_SIZE));
-		}
-		// Check?
-		//testCollision();
-	}
+	//[[[[[[[[[[[[[ Shoots behavior ]]]]]]]]]]]]]
 	
-	@Override
-	public String toString()
-	{
-		return "SpaceInvaders [tabMonster=" + Arrays.toString(this.monsters) + "tabTank="
-				+ Arrays.toString(this.tanks) + "]";
-	}
+		/**
+		 * Allow to move shoot
+		 */
+		private void moveShoots()
+		{
+			int i;
+			
+			for(i = 0; i < (this.monstersAmount + this.tanksAmount); i++)
+			{
+				if(this.shoots[i] != null && this.shoots[i].isAlive())
+				{
+					try
+					{
+						if(this.shoots[i].getDirection() < 0)
+							this.moveTab(new Coordinates(0, -this.moveShoots.getY()), this.shoots);
+						if(this.shoots[i].getDirection() > 0)
+							this.moveTab(new Coordinates(0, this.moveShoots.getY()), this.shoots);
+					}
+					catch (OutOfGridException e)
+					{
+						e.kill();
+					}
+				}
+			}
+		}
+		
+			//[[[[[[[[[[[[[  Controls ]]]]]]]]]]]]]
+			
+		/**
+		 * Allows random tank control
+		 * @throws OutOfGridException Indicate when Tank want to go over the screen
+		 */
+		private void randomMove() throws OutOfGridException
+		{
+			int i;
+			int x;
+			long neg;
+			
+			for(i=0; i < this.tanksAmount; i++)
+			{
+				if(this.tanks[i] != null && this.tanks[i].isAlive())
+				{
+					x = (int) (Math.random() * 10);
+					neg = Math.round(Math.random());
+					
+					if(neg == 0)
+						neg = -1;
+					
+					try
+					{
+						if((this.tanks[i].getArea().getPosition().getX() + (int) (x*neg)) > 0
+							&& (this.tanks[i].getArea().getPosition().getX() +
+							    this.tanks[i].getArea().getSize().getX() + (int) (x*neg)) < this.maxSize.getX())
+						{
+							this.tanks[i].move(new Coordinates((int) (x*neg),0));
+						}
+						else
+						{
+							throw new OutOfGridException(this.tanks[i]);
+						}
+					}
+					catch (NegativeSizeException e)
+					{
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		
+		/**
+		 * Allow tank to shoot Invaders
+		 */
+		private void tankShoot()
+		{
+			int i;
+			
+			for(i=0; i < this.tanksAmount; i++)
+			{
+				if(this.tanks[i] != null && this.tanks[i].isAlive())
+					this.shootFrom(this.tanks[i], 1);
+			}
+		}
+		
+			//[[[[[[[[[[[[[ Display ]]]]]]]]]]]]]
+		
+		/**
+		 * Create grid image to table of character
+		 * @return 2D table of character
+		 */
+		private char[][] gridImage()
+		{
+			int i,x,y;
+			char grid[][] = new char[this.maxSize.getX()][this.maxSize.getY()];
+			
+			for(y = 0; y < this.maxSize.getY(); y++)
+			{
+				for(x = 0; x < this.maxSize.getX(); x++)
+				{
+					grid[x][y] = ' ';
+				}
+			}
+			
+			for(i = 0; i < this.tanksAmount; i++)
+			{
+				if(this.tanks[i] != null && this.tanks[i].isAlive())
+				{
+					y = this.tanks[i].getArea().getPosition().getY();
+					while(y < (this.tanks[i].getArea().getSize().getY() + this.tanks[i].getArea().getPosition().getY()))
+					{
+						x = this.tanks[i].getArea().getPosition().getX();
+						while(x < (this.tanks[i].getArea().getSize().getX()  + this.tanks[i].getArea().getPosition().getX()))
+						{
+							grid[x][y] = 'T';
+							x++;
+						}
+						y++;
+					}
+				}
+			}
+			
+			for(i = 0; i < this.monstersAmount; i++)
+			{
+				if(this.monsters[i] != null && this.monsters[i].isAlive())
+				{
+					y = this.monsters[i].getArea().getPosition().getY();
+					while(y < (this.monsters[i].getArea().getSize().getY() + this.monsters[i].getArea().getPosition().getY()))
+					{
+						x = this.monsters[i].getArea().getPosition().getX();
+						while(x < (this.monsters[i].getArea().getSize().getX()  + this.monsters[i].getArea().getPosition().getX()))
+						{
+							grid[x][y] = 'M';
+							x++;
+						}
+						y++;
+					}
+				}
+			}
+
+			for(i = 0; i < (this.monstersAmount + this.tanksAmount); i++)
+			{
+				if(this.shoots[i] != null && this.shoots[i].isAlive())
+				{
+					y = this.shoots[i].getArea().getPosition().getY();
+					while(y < (this.shoots[i].getArea().getSize().getY() + this.shoots[i].getArea().getPosition().getY()))
+					{
+						x = this.shoots[i].getArea().getPosition().getX();
+						while(x < (this.shoots[i].getArea().getSize().getX()  + this.shoots[i].getArea().getPosition().getX()))
+						{
+							grid[x][y] = 'S';
+							x++;
+						}
+						y++;
+					}
+				}
+			}
+			
+			return grid;
+		}
+		
+		/**
+		 * Print the grid to the screen
+		 * @param grid the grid to print
+		 */
+		private void printGrid(char[][] grid)
+		{
+			int x ,y;
+			
+			for(y = this.maxSize.getY() - 1; y >= 0; y--)
+			{
+				for(x = 0; x <this.maxSize.getX(); x++)
+				{
+					System.out.print(grid[x][y]);
+				}
+				System.out.print("\n");
+			}
+			System.out.print("\n");
+		}
+		
+		/**
+		 * Allows to print the game to the screen in ASCII Art
+		 */
+		public void show()
+		{
+			char[][] grid = gridImage(); 
+			printGrid(grid);
+		}
+		
+			//[[[[[[[[[[[[[  Others ]]]]]]]]]]]]]
+		
+		@Override
+		public String toString()
+		{
+			return "SpaceInvaders [tabMonster=" + Arrays.toString(this.monsters) + "tabTank="
+					+ Arrays.toString(this.tanks) + "]";
+		}
 }

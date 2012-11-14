@@ -27,7 +27,7 @@ public class TestSpaceInvadersMaVs
 		
 		System.out.println("Etat Initial :" + SI);
 		
-		SI.start();
+		SI.run();
 
 		System.out.println("Etat Final :" + SI);
 	}

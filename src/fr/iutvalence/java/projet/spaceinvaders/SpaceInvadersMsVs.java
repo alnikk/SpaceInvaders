@@ -265,6 +265,63 @@ public class SpaceInvadersMsVs extends SpaceInvaders
 		}
 	}
 	
+		//[[[[[[[[[[[[[  Controls ]]]]]]]]]]]]]
+		
+	/**
+	 * Allows random tank control
+	 * @throws OutOfGridException Indicate when Tank want to go over the screen
+	 */
+	private void randomMove() throws OutOfGridException
+	{
+		int i;
+		int x;
+		long neg;
+		
+		for(i=0; i < this.tanksAmount; i++)
+		{
+			if(this.tanks[i] != null && this.tanks[i].isAlive())
+			{
+				x = (int) (Math.random() * 10);
+				neg = Math.round(Math.random());
+				
+				if(neg == 0)
+					neg = -1;
+				
+				try
+				{
+					if((this.tanks[i].getArea().getPosition().getX() + (int) (x*neg)) > 0
+						&& (this.tanks[i].getArea().getPosition().getX() +
+						    this.tanks[i].getArea().getSize().getX() + (int) (x*neg)) < this.maxSize.getX())
+					{
+						this.tanks[i].move(new Coordinates((int) (x*neg),0));
+					}
+					else
+					{
+						throw new OutOfGridException(this.tanks[i]);
+					}
+				}
+				catch (NegativeSizeException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Allow tank to shoot Invaders
+	 */
+	private void tankShoot()
+	{
+		int i;
+		
+		for(i=0; i < this.tanksAmount; i++)
+		{
+			if(this.tanks[i] != null && this.tanks[i].isAlive())
+				this.shootFrom(this.tanks[i], 1);
+		}
+	}
+	
 		//[[[[[[[[[[[[[ Display ]]]]]]]]]]]]]
 	
 	/**
@@ -367,64 +424,6 @@ public class SpaceInvadersMsVs extends SpaceInvaders
 	{
 		char[][] grid = gridImage(); 
 		printGrid(grid);
-	}
-	
-	
-		//[[[[[[[[[[[[[  Controls ]]]]]]]]]]]]]
-	
-	/**
-	 * Allows random tank control
-	 * @throws OutOfGridException Indicate when Tank want to go over the screen
-	 */
-	private void randomMove() throws OutOfGridException
-	{
-		int i;
-		int x;
-		long neg;
-		
-		for(i=0; i < this.tanksAmount; i++)
-		{
-			if(this.tanks[i] != null && this.tanks[i].isAlive())
-			{
-				x = (int) (Math.random() * 10);
-				neg = Math.round(Math.random());
-				
-				if(neg == 0)
-					neg = -1;
-				
-				try
-				{
-					if((this.tanks[i].getArea().getPosition().getX() + (int) (x*neg)) > 0
-						&& (this.tanks[i].getArea().getPosition().getX() +
-						    this.tanks[i].getArea().getSize().getX() + (int) (x*neg)) < this.maxSize.getX())
-					{
-						this.tanks[i].move(new Coordinates((int) (x*neg),0));
-					}
-					else
-					{
-						throw new OutOfGridException(this.tanks[i]);
-					}
-				}
-				catch (NegativeSizeException e)
-				{
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Allow tank to shoot Invaders
-	 */
-	private void tankShoot()
-	{
-		int i;
-		
-		for(i=0; i < this.tanksAmount; i++)
-		{
-			if(this.tanks[i] != null && this.tanks[i].isAlive())
-				this.shootFrom(this.tanks[i], 1);
-		}
 	}
 	
 		//[[[[[[[[[[[[[  Others ]]]]]]]]]]]]]
