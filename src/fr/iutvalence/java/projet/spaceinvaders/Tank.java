@@ -4,7 +4,7 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
- * 
+ * This interface is the control of the game
  * @author Gallet Guyon
  */
 public interface Tank

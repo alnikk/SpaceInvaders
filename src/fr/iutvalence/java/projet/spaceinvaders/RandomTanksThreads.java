@@ -3,9 +3,10 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
+//TODO Comment
 /**
- * @author Gallet Guyon
  *
+ * @author Gallet Guyon
  */
 public class RandomTanksThreads implements Tank
 {

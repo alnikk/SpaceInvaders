@@ -4,8 +4,8 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
+ * This class allows to drow on the screen in Ascii Art
  * @author Gallet Guyon
- *
  */
 public class AsciiDisplay implements Display
 {
