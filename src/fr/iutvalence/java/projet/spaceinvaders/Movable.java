@@ -173,12 +173,12 @@ public class Movable extends Element
 			if(direction < 0)
 			{
 				coorShoot = new Coordinates((this.getArea().getPosition().getX() + (this.getArea().getSize().getX() / 2)) - (size.getX() / 2)
-												,(this.getArea().getPosition().getY() - size.getY() - 1));
+												,(this.getArea().getPosition().getY() - size.getY()));
 			}
 			else if(direction > 0)
 			{
 				coorShoot = new Coordinates((this.getArea().getPosition().getX() + (this.getArea().getSize().getX()) / 2) - (size.getX() / 2)
-												,(this.getArea().getPosition().getY() + this.getArea().getSize().getX() + 1));
+												,(this.getArea().getPosition().getY() + this.getArea().getSize().getX()));
 			}
 			return new Movable(coorShoot, size, direction);
 		}
