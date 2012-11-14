@@ -9,7 +9,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * 
  * @author Gallet Guyon
  */
-public class MonstersBehaviorThread extends Thread
+public class MonstersBehavior extends Thread
 {
 	//***************** Constant *************************
 	
@@ -102,7 +102,7 @@ public class MonstersBehaviorThread extends Thread
 	 * @param work The stop loop value 
 	 * @param max The max coordinates of the screen
 	 */
-	public MonstersBehaviorThread(String nom, int sleepTime, int acceleration, Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work, Coordinates max)
+	public MonstersBehavior(String nom, int sleepTime, int acceleration, Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work, Coordinates max)
 	{
 		super(nom);
 		this.sleepTime = sleepTime;
@@ -125,7 +125,7 @@ public class MonstersBehaviorThread extends Thread
 	 * @param work The stop loop value
 	 * @param max The max coordinates of the screen
 	 */
-	public MonstersBehaviorThread(String nom, int sleepTime, Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work, Coordinates max)
+	public MonstersBehavior(String nom, int sleepTime, Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work, Coordinates max)
 	{
 		super(nom);
 		this.sleepTime = sleepTime;
@@ -147,7 +147,7 @@ public class MonstersBehaviorThread extends Thread
 	 * @param work The stop loop value
 	 * @param max The max coordinates of the screen
 	 */
-	public MonstersBehaviorThread(String nom, Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work, Coordinates max)
+	public MonstersBehavior(String nom, Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work, Coordinates max)
 	{
 		super(nom);
 		this.monsters = monsters;
