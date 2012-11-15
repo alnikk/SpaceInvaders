@@ -4,84 +4,81 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
- * This is abstract class who regroup all tools' methods and variable.
- * This Generalize all SpaceInvadersMxVx games. 
+ * This is abstract class who regroup all tools' methods and variable. This Generalize all SpaceInvadersMxVx games.
+ * 
  * @author Gallet Guyon
  */
 public abstract class SpaceInvaders
 {
 	// ************* Constant *************//
-	
-		//[[[[[[[ Grid ]]]]]]]
+
+	// [[[[[[[ Grid ]]]]]]]
 	/**
 	 * It defines the maximum (default) of X axis, if it's not set in constructor.
 	 */
 	private static final int X_GRID = 100;
-	
+
 	/**
 	 * It defines the maximum (default) of Y axis, if it's not set in constructor.
 	 */
 	private static final int Y_GRID = 30;
-	
-		//[[[[[[[ Movable ]]]]]]]
+
+	// [[[[[[[ Movable ]]]]]]]
 	/**
 	 * Default size of element (e.g. Doc Movable)
 	 */
-	private static final Coordinates DEFAULT_SIZE = new Coordinates(5,5);
-	
+	private static final Coordinates DEFAULT_SIZE = new Coordinates(5, 5);
+
 	/**
 	 * Default delta between 2 monsters
 	 */
 	private static final int DEFAULT_DELTA = 2;
-	
+
 	/**
 	 * This constant defines the step on the grid of a move
 	 */
-	private static final Coordinates DEFAULT_MOVE = new Coordinates(5,5);
-	
-		//[[[[[[[ Shoots ]]]]]]]
+	private static final Coordinates DEFAULT_MOVE = new Coordinates(5, 5);
+
+	// [[[[[[[ Shoots ]]]]]]]
 	/**
 	 * This constant defines the step on the grid of a move
 	 */
-	private static final Coordinates DEFAULT_MOVE_SHOOTS = new Coordinates(0,2);
-	
+	private static final Coordinates DEFAULT_MOVE_SHOOTS = new Coordinates(0, 2);
+
 	/**
 	 * This constant defines the size of shoot
 	 */
-	private static final Coordinates DEFAULT_SIZE_SHOOT = new Coordinates(2,5);
-	
-		//[[[[[[[ Numerous ]]]]]]]
+	private static final Coordinates DEFAULT_SIZE_SHOOT = new Coordinates(2, 5);
+
+	// [[[[[[[ Numerous ]]]]]]]
 	/**
 	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
 	 */
 	private static final int DEFAULT_MONSTERS_AMOUNT = 10;
-	
+
 	/**
 	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
 	 */
 	private static final int DEFAULT_TANKS_AMOUNT = 4;
-	
-		//[[[[[[[ Time ]]]]]]]
+
+	// [[[[[[[ Time ]]]]]]]
 	/**
-	 * This constant defines the default sleep time between each move of Invaders 
+	 * This constant defines the default sleep time between each move of Invaders
 	 */
 	private static final int DEFAULT_SLEEP_TIME = 800;
-	
+
 	/**
-	 * This constant is the default acceleration
-	 * (Not used for now)
+	 * This constant is the default acceleration (Not used for now)
 	 */
 	private static final int DEFAULT_ACCELERATION = 2;
 
-	// FIXME (SEEN) Define the enum in a separate file (same package)
-	
-			//[[[[[[[ Grid ]]]]]]]
+	// [[[[[[[ Grid ]]]]]]]
 	/**
 	 * The maximum size of the area
 	 */
 	protected final Coordinates maxSize;
-		
-		//[[[[[[[ Movable ]]]]]]]
+
+	// [[[[[[[ Movable ]]]]]]]
 	/**
 	 * Size of Movable (e.g. Doc Movable)
 	 */
@@ -96,8 +93,8 @@ public abstract class SpaceInvaders
 	 * This constant defines the step on the grid of a move
 	 */
 	protected Coordinates coorMove;
-		
-	//[[[[[[[ Shoots ]]]]]]]
+
+	// [[[[[[[ Shoots ]]]]]]]
 	/**
 	 * Defines the step on the grid of a move
 	 */
@@ -107,8 +104,8 @@ public abstract class SpaceInvaders
 	 * Defines the size of shoot
 	 */
 	protected Coordinates sizeShoots;
-	
-	//[[[[[[[ Numerous ]]]]]]]
+
+	// [[[[[[[ Numerous ]]]]]]]
 	/**
 	 * It defines the number of monsters you have in tabMonster.
 	 */
@@ -118,20 +115,19 @@ public abstract class SpaceInvaders
 	 * It defines the number of tank you have in tabTank.
 	 */
 	protected int tanksAmount;
-	
-	//[[[[[[[ Time ]]]]]]]
+
+	// [[[[[[[ Time ]]]]]]]
 	/**
-	 * This variable is used to wait sleepTime millisecond between each loop 
+	 * This variable is used to wait sleepTime millisecond between each loop
 	 */
 	private int sleepTime;
 
 	/**
-	 * Not implemented yet
-	 * It uses to accelerate sleepTime when invaders are less numerous
+	 * Not implemented yet It uses to accelerate sleepTime when invaders are less numerous
 	 */
 	private int acceleration;
 
-		//[[[[[[[ Table ]]]]]]]
+	// [[[[[[[ Table ]]]]]]]
 	/**
 	 * Array containing all monsters
 	 */
@@ -141,28 +137,28 @@ public abstract class SpaceInvaders
 	 * Array containing all tanks.
 	 */
 	protected Movable[] tanks;
-	
+
 	/**
 	 * Array containing all shoots.
 	 */
 	protected Movable[] shoots;
-		
-		//[[[[[[[ Others ]]]]]]]
+
+	// [[[[[[[ Others ]]]]]]]
 	/**
-	 * This variable is the state of invaders 
+	 * This variable is the state of invaders
 	 */
 	protected Etat etat;
-	
+
 	/**
 	 * Boolean to know if the game is finished
 	 */
 	protected boolean work;
-		// ************************** Constructors **************************//
+
+	// ************************** Constructors **************************//
 	/**
 	 * Initialize the game.<br/>
-	 * This is the default constructor. 
-	 * It set all to default value.
-	 * If you don't want to use this default characteristic use another constructor
+	 * This is the default constructor. It set all to default value. If you don't want to use this default
+	 * characteristic use another constructor
 	 */
 	public SpaceInvaders()
 	{
@@ -178,7 +174,8 @@ public abstract class SpaceInvaders
 		this.acceleration = DEFAULT_ACCELERATION;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
-		/**
+
+	/**
 	 * Initialize the game.<br/>
 	 * This constructor sets the X axis to 300, and the Y axis to 300 too.<br/>
 	 * If you don't want to use this default characteristic use another constructors
@@ -202,7 +199,7 @@ public abstract class SpaceInvaders
 		this.acceleration = DEFAULT_ACCELERATION;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
-	
+
 	/**
 	 * Initialize the game.<br/>
 	 * This constructor uses default value of acceleration
@@ -212,7 +209,7 @@ public abstract class SpaceInvaders
 	 * @param nbTanks
 	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
 	 * @param max
-	 *            Set the Max point of the grid (Coordinates) 
+	 *            Set the Max point of the grid (Coordinates)
 	 */
 	public SpaceInvaders(int nbMonsters, int nbTanks, Coordinates max)
 	{
@@ -228,7 +225,7 @@ public abstract class SpaceInvaders
 		this.acceleration = DEFAULT_ACCELERATION;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
-	
+
 	/**
 	 * Initialize the game.<br/>
 	 * This constructor no default value.
@@ -238,9 +235,9 @@ public abstract class SpaceInvaders
 	 * @param nbTanks
 	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
 	 * @param max
-	 *            Set the Max point of the grid (Coordinates) 
+	 *            Set the Max point of the grid (Coordinates)
 	 * @param sleepTime
-	 *            Set the time between each move of monster (in milliseconds)  
+	 *            Set the time between each move of monster (in milliseconds)
 	 */
 	public SpaceInvaders(int nbMonsters, int nbTanks, Coordinates max, int sleepTime)
 	{
@@ -256,7 +253,7 @@ public abstract class SpaceInvaders
 		this.acceleration = DEFAULT_ACCELERATION;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
-	
+
 	/**
 	 * Initialize the game.<br/>
 	 * This constructor uses no default value.
@@ -266,11 +263,11 @@ public abstract class SpaceInvaders
 	 * @param nbTanks
 	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
 	 * @param max
-	 *            Set the Max point of the grid (Coordinates) 
+	 *            Set the Max point of the grid (Coordinates)
 	 * @param sleepTime
-	 *            Set the time between each move of monster (in milliseconds)  
+	 *            Set the time between each move of monster (in milliseconds)
 	 * @param acceleration
-	 *            Set the acceleration of Invaders. (not uses for now) 
+	 *            Set the acceleration of Invaders. (not uses for now)
 	 */
 	public SpaceInvaders(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, int acceleration)
 	{
@@ -286,8 +283,7 @@ public abstract class SpaceInvaders
 		this.acceleration = acceleration;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
-	
-	
+
 	/**
 	 * Initialize the table of movable elements.<br/>
 	 * Algorithm for set-up the monsters' position on the grid, and also Tank. It positions the tank of the middle of
@@ -300,90 +296,96 @@ public abstract class SpaceInvaders
 	 *            Set the number of tank [1-4]
 	 */
 	private void initTab(int nbMonsters, int nbTanks)
-	{		
+	{
 		// local variable
 		int i;
-		
+
 		// Allocations
 		this.monsters = new Movable[nbMonsters];
 		this.tanks = new Movable[nbTanks];
 		this.shoots = new Movable[nbTanks + nbMonsters];
-		
+
 		// Set-up tank table
-		for(i = 0; i < nbTanks; i++)
+		for (i = 0; i < nbTanks; i++)
 		{
 			try
 			{		// TODO improve with tank
-				this.tanks[i] = new Movable(new Coordinates(((this.maxSize.getX() / 4) - (this.sizeMovable.getX() / 2))*i,0), 
-											new Coordinates(this.sizeMovable.getX(),this.sizeMovable.getY()));
+				this.tanks[i] = new Movable(new Coordinates(((this.maxSize.getX() / 4) - (this.sizeMovable.getX() / 2))
+						* i, 0), new Coordinates(this.sizeMovable.getX(), this.sizeMovable.getY()));
 			}
 			catch (NegativeSizeException e1)
 			{
 				System.out.println(e1);
 			}
 		}
-			// Define Invaders position
+		// Define Invaders position
 		this.etat = Etat.LEFT_UP;
-		
+
 		// Set-up Invaders table
-		Coordinates monster_position = new Coordinates(this.delta, this.maxSize.getY() - (this.sizeMovable.getY() + this.delta));
-		for(i = 0; i < nbMonsters; i++)
+		Coordinates monster_position = new Coordinates(this.delta, this.maxSize.getY()
+				- (this.sizeMovable.getY() + this.delta));
+		for (i = 0; i < nbMonsters; i++)
 		{
-			if(monster_position.getX() + (this.delta + this.sizeMovable.getX()) <= this.maxSize.getX())
+			if (monster_position.getX() + (this.delta + this.sizeMovable.getX()) <= this.maxSize.getX())
 			{
 				try
 				{
-					this.monsters[i] = new Movable(monster_position, new Coordinates(this.sizeMovable.getX(),this.sizeMovable.getY()));
+					this.monsters[i] = new Movable(monster_position, new Coordinates(this.sizeMovable.getX(),
+							this.sizeMovable.getY()));
 				}
 				catch (NegativeSizeException e)
 				{
 					System.out.println(e);
 				}
 				monster_position = new Coordinates(monster_position.getX() + (this.delta + this.sizeMovable.getX()),
-													monster_position.getY());
+						monster_position.getY());
 			}
 			else
-				monster_position = new Coordinates(this.delta, monster_position.getY() - (this.delta + this.sizeMovable.getY()));
+				monster_position = new Coordinates(this.delta, monster_position.getY()
+						- (this.delta + this.sizeMovable.getY()));
 		}
 		testCollision();
 	}
-		
-	// FIXME (SEEN) prefer using moveTab(Coordinate) rather than moveTab(int, int)
+
 	/**
 	 * This method allows to move all instances in table of delta coordinates.
-	 * @param delta The delta coordinates to move Invaders
-	 * @param tableToMove The table to move
-	 * @throws OutOfGridException This method can return OutOfgridException if monsters does'nt be anymore in the grid.  
+	 * 
+	 * @param delta
+	 *            The delta coordinates to move Invaders
+	 * @param tableToMove
+	 *            The table to move
+	 * @throws OutOfGridException
+	 *             This method can return OutOfgridException if monsters does'nt be anymore in the grid.
 	 */
 	protected void moveTab(Coordinates delta, Movable[] tableToMove) throws OutOfGridException
 	{
 		int i;
-		
+
 		// Test if all table is movable
-		for(i=0; i < tableToMove.length; i++)
+		for (i = 0; i < tableToMove.length; i++)
 		{
-			if(tableToMove[i] != null && tableToMove[i].isAlive())
+			if (tableToMove[i] != null && tableToMove[i].isAlive())
 			{
-				if(tableToMove[i].getArea().getPosition().getX() + 
-						tableToMove[i].getArea().getSize().getX() + delta.getX() > this.maxSize.getX()
-					|| tableToMove[i].getArea().getPosition().getY() + 
-						tableToMove[i].getArea().getSize().getY() + delta.getY() > this.maxSize.getY()
-					|| tableToMove[i].getArea().getPosition().getX() + delta.getX()< 0
-					|| tableToMove[i].getArea().getPosition().getY() + delta.getY() < 0)
+				if (tableToMove[i].getArea().getPosition().getX() + tableToMove[i].getArea().getSize().getX()
+						+ delta.getX() > this.maxSize.getX()
+						|| tableToMove[i].getArea().getPosition().getY() + tableToMove[i].getArea().getSize().getY()
+								+ delta.getY() > this.maxSize.getY()
+						|| tableToMove[i].getArea().getPosition().getX() + delta.getX() < 0
+						|| tableToMove[i].getArea().getPosition().getY() + delta.getY() < 0)
 				{
 					// TODO Kill when Y coordinates is less than 0?
 					throw new OutOfGridException(tableToMove[i]);
 				}
 			}
 		}
-		
+
 		// Next we move table
-		for(i=0; i < tableToMove.length; i++)
+		for (i = 0; i < tableToMove.length; i++)
 		{
-			if(tableToMove[i] != null && tableToMove[i].isAlive())
+			if (tableToMove[i] != null && tableToMove[i].isAlive())
 			{
 				try
-				{	
+				{
 					tableToMove[i].move(delta);
 				}
 				catch (NegativeSizeException e)
@@ -395,21 +397,23 @@ public abstract class SpaceInvaders
 			}
 		}
 	}
-	
+
 	/**
 	 * Search an empty cell in table given in argument.
-	 * @param table Table to search empty cell
+	 * 
+	 * @param table
+	 *            Table to search empty cell
 	 * @return return the index of empty cell in table. if it equals to -1 it didn't find
 	 */
 	private int searchEmptyCellFromMovableTable(Movable table[])
 	{
 		int i;
-		
-		for(i = 0; i < table.length; i++)
+
+		for (i = 0; i < table.length; i++)
 		{
-			if(table[i] != null)
+			if (table[i] != null)
 			{
-				if(!table[i].isAlive())
+				if (!table[i].isAlive())
 					return i;
 			}
 			else
@@ -417,51 +421,56 @@ public abstract class SpaceInvaders
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * This method count the number of alive Movable.
-	 * @param table The table to count alive Movable.
+	 * 
+	 * @param table
+	 *            The table to count alive Movable.
 	 * @return The number of alive Invaders.
 	 */
 	int countAlive(Movable[] table)
 	{
 		int nbAlive = 0, i;
-		
-		for(i = 0; i < table.length; i++)
+
+		for (i = 0; i < table.length; i++)
 		{
-			if(table[i].isAlive())
+			if (table[i].isAlive())
 				nbAlive++;
 		}
 		return nbAlive;
 	}
-	
+
 	/**
 	 * This method wait a time in function of sleepTime value and of monster alive's number
 	 */
 	void waitLoop()
 	{
 		try
-		{		
+		{
 			// TODO sleepTime constant...
 			// expression is a.x type. Add a.x + c with c playable. It have to don't affect sleepTime
-			Thread.sleep((long) (Math.sqrt(((double) countAlive(this.monsters)/this.monstersAmount)) * this.sleepTime));
+			Thread.sleep((long) (Math.sqrt(((double) countAlive(this.monsters) / this.monstersAmount)) * this.sleepTime));
 		}
 		catch (InterruptedException e)
 		{
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Make Movable given in arguments shoot
-	 * @param movable Invaders who have to shoot
-	 * @param direction The direction you want to shoot
+	 * 
+	 * @param movable
+	 *            Invaders who have to shoot
+	 * @param direction
+	 *            The direction you want to shoot
 	 */
 	protected void shootFrom(Movable movable, int direction)
 	{
 		int index;
-		
-		if(movable != null)
+
+		if (movable != null)
 		{
 			index = searchEmptyCellFromMovableTable(this.shoots);
 			if (index != -1)
@@ -477,7 +486,7 @@ public abstract class SpaceInvaders
 			}
 		}
 	}
-	
+
 	/**
 	 * This method tests if there is any collisions in all table declared.<br/>
 	 * Collision are tested between each table and not between elements of the same table.<br/>
@@ -486,28 +495,28 @@ public abstract class SpaceInvaders
 	protected void testCollision()
 	{
 		int i, j;
-		
-		for(i=0;i < this.tanksAmount; i++)
-		{ 
-			if(this.tanks[i] != null && this.tanks[i].isAlive())
+
+		for (i = 0; i < this.tanksAmount; i++)
+		{
+			if (this.tanks[i] != null && this.tanks[i].isAlive())
 			{
-				for(j=0; j < this.monstersAmount; j++)
+				for (j = 0; j < this.monstersAmount; j++)
 				{
-					if(this.shoots[i] != null && this.monsters[j].isAlive())
+					if (this.shoots[i] != null && this.monsters[j].isAlive())
 					{
-						if(this.tanks[i].overlapping(this.monsters[j]) != null)
+						if (this.tanks[i].overlapping(this.monsters[j]) != null)
 						{
 							this.tanks[i].setAlive(false);
 							this.monsters[j].setAlive(false);
 						}
 					}
 				}
-				
-				for(j=0; j < (this.monstersAmount + this.tanksAmount); j++)
+
+				for (j = 0; j < (this.monstersAmount + this.tanksAmount); j++)
 				{
-					if(this.shoots[j] != null && this.shoots[j].isAlive())
+					if (this.shoots[j] != null && this.shoots[j].isAlive())
 					{
-						if(this.tanks[i].overlapping(this.shoots[j]) != null)
+						if (this.tanks[i].overlapping(this.shoots[j]) != null)
 						{
 							this.tanks[i].setAlive(false);
 							this.shoots[j].setAlive(false);
@@ -516,41 +525,43 @@ public abstract class SpaceInvaders
 				}
 			}
 		}
-		
-		for(i=0; i < this.monstersAmount; i++)
+
+		for (i = 0; i < this.monstersAmount; i++)
 		{
-			if(this.monsters[i] != null && this.monsters[i].isAlive())
+			if (this.monsters[i] != null && this.monsters[i].isAlive())
 			{
-				for(j=0; j < (this.monstersAmount + this.tanksAmount); j++)
+				for (j = 0; j < (this.monstersAmount + this.tanksAmount); j++)
 				{
-					if(this.shoots[j] != null && this.shoots[j].isAlive())
+					if (this.shoots[j] != null && this.shoots[j].isAlive())
 					{
-						if(this.monsters[i].overlapping(this.shoots[j]) != null)
+						if (this.monsters[i].overlapping(this.shoots[j]) != null)
 						{
 							this.monsters[i].setAlive(false);
 							this.shoots[j].setAlive(false);
-						}						
+						}
 					}
 				}
 			}
 		}
 	}
-		
+
 	/**
 	 * Begin a game
 	 */
 	public abstract void run();
-	
+
 	// TODO think to remove
 	/**
 	 * Kill one instance of movable object
-	 * @param tabToKill Table where kill instance
+	 * 
+	 * @param tabToKill
+	 *            Table where kill instance
 	 */
 	protected void kill(Movable[] tabToKill)
 	{
-		int i = 0, nbMonsters= tabToKill.length;
-		
-		while(i < nbMonsters && (!tabToKill[i].isAlive()))
+		int i = 0, nbMonsters = tabToKill.length;
+
+		while (i < nbMonsters && (!tabToKill[i].isAlive()))
 			i++;
 		tabToKill[i].setAlive(false);
 	}

@@ -1,4 +1,3 @@
-
 /**
  * 
  */
@@ -38,7 +37,8 @@ public class BoundingBox
 	private final Coordinates position;
 
 	/**
-	 * The size (width, height) of the bounding box, defined by a <tt>Coordinate</tt> object whose x means width and y means height.
+	 * The size (width, height) of the bounding box, defined by a <tt>Coordinate</tt> object whose x means width and y
+	 * means height.
 	 */
 	private final Coordinates size;
 
@@ -69,7 +69,7 @@ public class BoundingBox
 	 * 
 	 * @param newPosition
 	 *            (Coordinates) the new position to set
-	 * @return New BoundingBox with new coordinates. 
+	 * @return New BoundingBox with new coordinates.
 	 */
 	public BoundingBox moveTo(Coordinates newPosition)
 	{
@@ -79,9 +79,8 @@ public class BoundingBox
 		}
 		catch (NegativeSizeException e)
 		{
-			//  here, the exception can not be raised since (as the bounding box exists) the size can not be negative
+			// here, the exception can not be raised since (as the bounding box exists) the size can not be negative
 			// so, we can safely ignore it
-			// FIXME (SEEN) remove the debug message
 			return null;
 		}
 	}
@@ -119,7 +118,7 @@ public class BoundingBox
 	 * 
 	 * @param point
 	 *            Coordinates of the point to check.
-	 * @return  <tt>true</tt> if the point is in the area, <tt>false</tt> otherwise.
+	 * @return <tt>true</tt> if the point is in the area, <tt>false</tt> otherwise.
 	 */
 	public boolean pointIn(Coordinates point)
 	{
@@ -160,22 +159,21 @@ public class BoundingBox
 				|| (this.pointIn(new Coordinates(x1, y1))) || (this.pointIn(new Coordinates(x2, y1)))
 				|| (this.pointIn(new Coordinates(x2, y2))) || (this.pointIn(new Coordinates(x1, y2))))
 		{
-			
+
 			posResX = Math.max(x1, hx1);
 			sizeResX = Math.min(x2, hx2);
 			posResY = Math.max(y1, hy1);
 			sizeResY = Math.min(y2, hy2);
-			
-			if((sizeResX - posResX) < 0)
+
+			if ((sizeResX - posResX) < 0)
 				sizeResX = posResX - sizeResX;
 			else
 				sizeResX = sizeResX - posResX;
-			if((sizeResY - posResY) < 0)
+			if ((sizeResY - posResY) < 0)
 				sizeResY = posResY - sizeResY;
 			else
 				sizeResY = sizeResY - posResY;
-				
-			
+
 			try
 			{
 				return new BoundingBox(new Coordinates(posResX, posResY), new Coordinates(sizeResX, sizeResY));
@@ -222,11 +220,10 @@ public class BoundingBox
 	{
 		return "BoundingBox [position=" + this.position + ", size=" + this.size + "]";
 	}
-	
 
 	/**
 	 * Indicates whether some other object is "equal to" this one.<br/>
-	 * That is to say, the BoundingBox have to be the same (equals size and positions)<br/> 
+	 * That is to say, the BoundingBox have to be the same (equals size and positions)<br/>
 	 */
 	@Override
 	public boolean equals(Object obj)

@@ -3,8 +3,8 @@ package fr.iutvalence.java.projet.spaceinvaders;
 /**
  * This class defines a movable object, that can move on a 2D grid and so being killed by others.<br/>
  * A movable object is characterized by its size and position on the grid and also its status [alive | dead]. Once a
- * movable object is touched by another one, it's killed. The bounds of the 2D grid is defined in SpaceInvaders for, 
- * and movable objects can't move over without exception.
+ * movable object is touched by another one, it's killed. The bounds of the 2D grid is defined in SpaceInvaders for, and
+ * movable objects can't move over without exception.
  * 
  * @author Gallet Guyon
  */
@@ -26,8 +26,8 @@ public class Movable extends Element
 	private boolean alive;
 
 	/**
-	 * Set the direction of shoot. Negative -> down, Positive -> up, Equals to 0 means it's not a shoot.
-	 * More it's big number, more it's quick.
+	 * Set the direction of shoot. Negative -> down, Positive -> up, Equals to 0 means it's not a shoot. More it's big
+	 * number, more it's quick.
 	 */
 	private int direction;
 
@@ -65,7 +65,7 @@ public class Movable extends Element
 		this.alive = true;
 		this.direction = 0;
 	}
-	
+
 	/**
 	 * This constructor creates a new living <tt>Movable</tt> object taking its coordinates and size as parameters.
 	 * 
@@ -73,8 +73,9 @@ public class Movable extends Element
 	 *            the initial position, as a Coordinate object
 	 * @param j
 	 *            the size, as a Coordinate object whose x means width and y means height.
-	 * @param direction 
-	 * 			  the direction of the movable object (shoot). For non shoot it sets to 0. for others negative is for down shoot and positive othewise.
+	 * @param direction
+	 *            the direction of the movable object (shoot). For non shoot it sets to 0. for others negative is for
+	 *            down shoot and positive othewise.
 	 * @throws NegativeSizeException
 	 *             Throws Exception when the size coordinates are negative
 	 */
@@ -111,7 +112,7 @@ public class Movable extends Element
 	 * It translates the coordinates by deltas given as x and y.<br/>
 	 * 
 	 * @param delta
-	 *             new Coordinates
+	 *            new Coordinates
 	 * @throws NegativeSizeException
 	 *             If position is negative.
 	 */
@@ -122,7 +123,7 @@ public class Movable extends Element
 			this.setArea(getArea().translate(delta));
 		}
 	}
-	
+
 	/**
 	 * Method to move element to specific coordinates on the 2D grid.
 	 * 
@@ -140,11 +141,12 @@ public class Movable extends Element
 			getArea().moveTo(new Coordinates(x, y));
 		}
 	}
-	
+
 	/**
 	 * Method to move element to specific coordinates on the 2D grid.
 	 * 
-	 * @param couple The new coordinates to move
+	 * @param couple
+	 *            The new coordinates to move
 	 * @throws NegativeSizeException
 	 *             If position is negative.
 	 */
@@ -155,30 +157,37 @@ public class Movable extends Element
 			getArea().moveTo(couple);
 		}
 	}
-	
+
 	/**
 	 * Method to create new movable object who moves by itself in given direction [UP|DOWN]
-	 * @param direction The direction of the shoot (if it negative the direction is down, up otherwise).
-	 * 					 If it's equal to 0 The function return null.
-	 * @param size This defined the size of the movable object to create
+	 * 
+	 * @param direction
+	 *            The direction of the shoot (if it negative the direction is down, up otherwise). If it's equal to 0
+	 *            The function return null.
+	 * @param size
+	 *            This defined the size of the movable object to create
 	 * @return Return new shoot (Movable) or null if it failed.
-	 * @throws NegativeSizeException If the size given is negative
+	 * @throws NegativeSizeException
+	 *             If the size given is negative
 	 */
 	public synchronized Movable fire(int direction, Coordinates size) throws NegativeSizeException
 	{
-		if(direction != 0)
+		if (direction != 0)
 		{
 			Coordinates coorShoot = null;
-			
-			if(direction < 0)
+
+			if (direction < 0)
 			{
-				coorShoot = new Coordinates((this.getArea().getPosition().getX() + (this.getArea().getSize().getX() / 2)) - (size.getX() / 2)
-												,(this.getArea().getPosition().getY() - size.getY()));
+				coorShoot = new Coordinates(
+						(this.getArea().getPosition().getX() + (this.getArea().getSize().getX() / 2))
+								- (size.getX() / 2), (this.getArea().getPosition().getY() - size.getY()));
 			}
-			else if(direction > 0)
+			else if (direction > 0)
 			{
-				coorShoot = new Coordinates((this.getArea().getPosition().getX() + (this.getArea().getSize().getX()) / 2) - (size.getX() / 2)
-												,(this.getArea().getPosition().getY() + this.getArea().getSize().getX()));
+				coorShoot = new Coordinates(
+						(this.getArea().getPosition().getX() + (this.getArea().getSize().getX()) / 2)
+								- (size.getX() / 2), (this.getArea().getPosition().getY() + this.getArea().getSize()
+								.getX()));
 			}
 			return new Movable(coorShoot, size, direction);
 		}
@@ -207,11 +216,10 @@ public class Movable extends Element
 	{
 		this.alive = alive;
 	}
-	
-	
 
 	/**
 	 * Return the direction of the shoot.
+	 * 
 	 * @return the direction of the shoot.
 	 */
 	public int getDirection()
@@ -221,7 +229,9 @@ public class Movable extends Element
 
 	/**
 	 * Set the direction of the shoot.
-	 * @param direction The direction to set
+	 * 
+	 * @param direction
+	 *            The direction to set
 	 */
 	public void setDirection(int direction)
 	{

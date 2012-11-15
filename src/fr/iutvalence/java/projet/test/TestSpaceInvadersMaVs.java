@@ -23,10 +23,10 @@ public class TestSpaceInvadersMaVs
 	public static void main(String[] args)
 	{
 		// TODO More Test
-		SpaceInvadersMaVs SI = new SpaceInvadersMaVs(10,1,new Coordinates(150,30));
-		
+		SpaceInvadersMaVs SI = new SpaceInvadersMaVs(10, 1, new Coordinates(150, 30));
+
 		System.out.println("Etat Initial :" + SI);
-		
+
 		SI.run();
 
 		System.out.println("Etat Final :" + SI);

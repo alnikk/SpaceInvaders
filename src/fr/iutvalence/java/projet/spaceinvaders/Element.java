@@ -46,7 +46,6 @@ public abstract class Element
 
 	// ************* Getters and Setters ***************
 
-
 	/**
 	 * This method returns the bounding box of the element
 	 * 
@@ -58,9 +57,10 @@ public abstract class Element
 	}
 
 	/**
-	 * This method allows to modify the location and size (BoundingBox) of the element. 
+	 * This method allows to modify the location and size (BoundingBox) of the element.
 	 * 
-	 * @param area bounding box of the element
+	 * @param area
+	 *            bounding box of the element
 	 */
 	protected void setArea(BoundingBox area)
 	{

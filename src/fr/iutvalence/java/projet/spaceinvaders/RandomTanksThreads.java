@@ -5,7 +5,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
 
 //TODO Comment
 /**
- *
+ * 
  * @author Gallet Guyon
  */
 public class RandomTanksThreads implements Tank
@@ -14,7 +14,7 @@ public class RandomTanksThreads implements Tank
 	 * It defines the number of tank you have in tabTank.
 	 */
 	private int tanksAmount;
-	
+
 	/**
 	 * Array containing all tanks.
 	 */
@@ -29,7 +29,9 @@ public class RandomTanksThreads implements Tank
 		this.tanksAmount = this.tanks.length;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.iutvalence.java.projet.spaceinvaders.Tank#shoot()
 	 */
 	@Override
@@ -38,24 +40,24 @@ public class RandomTanksThreads implements Tank
 		int i;
 		int x;
 		long neg;
-		
-		for(i=0; i < this.tanksAmount; i++)
+
+		for (i = 0; i < this.tanksAmount; i++)
 		{
-			if(this.tanks[i] != null && this.tanks[i].isAlive())
+			if (this.tanks[i] != null && this.tanks[i].isAlive())
 			{
 				x = (int) (Math.random() * 10);
 				neg = Math.round(Math.random());
-				
-				if(neg == 0)
+
+				if (neg == 0)
 					neg = -1;
-				
+
 				try
 				{
-					if((this.tanks[i].getArea().getPosition().getX() + (int) (x*neg)) > 0
-						&& (this.tanks[i].getArea().getPosition().getX() +
-						    this.tanks[i].getArea().getSize().getX() + (int) (x*neg)) < this.maxSize.getX())
+					if ((this.tanks[i].getArea().getPosition().getX() + (int) (x * neg)) > 0
+							&& (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX() + (int) (x * neg)) < this.maxSize
+									.getX())
 					{
-						this.tanks[i].move(new Coordinates((int) (x*neg),0));
+						this.tanks[i].move(new Coordinates((int) (x * neg), 0));
 					}
 					else
 					{
@@ -70,17 +72,19 @@ public class RandomTanksThreads implements Tank
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.iutvalence.java.projet.spaceinvaders.Tank#move()
 	 */
 	@Override
 	public void move()
 	{
 		int i;
-		
-		for(i=0; i < this.tanksAmount; i++)
+
+		for (i = 0; i < this.tanksAmount; i++)
 		{
-			if(this.tanks[i] != null && this.tanks[i].isAlive())
+			if (this.tanks[i] != null && this.tanks[i].isAlive())
 				this.shootFrom(this.tanks[i], 1);
 		}
 	}
