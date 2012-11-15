@@ -37,7 +37,7 @@ public class TanksThreads extends Thread
 			}
 			catch (OutOfGridException e)
 			{
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			
 			this.tank.tankShoot();

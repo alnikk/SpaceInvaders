@@ -98,7 +98,26 @@ public class SpaceInvadersMaVa extends SpaceInvaders
 	 */
 	public void run()
 	{
-
+		while(true)
+		{
+			moveShoots();
+	
+			testCollision();
+	
+			if (this.countAlive(this.tanks) == 0 || this.countAlive(this.monsters) == 0)
+				break;
+	
+			show();
+			
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	
