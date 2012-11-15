@@ -10,7 +10,7 @@ import java.util.Arrays;
  * 
  * @author Gallet Guyon
  */
-public class SpaceInvadersMaVs extends SpaceInvaders
+public class SpaceInvadersMaVs extends SpaceInvaders implements TankControler, MonsterControler
 {
 	// ************************** Constructors **************************//
 	/**
@@ -54,116 +54,243 @@ public class SpaceInvadersMaVs extends SpaceInvaders
 	{
 		super(nbMonster, nbTank, Max);
 	}
-
-	// ************************** Methods **************************//
-
-	/**
-	 * This method begins the game. It's the only entry point.
-	 */
+	
+	//********************* Main **************************
+	@Override
 	public void run()
 	{
-		MonstersThread monsters = new MonstersThread("Monsters", 1000, this.monsters, this.tanks,
-				this.shoots, this.work, this.maxSize);
-		monsters.start();
-		while (true)
+		
+		while(true)
 		{
+			moveShoots();
+
 			try
 			{
-				monsters.join();
+				tankMove();
+			}
+			catch (OutOfGridException e)
+			{
+				java.awt.Toolkit.getDefaultToolkit().beep();
+			}
+
+			tankShoot();
+
+			testCollision();
+
+			if (this.countAlive(this.tanks) == 0 || this.countAlive(this.monsters) == 0)
 				break;
+
+			show();
+			
+			try
+			{
+				Thread.sleep(1000);
 			}
 			catch (InterruptedException e)
 			{
+				e.printStackTrace();
 			}
-		}
+		}		
 	}
-
-	// [[[[[[[[[[[[[ Shoots behavior ]]]]]]]]]]]]]
-
-	/**
-	 * Allow to move shoot
-	 */
-	private void moveShoots()
-	{
-		int i;
-
-		for (i = 0; i < (this.monstersAmount + this.tanksAmount); i++)
+	
+	// ******************** Method ***********************
+	
+		// [[[[[[[[[[[[[ Monsters behavior ]]]]]]]]]]]]]
+		
+		/**
+		 * This method allows to move Invaders once that is to say to right, down, or left. It follow scheme by itself :
+		 * <ul>
+		 * <li>right</li>
+		 * <li>down</li>
+		 * <li>left</li>
+		 * <li>down</li>
+		 * <li>right</li>
+		 * </ul>
+		 * @return 
+		 */
+		public int monstersMove()
 		{
-			if (this.shoots[i] != null && this.shoots[i].isAlive())
+			switch (this.etat)
 			{
-				try
-				{
-					if (this.shoots[i].getDirection() < 0)
-						this.moveTab(new Coordinates(0, -this.moveShoots.getY()), this.shoots);
-					if (this.shoots[i].getDirection() > 0)
-						this.moveTab(new Coordinates(0, this.moveShoots.getY()), this.shoots);
-				}
-				catch (OutOfGridException e)
-				{
-					e.kill();
-				}
+				case LEFT_UP:
+					try
+					{
+						moveTab(new Coordinates(this.coorMove.getX(), 0), this.monsters);
+					}
+					catch (OutOfGridException e)
+					{
+						this.etat = Etat.RIGHT_UP;
+						monstersMove();
+					}
+					break;
+				case RIGHT_UP:
+					try
+					{
+						moveTab(new Coordinates(0, -this.coorMove.getY()), this.monsters);
+					}
+					catch (OutOfGridException e1)
+					{
+						e1.kill();
+						monstersMove();
+					}
+					this.etat = Etat.RIGHT_BOTTOM;
+					break;
+				case RIGHT_BOTTOM:
+					try
+					{
+						moveTab(new Coordinates(-this.coorMove.getX(), 0), this.monsters);
+					}
+					catch (OutOfGridException e)
+					{
+						this.etat = Etat.LEFT_BOTTOM;
+						monstersMove();
+					}
+					break;
+				case LEFT_BOTTOM:
+					try
+					{
+						moveTab(new Coordinates(0, -this.coorMove.getY()), this.monsters);
+					}
+					catch (OutOfGridException e1)
+					{
+						e1.kill();
+						monstersMove();
+					}
+					this.etat = Etat.LEFT_UP;
+					break;
 			}
+			return 1000;
 		}
-	}
 
-	// [[[[[[[[[[[[[ Controls ]]]]]]]]]]]]]
-
-	/**
-	 * Allows random tank control
-	 * 
-	 * @throws OutOfGridException
-	 *             Indicate when Tank want to go over the screen
-	 */
-	private void randomMove() throws OutOfGridException
-	{
-		int i;
-		int x;
-		long neg;
-
-		for (i = 0; i < this.tanksAmount; i++)
+		/**
+		 * Method for shoot on tanks. It search the invaders just above tanks and shoot.
+		 */
+		public void monsterShoot()
 		{
-			if (this.tanks[i] != null && this.tanks[i].isAlive())
+			int i, j;
+			Movable invaderAbove = null;
+
+			for (i = 0; i < this.tanksAmount; i++)
 			{
-				x = (int) (Math.random() * 10);
-				neg = Math.round(Math.random());
-
-				if (neg == 0)
-					neg = -1;
-
-				try
+				if (this.tanks[i] != null && this.tanks[i].isAlive())
 				{
-					if ((this.tanks[i].getArea().getPosition().getX() + (int) (x * neg)) > 0
-							&& (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX() + (int) (x * neg)) < this.maxSize
-									.getX())
+					for (j = this.monstersAmount - 1; j > 0; j--)
 					{
-						this.tanks[i].move(new Coordinates((int) (x * neg), 0));
+						if (this.monsters[i] != null && this.monsters[j].isAlive())
+						{
+							if (((this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea().getSize()
+									.getX()) / 2) - (this.sizeShoots.getX() / 2) < (this.tanks[i].getArea().getPosition()
+									.getX() + this.tanks[i].getArea().getSize().getX()) && (this.monsters[j].getArea()
+									.getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2)
+									- (this.sizeShoots.getX() / 2) > (this.tanks[i].getArea().getPosition().getX()))
+									|| ((this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea()
+											.getSize().getX()) / 2) + (this.sizeShoots.getX() / 2) < (this.tanks[i]
+											.getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX()) && (this.monsters[j]
+											.getArea().getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2)
+											+ (this.sizeShoots.getX() / 2) > (this.tanks[i].getArea().getPosition().getX())))
+							{
+								if (invaderAbove != null)
+								{
+									if (invaderAbove.getArea().getPosition().getY() > this.monsters[j].getArea()
+											.getPosition().getY())
+										invaderAbove = this.monsters[j];
+								}
+								else
+									invaderAbove = this.monsters[j];
+							}
+						}
 					}
-					else
-					{
-						throw new OutOfGridException(this.tanks[i]);
-					}
-				}
-				catch (NegativeSizeException e)
+				} // TODO Shoot's acceleration
+				shootFrom(invaderAbove, -1);
+			}
+		}
+
+		// [[[[[[[[[[[[[ Shoots behavior ]]]]]]]]]]]]]
+
+		/**
+		 * Allow to move shoot
+		 */
+		private void moveShoots()
+		{
+			int i;
+
+			for (i = 0; i < (this.monstersAmount + this.tanksAmount); i++)
+			{
+				if (this.shoots[i] != null && this.shoots[i].isAlive())
 				{
-					e.printStackTrace();
+					try
+					{
+						if (this.shoots[i].getDirection() < 0)
+							this.moveTab(new Coordinates(0, -this.moveShoots.getY()), this.shoots);
+						if (this.shoots[i].getDirection() > 0)
+							this.moveTab(new Coordinates(0, this.moveShoots.getY()), this.shoots);
+					}
+					catch (OutOfGridException e)
+					{
+						e.kill();
+					}
 				}
 			}
 		}
-	}
 
-	/**
-	 * Allow tank to shoot Invaders
-	 */
-	private void tankShoot()
-	{
-		int i;
+		// [[[[[[[[[[[[[ Controls ]]]]]]]]]]]]]
 
-		for (i = 0; i < this.tanksAmount; i++)
+		/**
+		 * Allows random tank control
+		 * 
+		 * @throws OutOfGridException
+		 *             Indicate when Tank want to go over the screen
+		 */
+		public void tankMove() throws OutOfGridException
 		{
-			if (this.tanks[i] != null && this.tanks[i].isAlive())
-				this.shootFrom(this.tanks[i], 1);
+			int i;
+			int x;
+			long neg;
+
+			for (i = 0; i < this.tanksAmount; i++)
+			{
+				if (this.tanks[i] != null && this.tanks[i].isAlive())
+				{
+					x = (int) (Math.random() * 10);
+					neg = Math.round(Math.random());
+
+					if (neg == 0)
+						neg = -1;
+
+					try
+					{
+						if ((this.tanks[i].getArea().getPosition().getX() + (int) (x * neg)) > 0
+								&& (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX() + (int) (x * neg)) < this.maxSize
+										.getX())
+						{
+							this.tanks[i].move(new Coordinates((int) (x * neg), 0));
+						}
+						else
+						{
+							throw new OutOfGridException(this.tanks[i]);
+						}
+					}
+					catch (NegativeSizeException e)
+					{
+						e.printStackTrace();
+					}
+				}
+			}
 		}
-	}
+
+		/**
+		 * Allow tank to shoot Invaders
+		 */
+		public void tankShoot()
+		{
+			int i;
+
+			for (i = 0; i < this.tanksAmount; i++)
+			{
+				if (this.tanks[i] != null && this.tanks[i].isAlive())
+					this.shootFrom(this.tanks[i], 1);
+			}
+		}
 
 	// [[[[[[[[[[[[[ Display ]]]]]]]]]]]]]
 

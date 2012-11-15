@@ -8,7 +8,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * 
  * @author Gallet Guyon
  */
-public interface TankControleur
+public interface TankControler
 {
 	/**
 	 * Allows the player to shoot

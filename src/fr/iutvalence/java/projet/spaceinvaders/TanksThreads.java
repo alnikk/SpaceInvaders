@@ -8,73 +8,40 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * 
  * @author Gallet Guyon
  */
-public class TanksThreads
+public class TanksThreads extends Thread
 {
 	/**
-	 * It defines the number of tank you have in tabTank.
+	 * 
 	 */
-	private int tanksAmount;
-
-	/**
-	 * Array containing all tanks.
-	 */
-	protected Movable[] tanks;
-
+	private TankControler tank;	
+	
 	/**
 	 * Create a new RandomTank Object
+	 * @param tank 
 	 */
-	public TanksThreads(Movable tanks[])
+	public TanksThreads(TankControler tank)
 	{
-		this.tanks = tanks;
-		this.tanksAmount = this.tanks.length;
+		this.tank = tank;
 	}
-
-	public void shoot()
+	
+	/**
+	 * Main of the thread. It calls move() then testCollision() every sleepTime millisecond.
+	 */
+	public void run()
 	{
-		int i;
-		int x;
-		long neg;
-
-		for (i = 0; i < this.tanksAmount; i++)
-		{
-			if (this.tanks[i] != null && this.tanks[i].isAlive())
+		while (true)
+		{			
+			try
 			{
-				x = (int) (Math.random() * 10);
-				neg = Math.round(Math.random());
-
-				if (neg == 0)
-					neg = -1;
-
-				try
-				{
-					if ((this.tanks[i].getArea().getPosition().getX() + (int) (x * neg)) > 0
-							&& (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX() + (int) (x * neg)) < this.maxSize
-									.getX())
-					{
-						this.tanks[i].move(new Coordinates((int) (x * neg), 0));
-					}
-					else
-					{
-						throw new OutOfGridException(this.tanks[i]);
-					}
-				}
-				catch (NegativeSizeException e)
-				{
-					e.printStackTrace();
-				}
+				this.tank.tankMove();
 			}
+			catch (OutOfGridException e)
+			{
+				e.printStackTrace();
+			}
+			
+			this.tank.tankShoot();
 		}
 	}
-
-	public void move()
-	{
-		int i;
-
-		for (i = 0; i < this.tanksAmount; i++)
-		{
-			if (this.tanks[i] != null && this.tanks[i].isAlive())
-				this.shootFrom(this.tanks[i], 1);
-		}
-	}
-
+	
 }

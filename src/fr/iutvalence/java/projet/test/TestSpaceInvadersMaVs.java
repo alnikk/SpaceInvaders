@@ -4,6 +4,7 @@
 package fr.iutvalence.java.projet.test;
 
 import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
+import fr.iutvalence.java.projet.spaceinvaders.MonstersThread;
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMaVs;
 
 /**
@@ -23,13 +24,10 @@ public class TestSpaceInvadersMaVs
 	public static void main(String[] args)
 	{
 		// TODO More Test
-		SpaceInvadersMaVs SI = new SpaceInvadersMaVs(10, 1, new Coordinates(150, 30));
-
-		System.out.println("Etat Initial :" + SI);
-
-		SI.run();
-
-		System.out.println("Etat Final :" + SI);
+		SpaceInvadersMaVs si = new SpaceInvadersMaVs();
+		MonstersThread monsters = new MonstersThread("Monsters", si, 1000);
+		monsters.start();
+		si.run();
 	}
 
 }

@@ -59,7 +59,7 @@ public abstract class SpaceInvaders
 	/**
 	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
 	 */
-	private static final int DEFAULT_TANKS_AMOUNT = 4;
+	private static final int DEFAULT_TANKS_AMOUNT = 1;
 
 	// [[[[[[[ Time ]]]]]]]
 	/**
@@ -120,7 +120,7 @@ public abstract class SpaceInvaders
 	/**
 	 * This variable is used to wait sleepTime millisecond between each loop
 	 */
-	private int sleepTime;
+	protected int sleepTime;
 
 	/**
 	 * Not implemented yet It uses to accelerate sleepTime when invaders are less numerous
@@ -439,23 +439,6 @@ public abstract class SpaceInvaders
 				nbAlive++;
 		}
 		return nbAlive;
-	}
-
-	/**
-	 * This method wait a time in function of sleepTime value and of monster alive's number
-	 */
-	void waitLoop()
-	{
-		try
-		{
-			// TODO sleepTime constant...
-			// expression is a.x type. Add a.x + c with c playable. It have to don't affect sleepTime
-			Thread.sleep((long) (Math.sqrt(((double) countAlive(this.monsters) / this.monstersAmount)) * this.sleepTime));
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	/**

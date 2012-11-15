@@ -10,7 +10,7 @@ import java.util.Arrays;
  * 
  * @author Gallet Guyon
  */
-public class SpaceInvadersMsVs extends SpaceInvaders implements TankControleur, MonsterControleur
+public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, MonsterControler
 {
 	// ********************* Constructors ************************
 
@@ -118,7 +118,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControleur, 
 				java.awt.Toolkit.getDefaultToolkit().beep();
 			}
 
-			tankShoot();
+			//tankShoot();
 
 			testCollision();
 
@@ -131,8 +131,26 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControleur, 
 	}
 
 	// ******************** Method ***********************
+	
 	// [[[[[[[[[[[[[ Monsters behavior ]]]]]]]]]]]]]
 
+	/**
+	 * This method wait a time in function of sleepTime value and of monster alive's number
+	 */
+	public void waitLoop()
+	{
+		try
+		{
+			// TODO sleepTime constant...
+			// expression is a.x type. Add a.x + c with c playable. It have to don't affect sleepTime
+			Thread.sleep((long) (Math.sqrt(((double) countAlive(this.monsters) / this.monstersAmount)) * this.sleepTime));
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * This method allows to move Invaders once that is to say to right, down, or left. It follow scheme by itself :
 	 * <ul>
@@ -142,8 +160,9 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControleur, 
 	 * <li>down</li>
 	 * <li>right</li>
 	 * </ul>
+	 * @return 
 	 */
-	public void monstersMove()
+	public int monstersMove()
 	{
 		switch (this.etat)
 		{
@@ -194,6 +213,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControleur, 
 				this.etat = Etat.LEFT_UP;
 				break;
 		}
+		return (int) (Math.sqrt(((double) countAlive(this.monsters) / this.monstersAmount)) * this.sleepTime);
 	}
 
 	/**
