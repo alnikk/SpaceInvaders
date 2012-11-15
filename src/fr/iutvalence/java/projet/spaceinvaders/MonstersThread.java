@@ -8,7 +8,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * 
  * @author Gallet Guyon
  */
-public class MonstersBehaviorThread extends Thread
+public class MonstersThread extends Thread
 {
 	// ***************** Constant *************************
 
@@ -101,7 +101,7 @@ public class MonstersBehaviorThread extends Thread
 	 * @param max
 	 *            The max coordinates of the screen
 	 */
-	public MonstersBehaviorThread(String nom, int sleepTime, int acceleration, Movable monsters[], Movable tanks[],
+	public MonstersThread(String nom, int sleepTime, int acceleration, Movable monsters[], Movable tanks[],
 			Movable[] shoots, Boolean work, Coordinates max)
 	{
 		super(nom);
@@ -133,7 +133,7 @@ public class MonstersBehaviorThread extends Thread
 	 * @param max
 	 *            The max coordinates of the screen
 	 */
-	public MonstersBehaviorThread(String nom, int sleepTime, Movable monsters[], Movable tanks[], Movable[] shoots,
+	public MonstersThread(String nom, int sleepTime, Movable monsters[], Movable tanks[], Movable[] shoots,
 			Boolean work, Coordinates max)
 	{
 		super(nom);
@@ -163,7 +163,7 @@ public class MonstersBehaviorThread extends Thread
 	 * @param max
 	 *            The max coordinates of the screen
 	 */
-	public MonstersBehaviorThread(String nom, Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work,
+	public MonstersThread(String nom, Movable monsters[], Movable tanks[], Movable[] shoots, Boolean work,
 			Coordinates max)
 	{
 		super(nom);

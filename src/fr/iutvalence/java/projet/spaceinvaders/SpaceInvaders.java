@@ -48,7 +48,7 @@ public abstract class SpaceInvaders
 	/**
 	 * This constant defines the size of shoot
 	 */
-	private static final Coordinates DEFAULT_SIZE_SHOOT = new Coordinates(2, 5);
+	private static final Coordinates DEFAULT_SIZE_SHOOT = new Coordinates(2, 2);
 
 	// [[[[[[[ Numerous ]]]]]]]
 	/**

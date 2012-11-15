@@ -8,7 +8,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * 
  * @author Gallet Guyon
  */
-public class RandomTanksThreads implements Tank
+public class TanksThreads
 {
 	/**
 	 * It defines the number of tank you have in tabTank.
@@ -23,18 +23,12 @@ public class RandomTanksThreads implements Tank
 	/**
 	 * Create a new RandomTank Object
 	 */
-	public RandomTanksThreads(Movable tanks[])
+	public TanksThreads(Movable tanks[])
 	{
 		this.tanks = tanks;
 		this.tanksAmount = this.tanks.length;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.iutvalence.java.projet.spaceinvaders.Tank#shoot()
-	 */
-	@Override
 	public void shoot()
 	{
 		int i;
@@ -72,12 +66,6 @@ public class RandomTanksThreads implements Tank
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.iutvalence.java.projet.spaceinvaders.Tank#move()
-	 */
-	@Override
 	public void move()
 	{
 		int i;

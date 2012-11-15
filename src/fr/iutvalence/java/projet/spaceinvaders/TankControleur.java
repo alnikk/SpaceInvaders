@@ -8,15 +8,17 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * 
  * @author Gallet Guyon
  */
-public interface Tank
+public interface TankControleur
 {
 	/**
 	 * Allows the player to shoot
 	 */
-	public void shoot();
+	public void tankShoot();
 
 	/**
 	 * Allows the player to move on the screen
+	 * @throws OutOfGridException
+	 *             Indicate when Tank want to go over the screen
 	 */
-	public void move();
+	public void tankMove() throws OutOfGridException;
 }

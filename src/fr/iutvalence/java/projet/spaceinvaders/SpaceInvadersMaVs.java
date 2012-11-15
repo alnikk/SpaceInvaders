@@ -62,7 +62,7 @@ public class SpaceInvadersMaVs extends SpaceInvaders
 	 */
 	public void run()
 	{
-		MonstersBehaviorThread monsters = new MonstersBehaviorThread("Monsters", 1000, this.monsters, this.tanks,
+		MonstersThread monsters = new MonstersThread("Monsters", 1000, this.monsters, this.tanks,
 				this.shoots, this.work, this.maxSize);
 		monsters.start();
 		while (true)

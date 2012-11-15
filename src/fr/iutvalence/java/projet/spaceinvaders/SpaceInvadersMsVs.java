@@ -10,7 +10,7 @@ import java.util.Arrays;
  * 
  * @author Gallet Guyon
  */
-public class SpaceInvadersMsVs extends SpaceInvaders
+public class SpaceInvadersMsVs extends SpaceInvaders implements TankControleur, MonsterControleur
 {
 	// ********************* Constructors ************************
 
@@ -105,13 +105,13 @@ public class SpaceInvadersMsVs extends SpaceInvaders
 		{
 			moveShoots();
 
-			moveMonsters();
+			monstersMove();
 
 			monsterShoot();
 
 			try
 			{
-				randomMove();
+				tankMove();
 			}
 			catch (OutOfGridException e)
 			{
@@ -143,7 +143,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders
 	 * <li>right</li>
 	 * </ul>
 	 */
-	private void moveMonsters()
+	public void monstersMove()
 	{
 		switch (this.etat)
 		{
@@ -155,7 +155,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders
 				catch (OutOfGridException e)
 				{
 					this.etat = Etat.RIGHT_UP;
-					moveMonsters();
+					monstersMove();
 				}
 				break;
 			case RIGHT_UP:
@@ -166,7 +166,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders
 				catch (OutOfGridException e1)
 				{
 					e1.kill();
-					moveMonsters();
+					monstersMove();
 				}
 				this.etat = Etat.RIGHT_BOTTOM;
 				break;
@@ -178,7 +178,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders
 				catch (OutOfGridException e)
 				{
 					this.etat = Etat.LEFT_BOTTOM;
-					moveMonsters();
+					monstersMove();
 				}
 				break;
 			case LEFT_BOTTOM:
@@ -189,7 +189,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders
 				catch (OutOfGridException e1)
 				{
 					e1.kill();
-					moveMonsters();
+					monstersMove();
 				}
 				this.etat = Etat.LEFT_UP;
 				break;
@@ -199,7 +199,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders
 	/**
 	 * Method for shoot on tanks. It search the invaders just above tanks and shoot.
 	 */
-	private void monsterShoot()
+	public void monsterShoot()
 	{
 		int i, j;
 		Movable invaderAbove = null;
@@ -275,7 +275,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders
 	 * @throws OutOfGridException
 	 *             Indicate when Tank want to go over the screen
 	 */
-	private void randomMove() throws OutOfGridException
+	public void tankMove() throws OutOfGridException
 	{
 		int i;
 		int x;
@@ -315,7 +315,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders
 	/**
 	 * Allow tank to shoot Invaders
 	 */
-	private void tankShoot()
+	public void tankShoot()
 	{
 		int i;
 
