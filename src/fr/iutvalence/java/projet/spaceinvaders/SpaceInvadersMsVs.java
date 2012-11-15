@@ -10,7 +10,7 @@ import java.util.Arrays;
  * 
  * @author Gallet Guyon
  */
-public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, MonsterControler
+public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, MonsterControler, Display
 {
 	// ********************* Constructors ************************
 
@@ -118,14 +118,15 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 				java.awt.Toolkit.getDefaultToolkit().beep();
 			}
 
-			//tankShoot();
+			tankShoot();
 
 			testCollision();
 
+			show();
+			
 			if (this.countAlive(this.tanks) == 0 || this.countAlive(this.monsters) == 0)
 				this.work = false;
-
-			show();
+			
 			waitLoop();
 		}
 	}
@@ -160,7 +161,8 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 	 * <li>down</li>
 	 * <li>right</li>
 	 * </ul>
-	 * @return 
+	 * @return (integer) this returns the wait time between each move. When it's equals to 0
+	 * 			the game is finished.
 	 */
 	public int monstersMove()
 	{
@@ -254,7 +256,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 						}
 					}
 				}
-			} // TODO Shoot's acceleration
+			}
 			shootFrom(invaderAbove, -1);
 		}
 	}

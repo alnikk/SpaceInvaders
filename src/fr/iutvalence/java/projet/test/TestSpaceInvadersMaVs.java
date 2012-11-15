@@ -3,7 +3,6 @@
  */
 package fr.iutvalence.java.projet.test;
 
-import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
 import fr.iutvalence.java.projet.spaceinvaders.MonstersThread;
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMaVs;
 

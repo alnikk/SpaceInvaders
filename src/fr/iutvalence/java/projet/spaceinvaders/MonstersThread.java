@@ -4,7 +4,7 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
- * This thread loop until the game finish. It make invaders move and test collision beetween us and the tank.
+ * This thread loop until the game finish. It make invaders move and shoot on tanks.
  * 
  * @author Gallet Guyon
  */
@@ -13,7 +13,7 @@ public class MonstersThread extends Thread
 	// ***************** Variable *************************
 
 	/**
-	 * Reference to work boolean in SpaceInvaders class Boolean to know if the game is finished
+	 * Delay between each moves of Invaders. When it's equals to 0 the game is finished
 	 */
 	private int delay;
 	
@@ -29,9 +29,10 @@ public class MonstersThread extends Thread
 	 * 
 	 * @param nom
 	 *            Name of the Thread
-	 * @param work
-	 *            The stop loop value
-	 * @param monster // TODO Comment 
+	 * @param monster 
+	 *            Interface for control Monster threw this class
+	 * @param initialDelay
+	 *            The initial delay between each moves of monsters 
 	 */
 	public MonstersThread(String nom, MonsterControler monster, int initialDelay)
 	{
@@ -56,6 +57,8 @@ public class MonstersThread extends Thread
 			this.waitLoop();
 		}
 	}
+	
+	// ******************** Method ***********************
 	
 	/**
 	 * This method wait a time in function of sleepTime value and of monster alive's number

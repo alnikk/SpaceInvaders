@@ -4,8 +4,8 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
- * @author alexandre
- * 
+ * A space invader game.<br/>
+ * @author Gallet Guyon
  */
 public class SpaceInvadersMaVa extends SpaceInvaders
 {
@@ -101,14 +101,14 @@ public class SpaceInvadersMaVa extends SpaceInvaders
 		while(true)
 		{
 			moveShoots();
-	
+
 			testCollision();
-	
+
+			show();
+
 			if (this.countAlive(this.tanks) == 0 || this.countAlive(this.monsters) == 0)
 				break;
-	
-			show();
-			
+
 			try
 			{
 				Thread.sleep(1000);
@@ -119,331 +119,332 @@ public class SpaceInvadersMaVa extends SpaceInvaders
 			}
 		}
 	}
-	
-	
+
+
 	// ******************** Method ***********************
-	
-		// [[[[[[[[[[[[[ Monsters behavior ]]]]]]]]]]]]]
 
-		/**
-		 * This method wait a time in function of sleepTime value and of monster alive's number
-		 */
-		public void waitLoop()
+	// [[[[[[[[[[[[[ Monsters behavior ]]]]]]]]]]]]]
+
+	/**
+	 * This method wait a time in function of sleepTime value and of monster alive's number
+	 */
+	public void waitLoop()
+	{
+		try
 		{
-			try
-			{
-				// TODO sleepTime constant...
-				// expression is a.x type. Add a.x + c with c playable. It have to don't affect sleepTime
-				Thread.sleep((long) (Math.sqrt(((double) countAlive(this.monsters) / this.monstersAmount)) * this.sleepTime));
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
+			// TODO sleepTime constant...
+			// expression is a.x type. Add a.x + c with c playable. It have to don't affect sleepTime
+			Thread.sleep((long) (Math.sqrt(((double) countAlive(this.monsters) / this.monstersAmount)) * this.sleepTime));
 		}
-		
-		/**
-		 * This method allows to move Invaders once that is to say to right, down, or left. It follow scheme by itself :
-		 * <ul>
-		 * <li>right</li>
-		 * <li>down</li>
-		 * <li>left</li>
-		 * <li>down</li>
-		 * <li>right</li>
-		 * </ul>
-		 * @return 
-		 */
-		public int monstersMove()
+		catch (InterruptedException e)
 		{
-			switch (this.etat)
-			{
-				case LEFT_UP:
-					try
-					{
-						moveTab(new Coordinates(this.coorMove.getX(), 0), this.monsters);
-					}
-					catch (OutOfGridException e)
-					{
-						this.etat = Etat.RIGHT_UP;
-						monstersMove();
-					}
-					break;
-				case RIGHT_UP:
-					try
-					{
-						moveTab(new Coordinates(0, -this.coorMove.getY()), this.monsters);
-					}
-					catch (OutOfGridException e1)
-					{
-						e1.kill();
-						monstersMove();
-					}
-					this.etat = Etat.RIGHT_BOTTOM;
-					break;
-				case RIGHT_BOTTOM:
-					try
-					{
-						moveTab(new Coordinates(-this.coorMove.getX(), 0), this.monsters);
-					}
-					catch (OutOfGridException e)
-					{
-						this.etat = Etat.LEFT_BOTTOM;
-						monstersMove();
-					}
-					break;
-				case LEFT_BOTTOM:
-					try
-					{
-						moveTab(new Coordinates(0, -this.coorMove.getY()), this.monsters);
-					}
-					catch (OutOfGridException e1)
-					{
-						e1.kill();
-						monstersMove();
-					}
-					this.etat = Etat.LEFT_UP;
-					break;
-			}
-			return (int) (Math.sqrt(((double) countAlive(this.monsters) / this.monstersAmount)) * this.sleepTime);
+			e.printStackTrace();
 		}
+	}
 
-		/**
-		 * Method for shoot on tanks. It search the invaders just above tanks and shoot.
-		 */
-		public void monsterShoot()
+	/**
+	 * This method allows to move Invaders once that is to say to right, down, or left. It follow scheme by itself :
+	 * <ul>
+	 * <li>right</li>
+	 * <li>down</li>
+	 * <li>left</li>
+	 * <li>down</li>
+	 * <li>right</li>
+	 * </ul>
+	 * @return (integer) this returns the wait time between each move. When it's equals to 0
+	 * 			the game is finished.
+	 */
+	public int monstersMove()
+	{
+		switch (this.etat)
 		{
-			int i, j;
-			Movable invaderAbove = null;
-
-			for (i = 0; i < this.tanksAmount; i++)
-			{
-				if (this.tanks[i] != null && this.tanks[i].isAlive())
+			case LEFT_UP:
+				try
 				{
-					for (j = this.monstersAmount - 1; j > 0; j--)
+					moveTab(new Coordinates(this.coorMove.getX(), 0), this.monsters);
+				}
+				catch (OutOfGridException e)
+				{
+					this.etat = Etat.RIGHT_UP;
+					monstersMove();
+				}
+				break;
+			case RIGHT_UP:
+				try
+				{
+					moveTab(new Coordinates(0, -this.coorMove.getY()), this.monsters);
+				}
+				catch (OutOfGridException e1)
+				{
+					e1.kill();
+					monstersMove();
+				}
+				this.etat = Etat.RIGHT_BOTTOM;
+				break;
+			case RIGHT_BOTTOM:
+				try
+				{
+					moveTab(new Coordinates(-this.coorMove.getX(), 0), this.monsters);
+				}
+				catch (OutOfGridException e)
+				{
+					this.etat = Etat.LEFT_BOTTOM;
+					monstersMove();
+				}
+				break;
+			case LEFT_BOTTOM:
+				try
+				{
+					moveTab(new Coordinates(0, -this.coorMove.getY()), this.monsters);
+				}
+				catch (OutOfGridException e1)
+				{
+					e1.kill();
+					monstersMove();
+				}
+				this.etat = Etat.LEFT_UP;
+				break;
+		}
+		return (int) (Math.sqrt(((double) countAlive(this.monsters) / this.monstersAmount)) * this.sleepTime);
+	}
+
+	/**
+	 * Method for shoot on tanks. It search the invaders just above tanks and shoot.
+	 */
+	public void monsterShoot()
+	{
+		int i, j;
+		Movable invaderAbove = null;
+
+		for (i = 0; i < this.tanksAmount; i++)
+		{
+			if (this.tanks[i] != null && this.tanks[i].isAlive())
+			{
+				for (j = this.monstersAmount - 1; j > 0; j--)
+				{
+					if (this.monsters[i] != null && this.monsters[j].isAlive())
 					{
-						if (this.monsters[i] != null && this.monsters[j].isAlive())
+						if (((this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea().getSize()
+								.getX()) / 2) - (this.sizeShoots.getX() / 2) < (this.tanks[i].getArea().getPosition()
+										.getX() + this.tanks[i].getArea().getSize().getX()) && (this.monsters[j].getArea()
+												.getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2)
+												- (this.sizeShoots.getX() / 2) > (this.tanks[i].getArea().getPosition().getX()))
+												|| ((this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea()
+														.getSize().getX()) / 2) + (this.sizeShoots.getX() / 2) < (this.tanks[i]
+																.getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX()) && (this.monsters[j]
+																		.getArea().getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2)
+																		+ (this.sizeShoots.getX() / 2) > (this.tanks[i].getArea().getPosition().getX())))
 						{
-							if (((this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea().getSize()
-									.getX()) / 2) - (this.sizeShoots.getX() / 2) < (this.tanks[i].getArea().getPosition()
-									.getX() + this.tanks[i].getArea().getSize().getX()) && (this.monsters[j].getArea()
-									.getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2)
-									- (this.sizeShoots.getX() / 2) > (this.tanks[i].getArea().getPosition().getX()))
-									|| ((this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea()
-											.getSize().getX()) / 2) + (this.sizeShoots.getX() / 2) < (this.tanks[i]
-											.getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX()) && (this.monsters[j]
-											.getArea().getPosition().getX() + (this.monsters[j].getArea().getSize().getX()) / 2)
-											+ (this.sizeShoots.getX() / 2) > (this.tanks[i].getArea().getPosition().getX())))
+							if (invaderAbove != null)
 							{
-								if (invaderAbove != null)
-								{
-									if (invaderAbove.getArea().getPosition().getY() > this.monsters[j].getArea()
-											.getPosition().getY())
-										invaderAbove = this.monsters[j];
-								}
-								else
+								if (invaderAbove.getArea().getPosition().getY() > this.monsters[j].getArea()
+										.getPosition().getY())
 									invaderAbove = this.monsters[j];
 							}
+							else
+								invaderAbove = this.monsters[j];
 						}
-					}
-				} // TODO Shoot's acceleration
-				shootFrom(invaderAbove, -1);
-			}
-		}
-
-		// [[[[[[[[[[[[[ Shoots behavior ]]]]]]]]]]]]]
-
-		/**
-		 * Allow to move shoot
-		 */
-		private void moveShoots()
-		{
-			int i;
-
-			for (i = 0; i < (this.monstersAmount + this.tanksAmount); i++)
-			{
-				if (this.shoots[i] != null && this.shoots[i].isAlive())
-				{
-					try
-					{
-						if (this.shoots[i].getDirection() < 0)
-							this.moveTab(new Coordinates(0, -this.moveShoots.getY()), this.shoots);
-						if (this.shoots[i].getDirection() > 0)
-							this.moveTab(new Coordinates(0, this.moveShoots.getY()), this.shoots);
-					}
-					catch (OutOfGridException e)
-					{
-						e.kill();
 					}
 				}
-			}
+			} // TODO Shoot's acceleration
+			shootFrom(invaderAbove, -1);
 		}
+	}
 
-		// [[[[[[[[[[[[[ Controls ]]]]]]]]]]]]]
+	// [[[[[[[[[[[[[ Shoots behavior ]]]]]]]]]]]]]
 
-		/**
-		 * Allows random tank control
-		 * 
-		 * @throws OutOfGridException
-		 *             Indicate when Tank want to go over the screen
-		 */
-		public void tankMove() throws OutOfGridException
+	/**
+	 * Allow to move shoot
+	 */
+	private void moveShoots()
+	{
+		int i;
+
+		for (i = 0; i < (this.monstersAmount + this.tanksAmount); i++)
 		{
-			int i;
-			int x;
-			long neg;
-
-			for (i = 0; i < this.tanksAmount; i++)
+			if (this.shoots[i] != null && this.shoots[i].isAlive())
 			{
-				if (this.tanks[i] != null && this.tanks[i].isAlive())
+				try
 				{
-					x = (int) (Math.random() * 10);
-					neg = Math.round(Math.random());
-
-					if (neg == 0)
-						neg = -1;
-
-					try
-					{
-						if ((this.tanks[i].getArea().getPosition().getX() + (int) (x * neg)) > 0
-								&& (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX() + (int) (x * neg)) < this.maxSize
-										.getX())
-						{
-							this.tanks[i].move(new Coordinates((int) (x * neg), 0));
-						}
-						else
-						{
-							throw new OutOfGridException(this.tanks[i]);
-						}
-					}
-					catch (NegativeSizeException e)
-					{
-						e.printStackTrace();
-					}
+					if (this.shoots[i].getDirection() < 0)
+						this.moveTab(new Coordinates(0, -this.moveShoots.getY()), this.shoots);
+					if (this.shoots[i].getDirection() > 0)
+						this.moveTab(new Coordinates(0, this.moveShoots.getY()), this.shoots);
+				}
+				catch (OutOfGridException e)
+				{
+					e.kill();
 				}
 			}
 		}
+	}
 
-		/**
-		 * Allow tank to shoot Invaders
-		 */
-		public void tankShoot()
+	// [[[[[[[[[[[[[ Controls ]]]]]]]]]]]]]
+
+	/**
+	 * Allows random tank control
+	 * 
+	 * @throws OutOfGridException
+	 *             Indicate when Tank want to go over the screen
+	 */
+	public void tankMove() throws OutOfGridException
+	{
+		int i;
+		int x;
+		long neg;
+
+		for (i = 0; i < this.tanksAmount; i++)
 		{
-			int i;
-
-			for (i = 0; i < this.tanksAmount; i++)
+			if (this.tanks[i] != null && this.tanks[i].isAlive())
 			{
-				if (this.tanks[i] != null && this.tanks[i].isAlive())
-					this.shootFrom(this.tanks[i], 1);
+				x = (int) (Math.random() * 10);
+				neg = Math.round(Math.random());
+
+				if (neg == 0)
+					neg = -1;
+
+				try
+				{
+					if ((this.tanks[i].getArea().getPosition().getX() + (int) (x * neg)) > 0
+							&& (this.tanks[i].getArea().getPosition().getX() + this.tanks[i].getArea().getSize().getX() + (int) (x * neg)) < this.maxSize
+							.getX())
+					{
+						this.tanks[i].move(new Coordinates((int) (x * neg), 0));
+					}
+					else
+					{
+						throw new OutOfGridException(this.tanks[i]);
+					}
+				}
+				catch (NegativeSizeException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	/**
+	 * Allow tank to shoot Invaders
+	 */
+	public void tankShoot()
+	{
+		int i;
+
+		for (i = 0; i < this.tanksAmount; i++)
+		{
+			if (this.tanks[i] != null && this.tanks[i].isAlive())
+				this.shootFrom(this.tanks[i], 1);
+		}
+	}
+
+	// [[[[[[[[[[[[[ Display ]]]]]]]]]]]]]
+
+	/**
+	 * Create grid image to table of character
+	 * 
+	 * @return 2D table of character
+	 */
+	private char[][] gridImage()
+	{
+		int i, x, y;
+		char grid[][] = new char[this.maxSize.getX()][this.maxSize.getY()];
+
+		for (y = 0; y < this.maxSize.getY(); y++)
+		{
+			for (x = 0; x < this.maxSize.getX(); x++)
+			{
+				grid[x][y] = ' ';
 			}
 		}
 
-		// [[[[[[[[[[[[[ Display ]]]]]]]]]]]]]
-
-		/**
-		 * Create grid image to table of character
-		 * 
-		 * @return 2D table of character
-		 */
-		private char[][] gridImage()
+		for (i = 0; i < this.tanksAmount; i++)
 		{
-			int i, x, y;
-			char grid[][] = new char[this.maxSize.getX()][this.maxSize.getY()];
-
-			for (y = 0; y < this.maxSize.getY(); y++)
+			if (this.tanks[i] != null && this.tanks[i].isAlive())
 			{
-				for (x = 0; x < this.maxSize.getX(); x++)
+				y = this.tanks[i].getArea().getPosition().getY();
+				while (y < (this.tanks[i].getArea().getSize().getY() + this.tanks[i].getArea().getPosition().getY()))
 				{
-					grid[x][y] = ' ';
-				}
-			}
-
-			for (i = 0; i < this.tanksAmount; i++)
-			{
-				if (this.tanks[i] != null && this.tanks[i].isAlive())
-				{
-					y = this.tanks[i].getArea().getPosition().getY();
-					while (y < (this.tanks[i].getArea().getSize().getY() + this.tanks[i].getArea().getPosition().getY()))
+					x = this.tanks[i].getArea().getPosition().getX();
+					while (x < (this.tanks[i].getArea().getSize().getX() + this.tanks[i].getArea().getPosition().getX()))
 					{
-						x = this.tanks[i].getArea().getPosition().getX();
-						while (x < (this.tanks[i].getArea().getSize().getX() + this.tanks[i].getArea().getPosition().getX()))
-						{
-							grid[x][y] = 'T';
-							x++;
-						}
-						y++;
+						grid[x][y] = 'T';
+						x++;
 					}
+					y++;
 				}
 			}
-
-			for (i = 0; i < this.monstersAmount; i++)
-			{
-				if (this.monsters[i] != null && this.monsters[i].isAlive())
-				{
-					y = this.monsters[i].getArea().getPosition().getY();
-					while (y < (this.monsters[i].getArea().getSize().getY() + this.monsters[i].getArea().getPosition()
-							.getY()))
-					{
-						x = this.monsters[i].getArea().getPosition().getX();
-						while (x < (this.monsters[i].getArea().getSize().getX() + this.monsters[i].getArea().getPosition()
-								.getX()))
-						{
-							grid[x][y] = 'M';
-							x++;
-						}
-						y++;
-					}
-				}
-			}
-
-			for (i = 0; i < (this.monstersAmount + this.tanksAmount); i++)
-			{
-				if (this.shoots[i] != null && this.shoots[i].isAlive())
-				{
-					y = this.shoots[i].getArea().getPosition().getY();
-					while (y < (this.shoots[i].getArea().getSize().getY() + this.shoots[i].getArea().getPosition().getY()))
-					{
-						x = this.shoots[i].getArea().getPosition().getX();
-						while (x < (this.shoots[i].getArea().getSize().getX() + this.shoots[i].getArea().getPosition()
-								.getX()))
-						{
-							grid[x][y] = 'S';
-							x++;
-						}
-						y++;
-					}
-				}
-			}
-
-			return grid;
 		}
 
-		/**
-		 * Print the grid to the screen
-		 * 
-		 * @param grid
-		 *            the grid to print
-		 */
-		private void printGrid(char[][] grid)
+		for (i = 0; i < this.monstersAmount; i++)
 		{
-			int x, y;
-
-			for (y = this.maxSize.getY() - 1; y >= 0; y--)
+			if (this.monsters[i] != null && this.monsters[i].isAlive())
 			{
-				for (x = 0; x < this.maxSize.getX(); x++)
+				y = this.monsters[i].getArea().getPosition().getY();
+				while (y < (this.monsters[i].getArea().getSize().getY() + this.monsters[i].getArea().getPosition()
+						.getY()))
 				{
-					System.out.print(grid[x][y]);
+					x = this.monsters[i].getArea().getPosition().getX();
+					while (x < (this.monsters[i].getArea().getSize().getX() + this.monsters[i].getArea().getPosition()
+							.getX()))
+					{
+						grid[x][y] = 'M';
+						x++;
+					}
+					y++;
 				}
-				System.out.print("\n");
+			}
+		}
+
+		for (i = 0; i < (this.monstersAmount + this.tanksAmount); i++)
+		{
+			if (this.shoots[i] != null && this.shoots[i].isAlive())
+			{
+				y = this.shoots[i].getArea().getPosition().getY();
+				while (y < (this.shoots[i].getArea().getSize().getY() + this.shoots[i].getArea().getPosition().getY()))
+				{
+					x = this.shoots[i].getArea().getPosition().getX();
+					while (x < (this.shoots[i].getArea().getSize().getX() + this.shoots[i].getArea().getPosition()
+							.getX()))
+					{
+						grid[x][y] = 'S';
+						x++;
+					}
+					y++;
+				}
+			}
+		}
+
+		return grid;
+	}
+
+	/**
+	 * Print the grid to the screen
+	 * 
+	 * @param grid
+	 *            the grid to print
+	 */
+	private void printGrid(char[][] grid)
+	{
+		int x, y;
+
+		for (y = this.maxSize.getY() - 1; y >= 0; y--)
+		{
+			for (x = 0; x < this.maxSize.getX(); x++)
+			{
+				System.out.print(grid[x][y]);
 			}
 			System.out.print("\n");
 		}
+		System.out.print("\n");
+	}
 
-		/**
-		 * Allows to print the game to the screen in ASCII Art
-		 */
-		public void show()
-		{
-			char[][] grid = gridImage();
-			printGrid(grid);
-		}
+	/**
+	 * Allows to print the game to the screen in ASCII Art
+	 */
+	public void show()
+	{
+		char[][] grid = gridImage();
+		printGrid(grid);
+	}
 }

@@ -3,9 +3,9 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
-//TODO Comment
 /**
- * 
+ * This thread loop until game finished.
+ * It allows to tank move and tank shoot. 
  * @author Gallet Guyon
  */
 public class TanksThreads extends Thread
@@ -16,8 +16,8 @@ public class TanksThreads extends Thread
 	private TankControler tank;	
 	
 	/**
-	 * Create a new RandomTank Object
-	 * @param tank 
+	 * Create a new Tank Object
+	 * @param tank Interface for controlling tank threw this class
 	 */
 	public TanksThreads(TankControler tank)
 	{
@@ -25,7 +25,7 @@ public class TanksThreads extends Thread
 	}
 	
 	/**
-	 * Main of the thread. It calls move() then testCollision() every sleepTime millisecond.
+	 * Main of the thread. It calls tankMove() and tankShoot() every 1000ms.
 	 */
 	public void run()
 	{
@@ -37,10 +37,20 @@ public class TanksThreads extends Thread
 			}
 			catch (OutOfGridException e)
 			{
-				//e.printStackTrace();
+				java.awt.Toolkit.getDefaultToolkit().beep();
 			}
 			
 			this.tank.tankShoot();
+			
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+				break;
+			}
 		}
 	}
 	

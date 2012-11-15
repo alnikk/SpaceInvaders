@@ -14,7 +14,7 @@ import fr.iutvalence.java.projet.spaceinvaders.TanksThreads;
 public class TestSapceInvadersMaVa
 {
 	/**
-	 * @param args
+	 * @param args No arguments
 	 */
 	public static void main(String[] args)
 	{

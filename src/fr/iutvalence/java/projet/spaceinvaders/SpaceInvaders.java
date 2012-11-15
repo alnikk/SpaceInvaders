@@ -122,6 +122,7 @@ public abstract class SpaceInvaders
 	 */
 	protected int sleepTime;
 
+	// TODO Acceleration
 	/**
 	 * Not implemented yet It uses to accelerate sleepTime when invaders are less numerous
 	 */
@@ -309,7 +310,7 @@ public abstract class SpaceInvaders
 		for (i = 0; i < nbTanks; i++)
 		{
 			try
-			{		// TODO improve with tank
+			{
 				this.tanks[i] = new Movable(new Coordinates(((this.maxSize.getX() / 4) - (this.sizeMovable.getX() / 2))
 						* i, 0), new Coordinates(this.sizeMovable.getX(), this.sizeMovable.getY()));
 			}
@@ -533,7 +534,7 @@ public abstract class SpaceInvaders
 	 */
 	public abstract void run();
 
-	// TODO think to remove
+	// TODO Debug
 	/**
 	 * Kill one instance of movable object
 	 * 
