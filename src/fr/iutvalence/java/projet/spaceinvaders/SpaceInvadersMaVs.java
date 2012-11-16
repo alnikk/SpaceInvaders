@@ -99,6 +99,21 @@ public class SpaceInvadersMaVs extends SpaceInvaders implements TankControler, M
 	// [[[[[[[[[[[[[ Monsters behavior ]]]]]]]]]]]]]
 
 	/**
+	 * This method wait a time in function of sleepTime value and of monster alive's number
+	 */
+	public void waitLoop()
+	{
+		try
+		{
+			Thread.sleep((long) ((Math.sqrt(((double) countAlive(this.monsters) / this.monstersAmount)) * this.sleepTime)+ this.timeDifficulty));
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * This method allows to move Invaders once that is to say to right, down, or left. It follow scheme by itself :
 	 * <ul>
 	 * <li>right</li>

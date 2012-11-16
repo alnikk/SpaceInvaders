@@ -66,6 +66,11 @@ public abstract class SpaceInvaders
 	 * This constant defines the default sleep time between each move of Invaders
 	 */
 	private static final int DEFAULT_SLEEP_TIME = 800;
+	
+	/**
+	 * This is the minimum time between each move of Invaders
+	 */
+	private static final int DEFAULT_TIME_DIFFICULTY = 300;
 
 	/**
 	 * This constant is the default acceleration (Not used for now)
@@ -121,8 +126,12 @@ public abstract class SpaceInvaders
 	 * This variable is used to wait sleepTime millisecond between each loop
 	 */
 	protected int sleepTime;
+	
+	/**
+	 * This is the minimum time between each move of Invaders
+	 */
+	protected int timeDifficulty = 300;
 
-	// TODO Acceleration
 	/**
 	 * Not implemented yet It uses to accelerate sleepTime when invaders are less numerous
 	 */
@@ -173,6 +182,7 @@ public abstract class SpaceInvaders
 		this.tanksAmount = DEFAULT_TANKS_AMOUNT;
 		this.sleepTime = DEFAULT_SLEEP_TIME;
 		this.acceleration = DEFAULT_ACCELERATION;
+		this.timeDifficulty = DEFAULT_TIME_DIFFICULTY;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
 
@@ -198,6 +208,7 @@ public abstract class SpaceInvaders
 		this.tanksAmount = nbTanks;
 		this.sleepTime = DEFAULT_SLEEP_TIME;
 		this.acceleration = DEFAULT_ACCELERATION;
+		this.timeDifficulty = DEFAULT_TIME_DIFFICULTY;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
 
@@ -224,6 +235,7 @@ public abstract class SpaceInvaders
 		this.tanksAmount = nbTanks;
 		this.sleepTime = DEFAULT_SLEEP_TIME;
 		this.acceleration = DEFAULT_ACCELERATION;
+		this.timeDifficulty = DEFAULT_TIME_DIFFICULTY;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
 
@@ -252,6 +264,7 @@ public abstract class SpaceInvaders
 		this.tanksAmount = nbTanks;
 		this.sleepTime = sleepTime;
 		this.acceleration = DEFAULT_ACCELERATION;
+		this.timeDifficulty = DEFAULT_TIME_DIFFICULTY;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
 
@@ -282,6 +295,7 @@ public abstract class SpaceInvaders
 		this.tanksAmount = nbTanks;
 		this.sleepTime = sleepTime;
 		this.acceleration = acceleration;
+		this.timeDifficulty = DEFAULT_TIME_DIFFICULTY;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
 
@@ -374,7 +388,6 @@ public abstract class SpaceInvaders
 						|| tableToMove[i].getArea().getPosition().getX() + delta.getX() < 0
 						|| tableToMove[i].getArea().getPosition().getY() + delta.getY() < 0)
 				{
-					// TODO Kill when Y coordinates is less than 0?
 					throw new OutOfGridException(tableToMove[i]);
 				}
 			}

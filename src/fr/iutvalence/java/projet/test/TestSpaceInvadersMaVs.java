@@ -22,11 +22,11 @@ public class TestSpaceInvadersMaVs
 	 */
 	public static void main(String[] args)
 	{
-		// TODO More Test
 		SpaceInvadersMaVs si = new SpaceInvadersMaVs();
 		MonstersThread monsters = new MonstersThread("Monsters", si, 1000);
 		monsters.start();
 		si.run();
+		System.out.println(si);
 	}
 
 }

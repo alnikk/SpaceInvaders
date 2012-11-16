@@ -132,9 +132,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders
 	{
 		try
 		{
-			// TODO sleepTime constant...
-			// expression is a.x type. Add a.x + c with c playable. It have to don't affect sleepTime
-			Thread.sleep((long) (Math.sqrt(((double) countAlive(this.monsters) / this.monstersAmount)) * this.sleepTime));
+			Thread.sleep((long) ((Math.sqrt(((double) countAlive(this.monsters) / this.monstersAmount)) * this.sleepTime)+ this.timeDifficulty));
 		}
 		catch (InterruptedException e)
 		{

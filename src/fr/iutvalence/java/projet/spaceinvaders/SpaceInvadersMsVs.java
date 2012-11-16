@@ -100,8 +100,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 	 */
 	public void run()
 	{
-		this.work = true;
-		while (this.work)
+		while (true)
 		{
 			moveShoots();
 
@@ -125,7 +124,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 			show();
 			
 			if (this.countAlive(this.tanks) == 0 || this.countAlive(this.monsters) == 0)
-				this.work = false;
+				break;
 			
 			waitLoop();
 		}
@@ -142,9 +141,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 	{
 		try
 		{
-			// TODO sleepTime constant...
-			// expression is a.x type. Add a.x + c with c playable. It have to don't affect sleepTime
-			Thread.sleep((long) (Math.sqrt(((double) countAlive(this.monsters) / this.monstersAmount)) * this.sleepTime));
+			Thread.sleep((long) ((Math.sqrt(((double) countAlive(this.monsters) / this.monstersAmount)) * this.sleepTime)+ this.timeDifficulty));
 		}
 		catch (InterruptedException e)
 		{

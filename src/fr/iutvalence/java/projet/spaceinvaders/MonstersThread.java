@@ -54,24 +54,7 @@ public class MonstersThread extends Thread
 			
 			this.monster.monsterShoot();
 			
-			this.waitLoop();
-		}
-	}
-	
-	// ******************** Method ***********************
-	
-	/**
-	 * This method wait a time in function of sleepTime value and of monster alive's number
-	 */
-	public void waitLoop()
-	{
-		try
-		{
-			Thread.sleep(this.delay);
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
+			this.monster.waitLoop();
 		}
 	}
 }

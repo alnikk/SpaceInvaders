@@ -21,5 +21,10 @@ public interface MonsterControler
 	 * 		the game is finished.
 	 */
 	public int monstersMove();
+
+	/**
+	 * This method wait a time in function of sleepTime value and of monster alive's number
+	 */
+	public void waitLoop();
 	
 }

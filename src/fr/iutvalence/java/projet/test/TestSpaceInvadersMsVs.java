@@ -17,8 +17,9 @@ public class TestSpaceInvadersMsVs
 	 */
 	public static void main(String[] args)
 	{
-		SpaceInvadersMsVs SI = new SpaceInvadersMsVs();
-		SI.run();
+		SpaceInvadersMsVs si = new SpaceInvadersMsVs();
+		si.run();
+		System.out.println(si);
 	}
 
 }

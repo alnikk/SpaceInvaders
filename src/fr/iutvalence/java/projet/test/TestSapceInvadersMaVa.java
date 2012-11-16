@@ -24,6 +24,7 @@ public class TestSapceInvadersMaVa
 		tank.start();
 		monsters.start();
 		si.run();
+		System.out.println(si);
 	}
 
 }
