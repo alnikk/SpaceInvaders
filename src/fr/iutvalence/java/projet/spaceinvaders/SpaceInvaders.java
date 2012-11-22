@@ -163,6 +163,11 @@ public abstract class SpaceInvaders
 	 * Boolean to know if the game is finished
 	 */
 	protected boolean work;
+	
+	/**
+	 * 
+	 */
+	protected Display display;
 
 	// ************************** Constructors **************************//
 	/**
@@ -170,7 +175,7 @@ public abstract class SpaceInvaders
 	 * This is the default constructor. It set all to default value. If you don't want to use this default
 	 * characteristic use another constructor
 	 */
-	public SpaceInvaders()
+	public SpaceInvaders(Display d)
 	{
 		this.maxSize = new Coordinates(X_GRID, Y_GRID);
 		this.sizeMovable = DEFAULT_SIZE;
@@ -183,6 +188,7 @@ public abstract class SpaceInvaders
 		this.sleepTime = DEFAULT_SLEEP_TIME;
 		this.acceleration = DEFAULT_ACCELERATION;
 		this.timeDifficulty = DEFAULT_TIME_DIFFICULTY;
+		this.display = d;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
 

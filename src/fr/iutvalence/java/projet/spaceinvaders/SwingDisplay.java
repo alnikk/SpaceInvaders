@@ -7,7 +7,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * @author Gallet Guyon
  *
  */
-public class SwingDisplay
+public class SwingDisplay implements Display
 {
 
 	/**
@@ -17,13 +17,10 @@ public class SwingDisplay
 	{
 		
 	}
-	
-	/**
-	 * 
-	 */
-	public void show()
-	{
-				
-	}
 
+	@Override
+	public void show(Movable[] tanks, Movable[] monsters, Movable[] shoots, Coordinates maxSize)
+	{
+		
+	}
 }

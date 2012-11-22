@@ -3,6 +3,7 @@
  */
 package fr.iutvalence.java.projet.test;
 
+import fr.iutvalence.java.projet.spaceinvaders.ASCIIDisplay;
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMsVs;
 
 /**
@@ -17,7 +18,8 @@ public class TestSpaceInvadersMsVs
 	 */
 	public static void main(String[] args)
 	{
-		SpaceInvadersMsVs si = new SpaceInvadersMsVs();
+		ASCIIDisplay d = new ASCIIDisplay();
+		SpaceInvadersMsVs si = new SpaceInvadersMsVs(d);
 		si.run();
 		System.out.println(si);
 	}
