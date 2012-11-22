@@ -13,7 +13,7 @@ import fr.iutvalence.java.projet.spaceinvaders.TanksThreads;
  * @author Gallet Guyon
  *
  */
-public class TestSapceInvadersMaVa
+public class TestSpaceInvadersMaVa
 {
 	/**
 	 * @param args No arguments
