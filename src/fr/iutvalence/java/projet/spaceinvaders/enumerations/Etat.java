@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet.spaceinvaders;
+package fr.iutvalence.java.projet.spaceinvaders.enumerations;
 
 /**
  * This enumerate the state of invaders on the grid.

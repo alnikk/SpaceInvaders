@@ -1,7 +1,10 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet.spaceinvaders;
+package fr.iutvalence.java.projet.spaceinvaders.threads;
+
+import fr.iutvalence.java.projet.spaceinvaders.exceptions.OutOfGridException;
+import fr.iutvalence.java.projet.spaceinvaders.interfaces.TankControler;
 
 /**
  * This thread loop until game finished.

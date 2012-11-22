@@ -3,6 +3,8 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
+import fr.iutvalence.java.projet.spaceinvaders.exceptions.NegativeSizeException;
+
 /**
  * The BoundingBox class define area.<br/>
  * An area is defined by position (Coordinates) and size (Coordinates) on the grid. The coordinates have to be positive

@@ -1,7 +1,9 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet.spaceinvaders;
+package fr.iutvalence.java.projet.spaceinvaders.threads;
+
+import fr.iutvalence.java.projet.spaceinvaders.interfaces.MonsterControler;
 
 /**
  * This thread loop until the game finish.<br/>
