@@ -4,7 +4,17 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
- * This enumerate the state of invaders
+ * This enumerate the state of invaders on the grid.
+ * The cycle of the movement is :
+ * <ul>
+ * <li>left - LEFT_UP</li>
+ * <li>right - RIGHT_UP</li>
+ * <li>down - RIGHT_BOTTOM</li>
+ * <li>left - LEFT_BOTTOM</li>
+ * <li>down - LEFT_UP</li>
+ * <li>right - RIGHT_UP</li>
+ * <li> etc..</li>
+ * </ul>
  */
 public enum Etat
 {

@@ -67,7 +67,8 @@ public class Movable extends Element
 	}
 
 	/**
-	 * This constructor creates a new living <tt>Movable</tt> object taking its coordinates and size as parameters.
+	 * This constructor creates a new living <tt>Movable</tt> object taking its coordinates and size as parameters.<br/>
+	 * Do not use this constructor by yourself, its used only by fire method for create shoot.
 	 * 
 	 * @param i
 	 *            the initial position, as a Coordinate object
@@ -75,11 +76,11 @@ public class Movable extends Element
 	 *            the size, as a Coordinate object whose x means width and y means height.
 	 * @param direction
 	 *            the direction of the movable object (shoot). For non shoot it sets to 0. for others negative is for
-	 *            down shoot and positive othewise.
+	 *            down shoot and positive otherwise.
 	 * @throws NegativeSizeException
 	 *             Throws Exception when the size coordinates are negative
 	 */
-	public Movable(Coordinates i, Coordinates j, int direction) throws NegativeSizeException
+	private Movable(Coordinates i, Coordinates j, int direction) throws NegativeSizeException
 	{
 		super(new BoundingBox(i, j));
 		this.alive = true;

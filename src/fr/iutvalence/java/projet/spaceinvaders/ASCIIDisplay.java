@@ -4,52 +4,83 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
+ * This class allows to print the state of the game into console.<br/>
+ * The display is in ASCII arts, that is to say drawable elements are represented by ASCII digit who can be changed by changing constants.<br/>
+ * For example : invaders area is represented by many 'M' character.<br/>
+ * This class implements Display
+ * @see Display 
  * @author Gallet Guyon
- *
  */
 public class ASCIIDisplay implements Display
 {
+	//*********** Constant *******************
+	/**
+	 * This constant used to defines the letter who fill the background  
+	 */
+	private static final char DEFAULT_LETTRE_EMPTY = ' ';
+	
+	/**
+	 * This constant used to fill tanks' area.<br/>
+	 * So you can identify tank in the console screen by this letter.  
+	 */
+	private static final char DEFAULT_LETTRE_TANKS = 'T';
+	
+	/**
+	 * This constant used to fill monsters' area.<br/>
+	 * So you can identify monsters in the console screen by this letter.  
+	 */
+	private static final char DEFAULT_LETTRE_MONTERS = 'M';
+	
+	/**
+	 * This constant used to fill shoots' area.<br/>
+	 * So you can identify shoots in the console screen by this letter.  
+	 */
+	private static final char DEFAULT_LETTRE_SHOOTS = 'S';
+	
+	
+	//*********** Variable *******************
 	/**
 	 * It defines the number of monsters you have in tabMonster.
 	 */
-	protected int monstersAmount;
+	private int monstersAmount;
 
 	/**
 	 * It defines the number of tank you have in tabTank.
 	 */
-	protected int tanksAmount;
+	private int tanksAmount;
 	
 	/**
-	 * Array containing all monsters
+	 * Array containing all monsters to draw.
 	 */
-	protected Movable[] monsters;
+	private Movable[] monsters;
 
 	/**
-	 * Array containing all tanks.
+	 * Array containing all tanks to draw.
 	 */
-	protected Movable[] tanks;
+	private Movable[] tanks;
 
 	/**
-	 * Array containing all shoots.
+	 * Array containing all shoots to draw.
 	 */
-	protected Movable[] shoots;
+	private Movable[] shoots;
 	
 	/**
-	 * The maximum size of the area
+	 * The maximum size of the area.<br/>
+	 * No elements can move (so be drown) over this bound.
 	 */
-	protected Coordinates maxSize;
+	private Coordinates maxSize;
 	
 	/**
-	 *  
+	 * Constructor of the class.<br/>
+	 * Do nothing, but just used to create new ASCIIDisplay object. 
 	 */
 	public ASCIIDisplay()
 	{
 	}
 
 	/**
-	 * Create grid image to table of character
-	 * 
-	 * @return 2D table of character
+	 * This method can make 2D table of characters from the state of elements' tables.
+	 * @return 2D table of character who used to display
 	 */
 	private char[][] gridImage()
 	{
@@ -60,7 +91,7 @@ public class ASCIIDisplay implements Display
 		{
 			for (x = 0; x < this.maxSize.getX(); x++)
 			{
-				grid[x][y] = ' ';
+				grid[x][y] = DEFAULT_LETTRE_EMPTY;
 			}
 		}
 
@@ -74,7 +105,7 @@ public class ASCIIDisplay implements Display
 					x = this.tanks[i].getArea().getPosition().getX();
 					while (x < (this.tanks[i].getArea().getSize().getX() + this.tanks[i].getArea().getPosition().getX()))
 					{
-						grid[x][y] = 'T';
+						grid[x][y] = DEFAULT_LETTRE_TANKS;
 						x++;
 					}
 					y++;
@@ -94,7 +125,7 @@ public class ASCIIDisplay implements Display
 					while (x < (this.monsters[i].getArea().getSize().getX() + this.monsters[i].getArea().getPosition()
 							.getX()))
 					{
-						grid[x][y] = 'M';
+						grid[x][y] = DEFAULT_LETTRE_MONTERS;
 						x++;
 					}
 					y++;
@@ -113,14 +144,13 @@ public class ASCIIDisplay implements Display
 					while (x < (this.shoots[i].getArea().getSize().getX() + this.shoots[i].getArea().getPosition()
 							.getX()))
 					{
-						grid[x][y] = 'S';
+						grid[x][y] = DEFAULT_LETTRE_SHOOTS;
 						x++;
 					}
 					y++;
 				}
 			}
 		}
-
 		return grid;
 	}
 
@@ -128,7 +158,7 @@ public class ASCIIDisplay implements Display
 	 * Print the grid to the screen
 	 * 
 	 * @param grid
-	 *            the grid to print
+	 *            the 2D grid to print. It can be made by gridImage function.
 	 */
 	private void printGrid(char[][] grid)
 	{

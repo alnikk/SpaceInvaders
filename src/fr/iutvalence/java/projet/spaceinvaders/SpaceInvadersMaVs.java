@@ -15,9 +15,9 @@ public class SpaceInvadersMaVs extends SpaceInvaders implements TankControler, M
 	// ************************** Constructors **************************//
 	/**
 	 * Initialize the game.<br/>
-	 * This is the default constructor. It sets the number of tanks to 1, the number of monsters to 20, the X axis to
-	 * 300, and the Y axis to 300 too.<br/>
-	 * If you don't want to use this default characteristic use another constructor
+	 * This is the default constructor. It set all to default value. If you don't want to use this default
+	 * characteristic use another constructor
+	 * @param d The display object to use.
 	 */
 	public SpaceInvadersMaVs(Display d)
 	{
@@ -29,31 +29,74 @@ public class SpaceInvadersMaVs extends SpaceInvaders implements TankControler, M
 	 * This constructor sets the X axis to 300, and the Y axis to 300 too.<br/>
 	 * If you don't want to use this default characteristic use another constructors
 	 * 
-	 * @param nbMonster
+	 * @param nbMonsters
 	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
-	 * @param nbTank
+	 * @param nbTanks
 	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
+	 * @param d The display object to use.
 	 */
-	public SpaceInvadersMaVs(int nbMonster, int nbTank)
+	public SpaceInvadersMaVs(int nbMonsters, int nbTanks, Display d)
 	{
-		super(nbMonster, nbTank);
+		super(nbMonsters, nbTanks, d);
+	}
+
+	/**
+	 * Initialize the game.<br/>
+	 * This constructor uses default value of acceleration
+	 * 
+	 * @param nbMonsters
+	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
+	 * @param nbTanks
+	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
+	 * @param max
+	 *            Set the Max point of the grid (Coordinates)
+	 * @param d The display object to use.
+	 */
+	public SpaceInvadersMaVs(int nbMonsters, int nbTanks, Coordinates max, Display d)
+	{
+		super(nbMonsters, nbTanks, max, d);
 	}
 
 	/**
 	 * Initialize the game.<br/>
 	 * This constructor no default value.
 	 * 
-	 * @param nbMonster
+	 * @param nbMonsters
 	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
-	 * @param nbTank
+	 * @param nbTanks
 	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
-	 * @param Max
+	 * @param max
 	 *            Set the Max point of the grid (Coordinates)
+	 * @param sleepTime
+	 *            Set the time between each move of monster (in milliseconds)
+	 * @param d The display object to use.
 	 */
-	public SpaceInvadersMaVs(int nbMonster, int nbTank, Coordinates Max)
+	public SpaceInvadersMaVs(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, Display d)
 	{
-		super(nbMonster, nbTank, Max);
+		super(nbMonsters, nbTanks, max, sleepTime, d);
 	}
+
+	/**
+	 * Initialize the game.<br/>
+	 * This constructor uses no default value.
+	 * 
+	 * @param nbMonsters
+	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
+	 * @param nbTanks
+	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
+	 * @param max
+	 *            Set the Max point of the grid (Coordinates)
+	 * @param sleepTime
+	 *            Set the time between each move of monster (in milliseconds)
+	 * @param acceleration
+	 *            Set the acceleration of Invaders. (not uses for now)
+	 * @param d The display object to use.
+	 */
+	public SpaceInvadersMaVs(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, int acceleration, Display d)
+	{
+		super(nbMonsters, nbTanks, max, sleepTime, acceleration, d);
+	}
+
 	
 	//********************* Main **************************
 	@Override
@@ -217,7 +260,7 @@ public class SpaceInvadersMaVs extends SpaceInvaders implements TankControler, M
 						}
 					}
 				}
-			} // TODO Shoot's acceleration
+			}
 			shootFrom(invaderAbove, -1);
 		}
 	}

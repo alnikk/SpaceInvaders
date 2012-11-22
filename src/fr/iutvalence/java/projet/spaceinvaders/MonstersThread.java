@@ -4,8 +4,8 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
- * This thread loop until the game finish. It make invaders move and shoot on tanks.
- * 
+ * This thread loop until the game finish.<br/>
+ *  It make invaders move and shot on tanks.
  * @author Gallet Guyon
  */
 public class MonstersThread extends Thread
@@ -18,12 +18,12 @@ public class MonstersThread extends Thread
 	private int delay;
 	
 	/**
-	 * 
+	 * Interface for using monsters objects.
 	 */
 	private MonsterControler monster;
 	
 	// ***************** Constructors *************************
-
+	// TODO Stop thread properly
 	/**
 	 * This constructors set the variable needed by the thread.
 	 * 
@@ -44,7 +44,8 @@ public class MonstersThread extends Thread
 	// ******************** Main ***********************
 
 	/**
-	 * Main of the thread. It calls move() then testCollision() every sleepTime millisecond.
+	 * Main of the thread.<br/>
+	 * It calls move() then testCollision() every sleepTime millisecond.<br/>
 	 */
 	public void run()
 	{

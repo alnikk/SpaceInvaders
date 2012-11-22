@@ -18,6 +18,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 	 * Initialize the game.<br/>
 	 * This is the default constructor. It set all to default value. If you don't want to use this default
 	 * characteristic use another constructor
+	 * @param d The display object to use.
 	 */
 	public SpaceInvadersMsVs(Display d)
 	{
@@ -33,10 +34,11 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
 	 * @param nbTanks
 	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
+	 * @param d The display object to use.
 	 */
-	public SpaceInvadersMsVs(int nbMonsters, int nbTanks)
+	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Display d)
 	{
-		super(nbMonsters, nbTanks);
+		super(nbMonsters, nbTanks, d);
 	}
 
 	/**
@@ -49,10 +51,11 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
 	 * @param max
 	 *            Set the Max point of the grid (Coordinates)
+	 * @param d The display object to use.
 	 */
-	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Coordinates max)
+	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Coordinates max, Display d)
 	{
-		super(nbMonsters, nbTanks, max);
+		super(nbMonsters, nbTanks, max, d);
 	}
 
 	/**
@@ -67,10 +70,11 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 	 *            Set the Max point of the grid (Coordinates)
 	 * @param sleepTime
 	 *            Set the time between each move of monster (in milliseconds)
+	 * @param d The display object to use.
 	 */
-	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Coordinates max, int sleepTime)
+	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, Display d)
 	{
-		super(nbMonsters, nbTanks, max, sleepTime);
+		super(nbMonsters, nbTanks, max, sleepTime, d);
 	}
 
 	/**
@@ -87,11 +91,13 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 	 *            Set the time between each move of monster (in milliseconds)
 	 * @param acceleration
 	 *            Set the acceleration of Invaders. (not uses for now)
+	 * @param d The display object to use.
 	 */
-	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, int acceleration)
+	public SpaceInvadersMsVs(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, int acceleration, Display d)
 	{
-		super(nbMonsters, nbTanks, max, sleepTime, acceleration);
+		super(nbMonsters, nbTanks, max, sleepTime, acceleration, d);
 	}
+
 
 	// ********************* Main ************************
 

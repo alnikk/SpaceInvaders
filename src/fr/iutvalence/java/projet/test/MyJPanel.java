@@ -18,7 +18,6 @@ public class MyJPanel extends JPanel
 	@Override
 	protected void paintComponent(Graphics g)
 	{
-		// TODO Auto-generated method stub
 		super.paintComponent(g);
 		if (pair) g.fillRect(0, 0, 100,100);
 		else g.drawRect(0, 0, 100,100);

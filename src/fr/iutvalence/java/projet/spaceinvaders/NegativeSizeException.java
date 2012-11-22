@@ -4,10 +4,11 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
- * Thrown when only positive coordinates are expected
+ * Thrown when only positive coordinates are expected.
  * 
  * @author Gallet Guyon
  */
+
 @SuppressWarnings("serial")
 public class NegativeSizeException extends Exception
 {

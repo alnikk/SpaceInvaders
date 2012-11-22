@@ -4,13 +4,14 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
- * The element Class is the basic class of all elements on the grid.<br/>
+ * The element Class is the basic class of all drowable elements on the grid.<br/>
  * It defines all stuff needed for position and collision.
  * 
  * @author Guyon Gallet
  */
 public abstract class Element
 {
+	// TODO add type for collections
 	/**
 	 * Area of the grid filled by the element
 	 */

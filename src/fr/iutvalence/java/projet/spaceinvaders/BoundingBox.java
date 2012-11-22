@@ -14,15 +14,15 @@ package fr.iutvalence.java.projet.spaceinvaders;
  * |<br/>
  * |<br/>
  * |<br/>
- * | (x1,y2)__________(x2,y2)<br/>
- * | | |<br/>
- * | | |<br/>
- * | | |<br/>
- * | | |<br/>
- * | | |<br/>
- * | | |<br/>
- * | | |<br/>
- * | (x1,y1)__________(x2,y1)<br/>
+ * | (x1,y2)________(x2,y2)<br/>
+ * |   |               |<br/>
+ * |   |               |<br/>
+ * |   |               |<br/>
+ * |   |               |<br/>
+ * |   |               |<br/>
+ * |   |               |<br/>
+ * |   |               |<br/>
+ * | (x1,y1)________(x2,y1)<br/>
  * |<br/>
  * |<br/>
  * 0---------------------------------> X<br/>
@@ -79,8 +79,6 @@ public class BoundingBox
 		}
 		catch (NegativeSizeException e)
 		{
-			// here, the exception can not be raised since (as the bounding box exists) the size can not be negative
-			// so, we can safely ignore it
 			return null;
 		}
 	}

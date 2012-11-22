@@ -4,7 +4,7 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
- * Thrown when only positive coordinates are expected
+ * Thrown when movable objects go over the grid.
  * 
  * @author Gallet Guyon
  */
@@ -17,7 +17,7 @@ public class OutOfGridException extends Exception
 	private Movable bad;
 
 	/**
-	 * Constructors who defined the bad Coordinates to handle
+	 * Constructors who defined the bad Coordinates to handle.
 	 * 
 	 * @param bad
 	 *            It is the bad coordinates to handle. It create an OutOfGridException
@@ -29,7 +29,7 @@ public class OutOfGridException extends Exception
 	}
 
 	/**
-	 * Default Constructors, it create an OutOfGridException
+	 * Default Constructors, it create an OutOfGridException without handle it.
 	 */
 	public OutOfGridException()
 	{
@@ -37,7 +37,7 @@ public class OutOfGridException extends Exception
 	}
 
 	/**
-	 * Allows to kill object OutOfGrid
+	 * Allows to kill object OutOfGrid.
 	 */
 	public void kill()
 	{
@@ -45,7 +45,7 @@ public class OutOfGridException extends Exception
 	}
 
 	/**
-	 * @return the bad coordinates
+	 * @return the bad coordinates.
 	 */
 	public Movable getOutOfGridException()
 	{

@@ -11,7 +11,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
 public class TanksThreads extends Thread
 {
 	/**
-	 * 
+	 * Interface for using tanks object
 	 */
 	private TankControler tank;	
 	
