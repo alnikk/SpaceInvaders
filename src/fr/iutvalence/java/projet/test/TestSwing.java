@@ -3,14 +3,13 @@
  */
 package fr.iutvalence.java.projet.test;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
-import javax.swing.JFrame;
+import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMaVa;
+import fr.iutvalence.java.projet.spaceinvaders.display.SwingDisplay;
+import fr.iutvalence.java.projet.spaceinvaders.threads.MonstersThread;
+import fr.iutvalence.java.projet.spaceinvaders.threads.TanksThreads;
 
 /**
  * @author Gallet Guyon
- *
  */
 public class TestSwing
 {
@@ -19,24 +18,14 @@ public class TestSwing
 	 */
 	public static void main(String[] args)
 	{
+		SwingDisplay d = new SwingDisplay(400,400);
+		SpaceInvadersMaVa si = new SpaceInvadersMaVa(d);
+		MonstersThread monsters = new MonstersThread("Monsters", si, 1000);
+		TanksThreads tank = new TanksThreads(si);
 		
-		JFrame frame = new JFrame("test");
-		frame.setSize(400, 200);
-		frame.setVisible(true);
-		//frame.setBackground(new Color(255,255,255));
-		frame.setContentPane(new MyJPanel());
-		while (true)
-		{
-			frame.getContentPane().repaint();
-			try
-			{
-				Thread.sleep(1000);
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-		}
+		tank.start();
+		monsters.start();
+		si.run();
+		System.out.println(si);
 	}
-
 }

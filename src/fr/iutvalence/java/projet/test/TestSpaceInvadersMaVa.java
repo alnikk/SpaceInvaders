@@ -4,7 +4,6 @@
 package fr.iutvalence.java.projet.test;
 
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMaVa;
-import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMaVs;
 import fr.iutvalence.java.projet.spaceinvaders.display.ASCIIDisplay;
 import fr.iutvalence.java.projet.spaceinvaders.threads.MonstersThread;
 import fr.iutvalence.java.projet.spaceinvaders.threads.TanksThreads;
