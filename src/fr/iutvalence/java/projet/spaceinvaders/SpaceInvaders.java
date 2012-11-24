@@ -26,7 +26,7 @@ public abstract class SpaceInvaders
 	/**
 	 * It defines the maximum (default) of Y axis, if it's not set in constructor.
 	 */
-	private static final int Y_GRID = 30;
+	private static final int Y_GRID = 100;
 
 	// [[[[[[[ Movable ]]]]]]]
 	/**
@@ -49,7 +49,7 @@ public abstract class SpaceInvaders
 	/**
 	 * This constant defines the step on the grid of a move
 	 */
-	private static final Coordinates DEFAULT_MOVE_SHOOTS = new Coordinates(0, 2);
+	private static final Coordinates DEFAULT_MOVE_SHOOTS = new Coordinates(0, 1);
 
 	/**
 	 * This constant defines the size of shoot
@@ -472,7 +472,7 @@ public abstract class SpaceInvaders
 
 		for (i = 0; i < table.length; i++)
 		{
-			if (table[i].isAlive())
+			if (table[i] != null && table[i].isAlive())
 				nbAlive++;
 		}
 		return nbAlive;

@@ -112,6 +112,8 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	{
 		while(true)
 		{
+			testCollision();
+			
 			moveShoots();
 
 			testCollision();
@@ -123,7 +125,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 
 			try
 			{
-				Thread.sleep(1000);
+				Thread.sleep(10);
 			}
 			catch (InterruptedException e)
 			{
@@ -307,7 +309,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 		{
 			if (this.tanks[i] != null && this.tanks[i].isAlive())
 			{
-				x = (int) (Math.random() * 10);
+				x = (int) (Math.random() * this.coorMove.getX());
 				neg = Math.round(Math.random());
 
 				if (neg == 0)
