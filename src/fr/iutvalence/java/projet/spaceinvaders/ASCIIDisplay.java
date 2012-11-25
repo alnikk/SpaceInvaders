@@ -3,7 +3,6 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
-
 /**
  * This class allows to print the state of the game into console.<br/>
  * The display is in ASCII arts, that is to say drawable elements are represented by ASCII digit who can be changed by changing constants.<br/>
@@ -40,30 +39,11 @@ public class ASCIIDisplay implements Display
 	
 	
 	//*********** Variable *******************
-	/**
-	 * It defines the number of monsters you have in tabMonster.
-	 */
-	private int monstersAmount;
-
-	/**
-	 * It defines the number of tank you have in tabTank.
-	 */
-	private int tanksAmount;
 	
 	/**
-	 * Array containing all monsters to draw.
+	 * Array containing all Movable elements to draw.
 	 */
-	private Movable[] monsters;
-
-	/**
-	 * Array containing all tanks to draw.
-	 */
-	private Movable[] tanks;
-
-	/**
-	 * Array containing all shoots to draw.
-	 */
-	private Movable[] shoots;
+	private Movable[] elements;
 	
 	/**
 	 * The maximum size of the area.<br/>
@@ -95,57 +75,32 @@ public class ASCIIDisplay implements Display
 				grid[x][y] = DEFAULT_LETTRE_EMPTY;
 			}
 		}
-
-		for (i = 0; i < this.tanksAmount; i++)
+		
+		for (i = 0; i < this.elements.length; i++)
 		{
-			if (this.tanks[i] != null && this.tanks[i].isAlive())
+			if (this.elements[i] != null && this.elements[i].isAlive())
 			{
-				y = this.tanks[i].getArea().getPosition().getY();
-				while (y < (this.tanks[i].getArea().getSize().getY() + this.tanks[i].getArea().getPosition().getY()))
+				y = this.elements[i].getArea().getPosition().getY();
+				while (y < (this.elements[i].getArea().getSize().getY() + this.elements[i].getArea().getPosition().getY()))
 				{
-					x = this.tanks[i].getArea().getPosition().getX();
-					while (x < (this.tanks[i].getArea().getSize().getX() + this.tanks[i].getArea().getPosition().getX()))
+					x = this.elements[i].getArea().getPosition().getX();
+					while (x < (this.elements[i].getArea().getSize().getX() + this.elements[i].getArea().getPosition().getX()))
 					{
-						grid[x][y] = DEFAULT_LETTRE_TANKS;
-						x++;
-					}
-					y++;
-				}
-			}
-		}
-
-		for (i = 0; i < this.monstersAmount; i++)
-		{
-			if (this.monsters[i] != null && this.monsters[i].isAlive())
-			{
-				y = this.monsters[i].getArea().getPosition().getY();
-				while (y < (this.monsters[i].getArea().getSize().getY() + this.monsters[i].getArea().getPosition()
-						.getY()))
-				{
-					x = this.monsters[i].getArea().getPosition().getX();
-					while (x < (this.monsters[i].getArea().getSize().getX() + this.monsters[i].getArea().getPosition()
-							.getX()))
-					{
-						grid[x][y] = DEFAULT_LETTRE_MONTERS;
-						x++;
-					}
-					y++;
-				}
-			}
-		}
-
-		for (i = 0; i < (this.monstersAmount + this.tanksAmount); i++)
-		{
-			if (this.shoots[i] != null && this.shoots[i].isAlive())
-			{
-				y = this.shoots[i].getArea().getPosition().getY();
-				while (y < (this.shoots[i].getArea().getSize().getY() + this.shoots[i].getArea().getPosition().getY()))
-				{
-					x = this.shoots[i].getArea().getPosition().getX();
-					while (x < (this.shoots[i].getArea().getSize().getX() + this.shoots[i].getArea().getPosition()
-							.getX()))
-					{
-						grid[x][y] = DEFAULT_LETTRE_SHOOTS;
+						switch(this.elements[i].getType())
+						{
+							case TANK:
+								System.out.println(x +" "+ y + " " + this.elements[i]);
+								grid[x][y] = DEFAULT_LETTRE_TANKS;
+								break;
+							case MONSTER:
+								grid[x][y] = DEFAULT_LETTRE_MONTERS;
+								break;
+							case SHOOT:
+								grid[x][y] = DEFAULT_LETTRE_SHOOTS;
+								break;
+							default:
+								break;
+						}
 						x++;
 					}
 					y++;
@@ -177,13 +132,9 @@ public class ASCIIDisplay implements Display
 	}
 
 	@Override
-	public void show(Movable tanks[], Movable monsters[], Movable shoots[], Coordinates maxSize)
+	public void show(Movable elements[], Coordinates maxSize)
 	{
-		this.monstersAmount = monsters.length;
-		this.tanksAmount = tanks.length;
-		this.tanks = tanks;
-		this.monsters = monsters;
-		this.shoots = shoots;
+		this.elements = elements;
 		this.maxSize = maxSize;
 		char[][] grid = gridImage();
 		printGrid(grid);

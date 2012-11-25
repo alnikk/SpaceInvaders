@@ -1,5 +1,7 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
+import fr.iutvalence.java.projet.spaceinvaders.enumerations.Type;
+
 
 /**
  * This class defines a movable object, that can move on a 2D grid and so being killed by others.<br/>
@@ -40,12 +42,13 @@ public class Movable extends Element
 	 * 
 	 * @param i
 	 *            the initial position, as a Coordinate object
+	 * @param t The type of the Movable element. It cannot be Type.Bunker
 	 * @throws NegativeSizeException
 	 *             Throws Exception when the size coordinates are negative
 	 */
-	public Movable(Coordinates i) throws NegativeSizeException
+	public Movable(Coordinates i, Type t) throws NegativeSizeException
 	{
-		super(new BoundingBox(i, new Coordinates(WIDTH, HEIGHT)));
+		super(new BoundingBox(i, new Coordinates(WIDTH, HEIGHT)), t);
 		this.alive = true;
 		this.direction = 0;
 	}
@@ -57,12 +60,13 @@ public class Movable extends Element
 	 *            the initial position, as a Coordinate object
 	 * @param j
 	 *            the size, as a Coordinate object whose x means width and y means height.
+	 * @param t  The type of the Movable element. It cannot be Type.Bunker
 	 * @throws NegativeSizeException
 	 *             Throws Exception when the size coordinates are negative
 	 */
-	public Movable(Coordinates i, Coordinates j) throws NegativeSizeException
+	public Movable(Coordinates i, Coordinates j, Type t) throws NegativeSizeException
 	{
-		super(new BoundingBox(i, j));
+		super(new BoundingBox(i, j), t);
 		this.alive = true;
 		this.direction = 0;
 	}
@@ -78,12 +82,13 @@ public class Movable extends Element
 	 * @param direction
 	 *            the direction of the movable object (shoot). For non shoot it sets to 0. for others negative is for
 	 *            down shoot and positive otherwise.
+	 * @param t The type of the Movable element. It cannot be Type.Bunker
 	 * @throws NegativeSizeException
 	 *             Throws Exception when the size coordinates are negative
 	 */
-	private Movable(Coordinates i, Coordinates j, int direction) throws NegativeSizeException
+	private Movable(Coordinates i, Coordinates j, int direction, Type t) throws NegativeSizeException
 	{
-		super(new BoundingBox(i, j));
+		super(new BoundingBox(i, j), t);
 		this.alive = true;
 		this.direction = direction;
 	}
@@ -191,7 +196,7 @@ public class Movable extends Element
 								- (size.getX() / 2), (this.getArea().getPosition().getY() + this.getArea().getSize()
 								.getX()));
 			}
-			return new Movable(coorShoot, size, direction);
+			return new Movable(coorShoot, size, direction, Type.SHOOT);
 		}
 		return null;
 	}
@@ -243,6 +248,6 @@ public class Movable extends Element
 	@Override
 	public String toString()
 	{
-		return "Movable [alive=" + this.alive + ", position=" + this.getArea().getPosition() + ", taille=" + this.getArea().getSize() + " direction=" + this.direction + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$"
+		return "Movable [alive=" + this.alive + ", position=" + this.getArea().getPosition() + ", taille=" + this.getArea().getSize() + " direction=" + this.direction + " type=" + this.getType() + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$"
 	}
 }

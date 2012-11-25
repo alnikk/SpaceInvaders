@@ -13,10 +13,8 @@ public interface Display
 {
 	/**
 	 * Allows to display the game.
-	 * @param tanks The table of tanks.
-	 * @param monsters The table of monsters. 
-	 * @param shoots The table of shoots.
+	 * @param elements The table of all Movable objects.
 	 * @param maxSize The maximum size of the grid.
 	 */
-	public void show(Movable[] tanks, Movable[] monsters, Movable[] shoots, Coordinates maxSize);
+	public void show(Movable[] elements, Coordinates maxSize);
 }

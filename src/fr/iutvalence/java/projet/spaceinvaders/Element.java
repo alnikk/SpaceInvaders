@@ -3,6 +3,8 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
+import fr.iutvalence.java.projet.spaceinvaders.enumerations.Type;
+
 /**
  * The element Class is the basic class of all drowable elements on the grid.<br/>
  * It defines all stuff needed for position and collision.
@@ -11,7 +13,11 @@ package fr.iutvalence.java.projet.spaceinvaders;
  */
 public abstract class Element
 {
-	// TODO add type for collections
+	/**
+	 * It defines the type of the element.
+	 */
+	private Type type;
+	
 	/**
 	 * Area of the grid filled by the element
 	 */
@@ -24,11 +30,13 @@ public abstract class Element
 	 * 
 	 * @param area
 	 *            The BoundingBox of the element to create.
+	 * @param t The type of the element
 	 */
-	public Element(BoundingBox area)
+	public Element(BoundingBox area, Type t)
 	{
 		super();
 		this.boundingBox = area;
+		this.setType(t);
 	}
 
 	// ************* Methods **************
@@ -66,6 +74,24 @@ public abstract class Element
 	protected void setArea(BoundingBox area)
 	{
 		this.boundingBox = area;
+	}
+
+	/**
+	 * Return the type of the element.
+	 * @return the type
+	 */
+	public Type getType()
+	{
+		return this.type;
+	}
+
+	/**
+	 * Set the type of the element.
+	 * @param type the type to set
+	 */
+	public void setType(Type type)
+	{
+		this.type = type;
 	}
 
 	/**

@@ -4,6 +4,7 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Etat;
+import fr.iutvalence.java.projet.spaceinvaders.enumerations.Type;
 
 /**
  * This is abstract class who regroup all tools' methods and variable. This Generalize all SpaceInvadersMxVx games.
@@ -143,20 +144,26 @@ public abstract class SpaceInvaders
 	private int acceleration;
 
 	// [[[[[[[ Table ]]]]]]]
+	
 	/**
 	 * Array containing all monsters
 	 */
-	protected Movable[] monsters;
+	protected Movable[] elements;
+	
+	/**
+	 * Array containing all monsters
+	 */
+	//protected Movable[] monsters;
 
 	/**
 	 * Array containing all tanks.
 	 */
-	protected Movable[] tanks;
+	//protected Movable[] tanks;
 
 	/**
 	 * Array containing all shoots.
 	 */
-	protected Movable[] shoots;
+	//protected Movable[] shoots;
 
 	// [[[[[[[ Others ]]]]]]]
 	/**
@@ -336,17 +343,15 @@ public abstract class SpaceInvaders
 		int i;
 
 		// Allocations
-		this.monsters = new Movable[nbMonsters];
-		this.tanks = new Movable[nbTanks];
-		this.shoots = new Movable[nbTanks + nbMonsters];
+		this.elements = new Movable[(nbMonsters + nbTanks) * 2];
 
 		// Set-up tank table
 		for (i = 0; i < nbTanks; i++)
 		{
 			try
 			{
-				this.tanks[i] = new Movable(new Coordinates(((this.maxSize.getX() / 4) - (this.sizeMovable.getX() / 2))
-						* i, 0), new Coordinates(this.sizeMovable.getX(), this.sizeMovable.getY()));
+				this.elements[i] = new Movable(new Coordinates(((this.maxSize.getX() / 4) - (this.sizeMovable.getX() / 2))
+						* i, 0), new Coordinates(this.sizeMovable.getX(), this.sizeMovable.getY()), Type.TANK);
 			}
 			catch (NegativeSizeException e1)
 			{
@@ -359,14 +364,14 @@ public abstract class SpaceInvaders
 		// Set-up Invaders table
 		Coordinates monster_position = new Coordinates(this.delta, this.maxSize.getY()
 				- (this.sizeMovable.getY() + this.delta));
-		for (i = 0; i < nbMonsters; i++)
+		for (i = nbTanks ; i < nbMonsters; i++)
 		{
 			if (monster_position.getX() + (this.delta + this.sizeMovable.getX()) <= this.maxSize.getX())
 			{
 				try
 				{
-					this.monsters[i] = new Movable(monster_position, new Coordinates(this.sizeMovable.getX(),
-							this.sizeMovable.getY()));
+					this.elements[i] = new Movable(monster_position, new Coordinates(this.sizeMovable.getX(),
+							this.sizeMovable.getY()), Type.MONSTER);
 				}
 				catch (NegativeSizeException e)
 				{
@@ -405,17 +410,18 @@ public abstract class SpaceInvaders
 	 *            The delta coordinates to move Invaders
 	 * @param tableToMove
 	 *            The table to move
+	 * @param t The type of elements to move
 	 * @throws OutOfGridException
 	 *             This method can return OutOfgridException if monsters does'nt be anymore in the grid.
 	 */
-	protected void moveTab(Coordinates delta, Movable[] tableToMove) throws OutOfGridException
+	protected void moveTab(Coordinates delta, Movable[] tableToMove, Type t) throws OutOfGridException
 	{
 		int i;
 
 		// Test if all table is movable
 		for (i = 0; i < tableToMove.length; i++)
 		{
-			if (tableToMove[i] != null && tableToMove[i].isAlive())
+			if (tableToMove[i] != null && tableToMove[i].isAlive() && tableToMove[i].getType() == t)
 			{
 				if (tableToMove[i].getArea().getPosition().getX() + tableToMove[i].getArea().getSize().getX()
 						+ delta.getX() > this.maxSize.getX()
@@ -432,7 +438,7 @@ public abstract class SpaceInvaders
 		// Next we move table
 		for (i = 0; i < tableToMove.length; i++)
 		{
-			if (tableToMove[i] != null && tableToMove[i].isAlive())
+			if (tableToMove[i] != null && tableToMove[i].isAlive()  && tableToMove[i].getType() == t)
 			{
 				try
 				{
@@ -477,15 +483,16 @@ public abstract class SpaceInvaders
 	 * 
 	 * @param table
 	 *            The table to count alive Movable.
+	 * @param t The type of elements to move
 	 * @return The number of alive Invaders.
 	 */
-	int countAlive(Movable[] table)
+	int countAlive(Movable[] table, Type t)
 	{
 		int nbAlive = 0, i;
 
 		for (i = 0; i < table.length; i++)
 		{
-			if (table[i] != null && table[i].isAlive())
+			if (table[i] != null && table[i].isAlive() && table[i].getType() == t)
 				nbAlive++;
 		}
 		return nbAlive;
@@ -505,12 +512,12 @@ public abstract class SpaceInvaders
 
 		if (movable != null)
 		{
-			index = searchEmptyCellFromMovableTable(this.shoots);
+			index = searchEmptyCellFromMovableTable(this.elements);
 			if (index != -1)
 			{
 				try
 				{
-					this.shoots[index] = movable.fire(direction, this.sizeShoots);
+					this.elements[index] = movable.fire(direction, this.sizeShoots);
 				}
 				catch (NegativeSizeException e)
 				{
@@ -529,48 +536,18 @@ public abstract class SpaceInvaders
 	{
 		int i, j;
 
-		for (i = 0; i < this.tanksAmount; i++)
+		for(i=0; i < this.elements.length; i++)
 		{
-			if (this.tanks[i] != null && this.tanks[i].isAlive())
+			if(this.elements[i] != null && this.elements[i].isAlive())
 			{
-				for (j = 0; j < this.monstersAmount; j++)
+				for(j=0 ; j < this.elements.length; j++)
 				{
-					if (this.monsters[j] != null && this.monsters[j].isAlive())
+					if(this.elements[j] != null && this.elements[j].isAlive())
 					{
-						if (this.tanks[i].overlapping(this.monsters[j]) != null)
+						if(this.elements[i].overlapping(this.elements[j]) != null)
 						{
-							this.tanks[i].setAlive(false);
-							this.monsters[j].setAlive(false);
-						}
-					}
-				}
-
-				for (j = 0; j < (this.monstersAmount + this.tanksAmount); j++)
-				{
-					if (this.shoots[j] != null && this.shoots[j].isAlive())
-					{
-						if (this.tanks[i].overlapping(this.shoots[j]) != null)
-						{
-							this.tanks[i].setAlive(false);
-							this.shoots[j].setAlive(false);
-						}
-					}
-				}
-			}
-		}
-
-		for (i = 0; i < this.monstersAmount; i++)
-		{
-			if (this.monsters[i] != null && this.monsters[i].isAlive())
-			{
-				for (j = 0; j < (this.monstersAmount + this.tanksAmount); j++)
-				{
-					if (this.shoots[j] != null && this.shoots[j].isAlive())
-					{
-						if (this.monsters[i].overlapping(this.shoots[j]) != null)
-						{
-							this.monsters[i].setAlive(false);
-							this.shoots[j].setAlive(false);
+							this.elements[i].setAlive(false);
+							this.elements[j].setAlive(false);
 						}
 					}
 				}

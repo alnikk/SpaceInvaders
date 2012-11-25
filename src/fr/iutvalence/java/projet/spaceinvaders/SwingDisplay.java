@@ -30,11 +30,11 @@ public class SwingDisplay implements Display
 	}
 
 	@Override
-	public void show(Movable[] tanks, Movable[] monsters, Movable[] shoots, Coordinates maxSize)
+	public void show(Movable elements[], Coordinates maxSize)
 	{
 		double ratio = (this.pan.getWidth() / maxSize.getX()) + 
 				(this.pan.getHeight() / maxSize.getY())/2;
-		this.pan.setTableToPaint(monsters,tanks,shoots, maxSize, ratio);
+		this.pan.setTableToPaint(elements, maxSize, ratio);
 		this.pan.repaint();
 	}
 }
