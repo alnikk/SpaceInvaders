@@ -3,6 +3,8 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
+import java.awt.event.KeyListener;
+
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Etat;
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Type;
 
@@ -58,12 +60,12 @@ public abstract class SpaceInvaders
 	/**
 	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
 	 */
-	private static final int DEFAULT_MONSTERS_AMOUNT = 60;
+	private static final int DEFAULT_MONSTERS_AMOUNT = 120;
 
 	/**
 	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
 	 */
-	private static final int DEFAULT_TANKS_AMOUNT = 4;
+	private static final int DEFAULT_TANKS_AMOUNT = 1;
 
 	// [[[[[[[ Time ]]]]]]]
 	/**
@@ -176,10 +178,11 @@ public abstract class SpaceInvaders
 	 */
 	protected boolean work;
 	
-	/**
-	 * 
-	 */
+	
+	
 	protected Display display;
+	
+	protected KeyListener listenController;
 
 	// ************************** Constructors **************************//
 	/**
@@ -554,7 +557,7 @@ public abstract class SpaceInvaders
 			}
 		}
 	}
-
+	
 	/**
 	 * Begin a game
 	 */

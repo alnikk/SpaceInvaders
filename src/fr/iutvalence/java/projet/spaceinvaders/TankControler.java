@@ -3,6 +3,8 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
+import java.awt.event.KeyListener;
+
 
 /**
  * This interface is the control of the game.<br/>
@@ -22,5 +24,9 @@ public interface TankControler
 	 * @throws OutOfGridException
 	 *             Indicate when Tank want to go over the screen. Then you can bip him ;)
 	 */
-	public void tankMove() throws OutOfGridException;
+	public void tankMove(Coordinates delta) throws OutOfGridException;
+	
+	public void setControleur(KeyListener k);
+	
+	public boolean working();
 }

@@ -3,6 +3,7 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
+import java.awt.event.KeyListener;
 import java.util.Arrays;
 
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Etat;
@@ -109,6 +110,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 	 */
 	public void run()
 	{
+		this.display.init(this.listenController, this.elements,this.maxSize);
 		while (true)
 		{			
 			moveShoots();
@@ -130,7 +132,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 
 			testCollision();
 
-			this.display.show(this.elements,this.maxSize);
+			this.display.show();
 			
 			if (this.countAlive(this.elements, Type.TANK) == 0 || this.countAlive(this.elements, Type.MONSTER) == 0)
 				break;
@@ -138,7 +140,19 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 			waitLoop();
 		}
 	}
+	
+	/**
+	 * @param k
+	 */
+	public void setControleur(KeyListener k)
+	{
+		this.listenController = k;
+	}
 
+	public boolean working()
+	{
+		return (this.countAlive(this.elements, Type.TANK) == 0 || this.countAlive(this.elements, Type.MONSTER) == 0);
+	}
 	// ******************** Method ***********************
 	
 	// [[[[[[[[[[[[[ Monsters behavior ]]]]]]]]]]]]]
@@ -378,6 +392,26 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 		{
 			if (this.elements[i] != null && this.elements[i].isAlive())
 				this.shootFrom(this.elements[i], 1);
+		}
+	}
+	
+	@Override
+	public void tankMove(Coordinates delta) throws OutOfGridException
+	{
+		int i;
+		for(i = 0 ; i < this.elements.length; i++)
+		{
+			if(this.elements[i] != null && this.elements[i].isAlive() && this.elements[i].getType() == Type.TANK)
+			{
+				try
+				{
+					this.elements[i].move(delta);
+				}
+				catch (NegativeSizeException e)
+				{
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 }

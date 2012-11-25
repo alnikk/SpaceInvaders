@@ -3,6 +3,8 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
+import java.awt.event.KeyListener;
+
 /**
  * This class allows to print the state of the game into console.<br/>
  * The display is in ASCII arts, that is to say drawable elements are represented by ASCII digit who can be changed by changing constants.<br/>
@@ -132,11 +134,16 @@ public class ASCIIDisplay implements Display
 	}
 
 	@Override
-	public void show(Movable elements[], Coordinates maxSize)
+	public void show()
+	{
+		char[][] grid = gridImage();
+		printGrid(grid);
+	}
+	
+	@Override
+	public void init(KeyListener e, Movable[] elements, Coordinates maxSize)
 	{
 		this.elements = elements;
 		this.maxSize = maxSize;
-		char[][] grid = gridImage();
-		printGrid(grid);
 	}
 }

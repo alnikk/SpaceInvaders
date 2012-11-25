@@ -3,6 +3,8 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
+import java.awt.event.KeyListener;
+
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Etat;
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Type;
 
@@ -106,13 +108,14 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	 */
 	public void run()
 	{
+		this.display.init(this.listenController, this.elements,this.maxSize);
 		while(true)
-		{			
+		{
 			moveShoots();
 
 			testCollision();
 
-			this.display.show(this.elements,this.maxSize);
+			this.display.show();
 
 			if (this.countAlive(this.elements, Type.TANK) == 0 || this.countAlive(this.elements, Type.MONSTER) == 0)
 				break;
@@ -128,7 +131,18 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 		}
 	}
 
-
+	/**
+	 * @param k
+	 */
+	public void setControleur(KeyListener k)
+	{
+		this.listenController = k;
+	}
+	
+	public boolean working()
+	{
+		return (this.countAlive(this.elements, Type.TANK) == 0 || this.countAlive(this.elements, Type.MONSTER) == 0);
+	}
 	// ******************** Method ***********************
 
 		// [[[[[[[[[[[[[ Monsters behavior ]]]]]]]]]]]]]
@@ -320,7 +334,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 		 * @throws OutOfGridException
 		 *             Indicate when Tank want to go over the screen
 		 */
-		public void tankMove() throws OutOfGridException
+		public void tankMoveRand() throws OutOfGridException
 		{
 			int i;
 			int x;
@@ -368,6 +382,26 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 			{
 				if (this.elements[i] != null && this.elements[i].isAlive())
 					this.shootFrom(this.elements[i], 1);
+			}
+		}
+
+		@Override
+		public void tankMove(Coordinates delta) throws OutOfGridException
+		{
+			int i;
+			for(i = 0 ; i < this.elements.length; i++)
+			{
+				if(this.elements[i] != null && this.elements[i].isAlive() && this.elements[i].getType() == Type.TANK)
+				{
+					try
+					{
+						this.elements[i].move(delta);
+					}
+					catch (NegativeSizeException e)
+					{
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 	}

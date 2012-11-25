@@ -35,7 +35,7 @@ public class MyJPanel extends JPanel
 	public void paintComponent(Graphics g) 
 	{
 		int i= 0;
-
+		
 		// Fond
 		g.setColor(Color.black);
 		if(this.maxSize != null)
@@ -81,6 +81,5 @@ public class MyJPanel extends JPanel
 		this.maxSize = maxSize;
 		this.ratio = ratio;
 		this.elements = elements;
-
 	}
 }
