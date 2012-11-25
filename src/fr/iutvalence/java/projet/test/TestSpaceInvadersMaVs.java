@@ -3,9 +3,9 @@
  */
 package fr.iutvalence.java.projet.test;
 
+import fr.iutvalence.java.projet.spaceinvaders.ASCIIDisplay;
+import fr.iutvalence.java.projet.spaceinvaders.MonstersThread;
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMaVs;
-import fr.iutvalence.java.projet.spaceinvaders.display.ASCIIDisplay;
-import fr.iutvalence.java.projet.spaceinvaders.threads.MonstersThread;
 
 /**
  * This class tests the main class of SpaceInvaders

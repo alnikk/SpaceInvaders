@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet.spaceinvaders.interfaces;
+package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
  * This interface defines all common method to control Monsters.<br/>

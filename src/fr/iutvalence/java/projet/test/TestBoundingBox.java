@@ -5,7 +5,7 @@ package fr.iutvalence.java.projet.test;
 
 import fr.iutvalence.java.projet.spaceinvaders.BoundingBox;
 import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
-import fr.iutvalence.java.projet.spaceinvaders.exceptions.NegativeSizeException;
+import fr.iutvalence.java.projet.spaceinvaders.NegativeSizeException;
 
 /**
  * @author alexandre

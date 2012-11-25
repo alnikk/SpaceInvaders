@@ -1,11 +1,8 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet.spaceinvaders.display;
+package fr.iutvalence.java.projet.spaceinvaders;
 
-import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
-import fr.iutvalence.java.projet.spaceinvaders.Movable;
-import fr.iutvalence.java.projet.spaceinvaders.interfaces.Display;
 
 /**
  * This class allows to print the state of the game into console.<br/>

@@ -1,14 +1,11 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet.spaceinvaders.display;
+package fr.iutvalence.java.projet.spaceinvaders;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
-import fr.iutvalence.java.projet.spaceinvaders.Movable;
-import fr.iutvalence.java.projet.spaceinvaders.interfaces.Display;
 
 // TODO Comment
 /**

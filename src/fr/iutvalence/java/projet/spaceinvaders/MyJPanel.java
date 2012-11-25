@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet.spaceinvaders.display;
+package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,8 +9,6 @@ import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
 
-import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
-import fr.iutvalence.java.projet.spaceinvaders.Movable;
 
 /**
  * @author Gallet Guyon

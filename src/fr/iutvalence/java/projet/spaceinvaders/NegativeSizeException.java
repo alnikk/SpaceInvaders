@@ -1,9 +1,8 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet.spaceinvaders.exceptions;
+package fr.iutvalence.java.projet.spaceinvaders;
 
-import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
 
 /**
  * Thrown when only positive coordinates are expected.

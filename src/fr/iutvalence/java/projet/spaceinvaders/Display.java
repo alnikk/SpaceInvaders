@@ -1,10 +1,8 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet.spaceinvaders.interfaces;
+package fr.iutvalence.java.projet.spaceinvaders;
 
-import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
-import fr.iutvalence.java.projet.spaceinvaders.Movable;
 
 /**
  * This interface defines the common primitive of all view class.<br/>

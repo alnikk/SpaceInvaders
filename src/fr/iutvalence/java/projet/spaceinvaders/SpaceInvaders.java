@@ -4,9 +4,6 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Etat;
-import fr.iutvalence.java.projet.spaceinvaders.exceptions.NegativeSizeException;
-import fr.iutvalence.java.projet.spaceinvaders.exceptions.OutOfGridException;
-import fr.iutvalence.java.projet.spaceinvaders.interfaces.Display;
 
 /**
  * This is abstract class who regroup all tools' methods and variable. This Generalize all SpaceInvadersMxVx games.

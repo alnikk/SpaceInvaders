@@ -1,9 +1,8 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet.spaceinvaders.exceptions;
+package fr.iutvalence.java.projet.spaceinvaders;
 
-import fr.iutvalence.java.projet.spaceinvaders.Movable;
 
 /**
  * Thrown when movable objects go over the grid.

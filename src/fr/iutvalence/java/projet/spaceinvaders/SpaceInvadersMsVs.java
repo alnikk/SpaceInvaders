@@ -6,11 +6,6 @@ package fr.iutvalence.java.projet.spaceinvaders;
 import java.util.Arrays;
 
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Etat;
-import fr.iutvalence.java.projet.spaceinvaders.exceptions.NegativeSizeException;
-import fr.iutvalence.java.projet.spaceinvaders.exceptions.OutOfGridException;
-import fr.iutvalence.java.projet.spaceinvaders.interfaces.Display;
-import fr.iutvalence.java.projet.spaceinvaders.interfaces.MonsterControler;
-import fr.iutvalence.java.projet.spaceinvaders.interfaces.TankControler;
 
 /**
  * A space invader game.<br/>

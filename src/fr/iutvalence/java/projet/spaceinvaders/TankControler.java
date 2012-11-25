@@ -1,9 +1,8 @@
 /**
  * 
  */
-package fr.iutvalence.java.projet.spaceinvaders.interfaces;
+package fr.iutvalence.java.projet.spaceinvaders;
 
-import fr.iutvalence.java.projet.spaceinvaders.exceptions.OutOfGridException;
 
 /**
  * This interface is the control of the game.<br/>

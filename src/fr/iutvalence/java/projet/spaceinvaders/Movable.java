@@ -1,6 +1,5 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
-import fr.iutvalence.java.projet.spaceinvaders.exceptions.NegativeSizeException;
 
 /**
  * This class defines a movable object, that can move on a 2D grid and so being killed by others.<br/>

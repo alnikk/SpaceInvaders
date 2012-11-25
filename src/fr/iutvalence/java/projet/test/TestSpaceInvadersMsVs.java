@@ -3,8 +3,8 @@
  */
 package fr.iutvalence.java.projet.test;
 
+import fr.iutvalence.java.projet.spaceinvaders.ASCIIDisplay;
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMsVs;
-import fr.iutvalence.java.projet.spaceinvaders.display.ASCIIDisplay;
 
 /**
  * @author Gallet Guyon

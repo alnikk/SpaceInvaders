@@ -3,7 +3,6 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
-import fr.iutvalence.java.projet.spaceinvaders.exceptions.NegativeSizeException;
 
 /**
  * The BoundingBox class define area.<br/>
