@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  */
 public class SwingDisplay implements Display
 {	
-	private MyJPanel pan = new MyJPanel();
+	private SwingDraw pan = new SwingDraw();
 	
 	private JFrame window = new JFrame();
 	

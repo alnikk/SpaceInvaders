@@ -18,7 +18,7 @@ public class TestSwing
 	 */
 	public static void main(String[] args)
 	{
-		SwingDisplay d = new SwingDisplay(400,400);
+		SwingDisplay d = new SwingDisplay(600,600);
 		SpaceInvadersMaVa si = new SpaceInvadersMaVa(d);
 		TankListener tank = new TankListener(si);
 		MonstersThread monsters = new MonstersThread("Monsters", si, 1000);

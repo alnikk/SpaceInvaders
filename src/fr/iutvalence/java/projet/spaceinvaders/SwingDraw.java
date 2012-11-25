@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.LayoutManager;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 
@@ -14,7 +15,7 @@ import javax.swing.JPanel;
  * @author Gallet Guyon
  *
  */
-public class MyJPanel extends JPanel
+public class SwingDraw extends JPanel
 {
 	/**
 	 * Array containing all monsters to draw.
@@ -35,7 +36,7 @@ public class MyJPanel extends JPanel
 	public void paintComponent(Graphics g) 
 	{
 		int i= 0;
-		
+		ImageIcon img =null;
 		// Fond
 		g.setColor(Color.black);
 		if(this.maxSize != null)
@@ -51,22 +52,26 @@ public class MyJPanel extends JPanel
 					switch(this.elements[i].getType())
 					{
 						case TANK:
-							g.setColor(Color.green);
+							//g.setColor(Color.green);
+							img = new ImageIcon("./Image/tank.png");
 							break;
 						case MONSTER:
-							g.setColor(Color.blue);
+							//g.setColor(Color.blue);
+							img = new ImageIcon("./Image/invader.png");
 							break;
 						case SHOOT:
-							g.setColor(Color.yellow);
+							//g.setColor(Color.yellow);
+							img = new ImageIcon("./Image/shoot.png");
 							break;
 						default:
 							break;
 					}
 					if(this.elements[i] != null && this.elements[i].isAlive())
-						g.fillRect((int)(this.elements[i].getArea().getPosition().getX() * this.ratio), 
+						g.drawImage(img.getImage(),(int) (this.elements[i].getArea().getPosition().getX() * this.ratio), 
 								(int)(this.getHeight() - ((this.elements[i].getArea().getSize().getY() + this.elements[i].getArea().getPosition().getY()) * this.ratio)), 
 								(int)(this.elements[i].getArea().getSize().getX() * this.ratio), 
-								(int)(this.elements[i].getArea().getSize().getY()* this.ratio));
+								(int)(this.elements[i].getArea().getSize().getY()* this.ratio),
+								null, null);
 				}
 			}
 		}
