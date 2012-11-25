@@ -50,50 +50,49 @@ public class MyJPanel extends JPanel
 		
 		// Fond
 		g.setColor(Color.black);
-		g.fillRect(0, 0, (int) (this.maxSize.getX() * this.ratio), (int) (this.maxSize.getY() * this.ratio));
+		if(this.maxSize != null)
+			g.fillRect(0, 0, (int) (this.maxSize.getX() * this.ratio), (int) (this.maxSize.getY() * this.ratio));
 		
 		// Tanks
 		g.setColor(Color.green);
-		for(i = 0; i < this.tanks.length; i++)
+		if(this.tanks != null)
 		{
-			System.out.println("Panel -> this : " + this.getHeight());
-			System.out.println("Panel -> sizeGrid : " + this.maxSize);
-			System.out.println("Panel -> ratio : " + this.ratio);
-			System.out.println("Panel -> TankPosH : " + this.tanks[i].getArea().getPosition().getY());
-			System.out.println("Panel -> TankPosSwing : " + 
-					(this.getHeight() - ((this.tanks[i].getArea().getSize().getY() + this.tanks[i].getArea().getPosition().getY()) * this.ratio)));
-			
-			if(this.tanks[i] != null && this.tanks[i].isAlive())
-				g.fillRect((int)(this.tanks[i].getArea().getPosition().getX() * this.ratio), 
-						(int)(this.getHeight() - ((this.tanks[i].getArea().getSize().getY() + this.tanks[i].getArea().getPosition().getY()) * this.ratio)), 
-						(int)(this.tanks[i].getArea().getSize().getX() * this.ratio), 
-						(int)(this.tanks[i].getArea().getSize().getY()* this.ratio));
+			for(i = 0; i < this.tanks.length; i++)
+			{
+				if(this.tanks[i] != null && this.tanks[i].isAlive())
+					g.fillRect((int)(this.tanks[i].getArea().getPosition().getX() * this.ratio), 
+							(int)(this.getHeight() - ((this.tanks[i].getArea().getSize().getY() + this.tanks[i].getArea().getPosition().getY()) * this.ratio)), 
+							(int)(this.tanks[i].getArea().getSize().getX() * this.ratio), 
+							(int)(this.tanks[i].getArea().getSize().getY()* this.ratio));
+			}
 		}
 		
 		// Monsters
 		g.setColor(Color.blue);
-		System.out.println("Panel -> MonstersBond : " + this.monsters[0].getArea());
-		System.out.println("Panel -> MonstersBondPosY : " + (int)(this.getHeight() - ((this.monsters[i].getArea().getSize().getY() + this.monsters[i].getArea().getPosition().getY()) * this.ratio)));
-		System.out.println("Panel -> MonstersBondSizeY : " + (int)(this.monsters[i].getArea().getSize().getY()* this.ratio));
-		System.out.println("-----------------"); 
-		for(i = 0 ; i < this.monsters.length; i++)
+		if(this.monsters != null)
 		{
-			if(this.monsters[i] != null && this.monsters[i].isAlive())
-				g.fillRect((int)(this.monsters[i].getArea().getPosition().getX() * this.ratio), 
-						(int)(this.getHeight() - ((this.monsters[i].getArea().getSize().getY() + this.monsters[i].getArea().getPosition().getY()) * this.ratio)), 
-						(int)(this.monsters[i].getArea().getSize().getX() * this.ratio), 
-						(int)(this.monsters[i].getArea().getSize().getY()* this.ratio));
+			for(i = 0 ; i < this.monsters.length; i++)
+			{
+				if(this.monsters[i] != null && this.monsters[i].isAlive())
+					g.fillRect((int)(this.monsters[i].getArea().getPosition().getX() * this.ratio), 
+							(int)(this.getHeight() - ((this.monsters[i].getArea().getSize().getY() + this.monsters[i].getArea().getPosition().getY()) * this.ratio)), 
+							(int)(this.monsters[i].getArea().getSize().getX() * this.ratio), 
+							(int)(this.monsters[i].getArea().getSize().getY()* this.ratio));
+			}
 		}
 		
 		// Shoots
 		g.setColor(Color.yellow);
-		for(i = 0 ; i < this.shoots.length; i++)
+		if(this.shoots != null)
 		{
-			if(this.shoots[i] != null && this.shoots[i].isAlive())
-				g.fillRect((int)(this.shoots[i].getArea().getPosition().getX() * this.ratio), 
-						(int)(this.getHeight() - ((this.shoots[i].getArea().getSize().getY() + this.shoots[i].getArea().getPosition().getY()) * this.ratio)), 
-						(int)(this.shoots[i].getArea().getSize().getX() * this.ratio), 
-						(int)(this.shoots[i].getArea().getSize().getY()* this.ratio));
+			for(i = 0 ; i < this.shoots.length; i++)
+			{
+				if(this.shoots[i] != null && this.shoots[i].isAlive())
+					g.fillRect((int)(this.shoots[i].getArea().getPosition().getX() * this.ratio), 
+							(int)(this.getHeight() - ((this.shoots[i].getArea().getSize().getY() + this.shoots[i].getArea().getPosition().getY()) * this.ratio)), 
+							(int)(this.shoots[i].getArea().getSize().getX() * this.ratio), 
+							(int)(this.shoots[i].getArea().getSize().getY()* this.ratio));
+			}
 		}
 	}
 	

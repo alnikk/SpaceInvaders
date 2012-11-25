@@ -111,9 +111,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	public void run()
 	{
 		while(true)
-		{
-			testCollision();
-			
+		{			
 			moveShoots();
 
 			testCollision();
@@ -125,7 +123,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 
 			try
 			{
-				Thread.sleep(10);
+				Thread.sleep(20);
 			}
 			catch (InterruptedException e)
 			{
@@ -234,7 +232,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 			{
 				for (j = this.monstersAmount - 1; j > 0; j--)
 				{
-					if (this.monsters[i] != null && this.monsters[j].isAlive())
+					if (this.monsters[j] != null && this.monsters[j].isAlive())
 					{
 						if (((this.monsters[j].getArea().getPosition().getX() + (this.monsters[j].getArea().getSize()
 								.getX()) / 2) - (this.sizeShoots.getX() / 2) < (this.tanks[i].getArea().getPosition()
@@ -276,17 +274,44 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 		{
 			if (this.shoots[i] != null && this.shoots[i].isAlive())
 			{
-				try
-				{
 					if (this.shoots[i].getDirection() < 0)
-						this.moveTab(new Coordinates(0, -this.moveShoots.getY()), this.shoots);
+					{
+						try
+						{
+							if(!this.isOutOfGrid(this.shoots[i]))
+							try
+							{
+								this.shoots[i].move(new Coordinates(0, -this.moveShoots.getY()));
+							}
+							catch (NegativeSizeException e)
+							{
+								e.printStackTrace();
+							}
+						}
+						catch (OutOfGridException e)
+						{
+							e.kill();
+						}
+					}
 					if (this.shoots[i].getDirection() > 0)
-						this.moveTab(new Coordinates(0, this.moveShoots.getY()), this.shoots);
-				}
-				catch (OutOfGridException e)
-				{
-					e.kill();
-				}
+					{
+						try
+						{
+							if(!this.isOutOfGrid(this.shoots[i]))
+							try
+							{
+								this.shoots[i].move(new Coordinates(0, this.moveShoots.getY()));
+							}
+							catch (NegativeSizeException e)
+							{
+								e.printStackTrace();
+							}
+						}
+						catch (OutOfGridException e)
+						{
+							e.kill();
+						}
+					}
 			}
 		}
 	}

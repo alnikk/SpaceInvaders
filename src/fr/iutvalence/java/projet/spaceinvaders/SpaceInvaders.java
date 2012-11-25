@@ -60,12 +60,12 @@ public abstract class SpaceInvaders
 	/**
 	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
 	 */
-	private static final int DEFAULT_MONSTERS_AMOUNT = 10;
+	private static final int DEFAULT_MONSTERS_AMOUNT = 60;
 
 	/**
 	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
 	 */
-	private static final int DEFAULT_TANKS_AMOUNT = 1;
+	private static final int DEFAULT_TANKS_AMOUNT = 4;
 
 	// [[[[[[[ Time ]]]]]]]
 	/**
@@ -384,6 +384,22 @@ public abstract class SpaceInvaders
 		}
 		testCollision();
 	}
+	
+	/**
+	 * Method for know if any movable objects is out of grid.
+	 * @param el Movable element to check
+	 * @return If return false, the element is in the grid.
+	 * @throws OutOfGridException If the element is out of grid, new exception raise.
+	 */
+	protected boolean isOutOfGrid(Movable el) throws OutOfGridException
+	{
+		if (el.getArea().getPosition().getX() + el.getArea().getSize().getX() > this.maxSize.getX()
+				|| el.getArea().getPosition().getY() + el.getArea().getSize().getY() > this.maxSize.getY()
+				|| el.getArea().getPosition().getX() < 0
+				|| el.getArea().getPosition().getY() < 0)
+			throw new OutOfGridException(el);
+		return false;
+	}
 
 	/**
 	 * This method allows to move all instances in table of delta coordinates.
@@ -522,7 +538,7 @@ public abstract class SpaceInvaders
 			{
 				for (j = 0; j < this.monstersAmount; j++)
 				{
-					if (this.shoots[i] != null && this.monsters[j].isAlive())
+					if (this.monsters[j] != null && this.monsters[j].isAlive())
 					{
 						if (this.tanks[i].overlapping(this.monsters[j]) != null)
 						{
