@@ -3,11 +3,8 @@
  */
 package fr.iutvalence.java.projet.spaceinvaders;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 
 // TODO Comment
@@ -17,12 +14,20 @@ import javax.swing.JPanel;
  */
 public class SwingDisplay implements Display
 {	
+	/**
+	 * 
+	 */
 	private SwingDraw pan = new SwingDraw();
 	
+	/**
+	 * 
+	 */
 	private JFrame window = new JFrame();
 	
 	/**
 	 * Constructor of the class.
+	 * @param x r
+	 * @param y r
 	 */
 	public SwingDisplay(int x, int y)
 	{

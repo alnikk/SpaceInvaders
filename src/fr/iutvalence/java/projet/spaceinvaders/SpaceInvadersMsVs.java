@@ -4,7 +4,6 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.awt.event.KeyListener;
-import java.util.Arrays;
 
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Etat;
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Type;
@@ -141,8 +140,9 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 		}
 	}
 	
+	//TODO Commment
 	/**
-	 * @param k
+	 * @param k f
 	 */
 	public void setControleur(KeyListener k)
 	{

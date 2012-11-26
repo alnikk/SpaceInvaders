@@ -49,7 +49,7 @@ public abstract class SpaceInvaders
 	/**
 	 * This constant defines the step on the grid of a move
 	 */
-	private static final Coordinates DEFAULT_MOVE_SHOOTS = new Coordinates(0, 1);
+	private static final Coordinates DEFAULT_MOVE_SHOOTS = new Coordinates(0, 2);
 
 	/**
 	 * This constant defines the size of shoot
@@ -60,23 +60,23 @@ public abstract class SpaceInvaders
 	/**
 	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
 	 */
-	private static final int DEFAULT_MONSTERS_AMOUNT = 120;
+	private static final int DEFAULT_MONSTERS_AMOUNT = 60;
 
 	/**
 	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
 	 */
-	private static final int DEFAULT_TANKS_AMOUNT = 1;
+	private static final int DEFAULT_TANKS_AMOUNT = 4;
 
 	// [[[[[[[ Time ]]]]]]]
 	/**
 	 * This constant defines the default sleep time between each move of Invaders
 	 */
-	private static final int DEFAULT_SLEEP_TIME = 800;
+	private static final int DEFAULT_SLEEP_TIME = 500;
 	
 	/**
 	 * This is the minimum time between each move of Invaders
 	 */
-	private static final int DEFAULT_TIME_DIFFICULTY = 300;
+	private static final int DEFAULT_TIME_DIFFICULTY = 1000;
 
 	/**
 	 * This constant is the default acceleration (Not used for now)
@@ -179,9 +179,15 @@ public abstract class SpaceInvaders
 	protected boolean work;
 	
 	
-	
+	// TODO Comment
+	/**
+	 * 
+	 */
 	protected Display display;
 	
+	/**
+	 * 
+	 */
 	protected KeyListener listenController;
 
 	// ************************** Constructors **************************//

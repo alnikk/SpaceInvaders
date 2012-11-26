@@ -5,18 +5,22 @@ package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.LayoutManager;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-
+//TODO Commment
 /**
  * @author Gallet Guyon
  *
  */
 public class SwingDraw extends JPanel
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Array containing all monsters to draw.
 	 */
@@ -79,7 +83,9 @@ public class SwingDraw extends JPanel
 
 	/**
 	 * 
-	 * @param monsters
+	 * @param elements v
+	 * @param maxSize cv 
+	 * @param ratio cz
 	 */
 	public void setTableToPaint(Movable elements[], Coordinates maxSize, double ratio)
 	{

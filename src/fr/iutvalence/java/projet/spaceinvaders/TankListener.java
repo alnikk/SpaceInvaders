@@ -19,8 +19,26 @@ public class TankListener extends Thread implements KeyListener
 	 */
 	private TankControler tank;	
 
+	
+	/**
+	 * 
+	 */
+	private boolean Upressed;
+	/**
+	 * 
+	 */
+	private boolean Dpressed;
+	/**
+	 * 
+	 */
 	private boolean Lpressed;
+	/**
+	 * 
+	 */
 	private boolean Rpressed;
+	/**
+	 * 
+	 */
 	private boolean Tpressed;
 	
 	/**
@@ -33,6 +51,8 @@ public class TankListener extends Thread implements KeyListener
 		this.Lpressed = false;
 		this.Rpressed = false;
 		this.Tpressed = false;
+		this.Upressed = false;
+		this.Dpressed = false;
 	}
 
 	/**
@@ -69,6 +89,28 @@ public class TankListener extends Thread implements KeyListener
 					java.awt.Toolkit.getDefaultToolkit().beep();
 				}
 			}
+			if(this.Upressed)
+			{
+				try
+				{
+					this.tank.tankMove(new Coordinates(0,2));
+				}
+				catch (OutOfGridException e)
+				{
+					java.awt.Toolkit.getDefaultToolkit().beep();
+				}
+			}
+			if(this.Dpressed)
+			{
+				try
+				{
+					this.tank.tankMove(new Coordinates(0,-2));
+				}
+				catch (OutOfGridException e)
+				{
+					java.awt.Toolkit.getDefaultToolkit().beep();
+				}
+			}
 			try
 			{
 				Thread.sleep(50);
@@ -94,6 +136,12 @@ public class TankListener extends Thread implements KeyListener
 			case KeyEvent.VK_LEFT:
 				this.Lpressed = true;
 				break;
+			case KeyEvent.VK_UP:
+				this.Upressed = true;
+				break;
+			case KeyEvent.VK_DOWN:
+				this.Dpressed = true;
+				break;
 		}
 	}
 
@@ -110,6 +158,12 @@ public class TankListener extends Thread implements KeyListener
 				break;
 			case KeyEvent.VK_LEFT:
 				this.Lpressed = false;
+				break;
+			case KeyEvent.VK_UP:
+				this.Upressed = false;
+				break;
+			case KeyEvent.VK_DOWN:
+				this.Dpressed = false;
 				break;
 		}
 	}

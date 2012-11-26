@@ -15,8 +15,6 @@ public interface Display
 {
 	/**
 	 * Allows to display the game.
-	 * @param elements The table of all Movable objects.
-	 * @param maxSize The maximum size of the grid.
 	 */
 	public void show();
 	

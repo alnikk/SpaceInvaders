@@ -3,7 +3,6 @@
  */
 package fr.iutvalence.java.projet.test;
 
-import fr.iutvalence.java.projet.spaceinvaders.ASCIIDisplay;
 import fr.iutvalence.java.projet.spaceinvaders.MonstersThread;
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMaVa;
 import fr.iutvalence.java.projet.spaceinvaders.SwingDisplay;
@@ -22,9 +21,10 @@ public class TestSpaceInvadersMaVa
 	{
 		SwingDisplay d = new SwingDisplay(400,400);
 		SpaceInvadersMaVa si = new SpaceInvadersMaVa(d);
-		MonstersThread monsters = new MonstersThread("Monsters", si, 1000);
 		TankListener tank = new TankListener(si);
+		MonstersThread monsters = new MonstersThread("Monsters", si, 1000);
 		
+		tank.start();
 		monsters.start();
 		si.run();
 		System.out.println(si);
