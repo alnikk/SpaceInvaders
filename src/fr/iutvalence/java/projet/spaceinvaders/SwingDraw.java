@@ -4,6 +4,7 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
@@ -37,15 +38,17 @@ public class SwingDraw extends JPanel
 	 */
 	private double ratio;
 
+	private int end;
+
 	public void paintComponent(Graphics g) 
 	{
 		int i= 0;
-		ImageIcon img =null;
+		ImageIcon img = null;
+		
 		// Fond
 		g.setColor(Color.black);
 		if(this.maxSize != null)
 			g.fillRect(0, 0, (int) (this.maxSize.getX() * this.ratio), (int) (this.maxSize.getY() * this.ratio));
-
 
 		if(this.elements != null)
 		{
@@ -65,7 +68,10 @@ public class SwingDraw extends JPanel
 							break;
 						case SHOOT:
 							//g.setColor(Color.yellow);
-							img = new ImageIcon("./Image/shoot.png");
+							if(this.elements[i].getDirection() > 0)
+								img = new ImageIcon("./Image/shoot_tank.png");
+							else
+								img = new ImageIcon("./Image/shoot_invaders.png");
 							break;
 						default:
 							break;
@@ -78,6 +84,16 @@ public class SwingDraw extends JPanel
 								null, null);
 				}
 			}
+		}
+		g.setFont(new Font("Century Schoolbook L",Font.ITALIC,30)); // TODO better display
+		g.setColor(Color.blue);
+		if(this.end == 1)
+		{
+			g.drawString("WIN !", 100, 100);
+		}
+		if(this.end == -1)
+		{
+			g.drawString("LOOSE !",100, 100);
 		}
 	}
 
@@ -92,5 +108,16 @@ public class SwingDraw extends JPanel
 		this.maxSize = maxSize;
 		this.ratio = ratio;
 		this.elements = elements;
+		this.end = 0;
+	}
+
+	public void loose()
+	{
+		this.end = -1;
+	}
+
+	public void win()
+	{
+		this.end = 1;
 	}
 }

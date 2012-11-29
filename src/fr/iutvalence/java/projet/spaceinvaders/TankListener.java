@@ -18,7 +18,7 @@ public class TankListener extends Thread implements KeyListener
 	 * Interface for using tanks object
 	 */
 	private TankControler tank;	
-
+// TODO Vitesse tank
 	
 	/**
 	 * 
@@ -68,56 +68,20 @@ public class TankListener extends Thread implements KeyListener
 				this.tank.tankShoot();
 			}
 			if(this.Rpressed)
-			{
-				try
-				{
-					this.tank.tankMove(new Coordinates(2,0));
-				}
-				catch (OutOfGridException e)
-				{
-					java.awt.Toolkit.getDefaultToolkit().beep();
-				}
-			}
+				this.tank.tankMove(new Coordinates(2,0));
 			if(this.Lpressed)
-			{
-				try
-				{
-					this.tank.tankMove(new Coordinates(-2,0));
-				}
-				catch (OutOfGridException e)
-				{
-					java.awt.Toolkit.getDefaultToolkit().beep();
-				}
-			}
+				this.tank.tankMove(new Coordinates(-2,0));
 			if(this.Upressed)
-			{
-				try
-				{
-					this.tank.tankMove(new Coordinates(0,2));
-				}
-				catch (OutOfGridException e)
-				{
-					java.awt.Toolkit.getDefaultToolkit().beep();
-				}
-			}
+				this.tank.tankMove(new Coordinates(0,2));
 			if(this.Dpressed)
-			{
-				try
-				{
-					this.tank.tankMove(new Coordinates(0,-2));
-				}
-				catch (OutOfGridException e)
-				{
-					java.awt.Toolkit.getDefaultToolkit().beep();
-				}
-			}
+				this.tank.tankMove(new Coordinates(0,-2));
+			
 			try
 			{
 				Thread.sleep(50);
 			}
 			catch (InterruptedException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

@@ -60,7 +60,7 @@ public abstract class SpaceInvaders
 	/**
 	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
 	 */
-	private static final int DEFAULT_MONSTERS_AMOUNT = 90;
+	private static final int DEFAULT_MONSTERS_AMOUNT = 20;
 
 	/**
 	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
@@ -71,12 +71,12 @@ public abstract class SpaceInvaders
 	/**
 	 * This constant defines the default sleep time between each move of Invaders
 	 */
-	private static final int DEFAULT_SLEEP_TIME = 10;
-	
+	private static final int DEFAULT_SLEEP_TIME = 100;
+
 	/**
 	 * This is the minimum time between each move of Invaders
 	 */
-	private static final int DEFAULT_TIME_DIFFICULTY = 100; 
+	private static final int DEFAULT_TIME_DIFFICULTY = 300; 
 
 	/**
 	 * This constant is the default acceleration (Not used for now)
@@ -93,7 +93,7 @@ public abstract class SpaceInvaders
 	/**
 	 * Size of Movable (e.g. Doc Movable)
 	 */
-	private Coordinates sizeMovable;
+	protected Coordinates sizeMovable;
 
 	/**
 	 * Delta between 2 Invaders
@@ -132,7 +132,7 @@ public abstract class SpaceInvaders
 	 * This variable is used to wait sleepTime millisecond between each loop
 	 */
 	protected int sleepTime;
-	
+
 	/**
 	 * This is the minimum time between each move of Invaders
 	 */
@@ -146,12 +146,12 @@ public abstract class SpaceInvaders
 	private int acceleration;
 
 	// [[[[[[[ Table ]]]]]]]
-	
+
 	/**
 	 * Array containing all monsters
 	 */
 	protected Movable[] elements;
-	
+
 	/**
 	 * Array containing all monsters
 	 */
@@ -177,14 +177,14 @@ public abstract class SpaceInvaders
 	 * Boolean to know if the game is finished
 	 */
 	protected boolean work;
-	
-	
+
+
 	// TODO Comment
 	/**
 	 * 
 	 */
 	protected Display display;
-	
+
 	/**
 	 * 
 	 */
@@ -395,7 +395,7 @@ public abstract class SpaceInvaders
 		}
 		testCollision();
 	}
-	
+
 	/**
 	 * Method for know if any movable objects is out of grid.
 	 * @param el Movable element to check
@@ -435,7 +435,7 @@ public abstract class SpaceInvaders
 				if (tableToMove[i].getArea().getPosition().getX() + tableToMove[i].getArea().getSize().getX()
 						+ delta.getX() > this.maxSize.getX()
 						|| tableToMove[i].getArea().getPosition().getY() + tableToMove[i].getArea().getSize().getY()
-								+ delta.getY() > this.maxSize.getY()
+						+ delta.getY() > this.maxSize.getY()
 						|| tableToMove[i].getArea().getPosition().getX() + delta.getX() < 0
 						|| tableToMove[i].getArea().getPosition().getY() + delta.getY() < 0)
 				{
@@ -535,6 +535,59 @@ public abstract class SpaceInvaders
 	}
 
 	/**
+	 * Allow to move shoot(s)
+	 */
+	protected void moveShoots()
+	{
+		int i;
+
+		for (i = 0; i < this.elements.length; i++)
+		{
+			if (this.elements[i] != null && this.elements[i].isAlive() && this.elements[i].getType() == Type.SHOOT)
+			{
+				if (this.elements[i].getDirection() < 0)
+				{
+					try
+					{
+						if(!this.isOutOfGrid(this.elements[i]))
+							try
+						{
+								this.elements[i].move(new Coordinates(0, -this.moveShoots.getY()));
+						}
+						catch (NegativeSizeException e)
+						{
+							e.printStackTrace();
+						}
+					}
+					catch (OutOfGridException e)
+					{
+						e.kill();
+					}
+				}
+				if (this.elements[i].getDirection() > 0)
+				{
+					try
+					{
+						if(!this.isOutOfGrid(this.elements[i]))
+							try
+						{
+								this.elements[i].move(new Coordinates(0, this.moveShoots.getY()));
+						}
+						catch (NegativeSizeException e)
+						{
+							e.printStackTrace();
+						}
+					}
+					catch (OutOfGridException e)
+					{
+						e.kill();
+					}
+				}
+			}
+		}
+	}
+
+	/**
 	 * This method tests if there is any collisions in all table declared.<br/>
 	 * Collision are tested between each table and not between elements of the same table.<br/>
 	 * If a Tank is touched by an enemy, work is set to false and the game is stopped by the main iteration.
@@ -549,9 +602,17 @@ public abstract class SpaceInvaders
 			{
 				for(j=0 ; j < this.elements.length; j++)
 				{
-					if (i == j) continue;
+					if(i == j) continue;
 					if(this.elements[j] != null && this.elements[j].isAlive())
 					{
+						if(this.elements[i].getType() == Type.TANK && this.elements[j].getType() == Type.SHOOT
+								&& this.elements[j].getDirection() >= 1) continue;
+						if(this.elements[i].getType() == Type.SHOOT && this.elements[j].getType() == Type.TANK
+								&& this.elements[i].getDirection() >= 1) continue;
+						if(this.elements[i].getType() == Type.MONSTER && this.elements[j].getType() == Type.SHOOT
+								&& this.elements[j].getDirection() <= -1) continue;
+						if(this.elements[i].getType() == Type.SHOOT && this.elements[j].getType() == Type.MONSTER  
+								&& this.elements[i].getDirection() <= -1) continue;
 						if(this.elements[i].overlapping(this.elements[j]) != null)
 						{
 							this.elements[i].setAlive(false);
@@ -562,11 +623,39 @@ public abstract class SpaceInvaders
 			}
 		}
 	}
-	
+
 	/**
 	 * Begin a game
 	 */
 	public abstract void run();
+
+
+	// TODO Comment
+	protected void killTank()
+	{
+		int i;
+
+		for(i = 0; i < this.elements.length; i++)
+		{
+			if(this.elements[i] != null && i <= this.tanksAmount && this.elements[i].getType() == Type.TANK)
+				this.elements[i].setAlive(false);
+		}
+	}
+
+	public int countShoot()
+	{
+		int i, nb=0;
+
+		for(i=0; i < this.elements.length; i++)
+		{
+			if(this.elements[i] != null
+					&& this.elements[i].isAlive()
+					&& this.elements[i].getType() == Type.SHOOT 
+					&& this.elements[i].getDirection() > 0)
+				nb++;
+		}
+		return nb;
+	}
 
 	// TODO Debug
 	/**
@@ -584,3 +673,6 @@ public abstract class SpaceInvaders
 		tabToKill[i].setAlive(false);
 	}
 }
+
+
+

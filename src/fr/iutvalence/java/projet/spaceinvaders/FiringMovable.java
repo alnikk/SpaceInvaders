@@ -5,8 +5,7 @@ import fr.iutvalence.java.projet.spaceinvaders.enumerations.Type;
 public class FiringMovable extends Movable
 {
 	/**
-	 * Set the direction of shoot. Negative -> down, Positive -> up, Equals to 0 means it's not a shoot. More it's big
-	 * number, more it's quick.
+	 * Set the direction of the shoot when FiringMovable fire.
 	 */
 	private int shootDirection;
 

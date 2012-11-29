@@ -25,7 +25,7 @@ public interface TankControler
 	 * @throws OutOfGridException
 	 *             Indicate when Tank want to go over the screen. Then you can bip him ;)
 	 */
-	public void tankMove(Coordinates delta) throws OutOfGridException;
+	public void tankMove(Coordinates delta);
 	
 	/**
 	 * @param k v

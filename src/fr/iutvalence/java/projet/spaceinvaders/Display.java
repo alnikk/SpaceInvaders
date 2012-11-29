@@ -25,4 +25,8 @@ public interface Display
 	 * @param maxSize (Coordinates) The maximum coordinates of the grid.
 	 */
 	public void init(KeyListener e, Movable elements[], Coordinates maxSize);
+
+	public void loose();
+
+	public void win();
 }

@@ -116,7 +116,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 			moveShoots();
 			this.display.show();
 			monstersMove();
-			
+
 			monsterShoot();
 
 			try
@@ -133,17 +133,17 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 			testCollision();
 
 			this.display.show();
-			
+
 			if (this.countAlive(this.elements, Type.TANK) == 0 || this.countAlive(this.elements, Type.MONSTER) == 0)
 				break;
-			
+
 			waitLoop();
 		}
 	}
-	
-	//TODO Commment
+
+	// TODO Comment
 	/**
-	 * @param k f
+	 * @param k t
 	 */
 	public void setControleur(KeyListener k)
 	{
@@ -155,7 +155,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 		return (this.countAlive(this.elements, Type.TANK) == 0 || this.countAlive(this.elements, Type.MONSTER) == 0);
 	}
 	// ******************** Method ***********************
-	
+
 	// [[[[[[[[[[[[[ Monsters behavior ]]]]]]]]]]]]]
 
 	/**
@@ -172,7 +172,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method allows to move Invaders once that is to say to right, down, or left. It follow scheme by itself :
 	 * <ul>
@@ -207,8 +207,10 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 				}
 				catch (OutOfGridException e1)
 				{
-					e1.kill();
-					monstersMove();
+					if(e1.getOutOfGridException().getArea().getPosition().getY() <= this.sizeMovable.getY())
+						this.killTank();
+					else
+						monstersMove();
 				}
 				this.etat = Etat.RIGHT_BOTTOM;
 				break;
@@ -230,27 +232,29 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 				}
 				catch (OutOfGridException e1)
 				{
-					e1.kill();
-					monstersMove();
+					if(e1.getOutOfGridException().getArea().getPosition().getY() <= this.sizeMovable.getY())
+						this.killTank();
+					else
+						monstersMove();
 				}
 				this.etat = Etat.LEFT_UP;
 				break;
 		}
-		return (int) (Math.sqrt(((double) countAlive(this.elements, Type.MONSTER) / this.monstersAmount)) * this.sleepTime);
+		return (int) (Math.sqrt(((double) countAlive(this.elements, Type.MONSTER) / this.monstersAmount)) + this.sleepTime);
 	}
 
 	/**
 	 * Method for shoot on tanks. It search the invaders just above tanks and shoot.
 	 */
 	public void monsterShoot()
-	{		
+	{
 		int i, j;
-		Movable invaderAbove = null;
+		FiringMovable invaderAbove = null;
 		for (i = 0; i < this.tanksAmount; i++)
 		{
 			if (this.elements[i] != null && this.elements[i].isAlive() && this.elements[i].getType() == Type.TANK)
 			{	
-				for (j = 0; j < this.elements.length; j++)
+				for (j = this.elements.length - 1; j >= 0; j--)
 				{
 					if (this.elements[j] != null && this.elements[j].isAlive() && this.elements[j].getType() ==  Type.MONSTER)
 					{
@@ -269,73 +273,20 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 							{
 								if (invaderAbove.getArea().getPosition().getY() > this.elements[j].getArea()
 										.getPosition().getY())
-									invaderAbove = this.elements[j];
+									// FIXME etster si c'est bien un monstre (classcastException ?)
+									invaderAbove = (FiringMovable) this.elements[j];
 							}
 							else
-								invaderAbove = this.elements[j];
+								invaderAbove = (FiringMovable) this.elements[j];
 						}
-						
+
 					}
 				}
 			}
-			shootFrom(invaderAbove, -1);
+			shootFrom(invaderAbove);
 		}
 	}
 
-	// [[[[[[[[[[[[[ Shoots behavior ]]]]]]]]]]]]]
-
-	/**
-	 * Allow to move shoot(s)
-	 */
-	private void moveShoots()
-	{
-		int i;
-
-		for (i = 0; i < this.elements.length; i++)
-		{
-			if (this.elements[i] != null && this.elements[i].isAlive() && this.elements[i].getType() == Type.SHOOT)
-			{
-					if (this.elements[i].getDirection() < 0)
-					{
-						try
-						{
-							if(!this.isOutOfGrid(this.elements[i]))
-							try
-							{
-								this.elements[i].move(new Coordinates(0, -this.moveShoots.getY()));
-							}
-							catch (NegativeSizeException e)
-							{
-								e.printStackTrace();
-							}
-						}
-						catch (OutOfGridException e)
-						{
-							e.kill();
-						}
-					}
-					if (this.elements[i].getDirection() > 0)
-					{
-						try
-						{
-							if(!this.isOutOfGrid(this.elements[i]))
-							try
-							{
-								this.elements[i].move(new Coordinates(0, this.moveShoots.getY()));
-							}
-							catch (NegativeSizeException e)
-							{
-								e.printStackTrace();
-							}
-						}
-						catch (OutOfGridException e)
-						{
-							e.kill();
-						}
-					}
-			}
-		}
-	}
 
 	// [[[[[[[[[[[[[ Controls ]]]]]]]]]]]]]
 
@@ -345,7 +296,7 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 	 * @throws OutOfGridException
 	 *             Indicate when Tank want to go over the screen
 	 */
-	public void tankMove() throws OutOfGridException
+	public void tankMoveRand() throws OutOfGridException
 	{
 		int i;
 		int x;
@@ -385,28 +336,79 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 	/**
 	 * Allow tank(s) to shoot Invaders
 	 */
-	public void tankShoot()
+	public void tankShoot() // TODO NB Shoot
+	{
+		int i, nb = this.countShoot();
+
+		if(nb < 2)
+		{
+			for (i = 0; i < this.tanksAmount; i++)
+			{
+				if (this.elements[i] != null && this.elements[i].isAlive())
+					this.shootFrom((FiringMovable) this.elements[i]);
+			}
+		}
+	}
+
+	@Override
+	public void tankMove(Coordinates delta)
 	{
 		int i;
 
-		for (i = 0; i < this.tanksAmount; i++)
-		{
-			if (this.elements[i] != null && this.elements[i].isAlive())
-				this.shootFrom(this.elements[i], 1);
-		}
-	}
-	
-	@Override
-	public void tankMove(Coordinates delta) throws OutOfGridException
-	{
-		int i;
 		for(i = 0 ; i < this.elements.length; i++)
 		{
 			if(this.elements[i] != null && this.elements[i].isAlive() && this.elements[i].getType() == Type.TANK)
 			{
+				if(this.elements[i].getArea().getPosition().getX() + delta.getX() > 0
+						&& this.elements[i].getArea().getPosition().getX() + this.elements[i].getArea().getSize().getX() + delta.getX() < this.maxSize.getX())
+					try
+				{
+						this.elements[i].move(delta);
+				}
+				catch (NegativeSizeException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+
+
+	/**
+	 * Allows random tank control
+	 * 
+	 * @throws OutOfGridException
+	 *             Indicate when Tank want to go over the screen
+	 */
+	public void tankMove() throws OutOfGridException
+	{
+		int i;
+		int x;
+		long neg;
+
+		for (i = 0; i < this.elements.length; i++)
+		{
+			if (this.elements[i] != null && this.elements[i].isAlive() && this.elements[i].getType() == Type.TANK)
+			{
+				x = (int) (Math.random() * this.coorMove.getX());
+				neg = Math.round(Math.random());
+
+				if (neg == 0)
+					neg = -1;
+
 				try
 				{
-					this.elements[i].move(delta);
+					if ((this.elements[i].getArea().getPosition().getX() + (int) (x * neg)) > 0
+							&& (this.elements[i].getArea().getPosition().getX() + this.elements[i].getArea().getSize().getX() + (int) (x * neg)) < this.maxSize
+							.getX())
+					{
+						this.elements[i].move(new Coordinates((int) (x * neg), 0));
+					}
+					else
+					{
+						throw new OutOfGridException(this.elements[i]);
+					}
 				}
 				catch (NegativeSizeException e)
 				{
