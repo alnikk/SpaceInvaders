@@ -60,23 +60,23 @@ public abstract class SpaceInvaders
 	/**
 	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
 	 */
-	private static final int DEFAULT_MONSTERS_AMOUNT = 60;
+	private static final int DEFAULT_MONSTERS_AMOUNT = 90;
 
 	/**
 	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
 	 */
-	private static final int DEFAULT_TANKS_AMOUNT = 4;
+	private static final int DEFAULT_TANKS_AMOUNT = 1;
 
 	// [[[[[[[ Time ]]]]]]]
 	/**
 	 * This constant defines the default sleep time between each move of Invaders
 	 */
-	private static final int DEFAULT_SLEEP_TIME = 500;
+	private static final int DEFAULT_SLEEP_TIME = 10;
 	
 	/**
 	 * This is the minimum time between each move of Invaders
 	 */
-	private static final int DEFAULT_TIME_DIFFICULTY = 1000;
+	private static final int DEFAULT_TIME_DIFFICULTY = 100; 
 
 	/**
 	 * This constant is the default acceleration (Not used for now)
@@ -136,7 +136,7 @@ public abstract class SpaceInvaders
 	/**
 	 * This is the minimum time between each move of Invaders
 	 */
-	protected int timeDifficulty = 300;
+	protected int timeDifficulty = 300; // TODO constant
 
 	// TODO acceleration
 	/**
@@ -359,8 +359,8 @@ public abstract class SpaceInvaders
 		{
 			try
 			{
-				this.elements[i] = new Movable(new Coordinates(((this.maxSize.getX() / 4) - (this.sizeMovable.getX() / 2))
-						* i, 0), new Coordinates(this.sizeMovable.getX(), this.sizeMovable.getY()), Type.TANK);
+				this.elements[i] = new FiringMovable(new Coordinates(((this.maxSize.getX() / 4) - (this.sizeMovable.getX() / 2))
+						* i, 0), new Coordinates(this.sizeMovable.getX(), this.sizeMovable.getY()),Type.TANK, 0, 1);
 			}
 			catch (NegativeSizeException e1)
 			{
@@ -375,12 +375,12 @@ public abstract class SpaceInvaders
 				- (this.sizeMovable.getY() + this.delta));
 		for (i = nbTanks ; i < nbMonsters; i++)
 		{
-			if (monster_position.getX() + (this.delta + this.sizeMovable.getX()) <= this.maxSize.getX())
+			if (monster_position.getX() + (this.delta + this.sizeMovable.getX()) <= this.maxSize.getX() - 20) // TODO CONSTANT
 			{
 				try
 				{
-					this.elements[i] = new Movable(monster_position, new Coordinates(this.sizeMovable.getX(),
-							this.sizeMovable.getY()), Type.MONSTER);
+					this.elements[i] = new FiringMovable(monster_position, new Coordinates(this.sizeMovable.getX(),
+							this.sizeMovable.getY()), Type.MONSTER, 0, -1);
 				}
 				catch (NegativeSizeException e)
 				{
@@ -512,10 +512,8 @@ public abstract class SpaceInvaders
 	 * 
 	 * @param movable
 	 *            Invaders who have to shoot
-	 * @param direction
-	 *            The direction you want to shoot
 	 */
-	protected void shootFrom(Movable movable, int direction)
+	protected void shootFrom(FiringMovable movable)
 	{
 		int index;
 
@@ -526,7 +524,7 @@ public abstract class SpaceInvaders
 			{
 				try
 				{
-					this.elements[index] = movable.fire(direction, this.sizeShoots);
+					this.elements[index] = movable.fire(this.sizeShoots);
 				}
 				catch (NegativeSizeException e)
 				{
@@ -551,6 +549,7 @@ public abstract class SpaceInvaders
 			{
 				for(j=0 ; j < this.elements.length; j++)
 				{
+					if (i == j) continue;
 					if(this.elements[j] != null && this.elements[j].isAlive())
 					{
 						if(this.elements[i].overlapping(this.elements[j]) != null)

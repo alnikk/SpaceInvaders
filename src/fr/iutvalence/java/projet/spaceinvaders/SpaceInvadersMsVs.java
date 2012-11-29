@@ -112,8 +112,9 @@ public class SpaceInvadersMsVs extends SpaceInvaders implements TankControler, M
 		this.display.init(this.listenController, this.elements,this.maxSize);
 		while (true)
 		{			
+			this.display.show();
 			moveShoots();
-			
+			this.display.show();
 			monstersMove();
 			
 			monsterShoot();

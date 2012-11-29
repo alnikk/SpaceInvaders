@@ -51,8 +51,7 @@ public class TestBoundingBox
 
 			/* test with bb2 is left */
 			b2 = b2.translate(new Coordinates(0, -5));
-			b3 = b3.translate(new Coordinates(0, -5));
-			b3 = b3.reSize(new Coordinates(5, 10));
+			b3 = new BoundingBox(new Coordinates(10, 10), new Coordinates(5, 10));
 
 			System.out.println("left :      b1 " + b1 + "\n\t\tb2 " + b2);
 			System.out.println("Intersection :  b3 " + b2.intersection(b1));

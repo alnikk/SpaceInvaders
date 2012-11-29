@@ -128,7 +128,7 @@ public class BoundingBox
 		int by1 = this.position.getY();
 		int by2 = this.position.getY() + this.size.getY();
 
-		return ((x > bx1) && (x < bx2) && (y > by1) && (y < by2));
+		return (((x >= bx1) && (x <= bx2)) && ((y >= by1) && (y <= by2)));
 	}
 
 	/**

@@ -35,8 +35,8 @@ public class SwingDisplay implements Display
 		this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.window.setSize(x,y);
 		this.window.setLocationRelativeTo(null);
-		this.window.setContentPane(this.pan);
 		this.window.setVisible(true);
+		this.window.setContentPane(this.pan);
 	}
 	
 	public void init(KeyListener e, Movable elements[], Coordinates maxSize)
@@ -49,6 +49,6 @@ public class SwingDisplay implements Display
 	@Override
 	public void show()
 	{
-		this.pan.repaint();
+		this.window.repaint();
 	}
 }

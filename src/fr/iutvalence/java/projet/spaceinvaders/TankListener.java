@@ -137,10 +137,10 @@ public class TankListener extends Thread implements KeyListener
 				this.Lpressed = true;
 				break;
 			case KeyEvent.VK_UP:
-				this.Upressed = true;
+				//this.Upressed = true;
 				break;
 			case KeyEvent.VK_DOWN:
-				this.Dpressed = true;
+				//this.Dpressed = true;
 				break;
 		}
 	}

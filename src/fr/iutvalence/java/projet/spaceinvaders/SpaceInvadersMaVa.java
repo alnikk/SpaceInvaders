@@ -186,6 +186,8 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 					}
 					catch (OutOfGridException e)
 					{
+						//if(e.getOutOfGridException().getArea().getPosition().getY() <= 0)
+							
 						this.etat = Etat.RIGHT_UP;
 						monstersMove();
 					}
@@ -235,7 +237,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 		public void monsterShoot()
 		{
 			int i, j;
-			Movable invaderAbove = null;
+			FiringMovable invaderAbove = null;
 			for (i = 0; i < this.tanksAmount; i++)
 			{
 				if (this.elements[i] != null && this.elements[i].isAlive() && this.elements[i].getType() == Type.TANK)
@@ -259,16 +261,17 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 								{
 									if (invaderAbove.getArea().getPosition().getY() > this.elements[j].getArea()
 											.getPosition().getY())
-										invaderAbove = this.elements[j];
+										// FIXME etster si c'est bien un monstre (classcastException ?)
+										invaderAbove = (FiringMovable) this.elements[j];
 								}
 								else
-									invaderAbove = this.elements[j];
+									invaderAbove = (FiringMovable) this.elements[j];
 							}
 							
 						}
 					}
 				}
-				shootFrom(invaderAbove, -1);
+				shootFrom(invaderAbove);
 			}
 		}
 
@@ -285,6 +288,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 			{
 				if (this.elements[i] != null && this.elements[i].isAlive() && this.elements[i].getType() == Type.SHOOT)
 				{
+					//System.out.println(this.elements[i].getType());
 						if (this.elements[i].getDirection() < 0)
 						{
 							try
@@ -382,7 +386,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 			for (i = 0; i < this.tanksAmount; i++)
 			{
 				if (this.elements[i] != null && this.elements[i].isAlive())
-					this.shootFrom(this.elements[i], 1);
+					this.shootFrom((FiringMovable) this.elements[i]);
 			}
 		}
 
