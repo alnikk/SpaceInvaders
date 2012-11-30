@@ -17,7 +17,6 @@ import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMaVs;
  */
 public class TestSpaceInvadersMaVs
 {
-	// TODO Constant
 	/**
 	 * Create a new SpaceInvader's object to test it.
 	 * 

@@ -18,7 +18,6 @@ import fr.iutvalence.java.projet.spaceinvaders.TankListener;
  */
 public class TestSpaceInvadersMaVa
 {
-	// TODO Constant
 	/**
 	 * @param args No arguments
 	 */

@@ -18,7 +18,6 @@ import fr.iutvalence.java.projet.spaceinvaders.TankListener;
  */
 public class TestSwingMaVa
 {
-	// TODO constant
 	/**
 	 * This class test space invaders model MaVa with Swing controls and graphics
 	 * @param args No

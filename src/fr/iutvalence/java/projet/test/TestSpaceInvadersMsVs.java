@@ -16,7 +16,6 @@ import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMsVs;
  */
 public class TestSpaceInvadersMsVs
 {
-	// TODO Constant
 	/**
 	 * @param args
 	 *            No arguments

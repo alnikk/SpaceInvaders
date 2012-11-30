@@ -5,7 +5,6 @@ package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.awt.event.KeyListener;
 
-//TODO Commment
 /**
  * This interface is the control of the game.<br/>
  * Thanks to this class your tanks objects can 

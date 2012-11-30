@@ -271,8 +271,9 @@ public class SpaceInvadersMaVs extends SpaceInvaders implements TankControler, M
 							{
 								if (invaderAbove.getArea().getPosition().getY() > this.elements[j].getArea()
 										.getPosition().getY())
-									// FIXME etster si c'est bien un monstre (classcastException ?)
-									invaderAbove = (FiringMovable) this.elements[j];
+									//FIXME (FIXED) etster si c'est bien un monstre (classcastException ?)
+									if(!(this.elements[i] instanceof FiringMovable))
+										invaderAbove = (FiringMovable) this.elements[j];
 							}
 							else
 								invaderAbove = (FiringMovable) this.elements[j];

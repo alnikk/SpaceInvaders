@@ -10,16 +10,16 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-//TODO Commment
 /**
+ * This class is used for draw in the window
+ * of the application. it draws the play and
+ * if you loose or win !
  * @author Gallet Guyon
- *
  */
 public class SwingDraw extends JPanel
 {
-	/**
-	 * 
-	 */
+
+	@SuppressWarnings("javadoc")
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -34,10 +34,13 @@ public class SwingDraw extends JPanel
 	private Coordinates maxSize;
 
 	/**
-	 * 
+	 * The ratio between model and view
 	 */
 	private double ratio;
 
+	/**
+	 * Know if the game continue, or is loosed or win. 
+	 */
 	private int end;
 
 	public void paintComponent(Graphics g) 
@@ -99,9 +102,9 @@ public class SwingDraw extends JPanel
 
 	/**
 	 * 
-	 * @param elements v
-	 * @param maxSize cv 
-	 * @param ratio cz
+	 * @param elements The table of movable elements to draw
+	 * @param maxSize The max size of the model
+	 * @param ratio The ratio between model and view
 	 */
 	public void setTableToPaint(Movable elements[], Coordinates maxSize, double ratio)
 	{
@@ -111,11 +114,17 @@ public class SwingDraw extends JPanel
 		this.end = 0;
 	}
 
+	/**
+	 * Tell to paint actions for loose.
+	 */
 	public void loose()
 	{
 		this.end = -1;
 	}
 
+	/**
+	 * Tell to paint actions for win. 
+	 */
 	public void win()
 	{
 		this.end = 1;
