@@ -141,15 +141,13 @@ public class SpaceInvadersMaVs extends SpaceInvaders implements TankControler, M
 	}
 
 
-	// TODO Comment
-	/**
-	 * @param k t
-	 */
+	@Override
 	public void setControleur(KeyListener k)
 	{
 		this.listenController = k;
 	}
 
+	@Override
 	public boolean working()
 	{
 		return (this.countAlive(this.elements, Type.TANK) == 0 || this.countAlive(this.elements, Type.MONSTER) == 0);
@@ -336,11 +334,11 @@ public class SpaceInvadersMaVs extends SpaceInvaders implements TankControler, M
 	/**
 	 * Allow tank(s) to shoot Invaders
 	 */
-	public void tankShoot() // TODO NB Shoot
+	public void tankShoot()
 	{
 		int i, nb = this.countShoot();
 
-		if(nb < 2)
+		if(nb < DEFAULT_NB_SHOOTS_TANK)
 		{
 			for (i = 0; i < this.tanksAmount; i++)
 			{

@@ -19,8 +19,10 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 
 	/**
 	 * Initialize the game.<br/>
-	 * This is the default constructor. It set all to default value. If you don't want to use this default
-	 * characteristic use another constructor
+	 * This is the default constructor. It set 
+	 * all to default value. If you don't want 
+	 * to use this default characteristic use 
+	 * another constructor
 	 * @param d The display object to use.
 	 */
 	public SpaceInvadersMaVa(Display d)
@@ -104,7 +106,8 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	// ********************* Main ************************
 
 	/**
-	 * Main of the thread. It create to other threads for Invaders and for Tanks
+	 * Main of the thread. It create to other 
+	 * threads for Invaders and for Tanks
 	 */
 	public void run()
 	{
@@ -139,15 +142,13 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 		}
 	}
 
-	// TODO Comment
-	/**
-	 * @param k t
-	 */
+	@Override
 	public void setControleur(KeyListener k)
 	{
 		this.listenController = k;
 	}
 
+	@Override
 	public boolean working()
 	{
 		return (this.countAlive(this.elements, Type.TANK) == 0 || this.countAlive(this.elements, Type.MONSTER) == 0);
@@ -156,9 +157,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 
 	// [[[[[[[[[[[[[ Monsters behavior ]]]]]]]]]]]]]
 
-	/**
-	 * This method wait a time in function of sleepTime value and of monster alive's number
-	 */
+	@Override
 	public void waitLoop()
 	{
 		try
@@ -171,18 +170,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 		}
 	}
 
-	/**
-	 * This method allows to move Invaders once that is to say to right, down, or left. It follow scheme by itself :
-	 * <ul>
-	 * <li>right</li>
-	 * <li>down</li>
-	 * <li>left</li>
-	 * <li>down</li>
-	 * <li>right</li>
-	 * </ul>
-	 * @return (integer) this returns the wait time between each move. When it's equals to 0
-	 * 			the game is finished.
-	 */
+	@Override
 	public int monstersMove()
 	{
 		switch (this.etat)
@@ -241,9 +229,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 		return (int) (Math.sqrt(((double) countAlive(this.elements, Type.MONSTER) / this.monstersAmount)) + this.sleepTime);
 	}
 
-	/**
-	 * Method for shoot on tanks. It search the invaders just above tanks and shoot.
-	 */
+	@Override
 	public void monsterShoot()
 	{
 		int i, j;
@@ -291,8 +277,8 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	/**
 	 * Allows random tank control
 	 * 
-	 * @throws OutOfGridException
-	 *             Indicate when Tank want to go over the screen
+	 * @throws OutOfGridException Indicate when Tank want 
+	 * 							to go over the screen
 	 */
 	public void tankMoveRand() throws OutOfGridException
 	{
@@ -331,14 +317,12 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 		}
 	}
 
-	/**
-	 * Allow tank(s) to shoot Invaders
-	 */
-	public void tankShoot() // TODO NB Shoot
+	@Override
+	public void tankShoot()
 	{
 		int i, nb = this.countShoot();
 
-		if(nb < 5)
+		if(nb < DEFAULT_NB_SHOOTS_TANK)
 		{
 			for (i = 0; i < this.tanksAmount; i++)
 			{

@@ -6,6 +6,7 @@ package fr.iutvalence.java.projet.spaceinvaders;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+// TODO ADD Cheat?
 
 /**
  * This thread loop until game finished.
@@ -14,40 +15,86 @@ import java.awt.event.KeyListener;
  */
 public class TankListener extends Thread implements KeyListener
 {
+	//***************** Constant ******************
+	/**
+	 * The default move of a tank
+	 */
+	private static final int DEFAULT_MOVE = 2;
+	
+	/**
+	 * The default waitTime between each actions of tank.
+	 */
+	private static final int DEFAULT_WAIT_TIME = 50;
+	
+	//***************** Variable ******************
+	/**
+	 * The default move of a tank
+	 */
+	private final int move;
+	
+	/**
+	 * The default waitTime between each actions of tank.
+	 */
+	private final int waitTime;
+	
 	/**
 	 * Interface for using tanks object
 	 */
 	private TankControler tank;	
-// TODO Vitesse tank
-	
+
 	/**
-	 * 
+	 * If UP key is pressed
 	 */
 	private boolean Upressed;
+	
 	/**
-	 * 
+	 * If DOWN key is pressed
 	 */
 	private boolean Dpressed;
+	
 	/**
-	 * 
+	 * If LEFT key is pressed
 	 */
 	private boolean Lpressed;
+	
 	/**
-	 * 
+	 * If RIGHT key is pressed 
 	 */
 	private boolean Rpressed;
+	
 	/**
-	 * 
+	 * If SPACE key is pressed
 	 */
 	private boolean Tpressed;
 	
+	//***************** Constructors ******************
 	/**
-	 * Create a new Tank Object
-	 * @param tank Interface for controlling tank threw this class
+	 * Create a new Tank Object.
+	 * @param tank Interface for controlling tank threw this class.
 	 */
 	public TankListener(TankControler tank)
 	{
 		this.tank = tank;
+		this.waitTime = DEFAULT_WAIT_TIME;
+		this.move = DEFAULT_MOVE;
+		this.Lpressed = false;
+		this.Rpressed = false;
+		this.Tpressed = false;
+		this.Upressed = false;
+		this.Dpressed = false;
+	}
+	
+	/**
+	 * Create a new Tank Object.
+	 * @param tank Interface for controlling tank threw this class.
+	 * @param move The default move of tank.
+	 * @param waitTime The default waitTime between each actions of tank. 
+	 */
+	public TankListener(TankControler tank, int move, int waitTime)
+	{
+		this.tank = tank;
+		this.waitTime = waitTime;
+		this.move = move;
 		this.Lpressed = false;
 		this.Rpressed = false;
 		this.Tpressed = false;
@@ -68,17 +115,17 @@ public class TankListener extends Thread implements KeyListener
 				this.tank.tankShoot();
 			}
 			if(this.Rpressed)
-				this.tank.tankMove(new Coordinates(2,0));
+				this.tank.tankMove(new Coordinates(this.move,0));
 			if(this.Lpressed)
-				this.tank.tankMove(new Coordinates(-2,0));
+				this.tank.tankMove(new Coordinates(-this.move,0));
 			if(this.Upressed)
-				this.tank.tankMove(new Coordinates(0,2));
+				this.tank.tankMove(new Coordinates(0,this.move));
 			if(this.Dpressed)
-				this.tank.tankMove(new Coordinates(0,-2));
+				this.tank.tankMove(new Coordinates(0,-this.move));
 			
 			try
 			{
-				Thread.sleep(50);
+				Thread.sleep(this.waitTime);
 			}
 			catch (InterruptedException e)
 			{
@@ -87,6 +134,9 @@ public class TankListener extends Thread implements KeyListener
 		}
 	}
 
+	//***************** Methods ******************
+	
+	@Override
 	public void keyPressed(KeyEvent event) 
 	{
 		switch(event.getKeyCode())

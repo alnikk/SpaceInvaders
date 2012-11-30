@@ -8,8 +8,12 @@ import java.awt.event.KeyListener;
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Etat;
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Type;
 
+// TODO Constructors
+
 /**
- * This is abstract class who regroup all tools' methods and variable. This Generalize all SpaceInvadersMxVx games.
+ * This is abstract class who regroup 
+ * all tools' methods and variable. 
+ * This Generalize all SpaceInvadersMxVx games.
  * 
  * @author Gallet Guyon
  */
@@ -19,12 +23,14 @@ public abstract class SpaceInvaders
 
 	// [[[[[[[ Grid ]]]]]]]
 	/**
-	 * It defines the maximum (default) of X axis, if it's not set in constructor.
+	 * It defines the maximum (default) of X axis, 
+	 * if it's not set in constructor.
 	 */
 	private static final int X_GRID = 100;
 
 	/**
-	 * It defines the maximum (default) of Y axis, if it's not set in constructor.
+	 * It defines the maximum (default) of Y axis, 
+	 * if it's not set in constructor.
 	 */
 	private static final int Y_GRID = 100;
 
@@ -39,15 +45,29 @@ public abstract class SpaceInvaders
 	 * Default delta between 2 monsters
 	 */
 	private static final int DEFAULT_DELTA = 2;
+	
+	/**
+	 * This sets the spacing between
+	 * monsters and the bound at the
+	 * Beginning.
+	 */
+	private static final int DEFAULT_BEGIN_SPACING_MONSTERS = 20;
 
 	/**
-	 * This constant defines the step on the grid of a move
+	 * This constant defines the step on 
+	 * the grid of a move
 	 */
 	private static final Coordinates DEFAULT_MOVE = new Coordinates(5, 5);
+	
+	/**
+	 * This sets the number of shoots tanks can fire
+	 */
+	protected static final int DEFAULT_NB_SHOOTS_TANK = 4;
 
 	// [[[[[[[ Shoots ]]]]]]]
 	/**
-	 * This constant defines the step on the grid of a move
+	 * This constant defines the step on 
+	 * the grid of a move
 	 */
 	private static final Coordinates DEFAULT_MOVE_SHOOTS = new Coordinates(0, 2);
 
@@ -58,28 +78,35 @@ public abstract class SpaceInvaders
 
 	// [[[[[[[ Numerous ]]]]]]]
 	/**
-	 * It defines the number of monsters you have in tabMonster by default, if it's not set in constructor.
+	 * It defines the number of monsters you 
+	 * have in tabMonster by default, if it's 
+	 * not set in constructor.
 	 */
 	private static final int DEFAULT_MONSTERS_AMOUNT = 20;
 
 	/**
-	 * It defines the number of tank you have in tabTank by default, if it's not set in constructor.
+	 * It defines the number of tank you have 
+	 * in tabTank by default, if it's not set 
+	 * in constructor.
 	 */
 	private static final int DEFAULT_TANKS_AMOUNT = 1;
 
 	// [[[[[[[ Time ]]]]]]]
 	/**
-	 * This constant defines the default sleep time between each move of Invaders
+	 * This constant defines the default sleep 
+	 * time between each move of Invaders
 	 */
 	private static final int DEFAULT_SLEEP_TIME = 100;
 
 	/**
-	 * This is the minimum time between each move of Invaders
+	 * This is the minimum time between each move 
+	 * of Invaders
 	 */
 	private static final int DEFAULT_TIME_DIFFICULTY = 300; 
 
 	/**
-	 * This constant is the default acceleration (Not used for now)
+	 * This constant is the default acceleration 
+	 * (Not used for now)
 	 */
 	private static final int DEFAULT_ACCELERATION = 2;
 
@@ -101,7 +128,8 @@ public abstract class SpaceInvaders
 	private int delta;
 
 	/**
-	 * This constant defines the step on the grid of a move
+	 * This constant defines the step on the grid 
+	 * of a move
 	 */
 	protected Coordinates coorMove;
 
@@ -118,29 +146,34 @@ public abstract class SpaceInvaders
 
 	// [[[[[[[ Numerous ]]]]]]]
 	/**
-	 * It defines the number of monsters you have in tabMonster.
+	 * It defines the number of monsters you have
+	 * in tabMonster.
 	 */
 	protected int monstersAmount;
 
 	/**
-	 * It defines the number of tank you have in tabTank.
+	 * It defines the number of tank you have in 
+	 * tabTank.
 	 */
 	protected int tanksAmount;
 
 	// [[[[[[[ Time ]]]]]]]
 	/**
-	 * This variable is used to wait sleepTime millisecond between each loop
+	 * This variable is used to wait sleepTime 
+	 * millisecond between each loop
 	 */
 	protected int sleepTime;
 
 	/**
-	 * This is the minimum time between each move of Invaders
+	 * This is the minimum time between each 
+	 * move of Invaders
 	 */
-	protected int timeDifficulty = 300; // TODO constant
+	protected int timeDifficulty;
 
 	// TODO acceleration
 	/**
-	 * Not implemented yet It uses to accelerate sleepTime when invaders are less numerous
+	 * Not implemented yet It uses to accelerate 
+	 * sleepTime when invaders are less numerous
 	 */
 	@SuppressWarnings("unused")
 	private int acceleration;
@@ -179,22 +212,22 @@ public abstract class SpaceInvaders
 	protected boolean work;
 
 
-	// TODO Comment
 	/**
-	 * 
+	 * Interface for controlling display.
 	 */
 	protected Display display;
 
 	/**
-	 * 
+	 * Interface for controlling tank.
 	 */
 	protected KeyListener listenController;
 
 	// ************************** Constructors **************************//
 	/**
 	 * Initialize the game.<br/>
-	 * This is the default constructor. It set all to default value. If you don't want to use this default
-	 * characteristic use another constructor
+	 * This is the default constructor. It set all 
+	 * to default value. If you don't want to use 
+	 * this default characteristic use another constructor
 	 * @param d The display object to use.
 	 */
 	public SpaceInvaders(Display d)
@@ -337,14 +370,17 @@ public abstract class SpaceInvaders
 
 	/**
 	 * Initialize the table of movable elements.<br/>
-	 * Algorithm for set-up the monsters' position on the grid, and also Tank. It positions the tank of the middle of
-	 * the grid and the monster from the top left to the bottom right (like writing in English or French)
+	 * Algorithm for set-up the monsters' position 
+	 * on the grid, and also Tank. It positions the 
+	 * tank of the middle of the grid and the monster 
+	 * from the top left to the bottom right 
+	 * (like writing in English or French)
 	 * 
-	 * @param nbMonsters
-	 *            Set the number of monster (The maximum is set (to my mind) to 250, after I'm offload one's
-	 *            responsibilities)
-	 * @param nbTanks
-	 *            Set the number of tank [1-4]
+	 * @param nbMonsters Set the number of monster 
+	 * 					(The maximum is set (to my mind) 
+	 * 					to 250, after I'm offload one's
+	 *            		responsibilities)
+	 * @param nbTanks Set the number of tank [1-4]
 	 */
 	private void initTab(int nbMonsters, int nbTanks)
 	{
@@ -375,7 +411,7 @@ public abstract class SpaceInvaders
 				- (this.sizeMovable.getY() + this.delta));
 		for (i = nbTanks ; i < nbMonsters; i++)
 		{
-			if (monster_position.getX() + (this.delta + this.sizeMovable.getX()) <= this.maxSize.getX() - 20) // TODO CONSTANT
+			if (monster_position.getX() + (this.delta + this.sizeMovable.getX()) <= this.maxSize.getX() - DEFAULT_BEGIN_SPACING_MONSTERS)
 			{
 				try
 				{
@@ -397,10 +433,13 @@ public abstract class SpaceInvaders
 	}
 
 	/**
-	 * Method for know if any movable objects is out of grid.
+	 * Method for know if any movable objects is 
+	 * out of grid.
 	 * @param el Movable element to check
-	 * @return If return false, the element is in the grid.
-	 * @throws OutOfGridException If the element is out of grid, new exception raise.
+	 * @return If return false, the element is in 
+	 * the grid.
+	 * @throws OutOfGridException If the element is 
+	 * 				out of grid, new exception raise.
 	 */
 	protected boolean isOutOfGrid(Movable el) throws OutOfGridException
 	{
@@ -413,15 +452,14 @@ public abstract class SpaceInvaders
 	}
 
 	/**
-	 * This method allows to move all instances in table of delta coordinates.
+	 * This method allows to move all instances 
+	 * in table of delta coordinates.
 	 * 
-	 * @param delta
-	 *            The delta coordinates to move Invaders
-	 * @param tableToMove
-	 *            The table to move
+	 * @param delta The delta coordinates to move Invaders
+	 * @param tableToMove The table to move
 	 * @param t The type of elements to move
-	 * @throws OutOfGridException
-	 *             This method can return OutOfgridException if monsters does'nt be anymore in the grid.
+	 * @throws OutOfGridException This method can return OutOfgridException
+	 *             					if monsters does'nt be anymore in the grid.
 	 */
 	protected void moveTab(Coordinates delta, Movable[] tableToMove, Type t) throws OutOfGridException
 	{
@@ -466,9 +504,9 @@ public abstract class SpaceInvaders
 	/**
 	 * Search an empty cell in table given in argument.
 	 * 
-	 * @param table
-	 *            Table to search empty cell
-	 * @return return the index of empty cell in table. if it equals to -1 it didn't find
+	 * @param table Table to search empty cell
+	 * @return returns the index of empty cell in table. 
+	 * 			If it equals to -1 it didn't find
 	 */
 	private int searchEmptyCellFromMovableTable(Movable table[])
 	{
@@ -490,8 +528,7 @@ public abstract class SpaceInvaders
 	/**
 	 * This method count the number of alive Movable.
 	 * 
-	 * @param table
-	 *            The table to count alive Movable.
+	 * @param table The table to count alive Movable.
 	 * @param t The type of elements to move
 	 * @return The number of alive Invaders.
 	 */
@@ -510,8 +547,7 @@ public abstract class SpaceInvaders
 	/**
 	 * Make Movable given in arguments shoot
 	 * 
-	 * @param movable
-	 *            Invaders who have to shoot
+	 * @param movable Invaders who have to shoot
 	 */
 	protected void shootFrom(FiringMovable movable)
 	{
@@ -588,9 +624,13 @@ public abstract class SpaceInvaders
 	}
 
 	/**
-	 * This method tests if there is any collisions in all table declared.<br/>
-	 * Collision are tested between each table and not between elements of the same table.<br/>
-	 * If a Tank is touched by an enemy, work is set to false and the game is stopped by the main iteration.
+	 * This method tests if there is any collisions 
+	 * in all table declared.<br/>
+	 * Collision are tested between each table and 
+	 * not between elements of the same table.<br/>
+	 * If a Tank is touched by an enemy, work is set 
+	 * to false and the game is stopped by the main 
+	 * iteration.
 	 */
 	protected void testCollision()
 	{
@@ -630,7 +670,10 @@ public abstract class SpaceInvaders
 	public abstract void run();
 
 
-	// TODO Comment
+	/**
+	 * This method is used for killing
+	 * tank(s).
+	 */
 	protected void killTank()
 	{
 		int i;
@@ -642,6 +685,11 @@ public abstract class SpaceInvaders
 		}
 	}
 
+	/**
+	 * Allows to count the number of shoots there's
+	 * in the global elements table.
+	 * @return The number of shoot(s).
+	 */
 	public int countShoot()
 	{
 		int i, nb=0;
@@ -655,22 +703,6 @@ public abstract class SpaceInvaders
 				nb++;
 		}
 		return nb;
-	}
-
-	// TODO Debug
-	/**
-	 * Kill one instance of movable object
-	 * 
-	 * @param tabToKill
-	 *            Table where kill instance
-	 */
-	protected void kill(Movable[] tabToKill)
-	{
-		int i = 0, nbMonsters = tabToKill.length;
-
-		while (i < nbMonsters && (!tabToKill[i].isAlive()))
-			i++;
-		tabToKill[i].setAlive(false);
 	}
 }
 

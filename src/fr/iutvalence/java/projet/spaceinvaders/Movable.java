@@ -14,51 +14,40 @@ import fr.iutvalence.java.projet.spaceinvaders.enumerations.Type;
 public class Movable extends Element
 {
 	/**
-	 * The default height of the movable on the grid.<br/>
-	 */
-	private static final int HEIGHT = 10;
-
-	/**
-	 * The default width of the movable on the grid.<br/>
-	 */
-	private static final int WIDTH = 10;
-
-	/**
 	 * Status indicating if the movable object is still alive (a dead movable can no longer move).
 	 */
 	private boolean alive;
 
+	/**
+	 * Uses for shoot only. It sets the direction
+	 * of the shoot.
+	 * direction < 0 -> DOWN
+	 * direction > 0 -> UP
+	 * direction = 0 -> Other Movable (Tanks, Monsters, ..)
+	 */
 	private int direction; 
 
 	// *************** Constructor *****************
 
 	/**
-	 * This constructor creates a new living <tt>Movable</tt> object taking its coordinates.<br/>
+	 * This constructor creates a new living 
+	 * <tt>Movable</tt> object taking its 
+	 * coordinates.<br/>
 	 * Size is set by the default couple of (10,10)
 	 * 
-	 * @param i
-	 *            the initial position, as a Coordinate object
-	 * @param t The type of the Movable element. It cannot be Type.Bunker
-	 * @throws NegativeSizeException
-	 *             Throws Exception when the size coordinates are negative
-	 */
-	public Movable(Coordinates i, Type t, int direction) throws NegativeSizeException
-	{
-		super(new BoundingBox(i, new Coordinates(WIDTH, HEIGHT)), t);
-		this.alive = true;
-		this.direction = direction;
-	}
-
-	/**
-	 * This constructor creates a new living <tt>Movable</tt> object taking its coordinates and size as parameters.
-	 * 
-	 * @param i
-	 *            the initial position, as a Coordinate object
-	 * @param j
-	 *            the size, as a Coordinate object whose x means width and y means height.
-	 * @param t  The type of the Movable element. It cannot be Type.Bunker
-	 * @throws NegativeSizeException
-	 *             Throws Exception when the size coordinates are negative
+	 * @param i the initial position, as a 
+	 * 			Coordinate object
+	 * @param j the size of the Movable.
+	 * 			It can't be changed.
+	 * @param t The type of the Movable element.
+	 * 			It cannot be Type.Bunker
+	 * @param direction Uses for shoot only. It sets the direction of 
+	 * 					the shoot.<br/>
+	 * 					direction < 0 -> DOWN
+	 * 					direction > 0 -> UP
+	 * 					direction = 0 -> Other Movable (Tanks, Monsters, ..)
+	 * @throws NegativeSizeException Throws Exception 
+	 * 			when the size coordinates are negative
 	 */
 	public Movable(Coordinates i, Coordinates j, Type t, int direction) throws NegativeSizeException
 	{
@@ -72,15 +61,14 @@ public class Movable extends Element
 	// *************** Method *****************
 
 	/**
-	 * The move method changes the position of the object (the size is unchanged).<br/>
-	 * It translates the coordinates by deltas given as x and y.<br/>
+	 * The move method changes the position 
+	 * of the object (the size is unchanged).<br/>
+	 * It translates the coordinates by 
+	 * deltas given as x and y.<br/>
 	 * 
-	 * @param dx
-	 *            new coordinate relative on x axis
-	 * @param dy
-	 *            new coordinate relative on y axis
-	 * @throws NegativeSizeException
-	 *             If position is negative.
+	 * @param dx new coordinate relative on x axis
+	 * @param dy new coordinate relative on y axis
+	 * @throws NegativeSizeException If position is negative.
 	 */
 	public synchronized void move(int dx, int dy) throws NegativeSizeException
 	{
@@ -91,13 +79,13 @@ public class Movable extends Element
 	}
 
 	/**
-	 * The move method changes the position of the object (the size is unchanged).<br/>
-	 * It translates the coordinates by deltas given as x and y.<br/>
+	 * The move method changes the position 
+	 * of the object (the size is unchanged).<br/>
+	 * It translates the coordinates by deltas 
+	 * given as x and y.<br/>
 	 * 
-	 * @param delta
-	 *            new Coordinates
-	 * @throws NegativeSizeException
-	 *             If position is negative.
+	 * @param delta new Coordinates
+	 * @throws NegativeSizeException If position is negative.
 	 */
 	public synchronized void move(Coordinates delta) throws NegativeSizeException
 	{
@@ -108,14 +96,12 @@ public class Movable extends Element
 	}
 
 	/**
-	 * Method to move element to specific coordinates on the 2D grid.
+	 * Method to move element to specific 
+	 * coordinates on the 2D grid.
 	 * 
-	 * @param x
-	 *            the X coordinates to move the element.
-	 * @param y
-	 *            the Y coordinates to move the element.
-	 * @throws NegativeSizeException
-	 *             If position is negative.
+	 * @param x the X coordinates to move the element.
+	 * @param y the Y coordinates to move the element.
+	 * @throws NegativeSizeException If position is negative.
 	 */
 	public synchronized void moveTo(int x, int y) throws NegativeSizeException
 	{
@@ -126,12 +112,11 @@ public class Movable extends Element
 	}
 
 	/**
-	 * Method to move element to specific coordinates on the 2D grid.
+	 * Method to move element to specific 
+	 * coordinates on the 2D grid.
 	 * 
-	 * @param couple
-	 *            The new coordinates to move
-	 * @throws NegativeSizeException
-	 *             If position is negative.
+	 * @param couple The new coordinates to move
+	 * @throws NegativeSizeException If position is negative.
 	 */
 	public synchronized void moveTo(Coordinates couple) throws NegativeSizeException
 	{
@@ -159,7 +144,7 @@ public class Movable extends Element
 	 */
 	public int getDirection()
 	{
-		return direction;
+		return this.direction;
 	}
 
 	/**
@@ -172,8 +157,6 @@ public class Movable extends Element
 	{
 		this.alive = alive;
 	}
-
-
 
 	@Override
 	public String toString()

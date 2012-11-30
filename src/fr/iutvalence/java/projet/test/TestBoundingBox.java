@@ -8,15 +8,15 @@ import fr.iutvalence.java.projet.spaceinvaders.Coordinates;
 import fr.iutvalence.java.projet.spaceinvaders.NegativeSizeException;
 
 /**
- * @author alexandre
- * 
+ * This class contains main program for 
+ * testing ALL methods of BoundingBox class.
+ * @author Gallet Guyon
  */
 public class TestBoundingBox
 {
 
 	/**
-	 * @param args
-	 *            No arguments
+	 * @param args No arguments
 	 */
 	public static void main(String[] args)
 	{
@@ -116,6 +116,7 @@ public class TestBoundingBox
 		}
 		catch (NegativeSizeException e)
 		{
+			System.out.println(e.getNegativeCoordinatesException().toString());
 			e.printStackTrace();
 		}
 

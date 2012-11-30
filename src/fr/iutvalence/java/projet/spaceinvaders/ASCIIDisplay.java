@@ -4,10 +4,12 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.awt.event.KeyListener;
-
+// TODO All toStrings
+// TODO Trier method utile/inutile
 /**
  * This class allows to print the state of the game into console.<br/>
- * The display is in ASCII arts, that is to say drawable elements are represented by ASCII digit who can be changed by changing constants.<br/>
+ * The display is in ASCII arts, that is to say drawable elements are 
+ * represented by ASCII digit who can be changed by changing constants.<br/>
  * For example : invaders area is represented by many 'M' character.<br/>
  * This class implements Display
  * @see Display 
@@ -35,9 +37,17 @@ public class ASCIIDisplay implements Display
 	
 	/**
 	 * This constant used to fill shoots' area.<br/>
-	 * So you can identify shoots in the console screen by this letter.  
+	 * So you can identify shoots of monsters
+	 * in the console screen by this letter.  
 	 */
-	private static final char DEFAULT_LETTRE_SHOOTS = 'S';
+	private static final char DEFAULT_LETTRE_SHOOTS_MONSTERS = 'S';
+	
+	/**
+	 * This constant used to fill shoots' area.<br/>
+	 * So you can identify shoots of Tank in the console 
+	 * screen by this letter.  
+	 */
+	private static final char DEFAULT_LETTRE_SHOOTS_TANK = 'I';
 	
 	
 	//*********** Variable *******************
@@ -98,7 +108,10 @@ public class ASCIIDisplay implements Display
 								grid[x][y] = DEFAULT_LETTRE_MONTERS;
 								break;
 							case SHOOT:
-								grid[x][y] = DEFAULT_LETTRE_SHOOTS;
+								if(this.elements[i].getDirection() < 0)
+									grid[x][y] = DEFAULT_LETTRE_SHOOTS_MONSTERS;
+								else
+									grid[x][y] = DEFAULT_LETTRE_SHOOTS_TANK;
 								break;
 							default:
 								break;
@@ -115,8 +128,8 @@ public class ASCIIDisplay implements Display
 	/**
 	 * Print the grid to the screen
 	 * 
-	 * @param grid
-	 *            the 2D grid to print. It can be made by gridImage function.
+	 * @param grid the 2D grid to print. 
+	 * 			   It can be made by gridImage function.
 	 */
 	private void printGrid(char[][] grid)
 	{
@@ -141,9 +154,24 @@ public class ASCIIDisplay implements Display
 	}
 	
 	@Override
+	/**
+	 * The KeyListener is not used here.
+	 */
 	public void init(KeyListener e, Movable[] elements, Coordinates maxSize)
 	{
 		this.elements = elements;
 		this.maxSize = maxSize;
+	}
+
+	@Override
+	public void loose()
+	{
+		System.out.println("Loose !");		
+	}
+
+	@Override
+	public void win()
+	{
+		System.out.println("Win !");
 	}
 }

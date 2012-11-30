@@ -13,15 +13,18 @@ package fr.iutvalence.java.projet.spaceinvaders;
 public class OutOfGridException extends Exception
 {
 	/**
-	 * This variable is the bad coordinates. Exception due to this coordinates.
+	 * This variable is the bad coordinates. 
+	 * Exception due to this coordinates.
 	 */
 	private Movable bad;
 
 	/**
-	 * Constructors who defined the bad Coordinates to handle.
+	 * Constructors who defined 
+	 * the bad Coordinates to handle.
 	 * 
-	 * @param bad
-	 *            It is the bad coordinates to handle. It create an OutOfGridException
+	 * @param bad It is the bad coordinates 
+	 * 			to handle. It create an 
+	 * 			OutOfGridException
 	 */
 	public OutOfGridException(Movable bad)
 	{
@@ -30,7 +33,8 @@ public class OutOfGridException extends Exception
 	}
 
 	/**
-	 * Default Constructors, it create an OutOfGridException without handle it.
+	 * Default Constructors, it create 
+	 * an OutOfGridException without handle it.
 	 */
 	public OutOfGridException()
 	{

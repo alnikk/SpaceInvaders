@@ -1,8 +1,12 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
- * This class allows to use couple of integers as coordinates. (Can be too a couple of (Width,Height)<br/>
- * Once created, a Coordinate object is immutable (i.e. its state can not be changed)
+ * This class allows to use couple of
+ * integers as coordinates. (Can be 
+ * too a couple of (Width,Height)<br/>
+ * Once created, a Coordinate object 
+ * is immutable (i.e. its state can 
+ * not be changed).
  * 
  * @author Gallet Guyon
  */
@@ -19,12 +23,11 @@ public class Coordinates
 	private final int y;
 
 	/**
-	 * This constructor creates a new Coordinate <tt>(x,y)</tt> taking x and y as parameters.
+	 * This constructor creates a new Coordinate 
+	 * <tt>(x,y)</tt> taking x and y as parameters.
 	 * 
-	 * @param x
-	 *            the X coordinate of the object you create
-	 * @param y
-	 *            the Y coordinate of the object you create
+	 * @param x the X coordinate of the object you create
+	 * @param y the Y coordinate of the object you create
 	 */
 	public Coordinates(final int x, final int y)
 	{
@@ -36,9 +39,10 @@ public class Coordinates
 	/**
 	 * Translate Coordinates with other one.
 	 * 
-	 * @param c
-	 *            delta coordinates to add to existing one
-	 * @return Return Coordinates object translated of the argument.
+	 * @param c delta coordinates to add to 
+	 * 			existing one
+	 * @return Return Coordinates object 
+	 * 			translated of the argument.
 	 */
 	public Coordinates translate(Coordinates c)
 	{
@@ -46,7 +50,8 @@ public class Coordinates
 	}
 
 	/**
-	 * This method returns the value of X from object's coordinates
+	 * This method returns the value of X 
+	 * from object's coordinates
 	 * 
 	 * @return the value of X
 	 */
@@ -56,7 +61,8 @@ public class Coordinates
 	}
 
 	/**
-	 * This method returns the value of Y from object's coordinates
+	 * This method returns the value of Y 
+	 * from object's coordinates
 	 * 
 	 * @return the value of Y
 	 */
@@ -91,9 +97,10 @@ public class Coordinates
 	 * That is to say, the coordinates have to be the same :<br/>
 	 * x1 = x2 y1 = y2
 	 * 
-	 * @param obj
-	 *            the reference object with which to compare (supposed to be instance of Coordinate).
-	 * @return <tt>true</tt> if this object is the same as the <tt>obj</tt> argument; <tt>false</tt> otherwise.
+	 * @param obj the reference object with which to compare 
+	 * 				(supposed to be instance of Coordinate).
+	 * @return <tt>true</tt> if this object is the same as 
+	 * 			the <tt>obj</tt> argument; <tt>false</tt> otherwise.
 	 */
 	@Override
 	public boolean equals(Object obj)

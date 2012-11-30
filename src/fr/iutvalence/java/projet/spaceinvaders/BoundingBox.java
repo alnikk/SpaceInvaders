@@ -6,9 +6,13 @@ package fr.iutvalence.java.projet.spaceinvaders;
 
 /**
  * The BoundingBox class define area.<br/>
- * An area is defined by position (Coordinates) and size (Coordinates) on the grid. The coordinates have to be positive
- * or equals to 0 otherwise it returns NegativeCoordinates exception The 0 point is bottom left, the grid is represented
- * like this : <br/>
+ * An area is defined by position (Coordinates)
+ * and size (Coordinates) on the grid. 
+ * The coordinates have to be positive
+ * or equals to 0 otherwise it returns 
+ * NegativeCoordinates exception The 0
+ * point is bottom left, the grid is 
+ * represented like this : <br/>
  * <br/>
  * Y<br/>
  * ^<br/>
@@ -38,21 +42,21 @@ public class BoundingBox
 	private final Coordinates position;
 
 	/**
-	 * The size (width, height) of the bounding box, defined by a <tt>Coordinate</tt> object whose x means width and y
+	 * The size (width, height) of the bounding box, 
+	 * defined by a <tt>Coordinate</tt> object whose 
+	 * x means width and y
 	 * means height.
 	 */
 	private final Coordinates size;
 
 	// ********************* Constructor ************************
 	/**
-	 * Creates a new bounding box, whose position and size are given as parameters
+	 * Creates a new bounding box, whose position 
+	 * and size are given as parameters
 	 * 
-	 * @param position
-	 *            Set the position of the element in 2D grid
-	 * @param size
-	 *            Can't be change once it's allocated
-	 * @throws NegativeSizeException
-	 *             If size has at least one negative coordinate.
+	 * @param position Set the position of the element in 2D grid
+	 * @param size Can't be change once it's allocated
+	 * @throws NegativeSizeException If size has at least one negative coordinate.
 	 */
 	public BoundingBox(Coordinates position, Coordinates size) throws NegativeSizeException
 	{
@@ -66,10 +70,10 @@ public class BoundingBox
 	// **************** Method ************************
 
 	/**
-	 * Method to change position of the bottom-left corner of the bounding box
+	 * Method to change position of the 
+	 * bottom-left corner of the bounding box
 	 * 
-	 * @param newPosition
-	 *            (Coordinates) the new position to set
+	 * @param newPosition (Coordinates) the new position to set
 	 * @return New BoundingBox with new coordinates.
 	 */
 	public BoundingBox moveTo(Coordinates newPosition)
@@ -85,13 +89,13 @@ public class BoundingBox
 	}
 
 	/**
-	 * Method to translate position of the bottom-left corner of the bounding box
+	 * Method to translate position of 
+	 * the bottom-left corner of the bounding box
 	 * 
-	 * @param delta
-	 *            (Coordinates) take the old coordinates and add delta to it.
+	 * @param delta (Coordinates) take the old coordinates 
+	 * 				and add delta to it.
 	 * @return New BoundingBox with new coordinates.
-	 * @throws NegativeSizeException
-	 *             If position is negative.
+	 * @throws NegativeSizeException If position is negative.
 	 */
 	public BoundingBox translate(Coordinates delta) throws NegativeSizeException
 	{
@@ -101,11 +105,9 @@ public class BoundingBox
 	/**
 	 * Method to change the size of the bounding box
 	 * 
-	 * @param newSize
-	 *            (Coordinates) the new size to set
+	 * @param newSize (Coordinates) the new size to set
 	 * @return New BoundingBox with new size.
-	 * @throws NegativeSizeException
-	 *             If the size is negative.
+	 * @throws NegativeSizeException If the size is negative.
 	 */
 	public BoundingBox reSize(Coordinates newSize) throws NegativeSizeException
 	{
@@ -115,9 +117,9 @@ public class BoundingBox
 	/**
 	 * Method to check if a point is contained in this bounding box.
 	 * 
-	 * @param point
-	 *            Coordinates of the point to check.
-	 * @return <tt>true</tt> if the point is in the area, <tt>false</tt> otherwise.
+	 * @param point Coordinates of the point to check.
+	 * @return <tt>true</tt> if the point is in the area,
+	 * 		   <tt>false</tt> otherwise.
 	 */
 	public boolean pointIn(Coordinates point)
 	{
@@ -134,9 +136,9 @@ public class BoundingBox
 	/**
 	 * Intersection of the current bounding box and another
 	 * 
-	 * @param bb
-	 *            Bounding box to calculate intersection with.
-	 * @return Return the bounding box resulting of this one and bb intersection if it exists, null otherwise.
+	 * @param bb Bounding box to calculate intersection with.
+	 * @return Return the bounding box resulting of this 
+	 * 			one and bb intersection if it exists, null otherwise.
 	 */
 	public BoundingBox intersection(BoundingBox bb)
 	{
@@ -192,9 +194,13 @@ public class BoundingBox
 	// ***************** Getters and Setters ************************
 
 	/**
-	 * Return the size of the bottom-left corner of the bounding box as a couple (width,height).
+	 * Return the size of the bottom-left
+	 * corner of the bounding box as a 
+	 * couple (width,height).
 	 * 
-	 * @return the size of the bottom-left corner of the bounding box as a couple (width,height).
+	 * @return the size of the bottom-left 
+	 * 			corner of the bounding box as 
+	 * 			a couple (width,height).
 	 */
 	public Coordinates getSize()
 	{
@@ -202,9 +208,13 @@ public class BoundingBox
 	}
 
 	/**
-	 * Getter to return position of the bottom-left corner of the bounding box.
+	 * Getter to return position of 
+	 * the bottom-left corner of the 
+	 * bounding box.
 	 * 
-	 * @return the position of the bottom-left corner of the bounding box.
+	 * @return the position of the 
+	 * bottom-left corner of the 
+	 * bounding box.
 	 */
 	public Coordinates getPosition()
 	{
@@ -221,8 +231,11 @@ public class BoundingBox
 	}
 
 	/**
-	 * Indicates whether some other object is "equal to" this one.<br/>
-	 * That is to say, the BoundingBox have to be the same (equals size and positions)<br/>
+	 * Indicates whether some other 
+	 * object is "equal to" this one.<br/>
+	 * That is to say, the BoundingBox 
+	 * have to be the same (equals size 
+	 * and positions)<br/>
 	 */
 	@Override
 	public boolean equals(Object obj)

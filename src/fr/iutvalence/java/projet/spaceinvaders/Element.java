@@ -6,8 +6,10 @@ package fr.iutvalence.java.projet.spaceinvaders;
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Type;
 
 /**
- * The element Class is the basic class of all drowable elements on the grid.<br/>
- * It defines all stuff needed for position and collision.
+ * The element Class is the basic class of 
+ * all drowable elements on the grid.<br/>
+ * It defines all stuff needed for position 
+ * and collision.
  * 
  * @author Guyon Gallet
  */
@@ -25,11 +27,11 @@ public abstract class Element
 
 	// ************* Constructor ***************
 	/**
-	 * This constructor sets the area of the grid filled by the element .<br/>
+	 * This constructor sets the area of the grid 
+	 * filled by the element .<br/>
 	 * It defines the BoundingBox of the element.
 	 * 
-	 * @param area
-	 *            The BoundingBox of the element to create.
+	 * @param area The BoundingBox of the element to create.
 	 * @param t The type of the element
 	 */
 	public Element(BoundingBox area, Type t)
@@ -41,12 +43,18 @@ public abstract class Element
 
 	// ************* Methods **************
 	/**
-	 * Calculate the overlapping of two Elements' Object. The compute is made through bounding box. The first element to
-	 * compare is the current element and the second one is given as argument.
+	 * Calculate the overlapping of two 
+	 * Elements' Object. The compute is 
+	 * made through bounding box. The first 
+	 * element to compare is the current 
+	 * element and the second one is given 
+	 * as argument.
 	 * 
-	 * @param e
-	 *            The element to compute the overlapping with.
-	 * @return (BoundingBox) the intersection of both elements if it exists, <tt>null</tt> otherwise
+	 * @param e The element to compute the 
+	 * 			overlapping with.
+	 * @return (BoundingBox) the intersection 
+	 * 			of both elements if it exists, 
+	 * 			<tt>null</tt> otherwise
 	 */
 	public BoundingBox overlapping(Element e)
 	{
@@ -66,10 +74,10 @@ public abstract class Element
 	}
 
 	/**
-	 * This method allows to modify the location and size (BoundingBox) of the element.
+	 * This method allows to modify the location 
+	 * and size (BoundingBox) of the element.
 	 * 
-	 * @param area
-	 *            bounding box of the element
+	 * @param area bounding box of the element
 	 */
 	protected void setArea(BoundingBox area)
 	{

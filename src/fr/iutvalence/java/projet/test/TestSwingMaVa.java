@@ -3,9 +3,9 @@
  */
 package fr.iutvalence.java.projet.test;
 
-import fr.iutvalence.java.projet.spaceinvaders.ASCIIDisplay;
 import fr.iutvalence.java.projet.spaceinvaders.MonstersThread;
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMaVa;
+import fr.iutvalence.java.projet.spaceinvaders.SwingDisplay;
 import fr.iutvalence.java.projet.spaceinvaders.TankListener;
 
 /**
@@ -13,18 +13,19 @@ import fr.iutvalence.java.projet.spaceinvaders.TankListener;
  * testing SpaceInvaders class with thread for
  * moving monsters and tank control, and 
  * main thread who handle shoots and end of game.
- * ASCII graphics.
+ * Swing graphics.
  * @author Gallet Guyon
  */
-public class TestSpaceInvadersMaVa
+public class TestSwingMaVa
 {
-	// TODO Constant
+	// TODO constant
 	/**
-	 * @param args No arguments
+	 * This class test space invaders model MaVa with Swing controls and graphics
+	 * @param args No
 	 */
-	public static void main(String[] args)
+	public static void main(String[] args) 
 	{
-		ASCIIDisplay d = new ASCIIDisplay();
+		SwingDisplay d = new SwingDisplay(400,400);
 		SpaceInvadersMaVa si = new SpaceInvadersMaVa(d);
 		TankListener tank = new TankListener(si);
 		MonstersThread monsters = new MonstersThread("Monsters", si, 1000);
@@ -34,5 +35,4 @@ public class TestSpaceInvadersMaVa
 		si.run();
 		System.out.println(si);
 	}
-
 }

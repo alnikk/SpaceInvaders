@@ -14,15 +14,17 @@ package fr.iutvalence.java.projet.spaceinvaders;
 public class NegativeSizeException extends Exception
 {
 	/**
-	 * This variable is the bad coordinates. Exception due to this coordinates.
+	 * This variable is the bad coordinates. 
+	 * Exception due to this coordinates.
 	 */
 	private Coordinates bad;
 
 	/**
-	 * Create an exception related to specified negative coordinates
+	 * Create an exception related to specified
+	 * negative coordinates
 	 * 
-	 * @param bad
-	 *            negative coordinates related to the exception
+	 * @param bad negative coordinates related 
+	 * 			to the exception
 	 */
 	public NegativeSizeException(Coordinates bad)
 	{
@@ -40,9 +42,11 @@ public class NegativeSizeException extends Exception
 	}
 
 	/**
-	 * Getter for the negative coordinates related to the exception
+	 * Getter for the negative coordinates 
+	 * related to the exception
 	 * 
-	 * @return negative coordinates related to the exception
+	 * @return negative coordinates related 
+	 * 			to the exception
 	 */
 	public Coordinates getNegativeCoordinatesException()
 	{

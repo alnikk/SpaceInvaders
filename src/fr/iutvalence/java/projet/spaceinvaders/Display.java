@@ -7,7 +7,8 @@ import java.awt.event.KeyListener;
 
 
 /**
- * This interface defines the common primitive of all view class.<br/>
+ * This interface defines the common 
+ * primitive of all view class.<br/>
  * 
  * @author Guyon Gallet
  */
@@ -25,8 +26,16 @@ public interface Display
 	 * @param maxSize (Coordinates) The maximum coordinates of the grid.
 	 */
 	public void init(KeyListener e, Movable elements[], Coordinates maxSize);
-
+	
+	/**
+	 * Send message to display, for do appropriate informations.
+	 * In this case, the player loose.
+	 */
 	public void loose();
 
+	/**
+	 * Send message to display, for do appropriate informations.
+	 * In this case, the player win.
+	 */
 	public void win();
 }
