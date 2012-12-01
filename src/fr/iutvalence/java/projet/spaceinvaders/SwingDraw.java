@@ -92,11 +92,11 @@ public class SwingDraw extends JPanel
 		g.setColor(Color.blue);
 		if(this.end == 1)
 		{
-			g.drawString("WIN !", 100, 100);
+			g.drawString("WIN !", 150,200);
 		}
 		if(this.end == -1)
 		{
-			g.drawString("LOOSE !",100, 100);
+			g.drawString("LOOSE !",150, 200);
 		}
 	}
 

@@ -6,7 +6,6 @@ package fr.iutvalence.java.projet.spaceinvaders;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-// TODO ADD Cheat?
 
 /**
  * This thread loop until game finished.
@@ -67,6 +66,11 @@ public class TankListener extends Thread implements KeyListener
 	 */
 	private boolean Tpressed;
 	
+	/**
+	 * If cheat key is pressed
+	 */
+	private boolean cheat;
+	
 	//***************** Constructors ******************
 	/**
 	 * Create a new Tank Object.
@@ -118,10 +122,13 @@ public class TankListener extends Thread implements KeyListener
 				this.tank.tankMove(new Coordinates(this.move,0));
 			if(this.Lpressed)
 				this.tank.tankMove(new Coordinates(-this.move,0));
-			if(this.Upressed)
-				this.tank.tankMove(new Coordinates(0,this.move));
-			if(this.Dpressed)
-				this.tank.tankMove(new Coordinates(0,-this.move));
+			if(this.cheat)
+			{
+				if(this.Upressed)
+					this.tank.tankMove(new Coordinates(0,this.move));
+				if(this.Dpressed)
+					this.tank.tankMove(new Coordinates(0,-this.move));
+			}
 			
 			try
 			{
@@ -151,11 +158,18 @@ public class TankListener extends Thread implements KeyListener
 				this.Lpressed = true;
 				break;
 			case KeyEvent.VK_UP:
-				//this.Upressed = true;
+				this.Upressed = true;
 				break;
 			case KeyEvent.VK_DOWN:
-				//this.Dpressed = true;
+				this.Dpressed = true;
 				break;
+			case KeyEvent.VK_CONTROL:
+				this.cheat = true;
+				break;
+			case KeyEvent.VK_ALT:
+				this.cheat = false;
+				break;
+				
 		}
 	}
 

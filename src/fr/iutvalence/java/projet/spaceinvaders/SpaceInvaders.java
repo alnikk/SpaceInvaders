@@ -51,7 +51,7 @@ public abstract class SpaceInvaders
 	 * monsters and the bound at the
 	 * Beginning.
 	 */
-	private static final int DEFAULT_BEGIN_SPACING_MONSTERS = 20;
+	private static final int DEFAULT_BEGIN_SPACING_MONSTERS = 10;
 
 	/**
 	 * This constant defines the step on 
@@ -62,7 +62,7 @@ public abstract class SpaceInvaders
 	/**
 	 * This sets the number of shoots tanks can fire
 	 */
-	protected static final int DEFAULT_NB_SHOOTS_TANK = 4;
+	protected static final int DEFAULT_NB_SHOOTS_TANK = 1;
 
 	// [[[[[[[ Shoots ]]]]]]]
 	/**
@@ -74,7 +74,7 @@ public abstract class SpaceInvaders
 	/**
 	 * This constant defines the size of shoot
 	 */
-	private static final Coordinates DEFAULT_SIZE_SHOOT = new Coordinates(2, 2);
+	private static final Coordinates DEFAULT_SIZE_SHOOT = new Coordinates(1, 5);
 
 	// [[[[[[[ Numerous ]]]]]]]
 	/**
@@ -82,7 +82,7 @@ public abstract class SpaceInvaders
 	 * have in tabMonster by default, if it's 
 	 * not set in constructor.
 	 */
-	private static final int DEFAULT_MONSTERS_AMOUNT = 20;
+	private static final int DEFAULT_MONSTERS_AMOUNT = 39;
 
 	/**
 	 * It defines the number of tank you have 
@@ -96,13 +96,13 @@ public abstract class SpaceInvaders
 	 * This constant defines the default sleep 
 	 * time between each move of Invaders
 	 */
-	private static final int DEFAULT_SLEEP_TIME = 100;
+	private static final int DEFAULT_SLEEP_TIME = 1000;
 
 	/**
 	 * This is the minimum time between each move 
 	 * of Invaders
 	 */
-	private static final int DEFAULT_TIME_DIFFICULTY = 300; 
+	private static final int DEFAULT_TIME_DIFFICULTY = 500; 
 
 	/**
 	 * This constant is the default acceleration 
@@ -576,7 +576,7 @@ public abstract class SpaceInvaders
 	protected void moveShoots()
 	{
 		int i;
-
+		//Movable fire;
 		for (i = 0; i < this.elements.length; i++)
 		{
 			if (this.elements[i] != null && this.elements[i].isAlive() && this.elements[i].getType() == Type.SHOOT)
@@ -586,13 +586,15 @@ public abstract class SpaceInvaders
 					try
 					{
 						if(!this.isOutOfGrid(this.elements[i]))
+						{
 							try
-						{
+							{
 								this.elements[i].move(new Coordinates(0, -this.moveShoots.getY()));
-						}
-						catch (NegativeSizeException e)
-						{
-							e.printStackTrace();
+							}
+							catch (NegativeSizeException e)
+							{
+								e.printStackTrace();
+							}
 						}
 					}
 					catch (OutOfGridException e)
@@ -608,6 +610,16 @@ public abstract class SpaceInvaders
 							try
 						{
 								this.elements[i].move(new Coordinates(0, this.moveShoots.getY()));
+								/*fire = new Movable(new Coordinates(this.elements[i].getArea().getPosition().getX() +2,this.elements[i].getArea().getPosition().getY()),
+										this.elements[i].getArea().getSize(), Type.SHOOT, 1);
+								int index = this.searchEmptyCellFromMovableTable(this.elements);
+								if(index != -1)
+									this.elements[index] = fire;
+								fire = new Movable(new Coordinates(this.elements[i].getArea().getPosition().getX() -2,this.elements[i].getArea().getPosition().getY()),
+										this.elements[i].getArea().getSize(), Type.SHOOT, 1);
+								index = this.searchEmptyCellFromMovableTable(this.elements);
+								if(index != -1)
+									this.elements[index] = fire;*/
 						}
 						catch (NegativeSizeException e)
 						{

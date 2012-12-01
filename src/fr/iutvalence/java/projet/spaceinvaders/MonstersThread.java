@@ -14,6 +14,11 @@ public class MonstersThread extends Thread
 	// ***************** Variable *************************
 
 	/**
+	 * It sets the number of monsters' thread loop before invaders shoots.
+	 */
+	private static final int DEFAULT_NB_LOOP_SHOOT = 2;
+
+	/**
 	 * Delay between each moves of Invaders. 
 	 * When it's equals to 0 the game is finished
 	 */
@@ -24,8 +29,25 @@ public class MonstersThread extends Thread
 	 */
 	private MonsterControler monster;
 	
+	/**
+	 * It sets the number of monsters' thread loop before invaders shoots.
+	 */
+	private int nbLoopShoot = DEFAULT_NB_LOOP_SHOOT;
+	
 	// ***************** Constructors *************************
-	// TODO Stop thread properly
+	
+	/**
+	 * This constructors set the variable needed by the thread.
+	 * 
+	 * @param monster Interface for control Monster threw this class 
+	 */
+	public MonstersThread(MonsterControler monster)
+	{
+		this.delay = 10;
+		this.monster = monster;
+		this.nbLoopShoot = DEFAULT_NB_LOOP_SHOOT;
+	}
+	
 	/**
 	 * This constructors set the variable needed by the thread.
 	 * 
@@ -38,6 +60,23 @@ public class MonstersThread extends Thread
 		super(nom);
 		this.delay = initialDelay;
 		this.monster = monster;
+		this.nbLoopShoot = DEFAULT_NB_LOOP_SHOOT;
+	}
+	
+	/**
+	 * This constructors set the variable needed by the thread.
+	 * 
+	 * @param nom Name of the Thread
+	 * @param monster Interface for control Monster threw this class
+	 * @param initialDelay The initial delay between each moves of monsters 
+	 * @param nbLoopShoot It sets the number of monsters' thread loop before invaders shoots.
+	 */
+	public MonstersThread(String nom, MonsterControler monster, int initialDelay, int nbLoopShoot)
+	{
+		super(nom);
+		this.delay = initialDelay;
+		this.monster = monster;
+		this.nbLoopShoot = nbLoopShoot;
 	}
 
 	// ******************** Main ***********************
@@ -51,13 +90,13 @@ public class MonstersThread extends Thread
 	{
 		while (this.delay > 0)
 		{			
-			// TODO Shoot after some loop and not right now
-			// Constant ? configure it? Constructor set-it?
 			this.delay = this.monster.monstersMove();
 			
-			this.monster.monsterShoot();
+			if(this.nbLoopShoot <= 0)
+				this.monster.monsterShoot();
 			
 			this.monster.waitLoop();
+			this.nbLoopShoot--;
 		}
 	}
 }

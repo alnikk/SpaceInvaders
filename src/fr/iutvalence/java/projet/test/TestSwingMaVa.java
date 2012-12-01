@@ -27,7 +27,7 @@ public class TestSwingMaVa
 		SwingDisplay d = new SwingDisplay(400,400);
 		SpaceInvadersMaVa si = new SpaceInvadersMaVa(d);
 		TankListener tank = new TankListener(si);
-		MonstersThread monsters = new MonstersThread("Monsters", si, 1000);
+		MonstersThread monsters = new MonstersThread(si);
 		
 		tank.start();
 		monsters.start();
