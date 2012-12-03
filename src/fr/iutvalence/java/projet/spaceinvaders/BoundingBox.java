@@ -238,6 +238,7 @@ public class BoundingBox
 	 * and positions)<br/>
 	 */
 	@Override
+	// FIXME il faut redéfinir hashCode aussi !
 	public boolean equals(Object obj)
 	{
 		if (this == obj)
