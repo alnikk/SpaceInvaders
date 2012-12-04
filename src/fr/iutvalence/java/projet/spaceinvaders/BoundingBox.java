@@ -227,7 +227,7 @@ public class BoundingBox
 	@Override
 	public String toString()
 	{
-		return "BoundingBox [position=" + this.position + ", size=" + this.size + "]";
+		return "position = " + this.position + ", size = " + this.size;
 	}
 
 	/* (non-Javadoc)
@@ -238,8 +238,8 @@ public class BoundingBox
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((position == null) ? 0 : position.hashCode());
-		result = prime * result + ((size == null) ? 0 : size.hashCode());
+		result = prime * result + ((this.position == null) ? 0 : this.position.hashCode());
+		result = prime * result + ((this.size == null) ? 0 : this.size.hashCode());
 		return result;
 	}
 

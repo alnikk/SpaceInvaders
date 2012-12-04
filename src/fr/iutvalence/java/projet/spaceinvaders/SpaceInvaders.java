@@ -4,6 +4,7 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.awt.event.KeyListener;
+import java.util.Arrays;
 
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Etat;
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Type;
@@ -702,7 +703,23 @@ public abstract class SpaceInvaders
 		}
 		return nb;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "SpaceInvaders\n" +
+				"Size of the grid : " + this.maxSize + "\n" +
+				"Monsters amount = " + this.monstersAmount + ", Tanks amount = " + this.tanksAmount + "\n" +
+				"Time between each actions of monsters : " + this.sleepTime + ", Time Difficulty=" + this.timeDifficulty + "\n" +
+				"Liste of elements : " + Arrays.toString(this.elements) + "\n" +
+				"State of Invaders : " + this.etat + "\n" +
+				"Game finished : " + this.work + "\n" +
+				"Amount of tank alive : " + this.countAlive(this.elements, Type.TANK) + "\n" +
+				"Amoutn of invaders alive : " + this.countAlive(this.elements, Type.MONSTER) + "\n";
+	}
+	
+	
+	
+	
+	
 }
-
-
-
