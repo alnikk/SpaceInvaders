@@ -5,7 +5,6 @@ package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.awt.event.KeyListener;
 // TODO All toStrings
-// TODO Trier method utile/inutile
 /**
  * This class allows to print the state of the game into console.<br/>
  * The display is in ASCII arts, that is to say drawable elements are 

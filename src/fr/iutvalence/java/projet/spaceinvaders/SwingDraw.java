@@ -88,7 +88,7 @@ public class SwingDraw extends JPanel
 				}
 			}
 		}
-		g.setFont(new Font("Century Schoolbook L",Font.ITALIC,30)); // TODO better display
+		g.setFont(new Font("Century Schoolbook L",Font.ITALIC,30));
 		g.setColor(Color.blue);
 		if(this.end == 1)
 		{

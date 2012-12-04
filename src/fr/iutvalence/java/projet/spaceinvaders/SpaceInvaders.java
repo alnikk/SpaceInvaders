@@ -7,9 +7,6 @@ import java.awt.event.KeyListener;
 
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Etat;
 import fr.iutvalence.java.projet.spaceinvaders.enumerations.Type;
-
-// TODO Constructors
-
 /**
  * This is abstract class who regroup 
  * all tools' methods and variable. 
@@ -249,16 +246,14 @@ public abstract class SpaceInvaders
 
 	/**
 	 * Initialize the game.<br/>
-	 * This constructor sets the X axis to 300, and the Y axis to 300 too.<br/>
-	 * If you don't want to use this default characteristic use another constructors
-	 * 
-	 * @param nbMonsters
-	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
-	 * @param nbTanks
-	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
+	 * This is the default constructor. It set all 
+	 * to default value. If you don't want to use 
+	 * this default characteristic use another constructor
 	 * @param d The display object to use.
+	 * @param nbMonsters Number of monsters
+	 * @param nbTanks Number of Tanks
 	 */
-	public SpaceInvaders(int nbMonsters, int nbTanks, Display d)
+	public SpaceInvaders(Display d, int nbMonsters, int nbTanks)
 	{
 		this.maxSize = new Coordinates(X_GRID, Y_GRID);
 		this.sizeMovable = DEFAULT_SIZE;
@@ -277,19 +272,17 @@ public abstract class SpaceInvaders
 
 	/**
 	 * Initialize the game.<br/>
-	 * This constructor uses default value of acceleration
-	 * 
-	 * @param nbMonsters
-	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
-	 * @param nbTanks
-	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
-	 * @param max
-	 *            Set the Max point of the grid (Coordinates)
+	 * This is the default constructor. It set all 
+	 * to default value. If you don't want to use 
+	 * this default characteristic use another constructor
 	 * @param d The display object to use.
+	 * @param nbMonsters Number of monsters
+	 * @param nbTanks Number of Tanks
+	 * @param sizeMax Set the max size of the grid
 	 */
-	public SpaceInvaders(int nbMonsters, int nbTanks, Coordinates max, Display d)
+	public SpaceInvaders(Display d, int nbMonsters, int nbTanks, Coordinates sizeMax)
 	{
-		this.maxSize = max;
+		this.maxSize = sizeMax;
 		this.sizeMovable = DEFAULT_SIZE;
 		this.delta = DEFAULT_DELTA;
 		this.coorMove = DEFAULT_MOVE;
@@ -306,21 +299,18 @@ public abstract class SpaceInvaders
 
 	/**
 	 * Initialize the game.<br/>
-	 * This constructor no default value.
-	 * 
-	 * @param nbMonsters
-	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
-	 * @param nbTanks
-	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
-	 * @param max
-	 *            Set the Max point of the grid (Coordinates)
-	 * @param sleepTime
-	 *            Set the time between each move of monster (in milliseconds)
+	 * This is the default constructor. It set all 
+	 * to default value. If you don't want to use 
+	 * this default characteristic use another constructor
 	 * @param d The display object to use.
+	 * @param nbMonsters Number of monsters
+	 * @param nbTanks Number of Tanks
+	 * @param sizeMax Set the max size of the grid
+	 * @param sleep set the wait before monsters' actions
 	 */
-	public SpaceInvaders(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, Display d)
+	public SpaceInvaders(Display d, int nbMonsters, int nbTanks, Coordinates sizeMax, int sleep)
 	{
-		this.maxSize = max;
+		this.maxSize = sizeMax;
 		this.sizeMovable = DEFAULT_SIZE;
 		this.delta = DEFAULT_DELTA;
 		this.coorMove = DEFAULT_MOVE;
@@ -328,7 +318,7 @@ public abstract class SpaceInvaders
 		this.sizeShoots = DEFAULT_SIZE_SHOOT;
 		this.monstersAmount = nbMonsters;
 		this.tanksAmount = nbTanks;
-		this.sleepTime = sleepTime;
+		this.sleepTime = sleep;
 		this.acceleration = DEFAULT_ACCELERATION;
 		this.timeDifficulty = DEFAULT_TIME_DIFFICULTY;
 		this.display = d;
@@ -337,23 +327,19 @@ public abstract class SpaceInvaders
 
 	/**
 	 * Initialize the game.<br/>
-	 * This constructor uses no default value.
-	 * 
-	 * @param nbMonsters
-	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
-	 * @param nbTanks
-	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
-	 * @param max
-	 *            Set the Max point of the grid (Coordinates)
-	 * @param sleepTime
-	 *            Set the time between each move of monster (in milliseconds)
-	 * @param acceleration
-	 *            Set the acceleration of Invaders. (not uses for now)
+	 * This is the default constructor. It set all 
+	 * to default value. If you don't want to use 
+	 * this default characteristic use another constructor
 	 * @param d The display object to use.
+	 * @param nbMonsters Number of monsters
+	 * @param nbTanks Number of Tanks
+	 * @param sizeMax Set the max size of the grid
+	 * @param sleep set the wait before monsters' actions
+	 * @param acceleration Set the accelerations of the shoots
 	 */
-	public SpaceInvaders(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, int acceleration, Display d)
+	public SpaceInvaders(Display d, int nbMonsters, int nbTanks, Coordinates sizeMax, int sleep, int acceleration)
 	{
-		this.maxSize = max;
+		this.maxSize = sizeMax;
 		this.sizeMovable = DEFAULT_SIZE;
 		this.delta = DEFAULT_DELTA;
 		this.coorMove = DEFAULT_MOVE;
@@ -361,7 +347,7 @@ public abstract class SpaceInvaders
 		this.sizeShoots = DEFAULT_SIZE_SHOOT;
 		this.monstersAmount = nbMonsters;
 		this.tanksAmount = nbTanks;
-		this.sleepTime = sleepTime;
+		this.sleepTime = sleep;
 		this.acceleration = acceleration;
 		this.timeDifficulty = DEFAULT_TIME_DIFFICULTY;
 		this.display = d;

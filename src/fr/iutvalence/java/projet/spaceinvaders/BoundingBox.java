@@ -230,6 +230,19 @@ public class BoundingBox
 		return "BoundingBox [position=" + this.position + ", size=" + this.size + "]";
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((position == null) ? 0 : position.hashCode());
+		result = prime * result + ((size == null) ? 0 : size.hashCode());
+		return result;
+	}
+
 	/**
 	 * Indicates whether some other 
 	 * object is "equal to" this one.<br/>
@@ -238,7 +251,6 @@ public class BoundingBox
 	 * and positions)<br/>
 	 */
 	@Override
-	// FIXME il faut redéfinir hashCode aussi !
 	public boolean equals(Object obj)
 	{
 		if (this == obj)
@@ -255,5 +267,5 @@ public class BoundingBox
 		}
 		BoundingBox other = (BoundingBox) obj; // Cast obj
 		return ((this.position.equals(other.position)) && (this.size.equals(other.size)));
-	}
+	}	
 }

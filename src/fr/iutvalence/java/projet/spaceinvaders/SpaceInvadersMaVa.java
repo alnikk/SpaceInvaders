@@ -43,7 +43,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	 */
 	public SpaceInvadersMaVa(int nbMonsters, int nbTanks, Display d)
 	{
-		super(nbMonsters, nbTanks, d);
+		super(d,nbMonsters, nbTanks);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	 */
 	public SpaceInvadersMaVa(int nbMonsters, int nbTanks, Coordinates max, Display d)
 	{
-		super(nbMonsters, nbTanks, max, d);
+		super(d, nbMonsters, nbTanks, max);
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	 */
 	public SpaceInvadersMaVa(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, Display d)
 	{
-		super(nbMonsters, nbTanks, max, sleepTime, d);
+		super(d, nbMonsters, nbTanks, max, sleepTime);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	 */
 	public SpaceInvadersMaVa(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, int acceleration, Display d)
 	{
-		super(nbMonsters, nbTanks, max, sleepTime, acceleration, d);
+		super(d, nbMonsters, nbTanks, max, sleepTime, acceleration);
 	}
 
 	// ********************* Main ************************
