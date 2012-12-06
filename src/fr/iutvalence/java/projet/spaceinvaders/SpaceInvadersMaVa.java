@@ -135,12 +135,14 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 			if (this.countAlive(this.elements, Type.TANK) == 0)
 			{
 				this.display.loose();
+				this.score.showSheet();
 				break;
 			}
 			if(this.countAlive(this.elements, Type.MONSTER) == 0)
 			{
 				this.display.win();
 				this.score.save(this.name, System.currentTimeMillis() - this.time); // TODO score
+				this.score.showSheet();
 				break;
 			}
 
