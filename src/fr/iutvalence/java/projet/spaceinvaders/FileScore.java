@@ -4,6 +4,8 @@
 package fr.iutvalence.java.projet.spaceinvaders;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Store the score in file.
@@ -14,7 +16,7 @@ public class FileScore implements Score
 	/**
 	 * File where is store all score.
 	 */
-	private File file;
+	private FileWriter file;
 	
 	/* (non-Javadoc)
 	 * @see fr.iutvalence.java.projet.spaceinvaders.Score#init()
@@ -22,7 +24,15 @@ public class FileScore implements Score
 	@Override
 	public void init()
 	{
-		this.file = new File("score.txt");			
+		try
+		{
+			this.file = new FileWriter("score.txt", true);
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}			
 	}
 
 	/* (non-Javadoc)
