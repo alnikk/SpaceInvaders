@@ -4,6 +4,7 @@
 package fr.iutvalence.java.projet.test;
 
 import fr.iutvalence.java.projet.spaceinvaders.ASCIIDisplay;
+import fr.iutvalence.java.projet.spaceinvaders.FileScore;
 import fr.iutvalence.java.projet.spaceinvaders.MonstersThread;
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMaVs;
 
@@ -25,7 +26,8 @@ public class TestSpaceInvadersMaVs
 	public static void main(String[] args)
 	{
 		ASCIIDisplay d = new ASCIIDisplay();
-		SpaceInvadersMaVs si = new SpaceInvadersMaVs(d);
+		FileScore score = new FileScore();
+		SpaceInvadersMaVs si = new SpaceInvadersMaVs("Alex", score, d);
 		MonstersThread monsters = new MonstersThread("Monsters", si, 1000);
 		monsters.start();
 		si.run();

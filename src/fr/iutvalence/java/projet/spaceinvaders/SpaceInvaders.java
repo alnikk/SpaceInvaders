@@ -199,6 +199,17 @@ public abstract class SpaceInvaders
 	//protected Movable[] shoots;
 
 	// [[[[[[[ Others ]]]]]]]
+	
+	/**
+	 * The name of the player
+	 */
+	protected String name;
+	
+	/**
+	 * It stores the time at begin of game, for save the score later
+	 */
+	protected long time; 
+	
 	/**
 	 * This variable is the state of invaders
 	 */
@@ -209,7 +220,6 @@ public abstract class SpaceInvaders
 	 */
 	protected boolean work;
 
-
 	/**
 	 * Interface for controlling display.
 	 */
@@ -219,6 +229,11 @@ public abstract class SpaceInvaders
 	 * Interface for controlling tank.
 	 */
 	protected KeyListener listenController;
+	
+	/**
+	 * Interface to save score.
+	 */
+	protected Score score;
 
 	// ************************** Constructors **************************//
 	/**
@@ -226,9 +241,11 @@ public abstract class SpaceInvaders
 	 * This is the default constructor. It set all 
 	 * to default value. If you don't want to use 
 	 * this default characteristic use another constructor
+	 * @param name The name of score
+	 * @param score The interface of score
 	 * @param d The display object to use.
 	 */
-	public SpaceInvaders(Display d)
+	public SpaceInvaders(String name, Score score, Display d)
 	{
 		this.maxSize = new Coordinates(X_GRID, Y_GRID);
 		this.sizeMovable = DEFAULT_SIZE;
@@ -242,6 +259,8 @@ public abstract class SpaceInvaders
 		this.acceleration = DEFAULT_ACCELERATION;
 		this.timeDifficulty = DEFAULT_TIME_DIFFICULTY;
 		this.display = d;
+		this.name = name;
+		this.score = score;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
 
@@ -250,11 +269,13 @@ public abstract class SpaceInvaders
 	 * This is the default constructor. It set all 
 	 * to default value. If you don't want to use 
 	 * this default characteristic use another constructor
+	 * @param name The name of score
+	 * @param score The interface of score
 	 * @param d The display object to use.
 	 * @param nbMonsters Number of monsters
 	 * @param nbTanks Number of Tanks
 	 */
-	public SpaceInvaders(Display d, int nbMonsters, int nbTanks)
+	public SpaceInvaders(String name, Score score, Display d, int nbMonsters, int nbTanks)
 	{
 		this.maxSize = new Coordinates(X_GRID, Y_GRID);
 		this.sizeMovable = DEFAULT_SIZE;
@@ -268,6 +289,8 @@ public abstract class SpaceInvaders
 		this.acceleration = DEFAULT_ACCELERATION;
 		this.timeDifficulty = DEFAULT_TIME_DIFFICULTY;
 		this.display = d;
+		this.name = name;
+		this.score = score;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
 
@@ -276,12 +299,14 @@ public abstract class SpaceInvaders
 	 * This is the default constructor. It set all 
 	 * to default value. If you don't want to use 
 	 * this default characteristic use another constructor
+	 * @param name The name of score
+	 * @param score The interface of score
 	 * @param d The display object to use.
 	 * @param nbMonsters Number of monsters
 	 * @param nbTanks Number of Tanks
 	 * @param sizeMax Set the max size of the grid
 	 */
-	public SpaceInvaders(Display d, int nbMonsters, int nbTanks, Coordinates sizeMax)
+	public SpaceInvaders(String name, Score score, Display d, int nbMonsters, int nbTanks, Coordinates sizeMax)
 	{
 		this.maxSize = sizeMax;
 		this.sizeMovable = DEFAULT_SIZE;
@@ -295,6 +320,8 @@ public abstract class SpaceInvaders
 		this.acceleration = DEFAULT_ACCELERATION;
 		this.timeDifficulty = DEFAULT_TIME_DIFFICULTY;
 		this.display = d;
+		this.name = name;
+		this.score = score;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
 
@@ -303,13 +330,15 @@ public abstract class SpaceInvaders
 	 * This is the default constructor. It set all 
 	 * to default value. If you don't want to use 
 	 * this default characteristic use another constructor
+	 * @param name The name of score
+	 * @param score The interface of score
 	 * @param d The display object to use.
 	 * @param nbMonsters Number of monsters
 	 * @param nbTanks Number of Tanks
 	 * @param sizeMax Set the max size of the grid
 	 * @param sleep set the wait before monsters' actions
 	 */
-	public SpaceInvaders(Display d, int nbMonsters, int nbTanks, Coordinates sizeMax, int sleep)
+	public SpaceInvaders(String name, Score score, Display d, int nbMonsters, int nbTanks, Coordinates sizeMax, int sleep)
 	{
 		this.maxSize = sizeMax;
 		this.sizeMovable = DEFAULT_SIZE;
@@ -323,6 +352,8 @@ public abstract class SpaceInvaders
 		this.acceleration = DEFAULT_ACCELERATION;
 		this.timeDifficulty = DEFAULT_TIME_DIFFICULTY;
 		this.display = d;
+		this.name = name;
+		this.score = score;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
 
@@ -331,6 +362,8 @@ public abstract class SpaceInvaders
 	 * This is the default constructor. It set all 
 	 * to default value. If you don't want to use 
 	 * this default characteristic use another constructor
+	 * @param name The name of score
+	 * @param score The interface of score
 	 * @param d The display object to use.
 	 * @param nbMonsters Number of monsters
 	 * @param nbTanks Number of Tanks
@@ -338,7 +371,7 @@ public abstract class SpaceInvaders
 	 * @param sleep set the wait before monsters' actions
 	 * @param acceleration Set the accelerations of the shoots
 	 */
-	public SpaceInvaders(Display d, int nbMonsters, int nbTanks, Coordinates sizeMax, int sleep, int acceleration)
+	public SpaceInvaders(String name, Score score, Display d, int nbMonsters, int nbTanks, Coordinates sizeMax, int sleep, int acceleration)
 	{
 		this.maxSize = sizeMax;
 		this.sizeMovable = DEFAULT_SIZE;
@@ -352,6 +385,8 @@ public abstract class SpaceInvaders
 		this.acceleration = acceleration;
 		this.timeDifficulty = DEFAULT_TIME_DIFFICULTY;
 		this.display = d;
+		this.name = name;
+		this.score = score;
 		initTab(this.monstersAmount, this.tanksAmount);
 	}
 

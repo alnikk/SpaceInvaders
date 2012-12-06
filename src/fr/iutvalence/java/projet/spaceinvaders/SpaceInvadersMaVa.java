@@ -23,11 +23,13 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	 * all to default value. If you don't want 
 	 * to use this default characteristic use 
 	 * another constructor
+	 * @param name The name of score
+	 * @param score The interface of score
 	 * @param d The display object to use.
 	 */
-	public SpaceInvadersMaVa(Display d)
+	public SpaceInvadersMaVa(String name, Score score, Display d)
 	{
-		super(d);
+		super(name, score, d);
 	}
 
 	/**
@@ -35,21 +37,25 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	 * This constructor sets the X axis to 300, and the Y axis to 300 too.<br/>
 	 * If you don't want to use this default characteristic use another constructors
 	 * 
+	 * @param name The name of score
+	 * @param score The interface of score
 	 * @param nbMonsters
 	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
 	 * @param nbTanks
 	 *            Set the number of Tank you want instantiate (with default constructors, it sets to 20)
 	 * @param d The display object to use.
 	 */
-	public SpaceInvadersMaVa(int nbMonsters, int nbTanks, Display d)
+	public SpaceInvadersMaVa(String name, Score score, int nbMonsters, int nbTanks, Display d)
 	{
-		super(d,nbMonsters, nbTanks);
+		super(name, score, d,nbMonsters, nbTanks);
 	}
 
 	/**
 	 * Initialize the game.<br/>
 	 * This constructor uses default value of acceleration
 	 * 
+	 * @param name The name of score
+	 * @param score The interface of score
 	 * @param nbMonsters
 	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
 	 * @param nbTanks
@@ -58,15 +64,17 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	 *            Set the Max point of the grid (Coordinates)
 	 * @param d The display object to use.
 	 */
-	public SpaceInvadersMaVa(int nbMonsters, int nbTanks, Coordinates max, Display d)
+	public SpaceInvadersMaVa(String name, Score score, int nbMonsters, int nbTanks, Coordinates max, Display d)
 	{
-		super(d, nbMonsters, nbTanks, max);
+		super(name, score, d, nbMonsters, nbTanks, max);
 	}
 
 	/**
 	 * Initialize the game.<br/>
 	 * This constructor no default value.
 	 * 
+	 * @param name The name of score
+	 * @param score The interface of score
 	 * @param nbMonsters
 	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
 	 * @param nbTanks
@@ -77,15 +85,17 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	 *            Set the time between each move of monster (in milliseconds)
 	 * @param d The display object to use.
 	 */
-	public SpaceInvadersMaVa(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, Display d)
+	public SpaceInvadersMaVa(String name, Score score, int nbMonsters, int nbTanks, Coordinates max, int sleepTime, Display d)
 	{
-		super(d, nbMonsters, nbTanks, max, sleepTime);
+		super(name, score, d, nbMonsters, nbTanks, max, sleepTime);
 	}
 
 	/**
 	 * Initialize the game.<br/>
 	 * This constructor uses no default value.
 	 * 
+	 * @param name The name of score
+	 * @param score The interface of score
 	 * @param nbMonsters
 	 *            Set the number of Monster you want instantiate (with default constructors, it sets to 20)
 	 * @param nbTanks
@@ -98,9 +108,9 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	 *            Set the acceleration of Invaders. (not uses for now)
 	 * @param d The display object to use.
 	 */
-	public SpaceInvadersMaVa(int nbMonsters, int nbTanks, Coordinates max, int sleepTime, int acceleration, Display d)
+	public SpaceInvadersMaVa(String name, Score score, int nbMonsters, int nbTanks, Coordinates max, int sleepTime, int acceleration, Display d)
 	{
-		super(d, nbMonsters, nbTanks, max, sleepTime, acceleration);
+		super(name, score, d, nbMonsters, nbTanks, max, sleepTime, acceleration);
 	}
 
 	// ********************* Main ************************
@@ -111,6 +121,8 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 	 */
 	public void run()
 	{
+		this.time = System.currentTimeMillis();
+		this.score.init();
 		this.display.init(this.listenController, this.elements,this.maxSize);
 		while(true)
 		{
@@ -128,6 +140,7 @@ public class SpaceInvadersMaVa extends SpaceInvaders implements TankControler, M
 			if(this.countAlive(this.elements, Type.MONSTER) == 0)
 			{
 				this.display.win();
+				this.score.save(this.name, System.currentTimeMillis() - this.time); // TODO score
 				break;
 			}
 

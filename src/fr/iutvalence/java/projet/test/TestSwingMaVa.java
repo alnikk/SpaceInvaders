@@ -3,6 +3,7 @@
  */
 package fr.iutvalence.java.projet.test;
 
+import fr.iutvalence.java.projet.spaceinvaders.FileScore;
 import fr.iutvalence.java.projet.spaceinvaders.MonstersThread;
 import fr.iutvalence.java.projet.spaceinvaders.SpaceInvadersMaVa;
 import fr.iutvalence.java.projet.spaceinvaders.SwingDisplay;
@@ -25,7 +26,8 @@ public class TestSwingMaVa
 	public static void main(String[] args) 
 	{
 		SwingDisplay d = new SwingDisplay(400,400);
-		SpaceInvadersMaVa si = new SpaceInvadersMaVa(d);
+		FileScore score = new FileScore();
+		SpaceInvadersMaVa si = new SpaceInvadersMaVa("Alex", score, d);
 		TankListener tank = new TankListener(si);
 		MonstersThread monsters = new MonstersThread(si);
 		
