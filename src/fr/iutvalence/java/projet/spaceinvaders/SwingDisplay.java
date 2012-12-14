@@ -36,8 +36,9 @@ public class SwingDisplay implements Display
 		this.window.setSize(x,y);
 		this.window.setLocationRelativeTo(null);
 		this.window.setResizable(false);
-		this.window.setVisible(true);
+	
 		this.window.setContentPane(this.pan);
+		this.window.setVisible(true);
 	}
 	
 	@Override
