@@ -17,12 +17,12 @@ public class SwingDisplay implements Display
 	/**
 	 * The panel to draw on
 	 */
-	private SwingDraw pan = new SwingDraw();
+	private SwingDraw pan;
 	
 	/**
 	 * The Window of the application
 	 */
-	private JFrame window = new JFrame();
+	private JFrame window;
 	
 	/**
 	 * Constructor of the class.
@@ -32,11 +32,12 @@ public class SwingDisplay implements Display
 	public SwingDisplay(int x, int y)
 	{
 		super();
+		this.window = new JFrame();
 		this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.window.setSize(x,y);
 		this.window.setLocationRelativeTo(null);
 		this.window.setResizable(false);
-	
+		this.pan = new SwingDraw();
 		this.window.setContentPane(this.pan);
 		this.window.setVisible(true);
 	}
@@ -44,7 +45,7 @@ public class SwingDisplay implements Display
 	@Override
 	public void init(KeyListener e, Movable elements[], Coordinates maxSize)
 	{
-		float ratio = (this.pan.getWidth() / maxSize.getX()) + ((this.pan.getHeight() / maxSize.getY())/2);
+		float ratio = (this.pan.getWidth() / maxSize.getX());// + ((this.pan.getHeight() / maxSize.getY())/2);
 		this.window.addKeyListener(e);
 		this.pan.setTableToPaint(elements, maxSize, ratio);
 	}
