@@ -60,7 +60,7 @@ public abstract class SpaceInvaders
 	/**
 	 * This sets the number of shoots tanks can fire
 	 */
-	protected static final int DEFAULT_NB_SHOOTS_TANK = 1;
+	protected static final int DEFAULT_NB_SHOOTS_TANK = 10;
 
 	// [[[[[[[ Shoots ]]]]]]]
 	/**
