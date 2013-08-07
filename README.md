@@ -1,4 +1,6 @@
-iutvalence-java-mp-g4p3-2012-2013
+Space Invaders
 =================================
 
-IUT Valence, mini-projets Java, Groupe 4, projet 3
+Space Invaders game in Java.
+
+This project was developed to learn Java and POO in the Valence's IUT.
